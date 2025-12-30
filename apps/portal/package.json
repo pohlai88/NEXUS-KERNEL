@@ -8,13 +8,15 @@
     "build": "next build",
     "start": "next start -p 9000",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@nexus/cruds": "workspace:*",
     "@nexus/kernel": "workspace:*",
     "@nexus/ui-actions": "workspace:*",
     "@supabase/supabase-js": "^2.89.0",
+    "@vercel/speed-insights": "^1.0.0",
     "aibos-design-system": "^1.1.0",
     "next": "16.1.1",
     "react": "^19.0.0",
@@ -22,6 +24,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.1.1",
     "@nexus/eslint-plugin-canon": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^19",

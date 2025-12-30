@@ -1,6 +1,6 @@
 # AIBOS Design System - Headless Application to Vendor Portal
 
-**Date:** 2025-01-27  
+**Date:** 2025-12-30  
 **Authority:** L0 Kernel SSOT - `concept_design_system_aibos`  
 **Status:** Implementation Guide  
 **Compliance:** `.cursorrules` Section 4 - Design System (Contract-001)

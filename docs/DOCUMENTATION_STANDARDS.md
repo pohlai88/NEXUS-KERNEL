@@ -1,7 +1,7 @@
 # Documentation Standards for Cursor AI
 
 **Version:** 1.0.0  
-**Last Updated:** 2025-01-21  
+**Last Updated:** 2025-12-30  
 **Purpose:** Establish clear rules and standards for documentation organization and maintenance
 
 ---
@@ -192,6 +192,33 @@ Use clear status indicators:
 ### Rule 4: Keep README Updated
 - README.md is the entry point
 - Keep it concise and current
+
+### Rule 5: Date Management (CRITICAL)
+
+**Problem:** Hardcoded dates in documentation headers become stale over time, causing confusion about document currency.
+
+**Solution:**
+1. **Update Dates Regularly:**
+   - Run `scripts/update-doc-dates.ps1` to batch update all "Last Updated" dates
+   - Run before major releases or quarterly
+   - Script automatically detects and updates only metadata dates (preserves historical dates)
+
+2. **Date Format:**
+   - Always use ISO format: `YYYY-MM-DD` (e.g., `2025-12-30`)
+   - Never use relative dates like "today" or "recently"
+   - Never use ambiguous formats like "01/30/2025"
+
+3. **What to Update:**
+   - ✅ **DO UPDATE:** "Last Updated", "Date:", "Generated:", "Tracker Updated", "Report Generated"
+   - ❌ **DON'T UPDATE:** Historical dates in tables (e.g., "Implemented Date: 2025-01-22" in audit history)
+
+4. **For Auto-Generated Docs:**
+   - Use `new Date().toISOString()` in code (see `docs/integrations/figma/FIGMA_AIBOS_HEADLESS_INTEGRATION.md` example)
+   - This ensures dates are always current when docs are generated
+
+5. **Manual Updates:**
+   - When editing a file, update the "Last Updated" date manually
+   - Or run the update script after making changes
 - Link to detailed docs in `docs/` folder
 - Include quick start, installation, basic usage
 

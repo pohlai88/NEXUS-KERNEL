@@ -36,13 +36,14 @@ docs/
 
 **Location:** `docs/ssot/`
 
-**Note:** SSOT documents referenced in `.cursorrules` but not yet present in repository.  
-**Expected Location:** `docs/ssot/db/` when created.
+**Note:** Some SSOT documents are referenced in `.cursorrules` and may not yet be present in repository.  
+**Location:** `docs/ssot/db/`
 
 | Document | Version | Status | Description |
 |----------|---------|--------|-------------|
-| `db/NEXUS_CANON_V5_KERNEL_DOCTRINE.md` | 5.0 | ⚠️ Referenced | Absolute authority for Kernel Doctrine (referenced in .cursorrules) |
-| `db/DB_GUARDRAIL_MATRIX.md` | 1.0 | ⚠️ Referenced | Database guardrails and constraints (referenced in .cursorrules) |
+| `db/NEXUS_CANON_V5_KERNEL_DOCTRINE.md` | 5.1.0 | ✅ Active | Absolute authority for Kernel Doctrine (Gold Master / SSOT) |
+| `db/DB_GUARDRAIL_MATRIX.md` | 1.1.0 | ✅ Active | Database guardrails and constraints (SSOT operational matrix) |
+| `db/JSONB_CONTRACT_REGISTRY.md` | 1.0.0 | ✅ Active | Detailed JSONB contract definitions with Zod schemas (Annex to DB_GUARDRAIL_MATRIX.md) |
 | `PRD_KERNEL_NEXUS_CANON.md` | 1.0 | ⚠️ Referenced | Product requirements for Kernel Canon (referenced in .cursorrules) |
 
 ---
@@ -188,6 +189,7 @@ docs/
 **Looking for:**
 - **Kernel Doctrine?** → `docs/ssot/db/NEXUS_CANON_V5_KERNEL_DOCTRINE.md`
 - **Database Rules?** → `docs/ssot/db/DB_GUARDRAIL_MATRIX.md`
+- **JSONB Contracts?** → `docs/ssot/db/JSONB_CONTRACT_REGISTRY.md`
 - **PRD Requirements?** → `docs/ssot/PRD_KERNEL_NEXUS_CANON.md`
 - **AIBOS Integration?** → `docs/integrations/aibos/`
 - **Next.js Guides?** → `docs/integrations/nextjs/`

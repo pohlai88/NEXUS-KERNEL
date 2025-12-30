@@ -1,7 +1,7 @@
 # NextUI Status Indicator Adapter - Requirements
 
 **Version:** 1.0.0  
-**Last Updated:** 2025-01-22  
+**Last Updated:** 2025-12-30  
 **Status:** Active  
 **Purpose:** Clear requirements for creating a NextUI adapter for AIBOS Design System status indicators
 

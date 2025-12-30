@@ -8,6 +8,46 @@
 
 ---
 
+## 🚨 CRITICAL: Development Environment Requirement
+
+**MANDATORY FOR NEXT.JS MCP TOOLS:**
+
+Before performing any Next.js-related analysis, audit, or diagnostics, the AI assistant (Claude/Cursor IDE) **MUST** ensure the development server is running.
+
+**Requirement:**
+- ✅ **Next.js dev server MUST be running** before using Next.js MCP tools
+- ✅ **Port:** Default is 9000 (`apps/portal` runs on port 9000)
+- ✅ **Command:** `cd apps/portal && npm run dev`
+- ✅ **Version:** Next.js 16+ required for MCP support
+
+**Why This Matters:**
+- Next.js MCP tools (`nextjs_index`, `nextjs_call`, `nextjs_docs`) require a **running server** to provide runtime diagnostics
+- Without a running server, MCP tools cannot access:
+  - Actual compilation errors
+  - Runtime route information
+  - Build status and diagnostics
+  - Real-time framework insights
+
+**AI Assistant Instructions:**
+1. **Before using Next.js MCP tools:** Check if server is running using `nextjs_index`
+2. **If server not running:** Inform user that dev server must be started first
+3. **Never perform manual analysis** when MCP tools are available - always use MCP tools for Next.js audits
+4. **Always use `nextjs_call`** to get actual runtime data, not assumptions from file reading
+
+**For Next.js Audits Specifically:**
+- ❌ **DO NOT** perform manual codebase analysis for Next.js audits
+- ✅ **DO** use `nextjs_index` to discover available MCP tools
+- ✅ **DO** use `nextjs_call` to get actual runtime diagnostics
+- ✅ **DO** use `nextjs_docs` for official Next.js guidance
+- ✅ **DO** compile audit from actual MCP tool outputs
+
+**Error Prevention:**
+- If `nextjs_index` returns "No MCP tools found", the server is not running
+- **STOP** and inform user to start dev server before proceeding
+- **DO NOT** proceed with manual analysis as substitute
+
+---
+
 ## 0. 🏛️ Template & Pre-Seeding System (System-Defined Authority)
 
 ### 0.1 Core Principle — Template-Based Development

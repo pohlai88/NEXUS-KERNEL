@@ -1,5 +1,15 @@
 import type { NextConfig } from "next";
 
+// Bundle analyzer configuration
+let withBundleAnalyzer = (config: NextConfig) => config;
+
+if (process.env.ANALYZE === 'true') {
+  const bundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: true,
+  });
+  withBundleAnalyzer = bundleAnalyzer;
+}
+
 const nextConfig: NextConfig = {
   // Transpile monorepo packages and external packages with TypeScript/React components
   transpilePackages: [
@@ -83,4 +93,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);
