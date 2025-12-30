@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    // === ULTRA STRICT MODE ===
+    // Use for CI/pre-commit to catch potential issues
+    // Run: pnpm tsc --project tsconfig.strict.json --noEmit
+
+    // Unused code detection
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    // Index access safety - adds undefined to array[index] access
+    "noUncheckedIndexedAccess": true,
+
+    // Advanced strictness (may require significant refactoring)
+    // "exactOptionalPropertyTypes": true,
+    // "noPropertyAccessFromIndexSignature": true
+  },
+  "include": [
+    "apps/**/*.ts",
+    "apps/**/*.tsx",
+    "packages/**/*.ts"
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "**/.next/**",
+    "**/dist/**"
+  ]
+}

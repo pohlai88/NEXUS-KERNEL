@@ -1,11 +1,11 @@
 /**
  * Invoice Auto-Link Service
- * 
+ *
  * PRD V-02: Zero Re-Typing Principle (MUST)
  * - Vendor uploads invoice once
  * - System auto-links: vendor master, bank details, tax ID, contract/PO
  * - If something is missing, system asks specifically with upload actions
- * 
+ *
  * What must never exist:
  * - Vendor re-entering data already on file
  * - "Upload invoice again" flows
@@ -81,10 +81,10 @@ export class InvoiceAutoLinkService {
     // 2. Auto-link vendor master
     if (uploadData.vendor_name || uploadData.vendor_email || uploadData.vendor_tax_id) {
       const vendor = await this.findVendor(
+        tenantId,
         uploadData.vendor_name,
         uploadData.vendor_email,
-        uploadData.vendor_tax_id,
-        tenantId
+        uploadData.vendor_tax_id
       );
 
       if (vendor) {
@@ -197,10 +197,10 @@ export class InvoiceAutoLinkService {
    * Find vendor by name, email, or tax ID
    */
   private async findVendor(
+    tenantId: string,
     vendorName?: string,
     vendorEmail?: string,
-    taxId?: string,
-    tenantId: string
+    taxId?: string
   ) {
     let query = this.supabase
       .from('vmp_vendors')

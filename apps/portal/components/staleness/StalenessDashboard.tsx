@@ -1,6 +1,6 @@
 /**
  * Staleness Dashboard
- * 
+ *
  * PRD S-03: Silence Is a Bug
  * - Shows invoices with no updates and no system messages
  * - Automatic notifications sent
@@ -10,8 +10,10 @@
 
 import { useState, useEffect } from 'react';
 import { getStalenessAction, getStalenessSummaryAction, detectStalenessAction } from '@/app/staleness/actions';
+import type { InvoiceStaleness as ServiceInvoiceStaleness } from '@/src/services/staleness-detection-service';
 
-interface InvoiceStaleness {
+// Extend service type with detected_at for UI
+interface InvoiceStaleness extends Partial<ServiceInvoiceStaleness> {
   id: string;
   invoice_id: string;
   status: string;
@@ -19,7 +21,7 @@ interface InvoiceStaleness {
   staleness_level: 'warning' | 'critical' | 'severe';
   expected_action: string | null;
   notification_sent: boolean;
-  detected_at: string;
+  detected_at?: string;
 }
 
 interface StalenessSummary {
@@ -179,7 +181,7 @@ export function StalenessDashboard() {
                   {item.status}
                 </span>
               </div>
-              
+
               {item.expected_action && (
                 <div className="na-card na-p-3 na-bg-paper na-mt-2">
                   <p className="na-metadata na-font-semibold na-mb-1">Expected Action:</p>
@@ -189,7 +191,7 @@ export function StalenessDashboard() {
 
               <div className="na-flex na-items-center na-justify-between na-mt-3">
                 <p className="na-metadata na-text-sm">
-                  Detected: {new Date(item.detected_at).toLocaleString()}
+                  {item.detected_at ? `Detected: ${new Date(item.detected_at).toLocaleString()}` : 'Recently detected'}
                   {item.notification_sent && ' • Notification sent'}
                 </p>
                 <a

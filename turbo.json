@@ -8,12 +8,7 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "dist/**"],
-      "env": [
-        "NODE_ENV",
-        "DATABASE_URL",
-        "NEXTAUTH_URL",
-        "NEXTAUTH_SECRET"
-      ]
+      "env": ["NODE_ENV", "DATABASE_URL", "NEXTAUTH_URL", "NEXTAUTH_SECRET"]
     },
     "lint": {
       "dependsOn": ["^build"]
@@ -21,7 +16,11 @@
     "typecheck": {
       "dependsOn": ["^build"],
       "outputs": []
+    },
+    "check:l0-drift": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "env": ["NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_ANON_KEY"]
     }
   }
 }
-

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>NexusCanon — SOLARIS (Inversion Engine)</title>
+  <style>
+    :root{
+      --void: #000000;
+      --mass: #ffffff;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --ser: "Iowan Old Style", "Apple Garamond", "Baskerville", "Times New Roman", serif;
+      --pad: clamp(20px, 4vw, 60px);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: var(--mass); /* STARTING STATE: HEAVY WHITE */
+      color: var(--void);
+      font-family: var(--sans);
+      overflow-x:hidden;
+      cursor: none; /* We control the view */
+    }
+
+    /* THE LENS (The Cursor) */
+    .lens{
+      position:fixed; top:0; left:0;
+      width: 40px; height: 40px;
+      border: 1px solid var(--void);
+      border-radius: 50%;
+      pointer-events:none; z-index:999;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1), height 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+      mix-blend-mode: difference; /* THE PARADOX: Inverts what it touches */
+      background: #fff;
+    }
+    .lens.active{ width:120px; height:120px; }
+
+    /* LAYOUT UTILS */
+    .wrap{ position:relative; z-index:2; }
+    .section{
+      min-height: 100vh;
+      display: flex; flex-direction:column; justify-content: center;
+      padding: var(--pad);
+      position: relative;
+    }
+
+    /* TYPOGRAPHY AS MASS */
+    .h1{
+      font-size: clamp(80px, 16vw, 240px);
+      line-height: 0.8;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      margin: 0;
+      /* The text is initially INVISIBLE (White on White) */
+      color: var(--mass);
+    }
+
+    /* THE INVERSION LAYER
+       This is a massive element that sits ON TOP of the text.
+       Because of mix-blend-mode: difference...
+       Where this layer is WHITE, the underlying WHITE text becomes BLACK.
+       Where this layer is BLACK, the underlying WHITE text stays WHITE (invisible).
+    */
+    .inverter{
+      position: fixed; inset: 0;
+      z-index: 1;
+      background: #000; /* Start black (so difference with white bg = white text = invisible) */
+      pointer-events: none;
+      mix-blend-mode: difference;
+    }
+
+    /* THE SOLARIS ENGINE (The SVG) */
+    .engine{
+      position:fixed; inset:0; z-index:0;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .engine svg{
+      width: 100%; height: 100%;
+      /* This layer dictates the visibility of everything via difference math */
+    }
+
+    .meta{
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 20px;
+      display:flex; align-items:center; gap:12px;
+    }
+    .meta:before{
+      content:""; width:12px; height:12px; background:currentColor;
+    }
+
+    .narrative{
+      font-family: var(--ser);
+      font-size: clamp(20px, 3vw, 32px);
+      line-height: 1.4;
+      max-width: 600px;
+      margin-top: 40px;
+    }
+
+    /* NAVIGATION (Fixed but blends) */
+    nav{
+      position:fixed; top:var(--pad); right:var(--pad); z-index:100;
+      font-family: var(--mono);
+      font-size: 10px;
+      writing-mode: vertical-rl;
+      mix-blend-mode: difference;
+      color: #fff;
+      display:flex; gap:30px;
+    }
+
+    /* UTILITY CLASSES FOR SCROLL TARGETS */
+    .reveal-trigger{ opacity:0; } /* Invisible markers to trigger JS */
+
+  </style>
+</head>
+<body>
+
+  <div class="lens" id="cursor"></div>
+
+  <nav>
+    <span>001 MASS</span>
+    <span>002 FLUID</span>
+    <span>003 VOID</span>
+    <span>NEXUSCANON</span>
+  </nav>
+
+  <div class="inverter">
+    <div class="engine">
+      <svg id="solaris" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+        <circle id="sun" cx="500" cy="500" r="0" fill="white" />
+
+        <rect id="horizon" x="0" y="1000" width="1000" height="0" fill="white" />
+      </svg>
+    </div>
+  </div>
+
+  <main class="wrap">
+
+    <section class="section">
+      <div class="meta">Figure 01: The Weight</div>
+      <div class="h1">White<br>is<br>Heavy</div>
+      <div class="narrative">
+        In traditional accounting, white is empty space.<br>
+        In NexusCanon, white is the crushing weight of the ledger.<br>
+        It is the marble slab upon which truth is etched.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="meta">Figure 02: The Eclipse</div>
+      <div class="h1" style="text-align:right">The Sun<br>is<br>Dark</div>
+      <div class="narrative" style="margin-left:auto; text-align:right">
+        When the ledger is perfectly balanced, it eclipses the noise.<br>
+        We do not seek the light.<br>
+        We seek the absolute zero of the reconciled state.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="meta">Figure 03: The Thread</div>
+      <div class="h1" style="font-size:clamp(40px, 8vw, 100px); letter-spacing:0em; text-transform:none; font-family:var(--ser); font-style:italic;">
+        "Drift is violence."
+      </div>
+      <div class="narrative">
+        Forensic psychology is the art of seeing the inversion.<br>
+        Where there is data, we see the disguise.<br>
+        Where there is silence, we find the theft.
+      </div>
+    </section>
+
+    <section class="section" style="min-height:50vh">
+      <div class="h1" style="font-size:clamp(20px, 4vw, 40px); letter-spacing:0.2em; text-align:center">
+        NEXUS CANON
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    /* SOLARIS ENGINE
+      Logic: Scroll position drives the SVG shapes in the 'inverter' layer.
+      Because of mix-blend-mode: difference, 'drawing white' effectively 'erases the world'.
+    */
+
+    const sun = document.getElementById('sun');
+    const horizon = document.getElementById('horizon');
+    const doc = document.documentElement;
+
+    function lerp(start, end, t) {
+      return start * (1 - t) + end * t;
+    }
+    function clamp(val, min, max) {
+      return Math.min(Math.max(val, min), max);
+    }
+
+    // Scroll Loop
+    function frame() {
+      const scroll = window.scrollY;
+      const height = doc.scrollHeight - doc.clientHeight;
+      const progress = scroll / height; // 0 to 1
+
+      // ACT 1 -> 2: The Sun Rises (A hole in reality)
+      // As the circle grows (white fill in the difference layer),
+      // it turns the White background underneath it BLACK.
+
+      const sunProgress = clamp(progress * 2.5, 0, 1);
+      const sunRadius = lerp(0, 400, sunProgress); // Grows to massive hole
+      sun.setAttribute('r', sunRadius);
+
+      // ACT 2 -> 3: The Horizon Rises (Total Inversion)
+      // A rectangle rises from bottom.
+      const horizonProgress = clamp((progress - 0.4) * 2, 0, 1);
+      const horizonY = lerp(1000, 0, horizonProgress);
+      const horizonH = lerp(0, 1000, horizonProgress);
+
+      horizon.setAttribute('y', horizonY);
+      horizon.setAttribute('height', horizonH);
+
+      requestAnimationFrame(frame);
+    }
+
+    // Cursor Logic (The Lens)
+    const cursor = document.getElementById('cursor');
+    let mouseX = 0, mouseY = 0;
+    let curX = 0, curY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      // Hover effect on text?
+      const target = e.target;
+      if(target.tagName === 'DIV' || target.tagName === 'svg') {
+         cursor.classList.remove('active');
+      } else {
+         cursor.classList.add('active');
+      }
+    });
+
+    function cursorLoop() {
+      // Smooth follow
+      curX = lerp(curX, mouseX, 0.15);
+      curY = lerp(curY, mouseY, 0.15);
+      cursor.style.transform = `translate(${curX}px, ${curY}px) translate(-50%, -50%)`;
+      requestAnimationFrame(cursorLoop);
+    }
+
+    // Init
+    window.addEventListener('scroll', frame, {passive: true});
+    frame();
+    cursorLoop();
+
+  </script>
+</body>
+</html>

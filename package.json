@@ -10,12 +10,24 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "lint": "turbo lint",
-    "typecheck": "turbo typecheck"
+    "typecheck": "turbo typecheck",
+    "typecheck:strict": "tsc --project tsconfig.strict.json --noEmit",
+    "typecheck:portal": "cd apps/portal && pnpm tsc --noEmit",
+    "precommit": "pnpm typecheck:portal && pnpm lint",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix --max-warnings 0"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "turbo": "^2.0.0",
     "typescript": "^5.6.3"
   }
 }
-
-

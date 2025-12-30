@@ -1,6 +1,6 @@
 /**
  * Break Glass Button Component
- * 
+ *
  * SOS feature: Vendor can escalate directly to Senior Manager.
  * "I cannot find anyone" → Break Glass → Senior Manager notified.
  */
@@ -15,6 +15,7 @@ interface BreakGlassButtonProps {
   invoiceId?: string;
   vendorId: string;
   onEscalated?: () => void;
+  escalationType?: 'sla_breach' | 'no_response' | 'staff_difficulty' | 'urgent_issue' | 'other';
 }
 
 export function BreakGlassButton({ caseId, invoiceId, vendorId, onEscalated }: BreakGlassButtonProps) {
@@ -77,7 +78,7 @@ export function BreakGlassButton({ caseId, invoiceId, vendorId, onEscalated }: B
                 <label className="na-metadata na-mb-2 na-block">Escalation Type *</label>
                 <select
                   value={escalationType}
-                  onChange={(e) => setEscalationType(e.target.value as BreakGlassButtonProps['escalationType'])}
+                  onChange={(e) => setEscalationType(e.target.value as 'sla_breach' | 'no_response' | 'staff_difficulty' | 'urgent_issue' | 'other')}
                   className="na-input na-w-full"
                 >
                   <option value="no_response">No Response</option>

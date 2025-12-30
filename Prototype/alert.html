@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NexusCanon — MONITOR (Forensic Terminal)</title>
+  <style>
+    :root{
+      --bg:#050505;
+      --fg:#fff;
+      --fga:rgba(255,255,255,.82);
+      --fgm:rgba(255,255,255,.62);
+      --fgl:rgba(255,255,255,.42);
+      --hair:rgba(255,255,255,.18);
+      --grid:rgba(255,255,255,.08);
+      --grid2:rgba(255,255,255,.05);
+      --red: #ff3333; /* The only color allowed, for critical threats */
+      --pad:clamp(16px,2vw,24px);
+      --serif: ui-serif, "Iowan Old Style","Palatino","Georgia",serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+      --ease:cubic-bezier(.22,1,.36,1);
+    }
+    *{ box-sizing:border-box; outline: none; }
+    html,body{ height:100%; margin:0; background:var(--bg); color:var(--fg); font-family:var(--sans); overflow:hidden; }
+
+    /* --- HUD ENVIRONMENT (Inherited from King Scroll) --- */
+    .hud{ position:fixed; inset:0; pointer-events:none; z-index:0; }
+    .hud::before{
+      content:""; position:absolute; inset:-10%;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.05), transparent 70%);
+      opacity:.32; filter:blur(.2px);
+    }
+    .grid-layer{
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity:.5;
+    }
+    .dust{ position:absolute; inset:0; opacity:.55; }
+    .dust i{ position:absolute; display:block; width:1px; height:1px; background:#fff; opacity:0.5; }
+
+    /* --- TYPOGRAPHY WEAPONRY --- */
+    .micro{ font-family:var(--mono); letter-spacing:.2em; text-transform:uppercase; font-size:9px; color:var(--fgl); }
+    .mono{ font-family:var(--mono); font-size:11px; letter-spacing:0.05em; }
+    .hair-text { -webkit-text-stroke: 0.5px rgba(255,255,255,0.2); color: transparent; font-family: var(--sans); font-weight: 900; }
+
+    /* --- LAYOUT STRUCTURE --- */
+    .interface {
+        position: relative; z-index: 10;
+        display: grid;
+        grid-template-columns: 60px 1fr;
+        height: 100vh;
+    }
+
+    /* LEFT RAIL NAV */
+    .nav-rail {
+        border-right: 1px solid var(--hair);
+        display: flex; flex-direction: column; align-items: center; padding-top: 20px;
+        background: rgba(0,0,0,0.5);
+    }
+    .nav-item {
+        width: 30px; height: 30px; border: 1px solid var(--hair); margin-bottom: 10px;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; transition: all 0.3s var(--ease);
+        font-family: var(--mono); font-size: 10px; color: var(--fgl);
+    }
+    .nav-item:hover, .nav-item.active { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+    .brand-v { writing-mode: vertical-rl; margin-top: auto; padding-bottom: 20px; opacity: 0.3; }
+
+    /* MAIN TERMINAL */
+    .terminal {
+        display: grid; grid-template-rows: 50px 1fr;
+        overflow: hidden;
+    }
+
+    /* HEADER */
+    .header {
+        border-bottom: 1px solid var(--hair);
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 0 var(--pad);
+    }
+    .live-dot { width: 6px; height: 6px; background: var(--fg); border-radius: 50%; box-shadow: 0 0 8px var(--fg); animation: pulse 2s infinite; }
+
+    /* WORKSPACE */
+    .workspace {
+        display: grid; grid-template-columns: 4fr 5fr;
+        position: relative;
+    }
+
+    /* PANEL: LEDGER (The List) */
+    .panel-ledger {
+        padding: var(--pad);
+        border-right: 1px solid var(--hair);
+        overflow-y: auto;
+    }
+    .table-header { display: flex; border-bottom: 1px solid var(--hair); padding-bottom: 10px; margin-bottom: 10px; }
+    .col { flex: 1; } .col-sm { width: 80px; } .col-lg { flex: 2; }
+
+    .data-row {
+        display: flex; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+        cursor: crosshair; transition: all 0.2s; opacity: 0.7;
+    }
+    .data-row:hover { opacity: 1; background: rgba(255,255,255,0.02); }
+
+    /* THE ANOMALY */
+    .anomaly { color: var(--fg); position: relative; }
+    .anomaly::before { content:'!'; position: absolute; left: -15px; color: var(--fg); font-weight: bold; }
+    .anomaly .mono { color: var(--fg); text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+
+    /* PANEL: MORPHOLOGY (The Graph) */
+    .panel-morph {
+        position: relative; background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+        overflow: hidden;
+    }
+
+    /* Graph Nodes */
+    .node-layer { position: absolute; inset: 0; }
+    .node {
+        position: absolute; width: 40px; height: 40px; border: 1px solid var(--hair);
+        display: grid; place-items: center; font-size: 9px; color: var(--fgl);
+        transition: all 0.5s var(--ease);
+    }
+    .node.core { width: 60px; height: 60px; border-color: var(--fga); color: var(--fg); }
+
+    /* Connector Lines (SVG) */
+    .links { position: absolute; inset: 0; pointer-events: none; }
+    line { stroke: var(--hair); stroke-width: 1; }
+    .hidden-link { stroke: var(--fg); stroke-dasharray: 4 2; opacity: 0; transition: opacity 0.4s; }
+
+    /* THE PLATE (Floating Info) */
+    .plate {
+        border: 1px solid var(--hair); background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);
+        padding: 20px; position: absolute; bottom: 30px; right: 30px;
+        width: 280px; transform: translateY(20px); opacity: 0; transition: all 0.5s var(--ease);
+    }
+    .plate.active { transform: translateY(0); opacity: 1; }
+
+    /* --- ANIMATIONS --- */
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+    /* CORNER STAMPS (Reusing your classic style) */
+    .c-stamp { position: absolute; font-family: var(--mono); font-size: 9px; color: var(--fgl); letter-spacing: 0.2em; pointer-events: none; }
+    .tl { top: 20px; left: 20px; } .tr { top: 20px; right: 20px; text-align: right; }
+    .bl { bottom: 20px; left: 20px; } .br { bottom: 20px; right: 20px; text-align: right; }
+
+  </style>
+</head>
+<body>
+
+  <div class="hud">
+      <div class="grid-layer"></div>
+      <div class="dust" id="dust"></div>
+  </div>
+
+  <div class="interface">
+      <nav class="nav-rail">
+          <div class="nav-item active">M</div>
+          <div class="nav-item">D</div>
+          <div class="nav-item">S</div>
+          <div class="micro brand-v">NEXUSCANON</div>
+      </nav>
+
+      <div class="terminal">
+          <div class="header">
+              <div class="micro">SESSION: <span style="color:var(--fg);">ADMIN_ROOT</span> // MODE: FORENSIC</div>
+              <div class="micro" style="display:flex; align-items:center; gap:10px;">
+                  SYSTEM INTEGRITY <div class="live-dot"></div>
+              </div>
+          </div>
+
+          <div class="workspace">
+
+              <div class="panel-ledger">
+                  <div class="micro" style="margin-bottom:20px;">INCOMING_STREAMS</div>
+
+                  <div class="table-header micro">
+                      <div class="col-sm">ID</div>
+                      <div class="col-lg">ENTITY</div>
+                      <div class="col">TYPE</div>
+                      <div class="col" style="text-align:right;">VALUE</div>
+                  </div>
+
+                  <div class="data-row mono">
+                      <div class="col-sm" style="color:var(--fgl);">0994</div>
+                      <div class="col-lg">AeroDyne Systems</div>
+                      <div class="col">Vendor</div>
+                      <div class="col" style="text-align:right;">12,400.00</div>
+                  </div>
+                  <div class="data-row mono">
+                      <div class="col-sm" style="color:var(--fgl);">0995</div>
+                      <div class="col-lg">Logistics Corp</div>
+                      <div class="col">Service</div>
+                      <div class="col" style="text-align:right;">4,150.00</div>
+                  </div>
+
+                  <div class="data-row anomaly" id="target-row">
+                      <div class="col-sm">0996</div>
+                      <div class="col-lg">Unknown_LLC</div>
+                      <div class="col">Consult</div>
+                      <div class="col" style="text-align:right;">50,000.00</div>
+                  </div>
+
+                  <div class="data-row mono">
+                      <div class="col-sm" style="color:var(--fgl);">0997</div>
+                      <div class="col-lg">Payroll Batch A</div>
+                      <div class="col">Internal</div>
+                      <div class="col" style="text-align:right;">120,000.00</div>
+                  </div>
+                  <div class="data-row mono">
+                      <div class="col-sm" style="color:var(--fgl);">0998</div>
+                      <div class="col-lg">Ops Cost</div>
+                      <div class="col">Utility</div>
+                      <div class="col" style="text-align:right;">890.00</div>
+                  </div>
+
+                  <div style="margin-top:40px; opacity:0.1; font-family:var(--mono); font-size:10px;">
+                      [END OF BUFFER]<br>Waiting for stream...
+                  </div>
+              </div>
+
+              <div class="panel-morph">
+                  <div class="c-stamp tl">VISUALIZER</div>
+                  <div class="c-stamp tr">AUTO-DETECT</div>
+                  <div class="c-stamp bl">X: 192.44</div>
+
+                  <div class="hair-text" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:120px; opacity:0.1; pointer-events:none;">
+                      NEXUS
+                  </div>
+
+                  <svg class="links">
+                      <line x1="50%" y1="50%" x2="20%" y2="30%" />
+                      <line x1="50%" y1="50%" x2="80%" y2="20%" />
+                      <line x1="20%" y1="30%" x2="25%" y2="60%" />
+
+                      <path id="ghost-line" d="M 50% 50% Q 80% 80% 60% 70%" fill="none" stroke="white" stroke-dasharray="4,4" class="hidden-link" />
+                  </svg>
+
+                  <div class="node-layer">
+                      <div class="node core" style="top:50%; left:50%; transform:translate(-50%,-50%);">ROOT</div>
+                      <div class="node" style="top:30%; left:20%;">V-01</div>
+                      <div class="node" style="top:20%; left:80%;">V-02</div>
+                      <div class="node" style="top:60%; left:25%;">S-01</div>
+
+                      <div id="ghost-node" class="node" style="top:70%; left:60%; opacity:0.2; border-style:dashed;">UNK</div>
+                  </div>
+
+                  <div id="info-plate" class="plate">
+                      <div class="micro" style="margin-bottom:10px; color:var(--fg);">ANOMALY DETECTED</div>
+                      <div class="mono" style="margin-bottom:15px; font-size:12px;">
+                          Structuring pattern identified. Round-number bias ($50k) links to shell entity.
+                      </div>
+                      <div style="display:flex; justify-content:space-between; border-top:1px solid var(--hair); padding-top:10px;">
+                          <div class="micro">CONFIDENCE</div>
+                          <div class="micro" style="color:#fff;">98.4%</div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script>
+    // --- DUST SYSTEM (Borrowed from your King Scroll) ---
+    (function(){
+      const dust = document.getElementById("dust");
+      const count = 40;
+      for(let i=0;i<count;i++){
+        const p = document.createElement("i");
+        p.style.left = Math.random()*100+"%";
+        p.style.top = Math.random()*100+"%";
+        p.style.opacity = Math.random()*0.5;
+        dust.appendChild(p);
+      }
+    })();
+
+    // --- INTERACTION LOGIC ---
+    const row = document.getElementById('target-row');
+    const plate = document.getElementById('info-plate');
+    const ghostLine = document.getElementById('ghost-line');
+    const ghostNode = document.getElementById('ghost-node');
+
+    row.addEventListener('mouseenter', () => {
+        plate.classList.add('active');
+        ghostLine.style.opacity = '1';
+        ghostNode.style.opacity = '1';
+        ghostNode.style.borderColor = '#fff';
+        ghostNode.style.background = 'rgba(255,255,255,0.1)';
+    });
+
+    row.addEventListener('mouseleave', () => {
+        plate.classList.remove('active');
+        ghostLine.style.opacity = '0';
+        ghostNode.style.opacity = '0.2';
+        ghostNode.style.borderColor = 'rgba(255,255,255,0.2)';
+        ghostNode.style.background = 'transparent';
+    });
+  </script>
+</body>
+</html>

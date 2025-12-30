@@ -1,6 +1,6 @@
 /**
  * Vendor Group Repository
- * 
+ *
  * Vendor Groups: Vendors as Groups of Companies serving multiple subsidiaries.
  * One vendor group can serve multiple subsidiaries, one vendor user can represent multiple vendor groups.
  */
@@ -83,15 +83,25 @@ export class VendorGroupRepository {
    * Get accessible subsidiaries for vendor user
    */
   async getAccessibleSubsidiaries(userId: string): Promise<VendorGroupAccess[]> {
+    // First, get the vendor group IDs for this user
+    const { data: userAccess, error: userAccessError } = await this.supabase
+      .from('vendor_user_access')
+      .select('vendor_group_id')
+      .eq('user_id', userId);
+
+    if (userAccessError) {
+      throw new Error(`Failed to get user access: ${userAccessError.message}`);
+    }
+
+    const vendorGroupIds = (userAccess || []).map(row => row.vendor_group_id);
+    if (vendorGroupIds.length === 0) {
+      return [];
+    }
+
     const { data, error } = await this.supabase
       .from('vendor_group_access')
       .select('*')
-      .in('vendor_group_id', 
-        this.supabase
-          .from('vendor_user_access')
-          .select('vendor_group_id')
-          .eq('user_id', userId)
-      )
+      .in('vendor_group_id', vendorGroupIds)
       .eq('status', 'active')
       .order('created_at', { ascending: false });
 
@@ -114,15 +124,25 @@ export class VendorGroupRepository {
    * Check if vendor user has access to tenant
    */
   async hasAccess(userId: string, tenantId: string): Promise<boolean> {
+    // First, get the vendor group IDs for this user
+    const { data: userAccess, error: userAccessError } = await this.supabase
+      .from('vendor_user_access')
+      .select('vendor_group_id')
+      .eq('user_id', userId);
+
+    if (userAccessError) {
+      throw new Error(`Failed to get user access: ${userAccessError.message}`);
+    }
+
+    const vendorGroupIds = (userAccess || []).map(row => row.vendor_group_id);
+    if (vendorGroupIds.length === 0) {
+      return false;
+    }
+
     const { data, error } = await this.supabase
       .from('vendor_group_access')
       .select('id')
-      .in('vendor_group_id',
-        this.supabase
-          .from('vendor_user_access')
-          .select('vendor_group_id')
-          .eq('user_id', userId)
-      )
+      .in('vendor_group_id', vendorGroupIds)
       .eq('tenant_id', tenantId)
       .eq('status', 'active')
       .single();

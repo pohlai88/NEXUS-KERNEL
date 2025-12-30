@@ -1,11 +1,11 @@
 /**
  * Rejection Repository with Code Enforcement
- * 
+ *
  * PRD A-03: System-Enforced Rejection (MUST)
  * - Standardized rejection reasons (select, not type)
  * - System rules enforce: cut-off dates, approval limits, required documents
  * - Vendor sees exactly the same reason AP sees
- * 
+ *
  * What must never exist:
  * - Personal explanations typed by staff
  * - "Soft rejections" without system record
@@ -61,7 +61,7 @@ export class RejectionRepository {
         status: 'REJECTED',
         reason_code: params.reason_code,
         reason_text: reasonCode.reason_label,
-        notes: params.explanation || params.notes || null,
+        notes: params.explanation || params.notes || undefined,
       },
       rejectedBy,
       tenantId,

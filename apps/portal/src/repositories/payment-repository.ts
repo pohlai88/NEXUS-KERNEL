@@ -1,10 +1,10 @@
 /**
  * Payment Repository - Flexible Payment Processing
- * 
+ *
  * Supports TWO modes:
  * 1. Standalone Mode (no ERP) - Portal creates and processes payments
  * 2. ERP Sync Mode - ERP processes payments, portal syncs/displays them
- * 
+ *
  * Payment Mode is configured per tenant in tenant settings:
  * - payment_mode: 'standalone' | 'erp_sync'
  * - erp_system: 'sap' | 'oracle' | 'netsuite' | 'custom' (if erp_sync)
@@ -159,8 +159,8 @@ export class PaymentRepository {
       .eq('id', params.vendor_id)
       .single();
 
-    const bankAccountLast4 = vendor?.account_number 
-      ? vendor.account_number.slice(-4) 
+    const bankAccountLast4 = vendor?.account_number
+      ? vendor.account_number.slice(-4)
       : null;
 
     // Determine initial status
@@ -381,8 +381,8 @@ export class PaymentRepository {
       entity_id: paymentId,
       action: 'process',
       action_by: processedBy,
-      old_state: payment as Record<string, unknown>,
-      new_state: updatedPayment as Record<string, unknown>,
+      old_state: payment,
+      new_state: updatedPayment,
       workflow_stage: 'processing',
       workflow_state: {
         transaction_id: transactionId,

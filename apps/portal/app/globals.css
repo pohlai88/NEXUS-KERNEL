@@ -1,29 +1,26 @@
 /**
- * Global Styles - AIBOS Design System Only
- * 
- * This file imports AIBOS Design System CSS which includes:
- * - Complete theme token system (colors, spacing, typography, shadows, etc.)
- * - All utility classes (flex, grid, gap, padding, margin, etc.)
- * - Semantic component classes (.na-card, .na-btn, .na-status, etc.)
- * 
- * NO custom utilities - everything comes from AIBOS Design System
+ * Global Styles - AIBOS Design System SSOT
+ *
+ * AIBOS Design System is loaded via aibos-styles.tsx which provides:
+ * - Complete design token system (colors, spacing, typography, shadows)
+ * - All semantic CSS classes (.na-*)
+ * - Layout utilities (flex, grid, gap, padding, margin)
+ * - Component patterns (cards, buttons, status indicators)
+ * - Theme configuration (dark theme default)
+ *
+ * This file contains ONLY minimal overrides that do not conflict with AIBOS.
  */
-
-/* Base body styles - fonts and smoothing */
-body {
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Global transitions - applies to all interactive elements */
-* {
-  transition-property: color, background-color, border-color, transform, opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
 
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
+}
+
+/* Utility to hide scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

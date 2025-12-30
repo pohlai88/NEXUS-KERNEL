@@ -1,6 +1,6 @@
 /**
  * Supplier Offboarding Repository with Audit Trail
- * 
+ *
  * Manages supplier offboarding workflow with automatic audit trail logging.
  * Every offboarding action creates an immutable audit record.
  */
@@ -64,7 +64,7 @@ export class SupplierOffboardingRepository {
         tenant_id: params.tenant_id,
         company_id: params.company_id,
         vendor_id: params.vendor_id,
-        case_type: 'offboarding',
+        case_type: 'general', // offboarding cases are categorized as general
         subject: `Supplier Offboarding Request: ${params.vendor_id}`,
         owner_team: 'procurement',
         tags: ['offboarding_request', 'vendor_request'],

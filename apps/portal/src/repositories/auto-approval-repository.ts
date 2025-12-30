@@ -1,6 +1,6 @@
 /**
  * Auto-Approval Repository
- * 
+ *
  * Exception-Only Inbox: Auto-approve perfect matches, only show exceptions.
  * "The 100 Years Back Dream: Total Silence & Total Control"
  */
@@ -169,9 +169,9 @@ export class AutoApprovalRepository {
     await this.matchingRepo.approveMatch(matchId, approvedBy);
 
     // Log auto-approval
-    const { data: match } = await this.matchingRepo.getById(matchId);
+    const match = await this.matchingRepo.getById(matchId);
     if (match) {
-      const { data: auditTrail } = await this.auditTrail.getByEntity('three_way_match', matchId);
+      const auditTrail = await this.auditTrail.getByEntity('three_way_match', matchId);
       const latestAudit = auditTrail[auditTrail.length - 1];
 
       await this.supabase.from('auto_approval_log').insert({

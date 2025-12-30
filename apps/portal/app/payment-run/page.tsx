@@ -1,6 +1,6 @@
 /**
  * Unified Payment Run Page
- * 
+ *
  * "God Mode" for Finance: All invoices together (External Vendors + Employee Claims).
  * One payment file for the bank.
  */
@@ -28,6 +28,24 @@ interface PaymentRunPageProps {
   };
 }
 
+// Type for invoice data from Supabase query
+interface PaymentInvoice {
+  id: string;
+  amount: number;
+  due_date: string;
+  vendor_id: string;
+  status: string;
+  vmp_vendors: {
+    vendor_type: string;
+    legal_name: string;
+    display_name: string | null;
+    employee_id: string | null;
+  };
+  tenants: {
+    name: string;
+  };
+}
+
 export default async function PaymentRunPage({ searchParams }: PaymentRunPageProps) {
   const ctx = getRequestContext();
   const supabase = createClient();
@@ -41,7 +59,7 @@ export default async function PaymentRunPage({ searchParams }: PaymentRunPagePro
   const tenantIdsToQuery = selectedTenantId ? [selectedTenantId] : accessibleTenantIds;
 
   // Get all approved invoices (External Vendors + Employee Claims)
-  let invoices: unknown[] = [];
+  let invoices: PaymentInvoice[] = [];
 
   if (tenantIdsToQuery.length > 0) {
     let invoiceQuery = supabase
@@ -65,27 +83,26 @@ export default async function PaymentRunPage({ searchParams }: PaymentRunPagePro
     if (error) {
       console.error('Failed to fetch invoices:', error);
     } else {
-      invoices = data || [];
+      invoices = (data || []) as PaymentInvoice[];
     }
   }
 
   // Group by vendor type for summary
   const summary = invoices.reduce(
-    (acc, inv: unknown) => {
-      const i = inv as { vmp_vendors: { vendor_type: string }; amount: number };
-      const vendorType = i.vmp_vendors?.vendor_type || 'UNKNOWN';
+    (acc, inv) => {
+      const vendorType = inv.vmp_vendors?.vendor_type || 'UNKNOWN';
       if (!acc[vendorType]) {
         acc[vendorType] = { count: 0, total: 0 };
       }
       acc[vendorType].count += 1;
-      acc[vendorType].total += parseFloat((i.amount || 0).toString());
+      acc[vendorType].total += parseFloat((inv.amount || 0).toString());
       return acc;
     },
     {} as Record<string, { count: number; total: number }>
   );
 
   const totalAmount = invoices.reduce(
-    (sum, inv: unknown) => sum + parseFloat(((inv as { amount: number }).amount || 0).toString()),
+    (sum, inv) => sum + parseFloat((inv.amount || 0).toString()),
     0
   );
 

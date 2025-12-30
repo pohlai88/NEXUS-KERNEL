@@ -1,6 +1,6 @@
 /**
  * Employee Claims Server Actions
- * 
+ *
  * Claims as Invoices: Same process, same database.
  */
 
@@ -44,8 +44,11 @@ export async function submitClaimAction(formData: FormData) {
     // Validate against schema
     const validated = EmployeeClaimSchema.parse(claimData);
 
-    // Create claim (Code Gate runs here)
-    const claim = await claimRepo.create(validated, {
+    // Create claim (Code Gate runs here) - add tenant_id for CreateClaimParams
+    const claim = await claimRepo.create({
+      ...validated,
+      tenant_id: claimData.tenant_id,
+    }, {
       request_id: ctx.requestId,
     });
 

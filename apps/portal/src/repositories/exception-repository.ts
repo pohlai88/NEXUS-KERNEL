@@ -1,6 +1,6 @@
 /**
  * Exception Repository with Severity Tagging
- * 
+ *
  * PRD A-01: Exception-First Workload (MUST)
  * - Default view shows only problems, not volume
  * - Severity tagging: 🔴 Blocking, 🟠 Needs action, 🟢 Safe
@@ -227,8 +227,8 @@ export class ExceptionRepository {
       entity_id: exceptionId,
       action: 'resolve',
       action_by: resolvedBy,
-      old_state: currentException as Record<string, unknown>,
-      new_state: updatedException as Record<string, unknown>,
+      old_state: currentException,
+      new_state: updatedException,
       workflow_stage: 'resolved',
       workflow_state: {
         resolution_notes: resolutionNotes,

@@ -21,7 +21,7 @@ export const VendorPayloadSchema = createContractSchema(
     country_code: z.string().length(2), // ISO alpha-2
     email: z.string().email().optional(),
     phone: z.string().min(6).max(40).optional(),
-    status: VendorStatus.schema.default("PENDING"),
+    status: VendorStatus.schema, // Required field, no default (default handled at application layer)
     // Official identifiers ONLY (no typo aliases in L0)
     official_aliases: z
       .array(
@@ -42,10 +42,10 @@ export const VendorPayloadSchema = createContractSchema(
   }
 );
 
-export type VendorPayload = z.infer<typeof VendorPayloadSchema>;
+export type VendorPayload = z.output<typeof VendorPayloadSchema>;
 
 export function validateVendorPayload(input: unknown): VendorPayload {
-  return validateOrThrow(VendorPayloadSchema, input);
+  return validateOrThrow(VendorPayloadSchema, input) as VendorPayload;
 }
 
 // Canon constants for this contract

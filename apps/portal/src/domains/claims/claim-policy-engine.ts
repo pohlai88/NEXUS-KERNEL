@@ -1,6 +1,6 @@
 /**
  * L1 Domain: Claim Policy Engine
- * 
+ *
  * The Code Gate: Policy hooks that run before database write.
  * Replaces Google Sheets mapping hell with automated validation.
  */
@@ -27,7 +27,7 @@ export class ClaimPolicyEngine {
 
   /**
    * Validate claim against policy (Code Gate)
-   * 
+   *
    * This runs BEFORE database write. Bad claims never enter the system.
    */
   async validateClaim(
@@ -52,13 +52,13 @@ export class ClaimPolicyEngine {
       );
     }
 
-    // Check auto-approve threshold
-    if (categoryLimit.auto_approve && claim.amount <= 50) {
+    // Check auto-approve threshold (only for categories with auto_approve flag)
+    if ('auto_approve' in categoryLimit && categoryLimit.auto_approve && claim.amount <= 50) {
       autoApprove = true;
     }
 
-    // Gate 2: Check Annual Limits
-    if (categoryLimit.max_per_year) {
+    // Gate 2: Check Annual Limits (only for categories with max_per_year)
+    if ('max_per_year' in categoryLimit && categoryLimit.max_per_year) {
       const annualTotal = await this.getAnnualTotal(
         context.employee_id,
         claim.category,
@@ -82,7 +82,8 @@ export class ClaimPolicyEngine {
       }
     }
 
-    if (claim.category === 'FUEL' || categoryLimit.requires_odometer) {
+    const requiresOdometer = 'requires_odometer' in categoryLimit && categoryLimit.requires_odometer;
+    if (claim.category === 'FUEL' || requiresOdometer) {
       if (!claim.metadata?.odometer_start || !claim.metadata?.odometer_end) {
         errors.push(
           `GATE_BLOCK: Fuel/Mileage claims require odometer readings (start and end).`

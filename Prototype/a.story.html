@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS CANON // THE STORY</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;900&family=Playfair+Display:ital,wght@1,400;1,900&family=Space+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --void: #000000;
+            --ink: #ffffff;
+            --dim: rgba(255, 255, 255, 0.2);
+            --grid-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--void);
+            color: var(--ink);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .f-mono { font-family: 'Space Mono', monospace; letter-spacing: 0.15em; text-transform: uppercase; font-size: 11px; }
+        .f-serif { font-family: 'Playfair Display', serif; font-style: italic; }
+        .f-bold { font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; }
+
+        .outline-text {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--ink);
+        }
+
+        /* --- STRUCTURE --- */
+        section {
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            border-bottom: 1px solid var(--grid-color);
+        }
+
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image:
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 100px 100px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* --- VISUALS --- */
+        .thread-line {
+            position: fixed;
+            top: 0; bottom: 0; left: 50%;
+            width: 1px;
+            background: var(--dim);
+            z-index: 10;
+        }
+
+        .scroll-marker {
+            position: absolute;
+            left: -6px;
+            width: 13px;
+            height: 13px;
+            background: var(--ink);
+            border-radius: 50%;
+        }
+
+        /* --- ACT 1: THE BORING (Static) --- */
+        .equation {
+            font-size: 15vw;
+            text-align: center;
+            opacity: 0.2;
+            transition: all 0.5s;
+        }
+
+        /* --- ACT 2: THE FORENSIC (Chaos) --- */
+        .chaos-word {
+            position: absolute;
+            font-size: 8vw;
+            mix-blend-mode: exclusion;
+        }
+
+        /* --- ACT 3: NEXUS (The Interface) --- */
+        .nexus-ui {
+            border: 1px solid var(--ink);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        /* --- UTILS --- */
+        .marker-tag {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            white-space: nowrap;
+        }
+
+        /* Grain Overlay */
+        .noise {
+            position: fixed; inset: 0; pointer-events: none; z-index: 999;
+            opacity: 0.07;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+    <div class="noise"></div>
+
+    <div class="thread-line">
+        <div class="scroll-marker"></div>
+    </div>
+
+    <nav style="position: fixed; top: 0; width: 100%; padding: 2rem; display: flex; justify-content: space-between; z-index: 100; mix-blend-mode: difference;">
+        <div class="f-mono">NEXUS_CANON v1.0</div>
+        <div class="f-mono">MENU [+]</div>
+    </nav>
+
+    <section id="act-1">
+        <div class="f-mono" style="position: absolute; top: 4rem; left: 4rem;">
+            [YEAR: 1924 - 2024]<br>STATUS: UNCHANGED
+        </div>
+
+        <div style="z-index: 20; text-align: center;">
+            <div class="f-serif" style="font-size: 2rem; margin-bottom: 1rem;">The Boring Truth.</div>
+            <h1 class="f-bold equation">1 + 1 = 2</h1>
+            <p class="f-mono" style="max-width: 400px; margin: 2rem auto; line-height: 1.6;">
+                Accounting never changes. It is the language of history.
+                Rigid. Predictable. Safe.
+                <br><br>
+                <span style="opacity: 0.5;">(Or so they think.)</span>
+            </p>
+        </div>
+    </section>
+
+    <section id="act-2" style="overflow: hidden;">
+        <div class="f-mono" style="position: absolute; top: 4rem; right: 4rem; text-align: right;">
+            [MORPHOLOGY DETECTED]<br>SYSTEM: PSYCHOLOGY
+        </div>
+
+        <div class="chaos-word f-serif" style="top: 20%; left: 10%; transform: rotate(-5deg);">Greed.</div>
+        <div class="chaos-word f-bold outline-text" style="top: 50%; right: -10%; font-size: 20vw;">CHAOS</div>
+        <div class="chaos-word f-mono" style="bottom: 20%; left: 30%;">[HIDDEN_ASSETS]</div>
+
+        <div style="z-index: 20; max-width: 600px; margin-left: 10%;">
+            <h2 class="f-bold" style="font-size: 5rem;">THE BRAIN<br>GAME</h2>
+            <div style="height: 2px; width: 100px; background: white; margin: 2rem 0;"></div>
+            <p style="font-size: 1.5rem; line-height: 1.4;">
+                Forensic isn't math. <span class="f-serif">It's morphology.</span>
+                <br><br>
+                It's the intent behind the number.
+                The psychology of the error.
+                The more you understand the game, the more you control the outcome.
+            </p>
+        </div>
+    </section>
+
+    <section id="act-3">
+        <div style="text-align: center; margin-bottom: 4rem;">
+            <div class="f-mono">INTRODUCING THE EQUILIBRIUM</div>
+        </div>
+
+        <div class="nexus-ui">
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--dim); padding-bottom: 1rem; margin-bottom: 2rem;">
+                <span class="f-mono">NEXUS // CORE</span>
+                <div style="display: flex; gap: 5px;">
+                    <div style="width: 10px; height: 10px; background: white;"></div>
+                    <div style="width: 10px; height: 10px; border: 1px solid white;"></div>
+                </div>
+            </div>
+
+            <h3 class="f-bold" style="font-size: 4rem; line-height: 1; margin-bottom: 2rem;">
+                ACCOUNTING<br>
+                <span class="f-serif" style="font-size: 0.5em; display: block; margin-top: 1rem;">meets</span>
+                INTELLIGENCE
+            </h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; border-top: 1px solid var(--dim); padding-top: 2rem;">
+                <div>
+                    <div class="f-mono" style="margin-bottom: 0.5rem;">INPUT</div>
+                    <p>Standard ERP Data</p>
+                </div>
+                <div>
+                    <div class="f-mono" style="margin-bottom: 0.5rem; color: #fff;">OUTPUT</div>
+                    <p class="f-serif">Psychological Pattern Recognition</p>
+                </div>
+            </div>
+
+            <button style="width: 100%; margin-top: 3rem; background: white; color: black; border: none; padding: 1.5rem; font-family: 'Space Mono'; font-weight: bold; cursor: pointer; transition: transform 0.2s;">
+                ENTER THE CANON ->
+            </button>
+
+            <div style="position: absolute; top: -50px; left: 50%; width: 1px; height: 50px; background: white;"></div>
+        </div>
+    </section>
+
+    <footer style="padding: 4rem; border-top: 1px solid var(--dim); display: flex; justify-content: space-between; align-items: flex-end;">
+        <div>
+            <div class="f-bold" style="font-size: 2rem;">NEXUSCANON</div>
+            <div class="f-mono" style="opacity: 0.5; margin-top: 1rem;">
+                ERP EVOLVED.<br>
+                FROM B&W TO TRUTH.
+            </div>
+        </div>
+        <div class="f-serif" style="font-size: 8rem; line-height: 0.5;">&</div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Thread Animation (The Marker follows the story)
+        gsap.to(".scroll-marker", {
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 0.5
+            },
+            y: window.innerHeight,
+            ease: "none"
+        });
+
+        // 2. Act 1: The Equation Fades Out
+        gsap.to(".equation", {
+            scrollTrigger: {
+                trigger: "#act-1",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            },
+            scale: 2,
+            opacity: 0,
+            filter: "blur(10px)"
+        });
+
+        // 3. Act 2: Chaos Words Fly In
+        gsap.from(".chaos-word", {
+            scrollTrigger: {
+                trigger: "#act-2",
+                start: "top center",
+                end: "center center",
+                scrub: 1
+            },
+            y: 200,
+            opacity: 0,
+            stagger: 0.2
+        });
+
+        // 4. Act 3: The UI Card Assembles
+        gsap.from(".nexus-ui", {
+            scrollTrigger: {
+                trigger: "#act-3",
+                start: "top 80%",
+                end: "center center",
+                scrub: 1
+            },
+            scale: 0.8,
+            rotationX: 45,
+            opacity: 0
+        });
+    </script>
+</body>
+</html>

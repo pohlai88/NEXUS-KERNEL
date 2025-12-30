@@ -1,6 +1,6 @@
 /**
  * Group Analytics Repository
- * 
+ *
  * Consolidated Spend Analytics: Real-time group-level analytics.
  * "How much do we spend on shipping?" → "$1,245,678.00" instantly.
  */
@@ -180,7 +180,8 @@ export class GroupAnalyticsRepository {
 
     for (const invoice of invoices || []) {
       const vendorId = invoice.vendor_id as string;
-      const vendorName = (invoice.vmp_vendors as { legal_name: string })?.legal_name || 'Unknown';
+      const vendorData = invoice.vmp_vendors as unknown;
+      const vendorName = (Array.isArray(vendorData) ? (vendorData[0] as { legal_name?: string })?.legal_name : (vendorData as { legal_name?: string })?.legal_name) || 'Unknown';
       const amount = parseFloat((invoice.amount || 0).toString());
 
       if (!vendorMap.has(vendorId)) {

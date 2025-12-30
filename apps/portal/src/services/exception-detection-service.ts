@@ -1,6 +1,6 @@
 /**
  * Exception Detection Service
- * 
+ *
  * PRD A-01: Exception-First Workload (MUST)
  * - Default view shows only problems, not volume
  * - Severity tagging: 🔴 Blocking, 🟠 Needs action, 🟢 Safe
@@ -9,14 +9,14 @@
 
 import { createClient } from '@/lib/supabase-client';
 
-export type ExceptionType = 
-  | 'MISSING_DOCUMENT' 
-  | 'VARIANCE_BREACH' 
-  | 'AGING_THRESHOLD' 
-  | 'MATCHING_FAILURE' 
-  | 'APPROVAL_OVERDUE' 
-  | 'PAYMENT_DELAYED' 
-  | 'DATA_INVALID' 
+export type ExceptionType =
+  | 'MISSING_DOCUMENT'
+  | 'VARIANCE_BREACH'
+  | 'AGING_THRESHOLD'
+  | 'MATCHING_FAILURE'
+  | 'APPROVAL_OVERDUE'
+  | 'PAYMENT_DELAYED'
+  | 'DATA_INVALID'
   | 'DUPLICATE_DETECTED';
 
 export type ExceptionSeverity = 'low' | 'medium' | 'high' | 'critical';
@@ -451,7 +451,8 @@ export class ExceptionDetectionService {
       });
     }
 
-    if (!inv.amount || inv.amount <= 0) {
+    const amount = typeof inv.amount === 'number' ? inv.amount : 0;
+    if (!inv.amount || amount <= 0) {
       exceptions.push({
         id: crypto.randomUUID(),
         tenant_id: tenantId,

@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>NexusCanon — Ribbon of Proof</title>
+  <style>
+    :root{
+      --bg:#000;
+      --fg:#fff;
+
+      --ink: rgba(255,255,255,.92);
+      --mut: rgba(255,255,255,.62);
+      --hair: rgba(255,255,255,.18);
+      --hair2: rgba(255,255,255,.10);
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --ser: ui-serif, "Iowan Old Style","Palatino","Georgia",serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+
+      --pad: clamp(16px, 3.6vw, 44px);
+      --max: 1140px;
+
+      --ease: cubic-bezier(.22,1,.36,1);
+      --shadow: radial-gradient(1200px 800px at 50% 45%, transparent 35%, rgba(0,0,0,.86) 78%);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--fg);
+      font-family:var(--sans);
+      text-rendering:geometricPrecision;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    /* --- GLOBAL HUD FIELD --- */
+    .hud{
+      position:fixed; inset:0; pointer-events:none; z-index:0;
+    }
+    .hud .grid{
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity:.13;
+      mix-blend-mode: screen;
+    }
+    .hud .sheen{
+      position:absolute; inset:0; opacity:.07;
+      background:
+        radial-gradient(1400px 760px at 22% 22%, rgba(255,255,255,.22), transparent 60%),
+        radial-gradient(900px 520px at 78% 46%, rgba(255,255,255,.18), transparent 62%),
+        radial-gradient(700px 420px at 62% 84%, rgba(255,255,255,.14), transparent 64%);
+    }
+    .hud .v{ position:absolute; inset:0; background:var(--shadow); }
+
+    /* Micro-grain (no images) */
+    .hud .grain{
+      position:absolute; inset:-40px;
+      background:
+        repeating-linear-gradient(0deg, rgba(255,255,255,.03), rgba(255,255,255,.03) 1px, transparent 1px, transparent 3px);
+      opacity:.06;
+      filter: blur(.2px);
+      transform: rotate(0.12deg);
+    }
+
+    /* --- MORPHOLOGY RIBBON LAYER --- */
+    .morph{
+      position:fixed; inset:0; z-index:1; pointer-events:none;
+      opacity:.95;
+      transform: translateZ(0);
+    }
+    .morph svg{ width:100%; height:100%; display:block; }
+
+    /* --- CONTENT --- */
+    .wrap{ position:relative; z-index:2; }
+
+    header{
+      position:fixed; left:0; right:0; top:0; z-index:3;
+      padding: 18px var(--pad);
+      background: linear-gradient(to bottom, rgba(0,0,0,.68), rgba(0,0,0,0));
+      backdrop-filter: blur(10px);
+    }
+    .nav{
+      max-width: var(--max);
+      margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-family:var(--mono);
+      letter-spacing:.32em;
+      text-transform:uppercase;
+      font-size:10px;
+      color: rgba(255,255,255,.70);
+      user-select:none;
+    }
+    .dot{
+      width:10px; height:10px; border:1px solid rgba(255,255,255,.60);
+      border-radius:999px; position:relative;
+    }
+    .dot:after{
+      content:""; position:absolute; inset:2px;
+      border:1px solid rgba(255,255,255,.22); border-radius:999px;
+    }
+    nav a{
+      pointer-events:auto;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:.34em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.55);
+      text-decoration:none;
+      padding:10px 10px;
+      border:1px solid transparent;
+    }
+    nav a:hover{
+      color: rgba(255,255,255,.86);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .section{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding: calc(var(--pad)*2.3) var(--pad);
+    }
+    .inner{ width:100%; max-width:var(--max); margin:0 auto; }
+
+    .micro{
+      font-family:var(--mono);
+      letter-spacing:.42em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:rgba(255,255,255,.45);
+    }
+    .rule{
+      height:1px;
+      background:linear-gradient(to right, transparent, rgba(255,255,255,.28), transparent);
+      margin: 18px 0 22px;
+    }
+
+    /* The Wordmark treatment (signature) */
+    .wordmark{
+      margin:0;
+      font-family:var(--sans);
+      font-weight:900;
+      letter-spacing:-.06em;
+      line-height:.90;
+      font-size: clamp(60px, 9.2vw, 128px);
+      color: #fff;
+      position:relative;
+      display:inline-block;
+      text-transform:uppercase;
+    }
+    /* “Canon cut” — a forensic incision across the word */
+    .wordmark:after{
+      content:"";
+      position:absolute;
+      left:-6%;
+      right:-10%;
+      top: 56%;
+      height:1px;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,.62), transparent);
+      opacity:.55;
+      transform: rotate(-0.35deg);
+    }
+    .submark{
+      margin-top:10px;
+      font-family:var(--mono);
+      letter-spacing:.50em;
+      text-transform:uppercase;
+      font-size:10px;
+      color: rgba(255,255,255,.42);
+    }
+
+    .lead{
+      margin: 18px 0 0;
+      font-family:var(--ser);
+      font-size: clamp(15px, 1.55vw, 18px);
+      line-height: 1.74;
+      color: rgba(255,255,255,.62);
+      max-width: 74ch;
+    }
+
+    .plates{
+      margin-top:28px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+    }
+    @media (max-width: 920px){
+      .plates{ grid-template-columns: 1fr; }
+    }
+
+    .plate{
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+      padding:20px;
+      position:relative;
+      overflow:hidden;
+    }
+    .plate:before{
+      content:""; position:absolute; inset:10px;
+      border:1px solid rgba(255,255,255,.10);
+      pointer-events:none;
+    }
+    .plate h3{
+      margin: 10px 0 0;
+      font-family:var(--ser);
+      font-size: 20px;
+      letter-spacing:-.01em;
+      color: rgba(255,255,255,.90);
+      line-height:1.15;
+    }
+    .plate p{
+      margin: 10px 0 0;
+      font-family:var(--ser);
+      font-size: 13.5px;
+      line-height:1.7;
+      color: rgba(255,255,255,.60);
+      max-width: 60ch;
+    }
+
+    .white{
+      background:#fff; color:#000;
+      border:2px solid #fff;
+    }
+    .white .micro{ color: rgba(0,0,0,.55); }
+    .sealBox{
+      margin-top:18px;
+      height:56px;
+      border:2px solid #000;
+    }
+    .mono{
+      font-family:var(--mono);
+      letter-spacing:.26em;
+      font-size:11px;
+    }
+
+    /* Section titles (discipline + contrast) */
+    .h2{
+      margin:0;
+      font-family:var(--sans);
+      font-weight:900;
+      letter-spacing:-.05em;
+      text-transform:uppercase;
+      font-size: clamp(34px, 4.8vw, 62px);
+      line-height:.94;
+    }
+    .aside{
+      margin-top:14px;
+      font-family:var(--ser);
+      color: rgba(255,255,255,.58);
+      line-height:1.8;
+      max-width:72ch;
+      font-size: 15px;
+    }
+
+    /* Footer minimal */
+    footer{
+      padding: 70px var(--pad);
+    }
+    .foot{
+      max-width:var(--max); margin:0 auto;
+      display:flex; flex-wrap:wrap; gap:18px; align-items:flex-end; justify-content:space-between;
+      border-top:1px solid rgba(255,255,255,.14);
+      padding-top:28px;
+    }
+    .foot .left{
+      font-family:var(--ser);
+      font-size:22px;
+      color: rgba(255,255,255,.90);
+      letter-spacing:-.02em;
+      line-height:1.15;
+    }
+    .foot .right{
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:.42em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.42);
+    }
+
+    /* Vertical whisper */
+    .whisper{
+      position:fixed; right:18px; top:50%; transform: translateY(-50%);
+      font-family:var(--mono); font-size:10px; letter-spacing:.42em;
+      color: rgba(255,255,255,.18);
+      writing-mode: vertical-rl;
+      z-index:3;
+      user-select:none;
+      pointer-events:none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand"><span class="dot"></span><span>NexusCanon</span></div>
+      <nav>
+        <a href="#truth">Truth</a>
+        <a href="#invariant">Invariant</a>
+        <a href="#game">The Game</a>
+        <a href="#dna">DNA</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hud" aria-hidden="true">
+    <div class="sheen"></div>
+    <div class="grid"></div>
+    <div class="grain"></div>
+    <div class="v"></div>
+  </div>
+
+  <!-- Ribbon-of-Proof Morphology Engine -->
+  <div class="morph" aria-hidden="true">
+    <svg id="morphSvg" viewBox="0 0 1000 700" preserveAspectRatio="none"></svg>
+  </div>
+
+  <div class="whisper" aria-hidden="true">RIBBON·OF·PROOF</div>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="section" id="truth">
+      <div class="inner">
+        <div class="micro">forensic accounting erp</div>
+        <div class="rule"></div>
+
+        <div class="wordmark">NEXUS<br/>CANON</div>
+        <div class="submark">engine of truth · ssot · evidence</div>
+
+        <p class="lead">
+          NexusCanon is not “finance software”. It’s a ledger system designed to be
+          explainable — every figure carries lineage, every action leaves evidence, every audit is already done.
+        </p>
+
+        <div class="plates">
+          <div class="plate">
+            <div class="micro">accounting</div>
+            <div class="rule"></div>
+            <div class="h2" style="font-size:clamp(44px,5.6vw,78px)">1 + 1<br/>= 2</div>
+            <div class="aside">
+              Unchanging mathematics. Unbreakable posting identity. Reversals and adjustments are still truth.
+            </div>
+          </div>
+
+          <div class="plate white">
+            <div class="micro">seal</div>
+            <div class="rule" style="background:linear-gradient(to right, transparent, rgba(0,0,0,.35), transparent)"></div>
+            <div class="h2" style="color:#000; font-size:clamp(28px,3.2vw,42px); letter-spacing:-.03em;">
+              THE<br/>PSYCHOLOGY<br/>OF NUMBERS
+            </div>
+            <div style="margin-top:12px; font-family:var(--ser); color:rgba(0,0,0,.68); line-height:1.75;">
+              Every transaction tells a story.<br/>Every pattern reveals intent.<br/>Every number is evidence.
+            </div>
+            <div class="sealBox"></div>
+            <div class="mono" style="margin-top:12px;">SSOT · LOCKED</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVARIANT -->
+    <section class="section" id="invariant">
+      <div class="inner">
+        <div class="micro">discipline</div>
+        <div class="rule"></div>
+        <div class="h2">Accounting<br/>never changes.</div>
+        <div class="aside">
+          The surface can be futuristic. The system cannot be theatrical.
+          NexusCanon keeps the accounting boring — on purpose — so that the forensic layer becomes sharp.
+        </div>
+      </div>
+    </section>
+
+    <!-- GAME -->
+    <section class="section" id="game">
+      <div class="inner">
+        <div class="micro">morphology</div>
+        <div class="rule"></div>
+        <div class="h2">THE GAME</div>
+        <div class="aside">
+          You don’t “decorate” forensic. You instrument it. The ribbon becomes your narrative: trail → pattern → proof.
+        </div>
+
+        <div class="plates" style="margin-top:26px;">
+          <div class="plate">
+            <div class="micro">investigation</div>
+            <div class="rule"></div>
+            <h3>Trail of data</h3>
+            <p>Pattern recognition, anomaly detection, evidence chain — all inside the same ledger identity.</p>
+          </div>
+          <div class="plate">
+            <div class="micro">proof</div>
+            <div class="rule"></div>
+            <h3>One-click explainability</h3>
+            <p>Not “reports”. Not “exports”. Every number is a clickable story with lineage and policy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DNA -->
+    <section class="section" id="dna">
+      <div class="inner">
+        <div class="micro">nexuscanon dna</div>
+        <div class="rule"></div>
+        <div class="h2">Precision · Intelligence · Evolution</div>
+        <div class="aside">
+          Trust is built when the visuals behave like the system: minimal, strict, and quietly forensic.
+          The ribbon is your signature: it looks like accounting lines, but moves like intent.
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div class="left">Trust is built<br/>one reconciliation at a time.</div>
+        <div class="right">© 2025 NexusCanon · B/W DNA · SSOT</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    /* ---------------------------------------------------------
+      Ribbon-of-Proof Morphology Engine
+      - Signature: parallel-line ribbon (accounting lines as motion)
+      - Secondary: frames + ticks (HUD discipline)
+      - Scroll drives “pressure”: calm → suspicious → forensic wake
+    --------------------------------------------------------- */
+
+    // Seeded RNG (xorshift32)
+    function makeRand(seed){
+      let t = seed | 0;
+      return function(){
+        t ^= (t << 13); t ^= (t >> 17); t ^= (t << 5);
+        const n = Math.abs(t) % 1000000;
+        return n / 1000000;
+      }
+    }
+    const rnd = makeRand(117);
+
+    const svg = document.getElementById("morphSvg");
+    const S = {
+      w:1000, h:700,
+      scroll01: 0,
+      reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+      dashers: [],
+      ribbonLines: [],
+      frames: [],
+      ghosts: []
+    };
+
+    function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
+    function lerp(a,b,t){ return a + (b-a)*t; }
+
+    function el(name, attrs){
+      const n = document.createElementNS("http://www.w3.org/2000/svg", name);
+      for(const k in attrs){
+        if(attrs[k] == null) continue;
+        n.setAttribute(k, String(attrs[k]));
+      }
+      return n;
+    }
+
+    function build(){
+      svg.innerHTML = "";
+
+      // --- Ribbon path (signature) ---
+      // A single path, drawn many times (parallel accounting lines).
+      // It stays “disciplined”: never too wavy, always ledger-like.
+      const base = "M -80 520 C 120 470 220 610 360 565 C 520 515 570 405 720 450 C 860 492 940 610 1120 560";
+      const base2 = "M -80 210 C 140 160 260 250 390 215 C 540 176 630 70 790 92 C 940 112 1010 210 1120 180";
+
+      const ribbonGroup = el("g",{});
+      svg.appendChild(ribbonGroup);
+
+      // top ribbon (lighter)
+      for(let i=0;i<9;i++){
+        const o = 0.06 + i*0.018;
+        const p = el("path",{
+          d: base2,
+          fill:"none",
+          stroke:`rgba(255,255,255,${o})`,
+          "stroke-width":"1",
+          "stroke-linecap":"round",
+          "stroke-linejoin":"round"
+        });
+        ribbonGroup.appendChild(p);
+        S.ribbonLines.push({ node:p, lane:i, top:true });
+      }
+
+      // main ribbon (stronger)
+      for(let i=0;i<12;i++){
+        const o = 0.08 + i*0.020;
+        const p = el("path",{
+          d: base,
+          fill:"none",
+          stroke:`rgba(255,255,255,${o})`,
+          "stroke-width":"1",
+          "stroke-linecap":"round",
+          "stroke-linejoin":"round"
+        });
+        ribbonGroup.appendChild(p);
+        S.ribbonLines.push({ node:p, lane:i, top:false });
+      }
+
+      // --- Frames (rare, thin, not “card UI”) ---
+      for(let i=0;i<10;i++){
+        const x = rnd()*860;
+        const y = rnd()*520;
+        const w = 150 + rnd()*520;
+        const h = 80 + rnd()*360;
+        const rx = Math.floor(rnd()*18);
+        const sw = (i%5===0) ? 2 : 1;
+        const op = (i%3===0) ? 0.20 : 0.14;
+
+        const r = el("rect",{
+          x,y,width:w,height:h,rx,ry:rx,
+          fill:"transparent",
+          stroke:`rgba(255,255,255,${op})`,
+          "stroke-width":sw
+        });
+        svg.appendChild(r);
+        S.frames.push({ node:r, base:{x,y,w,h,rx,sw,op}, i });
+
+        if(i%3===0){
+          r.setAttribute("stroke-dasharray","10 16");
+          S.dashers.push(r);
+        }
+
+        if(i%4===0){
+          const g = el("rect",{
+            x:x+7, y:y+7, width:Math.max(0,w-14), height:Math.max(0,h-14),
+            rx:Math.max(0,rx-7), ry:Math.max(0,rx-7),
+            fill:"rgba(255,255,255,0.05)",
+            stroke:"transparent"
+          });
+          svg.appendChild(g);
+          S.ghosts.push({ node:g, i });
+        }
+      }
+
+      // --- Calibration ticks (HUD discipline) ---
+      const ticks = el("g",{});
+      svg.appendChild(ticks);
+
+      for(let i=0;i<16;i++){
+        const xx = 70 + i*56;
+        const hh = (i%3===0) ? 18 : 10;
+        ticks.appendChild(el("line",{
+          x1:xx, x2:xx, y1:14, y2:14+hh,
+          stroke:"rgba(255,255,255,0.20)",
+          "stroke-width":"1"
+        }));
+      }
+      for(let i=0;i<12;i++){
+        const yy = 90 + i*46;
+        const ww = (i%3===0) ? 18 : 10;
+        ticks.appendChild(el("line",{
+          x1:980-ww, x2:980, y1:yy, y2:yy,
+          stroke:"rgba(255,255,255,0.16)",
+          "stroke-width":"1"
+        }));
+      }
+    }
+
+    function computeScroll01(){
+      const doc = document.documentElement;
+      const max = Math.max(1, doc.scrollHeight - doc.clientHeight);
+      S.scroll01 = clamp(doc.scrollTop / max, 0, 1);
+    }
+
+    function update(){
+      const s = S.scroll01;
+
+      // pressure curve: calm → suspicious → forensic wake
+      const pressure = clamp((s - 0.28) / 0.62, 0, 1);
+      const calm = 1 - pressure;
+
+      // Ribbon behavior: it should feel like “truth-flow”, not decoration.
+      // We shift lanes and dash phase, but keep the underlying geometry disciplined.
+      S.ribbonLines.forEach((r, idx)=>{
+        const lane = r.lane;
+        const spread = r.top ? lerp(1.6, 2.6, pressure) : lerp(2.2, 3.8, pressure);
+        const yOff = (lane - (r.top?4:6)) * spread;
+
+        const xOff = (r.top ? -10 : 14) * Math.sin((s*2.2 + lane*0.12) * Math.PI) * (S.reduced?0:1) * lerp(.3, .75, pressure);
+        const wob = (S.reduced?0:1) * Math.sin((s*4.0 + lane*0.33) * Math.PI) * lerp(0.0, 1.0, pressure);
+
+        const oBase = r.top ? 0.06 + lane*0.018 : 0.08 + lane*0.020;
+        const o = lerp(oBase*0.92, Math.min(0.34, oBase*1.25), pressure);
+
+        r.node.setAttribute("stroke", `rgba(255,255,255,${o})`);
+        r.node.setAttribute("transform", `translate(${xOff}px, ${yOff + wob}px)`);
+      });
+
+      // Frames: become slightly more “present” during forensic wake, but never turn into UI cards.
+      S.frames.forEach((f)=>{
+        const lift = (f.i%5 - 2) * lerp(2, 16, pressure);
+        const op = lerp(f.base.op, Math.min(0.30, f.base.op+0.10), pressure);
+        const sw = lerp(f.base.sw, f.base.sw + (f.i%4===0 ? 0.55 : 0.25), pressure);
+        f.node.style.opacity = String(op);
+        f.node.setAttribute("stroke-width", String(sw));
+        f.node.setAttribute("transform", `translate(0 ${lift})`);
+      });
+
+      // Ghosts: “evidence extracted” (slightly more visible later)
+      S.ghosts.forEach((g)=>{
+        g.node.style.opacity = String(lerp(0.06, 0.10, pressure));
+      });
+
+      // Dash phase: subtle scan — forensic suspicion
+      if(!S.reduced){
+        S.dashers.forEach((n,i)=>{
+          n.setAttribute("stroke-dashoffset", String(-(s*420 + i*60)));
+        });
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    build();
+    computeScroll01();
+    window.addEventListener("scroll", computeScroll01, { passive:true });
+    requestAnimationFrame(update);
+  </script>
+</body>
+</html>

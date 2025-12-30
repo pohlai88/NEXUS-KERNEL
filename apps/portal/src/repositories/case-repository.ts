@@ -1,6 +1,6 @@
 /**
  * Case Repository with Audit Trail Integration
- * 
+ *
  * Manages case operations with automatic audit trail logging.
  * Every case action creates an immutable audit record.
  */
@@ -183,9 +183,9 @@ export class CaseRepository {
       entity_id: caseId,
       action: 'update',
       action_by: updatedBy,
-      old_state: currentCase as Record<string, unknown>,
-      new_state: updatedCase as Record<string, unknown>,
-      changes: changes as Record<string, unknown>,
+      old_state: currentCase,
+      new_state: updatedCase,
+      changes: changes,
       workflow_stage: updatedCase.status,
       workflow_state: {
         status: updatedCase.status,

@@ -1,6 +1,6 @@
 /**
  * Audit Trail Repository
- * 
+ *
  * Manages cryptographic audit trail with immutable records.
  * Every action creates an audit record with cryptographic proof.
  */
@@ -39,8 +39,22 @@ export interface AuditTrailFilters {
   end_date?: string;
 }
 
+/**
+ * Helper type to convert any object to Record<string, unknown>
+ * This allows type-safe objects to be passed to audit trail
+ */
+type AuditState = Record<string, unknown> | object | null | undefined;
+
 export class AuditTrailRepository {
   private supabase = createClient();
+
+  /**
+   * Convert any state object to Record<string, unknown> for storage
+   */
+  private toRecord(state: AuditState): Record<string, unknown> | null {
+    if (state === null || state === undefined) return null;
+    return JSON.parse(JSON.stringify(state)) as Record<string, unknown>;
+  }
 
   /**
    * Insert audit trail record with cryptographic proof
@@ -51,11 +65,11 @@ export class AuditTrailRepository {
       entity_id: string;
       action: string;
       action_by: string;
-      old_state?: Record<string, unknown>;
-      new_state?: Record<string, unknown>;
-      changes?: Record<string, unknown>;
+      old_state?: AuditState;
+      new_state?: AuditState;
+      changes?: AuditState;
       workflow_stage?: string;
-      workflow_state?: Record<string, unknown>;
+      workflow_state?: AuditState;
       tenant_id: string;
       ip_address?: string;
       user_agent?: string;
@@ -68,11 +82,11 @@ export class AuditTrailRepository {
       p_entity_id: params.entity_id,
       p_action: params.action,
       p_action_by: params.action_by,
-      p_old_state: params.old_state || null,
-      p_new_state: params.new_state || null,
-      p_changes: params.changes || null,
+      p_old_state: this.toRecord(params.old_state),
+      p_new_state: this.toRecord(params.new_state),
+      p_changes: this.toRecord(params.changes),
       p_workflow_stage: params.workflow_stage || null,
-      p_workflow_state: params.workflow_state || null,
+      p_workflow_state: this.toRecord(params.workflow_state),
       p_tenant_id: params.tenant_id,
       p_ip_address: params.ip_address || null,
       p_user_agent: params.user_agent || null,

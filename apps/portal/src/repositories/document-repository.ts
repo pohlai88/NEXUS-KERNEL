@@ -1,6 +1,6 @@
 /**
  * Document Repository
- * 
+ *
  * Manages document storage with version tracking.
  * Uses Supabase Storage for file storage.
  * Direct Kernel alignment - NO mapping layer.
@@ -23,6 +23,7 @@ export interface Document extends SoftDeleteRecord {
   tenant_id: string;
   name: string;
   type: string;
+  file_type?: string; // Display-friendly file type (e.g., 'PDF', 'Image')
   category: 'invoice' | 'contract' | 'statement' | 'other';
   file_url: string;
   file_size: number;
@@ -338,7 +339,8 @@ export class DocumentRepository {
       created_at: row.created_at,
       updated_at: row.updated_at,
       created_by: row.created_by,
-      deletedAt: null, // documents table doesn't have deleted_at yet
+      deleted_at: null, // documents table doesn't have deleted_at yet
+      deletedAt: null,
       deletedBy: null,
     };
   }

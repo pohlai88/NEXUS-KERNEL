@@ -1,6 +1,6 @@
 /**
  * Vendor Invoice Detail Page
- * 
+ *
  * PRD V-01: Payment Status Transparency
  * - Status timeline (RECEIVED → UNDER_REVIEW → APPROVED → PAID)
  * - Rejection reasons (if rejected)
@@ -39,7 +39,7 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
   const invoiceRepo = new InvoiceRepository();
 
   // Get invoice
-  const invoice = await invoiceRepo.findById(params.id);
+  const invoice = await invoiceRepo.getById(params.id);
 
   if (!invoice) {
     notFound();
@@ -167,7 +167,7 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
           <div>
             <label className="na-metadata na-mb-2 na-block">Amount</label>
             <div className="na-data-large">
-              ${invoice.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}{' '}
+              ${(invoice.amount ?? 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}{' '}
               {invoice.currency_code || 'USD'}
             </div>
           </div>
@@ -276,7 +276,7 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
         <div className="na-card na-p-6 na-bg-danger-subtle na-text-danger">
           <h2 className="na-h4 na-mb-2">Rejection Reason</h2>
           <p className="na-body">
-            {invoice.rejection_reason || 'No rejection reason provided.'}
+            {(invoice as unknown as { rejection_reason?: string }).rejection_reason || 'No rejection reason provided.'}
           </p>
         </div>
       )}

@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NexusCanon — B&W DNA (King Scroll)</title>
+  <meta name="description" content="NexusCanon — Forensic Accounting ERP. Truth as a ledger that refuses drift." />
+  <style>
+    :root{
+      --bg:#000;
+      --fg:#fff;
+      --fga:rgba(255,255,255,.82);
+      --fgm:rgba(255,255,255,.62);
+      --fgl:rgba(255,255,255,.42);
+      --hair:rgba(255,255,255,.18);
+      --grid:rgba(255,255,255,.08);
+      --grid2:rgba(255,255,255,.05);
+      --ink:rgba(255,255,255,.94);
+      --max:1100px;
+      --pad:clamp(16px,3.6vw,44px);
+      --serif: ui-serif, "Iowan Old Style","Palatino","Georgia",serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --ease:cubic-bezier(.22,1,.36,1);
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--fg);
+      font-family:var(--sans);
+      text-rendering:geometricPrecision;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    /* --- HUD BACKDROP --- */
+    .hud{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:0;
+    }
+    .hud::before{
+      content:"";
+      position:absolute; inset:-10%;
+      background:
+        radial-gradient(1200px 700px at 20% 20%, rgba(255,255,255,.14), transparent 60%),
+        radial-gradient(900px 520px at 78% 46%, rgba(255,255,255,.10), transparent 62%),
+        radial-gradient(700px 420px at 62% 84%, rgba(255,255,255,.08), transparent 64%);
+      opacity:.32;
+      filter:blur(.2px);
+    }
+    .hud .grid{
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        linear-gradient(var(--grid2) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid2) 1px, transparent 1px);
+      background-size: 36px 36px, 36px 36px, 180px 180px, 180px 180px;
+      opacity:.9;
+      mix-blend-mode:screen;
+    }
+    .hud .vignette{
+      position:absolute; inset:0;
+      background: radial-gradient(1200px 700px at 50% 45%, transparent 35%, rgba(0,0,0,.82) 78%);
+    }
+    .scanline{
+      position:absolute; left:0; top:-10%;
+      width:100%; height:2px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+      opacity:.45;
+      animation:scan 10s linear infinite;
+    }
+    @keyframes scan{
+      0%{ transform:translateY(-10vh); }
+      100%{ transform:translateY(120vh); }
+    }
+
+    /* micro dust */
+    .dust{ position:absolute; inset:0; opacity:.55; }
+    .dust i{
+      position:absolute; display:block;
+      width:2px; height:2px; border-radius:999px;
+      background:rgba(255,255,255,.9);
+      filter:blur(.1px);
+    }
+
+    /* --- LAYOUT --- */
+    .wrap{ position:relative; z-index:1; }
+    .rail{
+      position:fixed;
+      left:clamp(10px,2vw,28px);
+      top:0; bottom:0;
+      width:1px;
+      background:linear-gradient(to bottom, transparent, rgba(255,255,255,.22), transparent);
+      opacity:.9;
+      z-index:2;
+      pointer-events:none;
+    }
+    .rail::after{
+      content:"";
+      position:absolute;
+      top:16vh;
+      left:-6px;
+      width:12px; height:12px;
+      border:1px solid rgba(255,255,255,.35);
+      transform:rotate(45deg);
+      opacity:.6;
+    }
+
+    .corner{
+      position:fixed; z-index:3; pointer-events:none;
+      display:flex; gap:10px; align-items:flex-start;
+      color:var(--fgl);
+      font-family:var(--mono);
+      letter-spacing:.42em;
+      text-transform:uppercase;
+      font-size:10px;
+      mix-blend-mode:screen;
+    }
+    .corner .bar{ width:1px; height:40px; background:rgba(255,255,255,.38); margin-top:2px; }
+    .corner b{ display:block; color:rgba(255,255,255,.85); letter-spacing:.28em; font-weight:600; font-size:11px; margin-top:4px; }
+    .tl{ top:18px; left:18px; }
+    .tr{ top:18px; right:18px; text-align:right; flex-direction:row-reverse; }
+    .bl{ bottom:18px; left:18px; }
+    .br{ bottom:18px; right:18px; text-align:right; flex-direction:row-reverse; }
+
+    /* --- TYPOGRAPHY WEAPON --- */
+    .micro{
+      font-family:var(--mono);
+      letter-spacing:.42em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:var(--fgl);
+    }
+    .mono{ font-family:var(--mono); }
+    .serif{ font-family:var(--serif); }
+    .hair{
+      -webkit-text-stroke: .5px rgba(255,255,255,.35);
+      color:transparent;
+    }
+
+    .section{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding: calc(var(--pad) * 2.3) var(--pad);
+    }
+    .inner{
+      width:100%;
+      max-width:var(--max);
+      margin:0 auto;
+      position:relative;
+    }
+
+    .rule{
+      height:1px;
+      background:linear-gradient(to right, transparent, rgba(255,255,255,.28), transparent);
+      margin:24px 0;
+      opacity:.9;
+    }
+
+    /* Morphology field: lines -> frames -> ghosts */
+    .morph{
+      position:absolute; inset:-40px;
+      pointer-events:none;
+      opacity:.9;
+    }
+    .morph svg{ width:100%; height:100%; display:block; }
+    .morph .soft{ opacity:.35; }
+    .morph .thin{ opacity:.22; }
+    .morph .dash{ stroke-dasharray: 8 14; opacity:.25; }
+
+    /* Cards that refuse being "cards" */
+    .plate{
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+      padding:22px;
+      position:relative;
+    }
+    .plate::before{
+      content:"";
+      position:absolute; inset:10px;
+      border:1px solid rgba(255,255,255,.10);
+      pointer-events:none;
+    }
+
+    /* White evidence slab */
+    .evidence{
+      background:#fff;
+      color:#000;
+      padding:24px;
+      border:2px solid #fff;
+      position:relative;
+    }
+    .evidence .micro{ color:rgba(0,0,0,.55); }
+    .evidence .mono{ letter-spacing:.26em; font-size:11px; }
+
+    /* HERO */
+    .hero h1{
+      margin:0;
+      font-family:var(--serif);
+      letter-spacing:-.06em;
+      line-height:.88;
+      font-size: clamp(54px, 9vw, 110px);
+    }
+    .hero p{
+      margin:18px 0 0;
+      font-family:var(--serif);
+      font-size: clamp(15px, 1.5vw, 17px);
+      line-height:1.72;
+      color:var(--fgm);
+      max-width:70ch;
+    }
+    .hero .sub{
+      margin-top:18px;
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:.22em;
+      color:rgba(255,255,255,.82);
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      margin-top:26px;
+    }
+    @media (max-width: 900px){
+      .grid2{ grid-template-columns:1fr; }
+    }
+
+    /* LAW section */
+    .law .eq{
+      font-family:var(--sans);
+      font-weight:800;
+      letter-spacing:-.04em;
+      font-size: clamp(64px, 10vw, 130px);
+      line-height: .92;
+      margin:0;
+    }
+    .law .note{
+      margin-top:12px;
+      font-family:var(--serif);
+      font-size:16px;
+      line-height:1.68;
+      color:var(--fgm);
+      max-width:62ch;
+    }
+    .repeat{
+      margin-top:26px;
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      opacity:.88;
+    }
+    .repeat .chip{
+      border:1px solid rgba(255,255,255,.16);
+      padding:12px 14px;
+      font-family:var(--mono);
+      font-size:11px;
+      letter-spacing:.22em;
+      color:rgba(255,255,255,.78);
+    }
+
+    /* INTERRUPTION */
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:26px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .split{ grid-template-columns:1fr; }
+    }
+    .split .right{
+      border-left:1px solid rgba(255,255,255,.22);
+      padding-left:20px;
+    }
+    @media (max-width: 900px){
+      .split .right{ border-left:none; padding-left:0; border-top:1px solid rgba(255,255,255,.22); padding-top:18px; }
+    }
+    .bigQ{
+      font-family:var(--sans);
+      font-weight:900;
+      letter-spacing:-.04em;
+      font-size: clamp(52px, 7.5vw, 100px);
+      line-height:.92;
+      margin:0;
+    }
+    .right p{
+      margin:0 0 14px;
+      font-family:var(--serif);
+      font-size: clamp(18px, 2vw, 26px);
+      line-height:1.32;
+      color:rgba(255,255,255,.9);
+    }
+    .right .subp{
+      font-size:16px;
+      color:var(--fgm);
+      line-height:1.68;
+      max-width:60ch;
+    }
+
+    /* TRAIL */
+    .trail h2{
+      margin:0;
+      font-family:var(--sans);
+      font-weight:900;
+      letter-spacing:-.03em;
+      font-size: clamp(44px, 6.8vw, 88px);
+      line-height:.94;
+    }
+    .trail .frag{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+    }
+    @media (max-width: 900px){
+      .trail .frag{ grid-template-columns:1fr; }
+    }
+    .frag .line{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px 0;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .frag .tick{
+      width:18px;
+      height:1px;
+      background:rgba(255,255,255,.45);
+      margin-top:10px;
+      flex:0 0 auto;
+    }
+    .frag .txt{
+      font-family:var(--sans);
+      font-size:16px;
+      color:rgba(255,255,255,.86);
+    }
+    .trail .caption{
+      margin-top:14px;
+      font-family:var(--serif);
+      color:var(--fgm);
+      line-height:1.72;
+      max-width:68ch;
+    }
+
+    /* GAME */
+    .game .gameRow{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      margin-top:18px;
+      align-items:end;
+    }
+    @media (max-width: 900px){
+      .game .gameRow{ grid-template-columns:1fr; }
+    }
+    .game h2{
+      margin:0;
+      font-family:var(--sans);
+      font-weight:900;
+      letter-spacing:-.03em;
+      font-size: clamp(54px, 8vw, 120px);
+      line-height:.88;
+    }
+    .game .aside{
+      font-family:var(--mono);
+      letter-spacing:.42em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:rgba(255,255,255,.40);
+      text-align:right;
+    }
+    .mantra{
+      margin-top:22px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+      align-items:center;
+      border-left:1px solid rgba(255,255,255,.22);
+      padding-left:16px;
+    }
+    .mantra b{
+      font-family:var(--sans);
+      font-weight:900;
+      letter-spacing:.04em;
+      font-size: clamp(22px, 3vw, 34px);
+    }
+    .mantra .dot{ opacity:.35; }
+    .miniRow{
+      margin-top:22px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      opacity:.95;
+    }
+    .miniRow .box{
+      width:72px; height:72px;
+      border:1px solid rgba(255,255,255,.18);
+      display:grid; place-items:center;
+      font-family:var(--sans);
+      font-weight:800;
+      letter-spacing:-.02em;
+      color:rgba(255,255,255,.9);
+    }
+    .miniRow .box.white{
+      background:#fff; color:#000; border-color:#fff;
+    }
+
+    /* CONSTANT */
+    .constGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      margin-top:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .constGrid{ grid-template-columns:1fr; }
+    }
+    .constGrid .blk{
+      border:1px solid rgba(255,255,255,.18);
+      padding:22px;
+      background:rgba(0,0,0,.25);
+    }
+    .constGrid .blk .num{
+      font-family:var(--sans);
+      font-weight:900;
+      letter-spacing:-.04em;
+      font-size: clamp(64px, 9vw, 120px);
+      line-height:.9;
+      margin:0;
+    }
+    .constGrid .blk .lbl{
+      margin-top:10px;
+      font-family:var(--mono);
+      letter-spacing:.42em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:rgba(255,255,255,.42);
+    }
+    .constGrid .blk .txt{
+      margin-top:12px;
+      font-family:var(--serif);
+      color:var(--fgm);
+      line-height:1.68;
+    }
+
+    /* QUESTION */
+    .why .bigQ{ font-size: clamp(56px, 9vw, 128px); }
+    .why .right p{ font-size: clamp(18px, 2vw, 26px); }
+
+    /* DNA */
+    .dna h2{
+      margin:0;
+      font-family:var(--sans);
+      font-weight:900;
+      letter-spacing:-.03em;
+      font-size: clamp(42px, 6.4vw, 86px);
+      line-height:.95;
+    }
+    .dna .coords{
+      margin-top:18px;
+      display:flex;
+      gap:22px;
+      flex-wrap:wrap;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:.42em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.44);
+    }
+    .dna .coords span{ padding:10px 12px; border:1px solid rgba(255,255,255,.14); }
+
+    /* SENTENCE */
+    .sentence{
+      min-height:85vh;
+      display:flex;
+      align-items:flex-end;
+      padding: calc(var(--pad) * 2) var(--pad);
+    }
+    .sentence .inner{ padding-bottom:32px; }
+    .finalLine{
+      font-family:var(--serif);
+      font-size: clamp(22px, 2.6vw, 44px);
+      line-height:1.24;
+      color:rgba(255,255,255,.9);
+      max-width:42ch;
+    }
+    .amp{
+      position:absolute;
+      right:0;
+      bottom:18px;
+      font-family:var(--sans);
+      font-weight:900;
+      font-size: clamp(72px, 10vw, 140px);
+      line-height:.8;
+      opacity:.92;
+    }
+
+    /* SIGNATURE */
+    .sig{
+      padding: calc(var(--pad) * 1.6) var(--pad) calc(var(--pad) * 2.2);
+    }
+    .sig .brand{
+      font-family:var(--sans);
+      font-weight:900;
+      letter-spacing:-.03em;
+      font-size: clamp(36px, 6vw, 72px);
+      margin:0;
+    }
+    .sig .sub{
+      margin-top:10px;
+      font-family:var(--mono);
+      letter-spacing:.42em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:rgba(255,255,255,.38);
+    }
+    .sig .whisper{
+      margin-top:18px;
+      font-family:var(--serif);
+      color:var(--fgm);
+      line-height:1.72;
+      max-width:72ch;
+    }
+
+    /* Subtle reveal */
+    [data-reveal]{
+      opacity:0;
+      transform:translateY(14px);
+      transition: opacity 900ms var(--ease), transform 900ms var(--ease);
+      will-change: opacity, transform;
+    }
+    [data-reveal].in{
+      opacity:1;
+      transform:none;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .scanline{ display:none; }
+      [data-reveal]{ opacity:1; transform:none; transition:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HUD backdrop -->
+  <div class="hud" aria-hidden="true">
+    <div class="grid"></div>
+    <div class="scanline"></div>
+    <div class="dust" id="dust"></div>
+    <div class="vignette"></div>
+  </div>
+
+  <div class="rail" aria-hidden="true"></div>
+
+  <!-- Corner stamps -->
+  <div class="corner tl"><span class="bar"></span><span><span>SIGNAL</span><b>NC.T01</b></span></div>
+  <div class="corner tr"><span class="bar"></span><span><span>DATE</span><b id="dateStamp">2025.12.30</b></span></div>
+  <div class="corner bl"><span class="bar"></span><span><span>MODE</span><b>FORENSIC</b></span></div>
+  <div class="corner br"><span class="bar"></span><span><span>SSOT</span><b>LOCKED</b></span></div>
+
+  <div class="wrap">
+
+    <!-- SCROLL 00 — VOID -->
+    <section class="section" id="void">
+      <div class="inner" data-reveal>
+        <div class="micro">the void</div>
+        <div class="rule"></div>
+        <div class="serif" style="font-size:clamp(18px,2.1vw,28px); line-height:1.45; color:rgba(255,255,255,.84); max-width:62ch;">
+          Nothing here needs your trust.
+        </div>
+      </div>
+    </section>
+
+    <!-- SCROLL 01 — DECREE -->
+    <section class="section hero" id="decree">
+      <div class="inner">
+        <div class="morph" aria-hidden="true">
+          <svg viewBox="0 0 1000 650" preserveAspectRatio="none">
+            <path d="M-30,160 C200,110 260,220 420,190 C560,165 640,60 800,90 C920,110 980,190 1040,175"
+              fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1"/>
+            <path d="M-20,520 C210,480 320,610 470,560 C610,515 680,420 840,455 C940,478 995,545 1040,525"
+              fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1"/>
+
+            <rect x="70" y="110" width="420" height="240" rx="18" fill="transparent" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+            <rect x="520" y="170" width="340" height="200" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)" stroke-width="1"/>
+            <rect class="dash" x="200" y="420" width="560" height="150" rx="12" fill="transparent" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+
+            <!-- ticks -->
+            <g class="thin">
+              <line x1="80" y1="20" x2="80" y2="44" stroke="rgba(255,255,255,.22)" />
+              <line x1="142" y1="20" x2="142" y2="34" stroke="rgba(255,255,255,.18)" />
+              <line x1="204" y1="20" x2="204" y2="44" stroke="rgba(255,255,255,.22)" />
+              <line x1="266" y1="20" x2="266" y2="34" stroke="rgba(255,255,255,.18)" />
+              <line x1="328" y1="20" x2="328" y2="44" stroke="rgba(255,255,255,.22)" />
+            </g>
+          </svg>
+        </div>
+
+        <div class="micro" data-reveal>AIBOS · NEXUSCANON</div>
+        <div class="rule" data-reveal></div>
+
+        <h1 data-reveal>
+          <span class="hair">NEXUS</span><br/>
+          <span style="color:rgba(255,255,255,.92)">CANON</span>
+        </h1>
+
+        <div class="sub" data-reveal>FORENSIC ACCOUNTING ERP</div>
+
+        <p data-reveal>
+          Truth is not a report. It is a system that refuses drift.
+          Every figure carries lineage. Every action leaves evidence.
+        </p>
+
+        <div class="grid2" data-reveal>
+          <div class="plate">
+            <div class="micro">promise</div>
+            <div class="rule"></div>
+            <div class="mono" style="font-size:12px; letter-spacing:.22em; color:rgba(255,255,255,.86);">
+              FORENSIC · TRACEABLE · PRECISE
+            </div>
+          </div>
+          <div class="plate">
+            <div class="micro">mechanism</div>
+            <div class="rule"></div>
+            <div class="mono" style="font-size:12px; letter-spacing:.22em; color:rgba(255,255,255,.86);">
+              EVENT → EVIDENCE → LEDGER
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCROLL 02 — LAW -->
+    <section class="section law" id="law">
+      <div class="inner" data-reveal>
+        <div class="micro">the law</div>
+        <div class="rule"></div>
+        <p class="eq">1 + 1<br/>= 2</p>
+        <div class="note">
+          Accounting never changes. Not because it is old — because it is correct.
+          Same mathematics. Same principles. Same outcome.
+        </div>
+        <div class="repeat" aria-hidden="true">
+          <div class="chip">UNCHANGING</div>
+          <div class="chip">INEVITABLE</div>
+          <div class="chip">BORING · ON PURPOSE</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCROLL 03 — INTERRUPTION -->
+    <section class="section" id="interrupt">
+      <div class="inner split" data-reveal>
+        <div>
+          <div class="micro">the interruption</div>
+          <div class="rule"></div>
+          <p class="bigQ">WHY<br/>FORENSIC?</p>
+        </div>
+        <div class="right">
+          <p>Because accounting and forensic<br/>always go together.</p>
+          <p class="subp">
+            But forensic is not accounting. It is the psychology. The brain game.
+            It reads intent through timing, repetition, and deviation from boredom.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCROLL 04 — TRAIL -->
+    <section class="section trail" id="trail">
+      <div class="inner" data-reveal>
+        <div class="micro">trail of data</div>
+        <div class="rule"></div>
+        <h2>TRAIL<br/>OF DATA</h2>
+
+        <div class="frag">
+          <div class="plate">
+            <div class="micro">investigation</div>
+            <div class="rule"></div>
+            <div class="line"><span class="tick"></span><div class="txt">Pattern recognition</div></div>
+            <div class="line"><span class="tick"></span><div class="txt">Anomaly detection</div></div>
+            <div class="line" style="border-bottom:none;"><span class="tick"></span><div class="txt">Evidence chain</div></div>
+          </div>
+
+          <div class="evidence">
+            <div class="micro">psychology</div>
+            <div style="margin-top:18px; font-family:var(--sans); font-weight:900; letter-spacing:-.02em; font-size:38px; line-height:1.0;">
+              INFINITE<br/>VARIABLES
+            </div>
+            <div class="rule" style="background:linear-gradient(to right, transparent, rgba(0,0,0,.25), transparent);"></div>
+            <div class="serif" style="color:rgba(0,0,0,.72); line-height:1.7;">
+              Every transaction tells a story.<br/>
+              Every pattern reveals intent.<br/>
+              Every number is evidence.
+            </div>
+          </div>
+        </div>
+
+        <div class="caption">
+          Evidence is produced automatically, not requested later.
+          The ledger becomes a trail — measured, queryable, explainable.
+        </div>
+      </div>
+    </section>
+
+    <!-- SCROLL 05 — GAME -->
+    <section class="section game" id="game">
+      <div class="inner" data-reveal>
+        <div class="micro">the game</div>
+        <div class="rule"></div>
+
+        <div class="gameRow">
+          <h2>THE GAME</h2>
+          <div class="aside">morphology</div>
+        </div>
+
+        <div class="mantra">
+          <b>UNDERSTAND</b><span class="dot">·</span>
+          <b>PLAY</b><span class="dot">·</span>
+          <b>WIN</b>
+        </div>
+
+        <div class="miniRow" aria-hidden="true">
+          <div class="box">$</div>
+          <div class="box white"></div>
+          <div class="box">%</div>
+          <div class="box" style="opacity:.5"></div>
+        </div>
+
+        <div class="micro" style="margin-top:18px; color:rgba(255,255,255,.34);">
+          TRANSACTION · PATTERN · EVIDENCE · PROOF
+        </div>
+      </div>
+    </section>
+
+    <!-- SCROLL 06 — CONSTANT -->
+    <section class="section" id="constant">
+      <div class="inner" data-reveal>
+        <div class="micro">the constant</div>
+        <div class="rule"></div>
+
+        <div class="constGrid">
+          <div class="blk">
+            <p class="num">100</p>
+            <div class="lbl">years</div>
+            <div class="txt">Same mathematics.<br/>Same principles.</div>
+          </div>
+          <div class="evidence">
+            <div style="font-family:var(--sans); font-weight:900; font-size:92px; line-height:.9;">∞</div>
+            <div class="micro" style="margin-top:10px;">evolution</div>
+            <div class="rule" style="background:linear-gradient(to right, transparent, rgba(0,0,0,.25), transparent);"></div>
+            <div class="serif" style="color:rgba(0,0,0,.72); line-height:1.7;">
+              New patterns.<br/>New investigations.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCROLL 07 — QUESTION (again, heavier) -->
+    <section class="section why" id="why">
+      <div class="inner split" data-reveal>
+        <div>
+          <div class="micro">the question</div>
+          <div class="rule"></div>
+          <p class="bigQ">WHY<br/>FORENSIC?</p>
+        </div>
+        <div class="right">
+          <p>Accounting alone cannot explain intent.</p>
+          <p class="subp">
+            Forensic does not change numbers. It reads behavior — hesitation, timing,
+            repetition, deviation from boredom — and turns it into evidence.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCROLL 08 — DNA -->
+    <section class="section dna" id="dna">
+      <div class="inner" data-reveal>
+        <div class="micro">nexuscanon dna</div>
+        <div class="rule"></div>
+        <h2>NEXUSCANON<br/>DNA</h2>
+        <div class="coords">
+          <span>precision</span>
+          <span>intelligence</span>
+          <span>evolution</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCROLL 09 — DISCIPLINES -->
+    <section class="section" id="disciplines">
+      <div class="inner" data-reveal>
+        <div class="micro">disciplines</div>
+        <div class="rule"></div>
+
+        <div class="constGrid">
+          <div class="plate">
+            <div class="micro">forensic lens</div>
+            <div class="rule"></div>
+            <div class="serif" style="color:var(--fga); line-height:1.7;">
+              Detects deviation.<br/>
+              Observes repetition.<br/>
+              Preserves evidence.
+            </div>
+          </div>
+
+          <div class="plate" style="transform:translateY(10px);">
+            <div class="micro">morpho logic</div>
+            <div class="rule"></div>
+            <div class="serif" style="color:var(--fga); line-height:1.7;">
+              Lines become structures.<br/>
+              Structures reveal behavior.
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px" class="plate">
+          <div class="micro">brain game</div>
+          <div class="rule"></div>
+          <div class="serif" style="color:var(--fga); line-height:1.7; max-width:70ch;">
+            Numbers do not lie.<br/>People do.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCROLL 10 — SENTENCE -->
+    <section class="sentence" id="sentence">
+      <div class="inner" data-reveal>
+        <div class="finalLine">
+          Accounting never changes.<br/>
+          Forensic never stops evolving.
+        </div>
+        <div class="amp" aria-hidden="true">&amp;</div>
+      </div>
+    </section>
+
+    <!-- SCROLL 11 — SIGNATURE -->
+    <footer class="sig" id="signature">
+      <div class="inner" data-reveal>
+        <div class="rule"></div>
+        <h3 class="brand">NEXUSCANON</h3>
+        <div class="sub">forensic accounting erp</div>
+        <div class="whisper">
+          Where the unchanging mathematics of accounting meets the psychological warfare
+          of forensic intelligence. SSOT governance. Evidence by default.
+        </div>
+        <div class="micro" style="margin-top:22px; color:rgba(255,255,255,.30);">
+          2025 · B&amp;W DNA · EVENT → EVIDENCE → LEDGER
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // date stamp
+    (function(){
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth()+1).padStart(2,"0");
+      const day = String(d.getDate()).padStart(2,"0");
+      document.getElementById("dateStamp").textContent = y + "." + m + "." + day;
+    })();
+
+    // dust points (deterministic-ish)
+    (function(){
+      const dust = document.getElementById("dust");
+      const w = window.innerWidth, h = window.innerHeight;
+      const count = 34;
+      let seed = 27;
+      function rnd(){
+        // xorshift32-ish
+        seed ^= seed << 13; seed ^= seed >> 17; seed ^= seed << 5;
+        const n = Math.abs(seed) % 1000000;
+        return n / 1000000;
+      }
+      for(let i=0;i<count;i++){
+        const p = document.createElement("i");
+        const x = rnd()*100;
+        const y = rnd()*100;
+        const s = 1 + Math.floor(rnd()*3);
+        const o = .08 + rnd()*.26;
+        p.style.left = x+"%";
+        p.style.top  = y+"%";
+        p.style.width = s+"px";
+        p.style.height= s+"px";
+        p.style.opacity = o;
+        dust.appendChild(p);
+      }
+    })();
+
+    // reveal on scroll
+    (function(){
+      const els = Array.from(document.querySelectorAll("[data-reveal]"));
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting) e.target.classList.add("in");
+        });
+      }, { root:null, threshold:0.16, rootMargin:"-10% 0px -10% 0px" });
+      els.forEach(el=>io.observe(el));
+    })();
+  </script>
+</body>
+</html>

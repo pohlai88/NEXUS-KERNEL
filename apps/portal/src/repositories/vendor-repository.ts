@@ -1,8 +1,9 @@
 /**
  * Vendor Repository
- * 
- * Direct Kernel alignment - NO mapping layer.
- * Database schema matches Kernel exactly.
+ *
+ * Database entity type - does NOT extend Kernel VendorPayload directly
+ * since database doesn't store schema header fields.
+ * Use VendorPayload for API contract validation when needed.
  */
 
 import { createClient } from '@/lib/supabase-client';
@@ -15,21 +16,27 @@ export interface VendorFilters {
   country_code?: string;
 }
 
-// Vendor type extends Kernel with database fields
-export interface Vendor extends VendorPayload, SoftDeleteRecord {
+// Official alias types (matching Kernel structure)
+export type OfficialAlias =
+  | { type: 'SSM'; value: string; jurisdiction: 'MY' }
+  | { type: 'TAX_ID'; value: string; jurisdiction: string };
+
+// Vendor database entity type (does not extend VendorPayload)
+// Schema header fields are NOT stored in database
+export interface Vendor extends SoftDeleteRecord {
   id: string;
   tenant_id: string;
   created_at: string;
   updated_at: string | null;
   deleted_at: string | null;
-  // Explicitly include VendorPayload fields for TypeScript
+  // Vendor fields (matching VendorPayload structure without schema header)
   legal_name: string;
   display_name?: string;
   country_code: string;
   email?: string;
   phone?: string;
-  status: VendorPayload['status'];
-  official_aliases: VendorPayload['official_aliases'];
+  status: 'PENDING' | 'SUBMITTED' | 'APPROVED' | 'REJECTED' | 'SUSPENDED';
+  official_aliases: OfficialAlias[];
 }
 
 // Database row type (matches Kernel exactly)
@@ -242,10 +249,11 @@ export class VendorRepository implements Repository<Vendor> {
       country_code: row.country_code,
       email: row.email || undefined,
       phone: row.phone || undefined,
-      status: row.status as VendorPayload['status'], // ✅ Kernel values
-      official_aliases: (row.official_aliases as VendorPayload['official_aliases']) || [],
+      status: row.status as Vendor['status'], // ✅ Typed status
+      official_aliases: (row.official_aliases as OfficialAlias[]) || [],
       created_at: row.created_at,
       updated_at: row.updated_at,
+      deleted_at: row.deleted_at,
       deletedAt: row.deleted_at ? new Date(row.deleted_at) : null,
       deletedBy: null, // TODO: Add deleted_by column if needed
     };

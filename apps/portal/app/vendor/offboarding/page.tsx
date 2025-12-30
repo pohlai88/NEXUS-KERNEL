@@ -1,6 +1,6 @@
 /**
  * Vendor Offboarding Request Page
- * 
+ *
  * PRD: Supplier Offboarding Workflow
  * - Request account deactivation
  * - View offboarding status
@@ -15,6 +15,9 @@ import { VendorRepository } from '@/src/repositories/vendor-repository';
 import { CaseRepository } from '@/src/repositories/case-repository';
 import Link from 'next/link';
 import { createOffboardingAction, cancelOffboardingAction } from '@/app/offboarding/actions';
+
+// Type for form actions that return results (Next.js 16 pattern)
+type FormAction = (formData: FormData) => void | Promise<void>;
 
 // TODO: Get RequestContext from authentication middleware
 function getRequestContext() {
@@ -112,7 +115,7 @@ export default async function VendorOffboardingPage() {
         /* Request Offboarding Form */
         <div className="na-card na-p-6">
           <h2 className="na-h3 na-mb-4">Request Account Deactivation</h2>
-          <form action={createOffboardingAction} className="na-space-y-4">
+          <form action={createOffboardingAction as unknown as FormAction} className="na-space-y-4">
             <input type="hidden" name="vendor_id" value={vendorId} />
             <input type="hidden" name="company_id" value={vendor.tenant_id} />
 
@@ -173,7 +176,7 @@ export default async function VendorOffboardingPage() {
           {/* Status Overview */}
           <div className="na-card na-p-6 na-mb-6">
             <h2 className="na-h3 na-mb-4">Offboarding Status</h2>
-            
+
             {/* Progress Bar */}
             <div className="na-mb-6">
               <div className="na-flex na-items-center na-justify-between na-mb-2">
@@ -291,7 +294,7 @@ export default async function VendorOffboardingPage() {
           {offboarding.status === 'pending' && (
             <div className="na-card na-p-6">
               <h2 className="na-h3 na-mb-4">Cancel Request</h2>
-              <form action={cancelOffboardingAction.bind(null, offboarding.id)} className="na-space-y-4">
+              <form action={cancelOffboardingAction.bind(null, offboarding.id) as unknown as FormAction} className="na-space-y-4">
                 <div>
                   <label className="na-metadata na-mb-2 na-block">
                     Cancellation Reason <span className="na-text-danger">*</span>

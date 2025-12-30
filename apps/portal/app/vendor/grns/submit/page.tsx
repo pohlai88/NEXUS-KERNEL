@@ -1,6 +1,6 @@
 /**
  * Vendor GRN Submission Page
- * 
+ *
  * Submit GRN (Goods Receipt Note): Link to PO, Upload GRN document, Enter GRN details.
  */
 
@@ -79,17 +79,17 @@ export default async function VendorGRNSubmitPage({ searchParams }: GRNSubmitPag
               defaultValue={searchParams.po_id || ''}
             >
               <option value="">Select PO</option>
-              {availablePOs?.map((p) => (
+              {availablePOs?.map((p: { id: string; po_number: string; po_date: string; amount?: number; created_at?: string; total_amount?: number }) => (
                 <option key={p.id} value={p.id}>
                   {p.po_number} - {new Date(p.created_at || p.po_date).toLocaleDateString()} - $
-                  {p.total_amount?.toLocaleString() || 'N/A'}
+                  {(p.total_amount ?? p.amount)?.toLocaleString() || 'N/A'}
                 </option>
               ))}
             </select>
             {po && (
               <div className="na-card na-p-3 na-bg-paper-2 na-mt-2">
                 <div className="na-metadata na-text-sm">
-                  Selected PO: {po.po_number} - Amount: ${po.amount?.toLocaleString() || 'N/A'}
+                  Selected PO: {po.po_number} - Amount: ${((po as { amount?: number; total_amount?: number }).total_amount ?? (po as { amount?: number }).amount)?.toLocaleString() || 'N/A'}
                 </div>
               </div>
             )}

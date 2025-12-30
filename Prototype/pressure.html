@@ -1,0 +1,1092 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>NexusCanon — Boardroom V2 (Canon-Locked Governance OS)</title>
+  <meta name="description" content="Governance is the product. Compliance is compiled. Truth is enforced."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;800;900&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@1,500;1,900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --mass:#ffffff;
+      --ink:#0b0b0b;
+      --mute:#5c5c5c;
+      --hair:#e9e9e9;
+      --paper:#ffffff;
+      --soft:#f6f6f6;
+      --shadow:0 14px 70px rgba(0,0,0,.08);
+      --shadow2:0 18px 90px rgba(0,0,0,.10);
+      --r:18px;
+      --pad:clamp(16px, 3vw, 28px);
+      --w:min(1160px, calc(100vw - (var(--pad) * 2)));
+      --mono:"Space Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --sans:"Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      --ser:"Playfair Display", ui-serif, "Times New Roman", serif;
+      --ok:#0b0b0b; /* keep B/W discipline */
+      --warn:#0b0b0b;
+      --bad:#0b0b0b;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--paper);
+      color:var(--ink);
+      font-family:var(--sans);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    ::selection{background:#111;color:#fff}
+
+    /* PAPER GRAIN (subtle) */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:0;
+      opacity:0.20;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+      mix-blend-mode:multiply;
+    }
+
+    /* AUDIT LENS (Solaris-lite) — signature only */
+    .lens{
+      position:fixed; top:0; left:0;
+      width:28px; height:28px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #111;
+      pointer-events:none;
+      z-index:999;
+      mix-blend-mode:difference;
+      transform:translate(-50%,-50%);
+      opacity:0;
+      transition:opacity .18s ease, width .18s ease, height .18s ease;
+    }
+    .lens.on{opacity:1}
+    .lens.big{width:170px;height:170px}
+
+    /* LAYOUT */
+    .wrap{position:relative; z-index:1;}
+    .container{width:var(--w); margin:0 auto; padding:var(--pad);}
+    .topbar{
+      position:sticky; top:0;
+      background:rgba(255,255,255,0.78);
+      backdrop-filter:saturate(140%) blur(12px);
+      border-bottom:1px solid var(--hair);
+      z-index:50;
+    }
+    .toprow{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+      padding:12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:900; letter-spacing:-0.02em;
+    }
+    .mark{
+      width:28px;height:28px;border-radius:10px;
+      border:1px solid #111;
+      background:#fff;
+      display:grid; place-items:center;
+      font-family:var(--mono);
+      font-size:12px;
+      box-shadow:0 8px 26px rgba(0,0,0,.08);
+    }
+    .smallcaps{
+      font-family:var(--mono);
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:var(--mute);
+      margin-top:2px;
+    }
+    .nav{
+      display:flex; align-items:center; gap:18px;
+      font-family:var(--mono);
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:var(--mute);
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{opacity:.85}
+    .nav a:hover{opacity:1;color:var(--ink)}
+    .actions{display:flex; gap:10px; align-items:center}
+    .btn{
+      border:1px solid #111;
+      background:#111;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:999px;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      cursor:pointer;
+      box-shadow:var(--shadow);
+    }
+    .btn.secondary{
+      background:#fff;
+      color:#111;
+      box-shadow:none;
+    }
+    .btn:active{transform:translateY(1px)}
+
+    /* HERO */
+    header{
+      padding: clamp(34px, 6vw, 74px) 0 20px;
+      border-bottom:1px solid var(--hair);
+    }
+    .kicker{
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      color:var(--mute);
+      display:flex; align-items:center; gap:10px;
+    }
+    .kicker:before{content:""; width:10px;height:10px;background:#111}
+    h1{
+      margin:16px 0 0;
+      font-size:clamp(40px, 6vw, 78px);
+      line-height:0.95;
+      letter-spacing:-0.06em;
+    }
+    .sub{
+      margin:16px 0 0;
+      max-width:880px;
+      font-size:clamp(16px, 2vw, 20px);
+      line-height:1.55;
+      color:#161616;
+    }
+    .heroGrid{
+      margin-top:26px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:14px;
+    }
+    @media (max-width: 920px){
+      .heroGrid{grid-template-columns:1fr}
+      .nav{display:none}
+    }
+
+    .panel{
+      border:1px solid var(--hair);
+      border-radius:var(--r);
+      background:rgba(255,255,255,0.86);
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+    }
+    .panelHd{
+      padding:14px 16px;
+      border-bottom:1px solid var(--hair);
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:var(--mute);
+    }
+    .panelBd{padding:16px}
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid var(--hair);
+      border-radius:999px;
+      padding:6px 10px;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      background:#fff;
+      color:#111;
+      white-space:nowrap;
+    }
+    .pill i{width:8px;height:8px;border-radius:999px;background:#111;display:inline-block}
+
+    /* STATS */
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+    }
+    @media (max-width: 920px){ .stats{grid-template-columns:1fr 1fr} }
+    @media (max-width: 560px){ .stats{grid-template-columns:1fr} }
+    .stat{
+      border:1px solid var(--hair);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+    }
+    .stat .t{
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      color:var(--mute);
+    }
+    .stat .v{
+      margin-top:10px;
+      font-weight:900;
+      letter-spacing:-0.03em;
+      font-size:18px;
+    }
+    .stat .d{
+      margin-top:8px;
+      color:var(--mute);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    /* SECTION */
+    section{padding:44px 0; border-bottom:1px solid var(--hair);}
+    .sectHd{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:14px;
+      margin-bottom:14px;
+    }
+    .sectHd h2{
+      margin:0;
+      font-size:clamp(22px, 3vw, 34px);
+      letter-spacing:-0.04em;
+      line-height:1.1;
+    }
+    .sectHd p{
+      margin:0;
+      max-width:560px;
+      color:var(--mute);
+      line-height:1.55;
+      font-size:14px;
+    }
+
+    /* ONE-PAGER BLOCK */
+    .onepager{
+      border:1px solid #111;
+      border-radius:var(--r);
+      background:#111;
+      color:#fff;
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+    }
+    .onepager .hd{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,0.14);
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      opacity:.92;
+    }
+    .onepager .bd{
+      padding:16px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:12px;
+    }
+    @media (max-width: 920px){ .onepager .bd{grid-template-columns:1fr} }
+    .opCard{
+      border:1px solid rgba(255,255,255,0.14);
+      border-radius:14px;
+      padding:14px;
+      background:rgba(255,255,255,0.06);
+    }
+    .opCard .k{
+      font-family:var(--mono);
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-size:10px;
+      opacity:.78;
+    }
+    .opCard .v{
+      margin-top:10px;
+      font-size:20px;
+      font-weight:900;
+      letter-spacing:-0.03em;
+    }
+    .opCard .p{
+      margin-top:8px;
+      opacity:.84;
+      line-height:1.55;
+      font-size:13px;
+    }
+    .opList{
+      margin:10px 0 0;
+      padding:0 0 0 18px;
+      line-height:1.6;
+      font-size:13px;
+      opacity:.88;
+    }
+    .opList li{margin:6px 0}
+
+    /* A→Z CAPABILITY GRID */
+    .az{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+    @media (max-width: 980px){ .az{grid-template-columns:1fr} }
+    .azItem{
+      border:1px solid var(--hair);
+      border-radius:var(--r);
+      background:#fff;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .azItem .hd{
+      padding:14px 16px;
+      border-bottom:1px solid var(--hair);
+      display:flex; justify-content:space-between; gap:12px; align-items:flex-start;
+    }
+    .azItem .hd .title{
+      font-weight:900;
+      letter-spacing:-0.02em;
+    }
+    .tag{
+      font-family:var(--mono);
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:var(--mute);
+      border:1px solid var(--hair);
+      border-radius:999px;
+      padding:6px 8px;
+      background:#fff;
+      white-space:nowrap;
+    }
+    .azItem .bd{padding:14px 16px}
+    .azItem ul{
+      margin:0; padding:0 0 0 18px;
+      line-height:1.6;
+      font-size:13px;
+      color:#1a1a1a;
+    }
+    .azItem li{margin:6px 0}
+
+    /* TIMELINE: Insight → Enforcement (Palantir killer) */
+    .timeline{
+      border:1px solid var(--hair);
+      border-radius:var(--r);
+      background:#fff;
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+    }
+    .timeline .hd{
+      padding:14px 16px;
+      border-bottom:1px solid var(--hair);
+      display:flex; justify-content:space-between; gap:12px; align-items:center;
+      font-family:var(--mono);
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:var(--mute);
+    }
+    .tgrid{
+      display:grid;
+      grid-template-columns:repeat(6, 1fr);
+      gap:0;
+    }
+    @media (max-width: 980px){ .tgrid{grid-template-columns:1fr} }
+    .step{
+      padding:14px 16px;
+      border-right:1px solid var(--hair);
+      min-height:120px;
+      position:relative;
+    }
+    @media (max-width: 980px){
+      .step{border-right:none;border-bottom:1px solid var(--hair)}
+    }
+    .step:last-child{border-right:none}
+    .step .n{
+      font-family:var(--mono);
+      font-size:10px;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      color:var(--mute);
+    }
+    .step .h{
+      margin-top:10px;
+      font-weight:900;
+      letter-spacing:-0.02em;
+      font-size:16px;
+    }
+    .step .p{
+      margin-top:8px;
+      color:var(--mute);
+      line-height:1.55;
+      font-size:13px;
+    }
+
+    /* CONTROLS MATRIX */
+    .matrix{
+      border:1px solid var(--hair);
+      border-radius:var(--r);
+      overflow:hidden;
+      box-shadow:var(--shadow2);
+      background:#fff;
+    }
+    .matrix .hd{
+      padding:14px 16px;
+      border-bottom:1px solid var(--hair);
+      display:flex; justify-content:space-between; gap:12px; align-items:center;
+      font-family:var(--mono);
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:var(--mute);
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:13px;
+    }
+    th,td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--hair);
+      vertical-align:top;
+    }
+    th{
+      text-align:left;
+      font-family:var(--mono);
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:var(--mute);
+      background:var(--soft);
+    }
+    tr:last-child td{border-bottom:none}
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--hair);
+      border-radius:999px;
+      padding:6px 10px;
+      font-family:var(--mono);
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      font-size:10px;
+      background:#fff;
+      color:#111;
+      white-space:nowrap;
+    }
+    .chip .dot{width:8px;height:8px;border-radius:999px;background:#111;display:inline-block}
+
+    /* CANON DIFF PROOF */
+    .diff{
+      border:1px solid var(--hair);
+      border-radius:var(--r);
+      background:#fff;
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+    }
+    .diff .hd{
+      padding:14px 16px;
+      border-bottom:1px solid var(--hair);
+      display:flex; justify-content:space-between; gap:12px; align-items:center;
+      font-family:var(--mono);
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:var(--mute);
+    }
+    pre{
+      margin:0;
+      padding:14px 16px;
+      font-family:var(--mono);
+      font-size:12px;
+      line-height:1.6;
+      white-space:pre-wrap;
+    }
+    .g{color:#0b0b0b; font-weight:900}
+    .r{color:#0b0b0b; text-decoration:line-through}
+    .m{color:#0b0b0b; opacity:.72}
+
+    /* COMPETITOR BOXES */
+    .compare{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+    @media (max-width: 980px){ .compare{grid-template-columns:1fr} }
+    .cmp{
+      border:1px solid var(--hair);
+      border-radius:var(--r);
+      background:#fff;
+      box-shadow:var(--shadow);
+      padding:14px 16px;
+    }
+    .cmp .t{
+      font-family:var(--mono);
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-size:10px;
+      color:var(--mute);
+    }
+    .cmp .b{
+      margin-top:10px;
+      font-weight:900;
+      letter-spacing:-0.02em;
+      font-size:18px;
+    }
+    .cmp .p{
+      margin-top:8px;
+      color:var(--mute);
+      line-height:1.55;
+      font-size:13px;
+    }
+
+    /* FOOTER */
+    footer{
+      padding:44px 0 56px;
+    }
+    .foot{
+      display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap;
+      border-top:1px solid var(--hair);
+      padding-top:18px;
+      color:var(--mute);
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    /* AUDIT MODE (semantic inversion) */
+    [data-audit="1"] body{
+      background:#0b0b0b;
+      color:#fff;
+    }
+    [data-audit="1"] .topbar{
+      background:rgba(11,11,11,0.72);
+      border-bottom:1px solid rgba(255,255,255,0.14);
+    }
+    [data-audit="1"] body:before{opacity:.10; mix-blend-mode:screen}
+    [data-audit="1"] .panel,
+    [data-audit="1"] .stat,
+    [data-audit="1"] .azItem,
+    [data-audit="1"] .timeline,
+    [data-audit="1"] .matrix,
+    [data-audit="1"] .diff,
+    [data-audit="1"] .cmp{
+      background:#111;
+      color:#fff;
+      border-color:rgba(255,255,255,0.14);
+      box-shadow:none;
+    }
+    [data-audit="1"] .panelHd,
+    [data-audit="1"] .stat,
+    [data-audit="1"] .azItem .hd,
+    [data-audit="1"] .timeline .hd,
+    [data-audit="1"] .matrix .hd,
+    [data-audit="1"] .diff .hd{
+      border-color:rgba(255,255,255,0.14);
+    }
+    [data-audit="1"] .smallcaps,
+    [data-audit="1"] .panelHd,
+    [data-audit="1"] .timeline .hd,
+    [data-audit="1"] .matrix .hd,
+    [data-audit="1"] .diff .hd,
+    [data-audit="1"] .tag{
+      color:rgba(255,255,255,0.78);
+    }
+    [data-audit="1"] .tag,
+    [data-audit="1"] .pill,
+    [data-audit="1"] .chip{
+      border-color:rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.04);
+      color:rgba(255,255,255,0.86);
+    }
+    [data-audit="1"] .cmp .p,
+    [data-audit="1"] .step .p,
+    [data-audit="1"] .stat .d,
+    [data-audit="1"] .sectHd p{
+      color:rgba(255,255,255,0.74);
+    }
+    [data-audit="1"] th{background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.70); border-color:rgba(255,255,255,0.14)}
+    [data-audit="1"] td{border-color:rgba(255,255,255,0.14)}
+    [data-audit="1"] pre{color:rgba(255,255,255,0.86)}
+    [data-audit="1"] .g,[data-audit="1"] .r,[data-audit="1"] .m{color:rgba(255,255,255,0.86)}
+  </style>
+</head>
+
+<body>
+  <div class="lens" id="lens"></div>
+
+  <div class="wrap">
+    <div class="topbar">
+      <div class="container">
+        <div class="toprow">
+          <div class="brand">
+            <div class="mark">NC</div>
+            <div>
+              <div style="font-size:13px; font-weight:900; letter-spacing:-0.02em">NexusCanon</div>
+              <div class="smallcaps">Boardroom V2 · Canon-Locked Governance OS</div>
+            </div>
+          </div>
+
+          <div class="nav">
+            <a href="#onepager">1-pager</a>
+            <a href="#az">a→z</a>
+            <a href="#timeline">enforcement</a>
+            <a href="#controls">controls</a>
+            <a href="#proof">proof</a>
+            <a href="#compare">vs</a>
+          </div>
+
+          <div class="actions">
+            <button class="btn secondary" id="auditToggle" type="button">Audit Mode</button>
+            <button class="btn secondary" id="lensToggle" type="button">Audit Lens</button>
+            <a class="btn" href="#proof">Request Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header>
+      <div class="container">
+        <div class="kicker">Not dashboards. Enforcement.</div>
+        <h1>
+          Governance is the product.<br/>
+          Compliance is compiled.<br/>
+          Truth is enforced.
+        </h1>
+        <p class="sub">
+          SAP sells configuration. Oracle sells storage. Palantir sells insight.
+          NexusCanon sells <b>Canon-Locked Reality</b>: every field, workflow, permission, integration and AI action
+          is bound to a versioned Canon. If it violates the Canon, it does not execute.
+        </p>
+
+        <div class="heroGrid">
+          <div class="panel">
+            <div class="panelHd">
+              <span>Executive Summary</span>
+              <span class="pill"><i></i> CANON: ENFORCED</span>
+            </div>
+            <div class="panelBd">
+              <div class="stats">
+                <div class="stat">
+                  <div class="t">01 · Contract</div>
+                  <div class="v">Canon = Law</div>
+                  <div class="d">Schema + policy + controls versioned and reviewable.</div>
+                </div>
+                <div class="stat">
+                  <div class="t">02 · Runtime</div>
+                  <div class="v">No Drift</div>
+                  <div class="d">Every write validated. Violations block / quarantine.</div>
+                </div>
+                <div class="stat">
+                  <div class="t">03 · Evidence</div>
+                  <div class="v">Admissible</div>
+                  <div class="d">Intent → change → approval → effect captured as evidence.</div>
+                </div>
+                <div class="stat">
+                  <div class="t">04 · AI</div>
+                  <div class="v">Silent & Bound</div>
+                  <div class="d">AI can suggest/explain, never bypass Canon constraints.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panelHd">
+              <span>What buyers need</span>
+              <span class="pill"><i></i> BOARDROOM</span>
+            </div>
+            <div class="panelBd">
+              <div class="stat">
+                <div class="t">Outcome</div>
+                <div class="v">Irreversible Control</div>
+                <div class="d">Controls are executable, repeatable, exportable, and provable.</div>
+              </div>
+              <div class="stat">
+                <div class="t">Proof</div>
+                <div class="v">Canon Diff + Replay</div>
+                <div class="d">Governance changes are diffed. Transactions replayable as timelines.</div>
+              </div>
+              <div class="stat">
+                <div class="t">Adoption</div>
+                <div class="v">No Config Fatigue</div>
+                <div class="d">Less toggles. More law. Faster rollout. Fewer consultants.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- INLINE 1-PAGER -->
+    <section id="onepager">
+      <div class="container">
+        <div class="sectHd">
+          <h2>Inline 1-pager</h2>
+          <p>Use this as your “slide 1”. Everything below expands the same thesis.</p>
+        </div>
+
+        <div class="onepager" role="region" aria-label="Inline one-pager">
+          <div class="hd">
+            <span>nexuscanon // one-pager</span>
+            <span style="opacity:.78">contract → enforcement → evidence</span>
+          </div>
+
+          <div class="bd">
+            <div class="opCard">
+              <div class="k">The claim</div>
+              <div class="v">Canon-Locked Reality</div>
+              <div class="p">
+                Governance is not a module. It is the operating system.
+                A Canon is a versioned contract defining what is allowed to exist,
+                how it’s approved, how it’s retained, and how it is proven.
+              </div>
+
+              <ul class="opList">
+                <li><b>Contract:</b> schema + policy + controls</li>
+                <li><b>Runtime:</b> validate → block/quarantine → approve → publish</li>
+                <li><b>Evidence:</b> intent → change → approval → effect</li>
+                <li><b>AI:</b> suggestions & explanations, policy-bound</li>
+              </ul>
+            </div>
+
+            <div class="opCard">
+              <div class="k">Why we win</div>
+              <div class="v">They visualize data. We enforce truth.</div>
+              <div class="p">
+                SAP cannot remove configuration debt. Oracle cannot convert storage into admissible evidence.
+                Palantir cannot close the loop from insight to enforcement without rewriting the product.
+              </div>
+
+              <div style="margin-top:10px;display:grid;gap:10px">
+                <div class="opCard" style="padding:12px;background:rgba(255,255,255,0.04)">
+                  <div class="k">sap</div>
+                  <div class="p">Config fatigue → inconsistent reality</div>
+                </div>
+                <div class="opCard" style="padding:12px;background:rgba(255,255,255,0.04)">
+                  <div class="k">oracle</div>
+                  <div class="p">Rows & joins ≠ governance, intent, approvals</div>
+                </div>
+                <div class="opCard" style="padding:12px;background:rgba(255,255,255,0.04)">
+                  <div class="k">palantir</div>
+                  <div class="p">Insight theater → weak operational closure</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- A→Z -->
+    <section id="az">
+      <div class="container">
+        <div class="sectHd">
+          <h2>A→Z capability map</h2>
+          <p>This is the “A to Z inside” you asked for: end-to-end governance, compliance, evidence, and enforcement.</p>
+        </div>
+
+        <div class="az">
+          <article class="azItem">
+            <div class="hd">
+              <div class="title">Governance Core</div>
+              <div class="tag">contract</div>
+            </div>
+            <div class="bd">
+              <ul>
+                <li>Canon: schema, validations, states, approvals</li>
+                <li>Policy versioning & review workflow</li>
+                <li>SoD (segregation of duties) as state machine gates</li>
+                <li>Retention & deletion rules per field</li>
+                <li>Environment promotion rules (dev→prod)</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="azItem">
+            <div class="hd">
+              <div class="title">Runtime Enforcement</div>
+              <div class="tag">no-drift</div>
+            </div>
+            <div class="bd">
+              <ul>
+                <li>Write-time validation across UI/API/DB/AI</li>
+                <li>Quarantine pipeline with required closure states</li>
+                <li>Locked period physics: no backdate, no bypass</li>
+                <li>Evidence requirements (PO/GRN/POD/Contract)</li>
+                <li>Continuous controls monitoring (CCM)</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="azItem">
+            <div class="hd">
+              <div class="title">Evidence & Audit</div>
+              <div class="tag">admissible</div>
+            </div>
+            <div class="bd">
+              <ul>
+                <li>Evidence packets (intent→change→approval→effect)</li>
+                <li>Lineage replay timeline per transaction</li>
+                <li>Export bundles for auditors & regulators</li>
+                <li>Document chain: required, linked, immutable</li>
+                <li>Forensic exception handling</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE: Insight → Enforcement -->
+    <section id="timeline">
+      <div class="container">
+        <div class="sectHd">
+          <h2>Insight → Enforcement timeline</h2>
+          <p>Palantir shows you what happened. NexusCanon ensures what happens next is governed.</p>
+        </div>
+
+        <div class="timeline" role="region" aria-label="Insight to enforcement timeline">
+          <div class="hd">
+            <span>operational closure</span>
+            <span class="pill"><i></i> LOOP CLOSED</span>
+          </div>
+
+          <div class="tgrid">
+            <div class="step">
+              <div class="n">01</div>
+              <div class="h">Signal</div>
+              <div class="p">Variance, anomaly, or drift is detected at runtime, not in dashboards.</div>
+            </div>
+            <div class="step">
+              <div class="n">02</div>
+              <div class="h">Canon Check</div>
+              <div class="p">Transaction is validated against Canon: states, thresholds, evidence, SoD.</div>
+            </div>
+            <div class="step">
+              <div class="n">03</div>
+              <div class="h">Block / Quarantine</div>
+              <div class="p">Violation blocks the write or routes to quarantine with mandatory closure.</div>
+            </div>
+            <div class="step">
+              <div class="n">04</div>
+              <div class="h">Escalate</div>
+              <div class="p">Workflow escalates by policy: approver, controller, compliance officer.</div>
+            </div>
+            <div class="step">
+              <div class="n">05</div>
+              <div class="h">Evidence Packet</div>
+              <div class="p">Intent → change → approval → effect packaged as admissible evidence.</div>
+            </div>
+            <div class="step">
+              <div class="n">06</div>
+              <div class="h">Publish</div>
+              <div class="p">Only Canon-approved state transitions are published to ledger and integrations.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTROLS MATRIX -->
+    <section id="controls">
+      <div class="container">
+        <div class="sectHd">
+          <h2>Controls Matrix</h2>
+          <p>Not “we comply.” Instead: which controls execute, where, and what evidence is produced.</p>
+        </div>
+
+        <div class="matrix" role="region" aria-label="Controls matrix">
+          <div class="hd">
+            <span>compiled controls</span>
+            <span class="pill"><i></i> EXECUTABLE</span>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Framework</th>
+                <th>Control Theme</th>
+                <th>Canon Enforcement</th>
+                <th>Evidence Output</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="chip"><span class="dot"></span>SOC 2</span></td>
+                <td>Access, change management, monitoring</td>
+                <td>Scopes & SoD gates, versioned Canon approvals, quarantine rules</td>
+                <td>Approval trails, access lineage, enforcement events</td>
+              </tr>
+              <tr>
+                <td><span class="chip"><span class="dot"></span>ISO 27001</span></td>
+                <td>Policy execution & auditability</td>
+                <td>Policy-as-law, environment promotion constraints, immutable audit events</td>
+                <td>Evidence packets, control execution logs (admissible)</td>
+              </tr>
+              <tr>
+                <td><span class="chip"><span class="dot"></span>SOX</span></td>
+                <td>Financial controls & SoD</td>
+                <td>State machines for approvals, locked period physics, SoD enforcement</td>
+                <td>Posting provenance, approval chains, exception closures</td>
+              </tr>
+              <tr>
+                <td><span class="chip"><span class="dot"></span>GDPR</span></td>
+                <td>Retention, minimization, access traceability</td>
+                <td>Field-level retention rules, access scopes, deletion workflows</td>
+                <td>Access lineage, retention execution, deletion proofs</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF: CANON DIFF -->
+    <section id="proof">
+      <div class="container">
+        <div class="sectHd">
+          <h2>Proof: Canon Diff</h2>
+          <p>Governance changes are diffed, reviewed, approved, and become enforceable law.</p>
+        </div>
+
+        <div class="diff" role="region" aria-label="Canon diff">
+          <div class="hd">
+            <span>canon changeset</span>
+            <span class="pill"><i></i> APPROVED</span>
+          </div>
+          <pre>
+<span class="m">diff --canon finance.ap.posting v1.9..v2.0</span>
+<span class="m">--- v1.9</span>
+<span class="m">+++ v2.0</span>
+
+<span class="g">+ REQUIRE_EVIDENCE: ["PO","GRN","InvoiceCopy"]</span>
+<span class="g">+ ENFORCE_3_WAY_MATCH: true</span>
+<span class="g">+ LOCKED_PERIOD_POLICY: "no-backdate"</span>
+
+<span class="r">- ALLOW_POSTING_WITHOUT_GRN: true</span>
+
+<span class="g">+ SoD_RULES:</span>
+<span class="g">+  - requester != approver</span>
+<span class="g">+  - approver != poster</span>
+
+<span class="g">+ QUARANTINE_ON:</span>
+<span class="g">+  - duplicate_invoice_number</span>
+<span class="g">+  - abnormal_price_variance</span>
+<span class="g">+  - vendor_bank_change_without_approval</span>
+          </pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPETITOR COMPARE -->
+    <section id="compare">
+      <div class="container">
+        <div class="sectHd">
+          <h2>Why SAP / Oracle / Palantir cannot copy this</h2>
+          <p>Because they would need to rewrite their product around “Canon-Locked Reality”.</p>
+        </div>
+
+        <div class="compare">
+          <div class="cmp">
+            <div class="t">SAP</div>
+            <div class="b">Configuration debt</div>
+            <div class="p">Thousands of toggles create inconsistent reality. NexusCanon replaces toggles with enforceable Canon law.</div>
+          </div>
+          <div class="cmp">
+            <div class="t">Oracle</div>
+            <div class="b">Storage ≠ truth</div>
+            <div class="p">Rows and joins don’t encode intent, approvals, and admissible lineage. NexusCanon makes truth enforceable.</div>
+          </div>
+          <div class="cmp">
+            <div class="t">Palantir</div>
+            <div class="b">Insight theater</div>
+            <div class="p">Dashboards explain reality but don’t close the loop. NexusCanon turns insight into enforcement automatically.</div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn" href="#onepager">Use this as Slide 1</a>
+          <a class="btn secondary" href="#controls">Show Controls</a>
+          <a class="btn secondary" href="#proof">Show Proof</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="foot">
+          <div>
+            <div style="font-weight:900; letter-spacing:-0.02em">NexusCanon</div>
+            <div class="smallcaps">Governance OS · Boardroom V2</div>
+          </div>
+          <div>
+            <div class="smallcaps">Positioning</div>
+            We are not an ERP skin. We are a constitution.
+          </div>
+          <div>
+            <div class="smallcaps">Demo</div>
+            Replace with your real booking link / email.
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // ===== Audit Mode =====
+    const root = document.documentElement;
+    const auditToggle = document.getElementById('auditToggle');
+
+    function setAudit(on){
+      root.setAttribute('data-audit', on ? '1' : '0');
+      localStorage.setItem('nc_audit_v2', on ? '1' : '0');
+    }
+    setAudit(localStorage.getItem('nc_audit_v2') === '1');
+
+    auditToggle.addEventListener('click', () => {
+      setAudit(root.getAttribute('data-audit') !== '1');
+    });
+
+    // ===== Audit Lens (Solaris-lite signature) =====
+    const lens = document.getElementById('lens');
+    const lensToggle = document.getElementById('lensToggle');
+
+    let lensOn = (localStorage.getItem('nc_lens_v2') || '0') === '1'; // default OFF for boardroom
+    function setLens(on){
+      lensOn = on;
+      lens.classList.toggle('on', on);
+      localStorage.setItem('nc_lens_v2', on ? '1' : '0');
+    }
+    setLens(lensOn);
+
+    let mx = window.innerWidth/2, my = window.innerHeight/2;
+    let cx = mx, cy = my;
+
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      if(!lensOn) return;
+      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+      const interactive = (tag === 'a' || tag === 'button');
+      lens.classList.toggle('big', interactive);
+    });
+
+    function lerp(a,b,t){ return a*(1-t)+b*t; }
+    function loop(){
+      cx = lerp(cx, mx, 0.14);
+      cy = lerp(cy, my, 0.14);
+      if(lensOn){
+        lens.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+      }
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    lensToggle.addEventListener('click', () => setLens(!lensOn));
+  </script>
+</body>
+</html>

@@ -1,14 +1,14 @@
 /**
  * Hierarchical Configuration Repository
- * 
+ *
  * Manages configuration at multiple levels with inheritance:
- * 
+ *
  * Priority Order (Highest to Lowest):
  * 1. User Personal Config (tenant_user_personal / vendor_user_personal)
  * 2. User Admin Config (tenant_user_admin / vendor_user_global)
  * 3. Tenant Config (tenants.settings)
  * 4. Portal Global Config (portal_global_config)
- * 
+ *
  * Config Types:
  * - Portal Global: System defaults for all tenants and vendors
  * - Tenant: Tenant-specific overrides
@@ -163,8 +163,8 @@ export class ConfigRepository {
       entity_id: config.id,
       action: existing ? 'update' : 'create',
       action_by: updatedBy,
-      old_state: (existing || null) as Record<string, unknown> | undefined,
-      new_state: config as Record<string, unknown>,
+      old_state: existing || null,
+      new_state: config,
       workflow_state: {
         config_type: configType,
       },

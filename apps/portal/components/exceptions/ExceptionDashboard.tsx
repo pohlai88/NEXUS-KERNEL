@@ -1,6 +1,6 @@
 /**
  * Exception-First Dashboard
- * 
+ *
  * PRD A-01: Exception-First Workload
  * - Shows only problems, not volume
  * - Severity tagging: 🔴 Blocking, 🟠 Needs action, 🟢 Safe
@@ -35,7 +35,8 @@ export function ExceptionDashboard() {
   const [exceptions, setExceptions] = useState<Exception[]>([]);
   const [summary, setSummary] = useState<ExceptionSummary | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [filter, setFilter] = useState<'all' | 'open' | 'critical' | 'high' | 'medium' | 'low'>('all');
+  type FilterType = 'all' | 'open' | 'critical' | 'high' | 'medium' | 'low';
+  const [filter, setFilter] = useState<FilterType>('all');
 
   useEffect(() => {
     loadData();
@@ -45,9 +46,9 @@ export function ExceptionDashboard() {
     setIsLoading(true);
     try {
       const [exceptionsResult, summaryResult] = await Promise.all([
-        getExceptionsAction(filter === 'all' ? undefined : { 
+        getExceptionsAction(filter === 'all' ? undefined : {
           status: filter === 'open' ? 'open' : undefined,
-          severity: filter !== 'all' && filter !== 'open' ? filter as any : undefined,
+          severity: !['all', 'open'].includes(filter) ? (filter as 'critical' | 'high' | 'medium' | 'low') : undefined,
         }),
         getExceptionSummaryAction(),
       ]);
@@ -187,10 +188,10 @@ export function ExceptionDashboard() {
               key={exception.id}
               className="na-card na-p-4 na-border-l-4"
               style={{
-                borderLeftColor: exception.severity === 'critical' || exception.severity === 'high' 
-                  ? 'var(--color-danger)' 
-                  : exception.severity === 'medium' 
-                    ? 'var(--color-warn)' 
+                borderLeftColor: exception.severity === 'critical' || exception.severity === 'high'
+                  ? 'var(--color-danger)'
+                  : exception.severity === 'medium'
+                    ? 'var(--color-warn)'
                     : 'var(--color-ok)',
               }}
             >

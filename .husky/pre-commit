@@ -1,0 +1,19 @@
+#!/bin/sh
+# PREVENTION GATE: Blocks commits with TypeScript errors
+# "Prevention is better than cure" - NEXUS Canon
+
+echo "🛡️ NEXUS Pre-Commit Guard: Checking types..."
+
+# Run TypeScript check on portal
+cd apps/portal && pnpm tsc --noEmit
+
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "❌ TypeScript errors detected! Commit blocked."
+  echo "   Fix the errors above before committing."
+  echo ""
+  exit 1
+fi
+
+echo "✅ TypeScript check passed!"
+echo "🚀 Commit approved!"

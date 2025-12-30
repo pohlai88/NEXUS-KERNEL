@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NEXUS // YAMAMOTO_PROTOCOL</title>
+  <style>
+    /* --- THE EQUILIBRIUM --- */
+    :root {
+      --void: #000000;      /* The Infinite */
+      --bone: #EAEAEA;      /* The Structure */
+      --ash:  #555555;      /* The Shadow */
+      --blood:#FF0000;      /* The Violation */
+
+      --font-main: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-mono: "Menlo", "Consolas", monospace;
+
+      --ease-sculpt: cubic-bezier(0.19, 1, 0.22, 1); /* "Exponential Out" - Heavy, Physical */
+    }
+
+    * { box-sizing: border-box; cursor: crosshair; }
+
+    body {
+      margin: 0; height: 100vh; overflow: hidden;
+      background: var(--void); color: var(--bone);
+      font-family: var(--font-main);
+      display: grid; grid-template-columns: 80px 1fr;
+    }
+
+    /* --- THE RAIL (The Spine) --- */
+    .rail {
+      border-right: 1px solid var(--ash);
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 40px 0; align-items: center;
+      z-index: 100; background: var(--void);
+    }
+    .rail-text {
+      writing-mode: vertical-rl; text-orientation: mixed;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.3em;
+      color: var(--ash); text-transform: uppercase;
+    }
+    .rail-mark { width: 1px; height: 40px; background: var(--bone); }
+
+    /* --- THE STAGE (The Void) --- */
+    .stage {
+      position: relative; display: flex; flex-direction: column;
+      justify-content: center; padding: 0 10%;
+    }
+
+    /* --- THE THREADS (The Ledger) --- */
+    .ledger {
+      display: flex; flex-direction: column;
+      gap: 0; /* No gap, continuous geometry */
+      position: relative;
+    }
+
+    .row {
+      position: relative;
+      display: grid; grid-template-columns: 100px 1fr 150px;
+      padding: 25px 0;
+      border-bottom: 1px solid var(--ash);
+      transition: all 0.4s var(--ease-sculpt);
+      opacity: 0.5;
+    }
+
+    /* Typography Hierarchy */
+    .id { font-family: var(--font-mono); font-size: 11px; color: var(--ash); letter-spacing: 0.1em; }
+    .entity { font-weight: 700; font-size: 24px; letter-spacing: -0.02em; text-transform: uppercase; }
+    .val { font-family: var(--font-mono); font-size: 14px; text-align: right; letter-spacing: 0.05em; }
+
+    /* --- THE ANOMALY (The Catalyst) --- */
+    .row.anomaly {
+      opacity: 1; border-color: var(--bone);
+      z-index: 10;
+    }
+
+    /* THE CLASH: When Hovered, The Thread Becomes The Volume */
+    .row.anomaly:hover {
+      background: var(--bone);
+      color: var(--void);
+      padding: 40px 20px; /* Expansion */
+      border-color: transparent;
+      transform: scaleX(1.05); /* Architectural Break */
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    }
+
+    .row.anomaly:hover .id { color: var(--void); font-weight: bold; }
+    .row.anomaly:hover .entity { letter-spacing: 0.05em; } /* Text expands */
+
+    /* --- THE MORPHOLOGY (The Hidden Architecture) --- */
+    /* This element exists INSIDE the row but is folded flat until interaction */
+    .forensic-card {
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: var(--void); /* Contrast against the white row */
+      color: var(--bone);
+      height: 0; overflow: hidden;
+      transition: height 0.5s var(--ease-sculpt);
+      border: 1px solid var(--ash); border-top: none;
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+
+    .row.anomaly:hover .forensic-card {
+      height: 250px; /* The Box reveals itself */
+    }
+
+    /* Inside the Card */
+    .card-data { padding: 30px; border-right: 1px solid var(--ash); }
+    .card-visual { padding: 30px; position: relative; }
+
+    .label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; color: var(--ash); margin-bottom: 10px; display: block; }
+    .big-stat { font-size: 48px; font-weight: 900; line-height: 0.9; margin-bottom: 20px; }
+    .meta { font-family: var(--font-mono); font-size: 10px; line-height: 1.6; max-width: 200px; }
+
+    /* The "Red" Violation - Minimal usage */
+    .violation-mark {
+      position: absolute; top: 20px; right: 20px;
+      width: 10px; height: 10px; background: var(--blood);
+      display: none;
+    }
+    .row.anomaly:hover .violation-mark { display: block; }
+
+    /* --- SVG MORPH LINES --- */
+    .morph-graph {
+      width: 100%; height: 100px;
+      border-bottom: 1px solid var(--ash);
+      margin-top: 20px;
+    }
+    path {
+      fill: none; stroke: var(--bone); stroke-width: 2;
+      stroke-dasharray: 200; stroke-dashoffset: 200;
+      transition: stroke-dashoffset 1s var(--ease-sculpt) 0.1s;
+    }
+    .row.anomaly:hover path { stroke-dashoffset: 0; }
+
+    /* --- DECORATION REMOVED. EQUILIBRIUM RESTORED. --- */
+
+  </style>
+</head>
+<body>
+
+  <div class="rail">
+    <div class="rail-mark"></div>
+    <div class="rail-text">NXS // CNON</div>
+    <div class="rail-text">001</div>
+  </div>
+
+  <div class="stage">
+
+    <div class="ledger">
+
+      <div class="row">
+        <div class="id">0994</div>
+        <div class="entity">Aerodyne Systems</div>
+        <div class="val">12,400.00</div>
+      </div>
+
+      <div class="row">
+        <div class="id">0995</div>
+        <div class="entity">Logistics Corp</div>
+        <div class="val">4,150.00</div>
+      </div>
+
+      <div class="row anomaly">
+        <div class="id">0996 // REF</div>
+        <div class="entity">Unknown_LLC</div>
+        <div class="val">$50,000.00</div>
+
+        <div class="forensic-card">
+          <div class="card-data">
+            <span class="label">ANALYSIS</span>
+            <div class="big-stat">SHELL<br>ENTITY</div>
+            <div class="meta">
+              STRUCTURING DETECTED.<br>
+              ROUND-NUMBER BIAS.<br>
+              NO PHYSICAL ADDRESS.
+            </div>
+          </div>
+          <div class="card-visual">
+            <span class="label">TRAJECTORY</span>
+            <div class="violation-mark"></div>
+            <svg class="morph-graph" viewBox="0 0 200 100" preserveAspectRatio="none">
+              <path d="M0,100 L50,80 L100,80 L150,20 L200,20" />
+            </svg>
+            <div class="meta" style="margin-top:10px; color:var(--blood);">
+              CRITICALITY: 99.9%
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="id">0997</div>
+        <div class="entity">Payroll Batch A</div>
+        <div class="val">120,000.00</div>
+      </div>
+
+      <div class="row">
+        <div class="id">0998</div>
+        <div class="entity">Ops Cost</div>
+        <div class="val">890.00</div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

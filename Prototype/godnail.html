@@ -1,0 +1,103 @@
+const T0 = performance.now();
+let introDone = false;
+
+function intro01(now){
+  // 0..1 in 320ms — immediate “alive” without waiting
+  const t = (now - T0) / 320;
+  return clamp(t, 0, 1);
+}
+
+function update(now, forceInstant=false){
+  const s = S.scroll01;
+
+  // GODVIEW: even if user doesn’t scroll, we morph instantly a little.
+  const intro = forceInstant ? 1 : intro01(now);
+  const idleMorph = intro * 0.22; // subtle: line→thread hint at rest
+
+  // Stage weights (overlapping) + intro bias
+  const tThread = clamp(stageT(s, 0.12, 0.42) + idleMorph, 0, 1);
+  const tBox    = stageT(s, 0.28, 0.60);
+  const tCard   = stageT(s, 0.50, 0.82);
+  const tCurve  = stageT(s, 0.66, 0.96);
+
+  // Pressure / path tightness
+  const pressure = clamp((s - 0.30) / 0.60, 0, 1);
+  const pathMix = smoothstep(pressure * 0.92 + intro * 0.08); // tiny “wake-up”
+
+  const d = curvePath(pathMix);
+
+  // THREAD evolution
+  lines.forEach((r)=>{
+    r.node.setAttribute("d", d);
+
+    const isTruthLine = (r.lane === 6);
+    const laneOffset = (r.lane - 6);
+
+    // Spread appears immediately (intro) and grows with tThread
+    const spread = lerp(0.0, 3.9, tThread);
+    const yOff = laneOffset * spread;
+
+    // kill “wobbly noise”: only micro drift after intro, super restrained
+    const wob = reduced ? 0 : (Math.sin((now*0.00028) + r.lane*0.23) * pressure * 0.22);
+
+    // Opacity: harder, cleaner
+    const base = isTruthLine ? 0.52 : (0.05 + r.lane * 0.018);
+    const op = isTruthLine
+      ? lerp(0.66, 0.44, tThread) // truth line remains dominant
+      : base * tThread;
+
+    r.node.setAttribute("stroke", `rgba(255,255,255,${op.toFixed(3)})`);
+    r.node.setAttribute("transform", `translate(0 ${(yOff + wob).toFixed(2)})`);
+  });
+
+  // BOX → CARD → CURVE
+  rects.forEach((r)=>{
+    const strokeOp = lerp(0.0, 0.20, tBox);
+    const fillOp = (r.idx === 1)
+      ? lerp(0.0, 0.10, tCard)   // ONE plate becomes meaningful
+      : lerp(0.0, 0.04, tCard);  // others stay restrained
+
+    const rad = lerp(0, 22, tCurve);
+    const sw = lerp(2, 1, tCard);
+
+    r.node.setAttribute("rx", rad.toFixed(2));
+    r.node.setAttribute("ry", rad.toFixed(2));
+    r.node.setAttribute("stroke-width", sw.toFixed(2));
+    r.node.setAttribute("stroke", `rgba(255,255,255,${strokeOp.toFixed(3)})`);
+    r.node.setAttribute("fill", `rgba(255,255,255,${fillOp.toFixed(3)})`);
+  });
+
+  // Frame discipline (late)
+  frames.forEach((fr, i)=>{
+    const op = lerp(0.0, i===0 ? 0.16 : 0.10, stageT(s, 0.42, 0.80));
+    fr.setAttribute("stroke", `rgba(255,255,255,${op.toFixed(3)})`);
+    fr.setAttribute("rx", lerp(0, 18, tCurve).toFixed(2));
+    fr.setAttribute("ry", lerp(0, 18, tCurve).toFixed(2));
+  });
+
+  // ticks
+  const ticks = g.__ticks;
+  if(ticks && ticks.__lines){
+    const op = lerp(0.0, 0.18, stageT(s, 0.22, 0.62));
+    ticks.__lines.forEach(l => l.setAttribute("stroke", `rgba(255,255,255,${op.toFixed(3)})`));
+  }
+
+  // Scan band: only after intro, only when there’s some thread energy
+  if(!reduced){
+    const show = clamp(tThread * 0.85, 0, 1);
+    const y = -240 + ((now * 0.035 + s * 720) % 980);
+    scan.setAttribute("transform", `translate(0 ${y.toFixed(2)})`);
+    scan.style.opacity = String(show * 0.40); // restrained
+  } else {
+    scan.style.opacity = "0";
+  }
+
+  requestAnimationFrame(update);
+}
+
+// INIT: no waiting, render immediately in correct state
+build();
+computeScroll01();
+update(performance.now(), true);
+window.addEventListener("scroll", computeScroll01, { passive:true });
+requestAnimationFrame(update);

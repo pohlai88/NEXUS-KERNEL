@@ -1,6 +1,6 @@
 /**
  * Invoice Repository with Auto-Linking
- * 
+ *
  * PRD V-02: Zero Re-Typing Principle (MUST)
  * - Vendor uploads invoice once
  * - System auto-links all available data
@@ -104,7 +104,7 @@ export class InvoiceRepository {
     const invoiceParams: CreateInvoiceParams = {
       tenant_id: params.tenant_id,
       vendor_id: autoLinkResult.vendor_id,
-      invoice_number: params.invoice_data.invoice_number || undefined,
+      invoice_number: params.invoice_data.invoice_number || 'TBD', // Required field, use placeholder if not provided
       invoice_date: params.invoice_data.invoice_date || new Date().toISOString().split('T')[0],
       amount: params.invoice_data.amount || undefined,
       currency_code: 'USD', // TODO: Detect from invoice or use vendor default
@@ -127,15 +127,16 @@ export class InvoiceRepository {
       requestContext
     );
 
-    // 7. Try auto-matching and auto-approval (if PO/GRN exists)
+    // 7. Try auto-matching and auto-approval (if PO exists)
     let autoApproved = false;
     let paymentCreated = false;
+    const poRef = params.invoice_data.po_number;
 
-    if (autoLinkResult.po_ref || autoLinkResult.grn_ref) {
+    if (poRef || autoLinkResult.po_linked) {
       try {
-        // Get PO and GRN IDs
-        const poId = await this.findPOId(autoLinkResult.po_ref, params.tenant_id);
-        const grnId = await this.findGRNId(autoLinkResult.grn_ref, params.tenant_id);
+        // Get PO and GRN IDs (only if poRef is defined)
+        const poId = poRef ? await this.findPOId(poRef, params.tenant_id) : null;
+        const grnId = poRef ? await this.findGRNId(poRef, params.tenant_id) : null; // GRN typically references PO
 
         if (poId && grnId) {
           // Perform 3-way matching

@@ -1,6 +1,6 @@
 /**
  * Employee Claim Repository
- * 
+ *
  * Claims as Invoices: Same database table, same process.
  * Employee = Vendor (Shadow Vendor).
  */
@@ -37,6 +37,11 @@ export interface EmployeeClaim {
   updated_at: string;
 }
 
+// Extended claim type with tenant_id for repository operations
+export interface CreateClaimParams extends EmployeeClaimPayload {
+  tenant_id: string;
+}
+
 export class EmployeeClaimRepository {
   private supabase = createClient();
   private policyEngine = new ClaimPolicyEngine();
@@ -46,7 +51,7 @@ export class EmployeeClaimRepository {
    * Create employee claim (with Code Gate validation)
    */
   async create(
-    claim: EmployeeClaimPayload,
+    claim: CreateClaimParams,
     requestContext?: { ip_address?: string; user_agent?: string; request_id?: string }
   ): Promise<EmployeeClaim> {
     // Get or create employee vendor profile

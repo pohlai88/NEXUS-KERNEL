@@ -1,6 +1,6 @@
 /**
  * Staleness Repository with Notification Triggers
- * 
+ *
  * PRD S-03: Silence Is a Bug
  * - No change + no explanation = defect
  * - System detects and notifies on staleness
@@ -50,7 +50,7 @@ export class StalenessRepository {
     for (const staleness of detectedStaleness) {
       // Check if staleness record already exists
       const existing = await this.getByInvoice(staleness.invoice_id, tenantId);
-      
+
       if (existing) {
         // Update existing record
         const { data: updatedStaleness, error } = await this.supabase
@@ -99,7 +99,7 @@ export class StalenessRepository {
 
     // Send notifications for new critical/severe staleness
     for (const staleness of createdStaleness) {
-      if ((staleness.staleness_level === 'critical' || staleness.staleness_level === 'severe') 
+      if ((staleness.staleness_level === 'critical' || staleness.staleness_level === 'severe')
           && !staleness.notification_sent) {
         await this.sendStalenessNotification(staleness, tenantId, detectedBy, requestContext);
       }
@@ -122,15 +122,14 @@ export class StalenessRepository {
     // Create notification
     await this.notificationRepo.create({
       tenant_id: tenantId,
-      entity_type: 'invoice',
-      entity_id: staleness.invoice_id,
+      recipient_type: 'vendor', // Notify vendor about staleness
+      related_entity_type: 'invoice',
+      related_entity_id: staleness.invoice_id,
       notification_type: 'staleness_alert',
       title: `Invoice Staleness Alert - ${staleness.staleness_level.toUpperCase()}`,
       message,
-      priority: staleness.staleness_level === 'severe' ? 'high' : 'medium',
-      channel: 'portal', // Can be extended to email, whatsapp, etc.
-      recipient_type: 'vendor', // Notify vendor about staleness
-    }, sentBy, requestContext);
+      priority: staleness.staleness_level === 'severe' ? 'high' : 'normal',
+    }, requestContext);
 
     // Mark notification as sent
     await this.supabase
