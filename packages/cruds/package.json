@@ -1,0 +1,16 @@
+{
+  "name": "@nexus/cruds",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@nexus/kernel": "workspace:*"
+  },
+  "scripts": {
+    "build": "echo \"cruds: build handled by Next transpile\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}
