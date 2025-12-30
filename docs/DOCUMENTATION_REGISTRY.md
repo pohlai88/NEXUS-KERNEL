@@ -1,7 +1,7 @@
 # Documentation Registry
 
-**Version:** 1.0.0  
-**Last Updated:** 2025-01-22  
+**Version:** 1.1.0  
+**Last Updated:** 2025-12-30  
 **Status:** Active
 
 ---
@@ -86,12 +86,19 @@ docs/
 
 | Document | Version | Status | Description |
 |----------|---------|--------|-------------|
+| `aibos/AIBOS_HEADLESS_APPLICATION.md` | 1.0 | ✅ Active | AIBOS headless application guide |
 | `aibos/AIBOS_NEXTUI_INTEGRATION_GUIDE.md` | 1.0 | ✅ Active | AIBOS + NextUI integration guide |
 | `aibos/AIBOS_IMPLEMENTATION_REPORT.md` | 1.0 | ✅ Active | AIBOS implementation report |
+| `figma/FIGMA_AIBOS_HEADLESS_INTEGRATION.md` | 1.0 | ✅ Active | Figma AIBOS headless integration guide |
 | `nextui/NEXTUI_STATUS_INDICATOR_REQUIREMENTS.md` | 1.0 | ✅ Active | NextUI status indicator requirements |
 | `nextjs/NEXTJS_DESIGN_SYSTEM_IMPROVEMENTS.md` | 1.0 | ✅ Active | Next.js design system improvements |
+| `nextjs/NEXTJS_MCP_AUDIT_REPORT_2025-12-30.md` | 1.0 | ✅ Active | Next.js MCP comprehensive audit report |
 | `nextjs/UI_UX_IMPROVEMENTS.md` | 1.0 | ✅ Active | UI/UX improvements guide |
+| `nextjs/PERFORMANCE_MONITORING_SETUP.md` | 1.0 | ✅ Active | Performance monitoring setup guide |
+| `nextjs/MCP_EFFICIENCY_TRACKER.md` | 1.0 | ✅ Active | MCP efficiency tracking document |
 | `supabase/SUPABASE_MCP_OPTIMIZATION_REPORT.md` | 1.0 | ✅ Active | Supabase optimization report |
+| `STRATEGIC_ADJUSTMENTS.md` | 1.0 | ✅ Active | Strategic adjustments documentation |
+| `VENDOR_PORTAL_IMPLEMENTATION_COMPLETE.md` | 1.0 | ✅ Active | Vendor portal implementation complete report |
 
 ## Standards & Meta Documentation
 
@@ -120,17 +127,47 @@ docs/
 
 **Location:** `docs/reports/archive/`
 
+**Historical Cleanup Files:**
+| Document | Version | Status | Reason |
+|----------|---------|--------|--------|
+| `ACTUAL_FILE_INVENTORY.md` | 1.0 | 📦 Archived | Historical cleanup inventory (2025-12-30) |
+| `CLEANUP_COMPLETE.md` | 1.0 | 📦 Archived | Historical cleanup completion report (2025-12-30) |
+| `CLEANUP_SUMMARY.md` | 1.0 | 📦 Archived | Historical cleanup summary (2025-12-30) |
+| `FINAL_CLEANUP_STATUS.md` | 1.0 | 📦 Archived | Historical cleanup status (2025-12-30) |
+| `REPOSITORY_CLEANUP_REPORT.md` | 1.0 | 📦 Archived | Historical cleanup report (2025-12-30) |
+
+**Next.js Audit Iteration Files:**
+| Document | Version | Status | Reason |
+|----------|---------|--------|--------|
+| `AUDIT_QUALITY_FAILURE_LETTER.md` | 1.0 | 📦 Archived | Critique letter - corrections applied to main report (2025-12-30) |
+| `AUDIT_REPORT_CORRECTIONS_DIFF.md` | 1.0 | 📦 Archived | Corrections diff - incorporated into main report (2025-12-30) |
+| `AUDIT_REPORT_CRITIQUE_AND_EVIDENCE.md` | 1.0 | 📦 Archived | Critique with evidence - corrections applied (2025-12-30) |
+| `AUDIT_REPORT_CRITIQUE_RESPONSE.md` | 1.0 | 📦 Archived | Response to critique - corrections applied (2025-12-30) |
+| `AUDIT_REPORT_OPTIMIZATION_SUMMARY.md` | 1.0 | 📦 Archived | Optimization summary - incorporated into main report (2025-12-30) |
+| `NEXTJS_MCP_AUDIT_REQUEST.md` | 1.0 | 📦 Archived | Audit request - audit completed (2025-12-30) |
+
+**MCP Setup Files:**
+| Document | Version | Status | Reason |
+|----------|---------|--------|--------|
+| `MCP_INTEGRATION_SUMMARY.md` | 1.0 | 📦 Archived | Setup summary - historical, setup complete (2025-12-30) |
+| `MCP_TOOL_USAGE_CORRECTION.md` | 1.0 | 📦 Archived | Tool usage correction - corrections applied (2025-12-30) |
+
+**Vendor Portal Duplicate Files:**
+| Document | Version | Status | Reason |
+|----------|---------|--------|--------|
+| `VENDOR_PORTAL_FINAL_REPORT.md` | 1.0 | 📦 Archived | Duplicate - consolidated into VENDOR_PORTAL_IMPLEMENTATION_COMPLETE.md (2025-12-30) |
+| `VENDOR_PORTAL_IMPLEMENTATION_SUMMARY.md` | 1.0 | 📦 Archived | Duplicate - consolidated into VENDOR_PORTAL_IMPLEMENTATION_COMPLETE.md (2025-12-30) |
+| `VENDOR_PORTAL_IMPLEMENTATION_COMPLIANCE.md` | 1.0 | 📦 Archived | Duplicate - consolidated into VENDOR_PORTAL_IMPLEMENTATION_COMPLETE.md (2025-12-30) |
+| `VENDOR_PORTAL_MCP_AUDIT.md` | 1.0 | 📦 Archived | Historical MCP audit - superseded (2025-12-30) |
+| `VENDOR_PORTAL_MCP_DIFFS.md` | 1.0 | 📦 Archived | Historical MCP diffs - superseded (2025-12-30) |
+
+**Legacy Reports (Referenced but not yet archived):**
 | Document | Version | Status | Reason |
 |----------|---------|--------|--------|
 | `MCP_AUDIT_REPORT.md` | 1.0 | 📦 Archived | Duplicate - consolidated into NEXTJS_MCP_AUDIT_REPORT.md |
 | `WORKSPACE_AUDIT_REPORT.md` | 1.0 | 📦 Archived | Duplicate - consolidated into NEXTJS_MCP_AUDIT_REPORT.md |
 | `NEXTJS_MCP_AUDIT_REPORT.md` | 1.0 | 📦 Archived | Superseded by NEXTJS_MCP_OPTIMIZATION_REPORT.md |
 | `NEXTJS_MCP_COMPLIANCE_DIFF.md` | 1.0 | 📦 Archived | Superseded by PRD_KERNEL_NEXUS_CANON_COMPLIANCE_REPORT.md |
-| `ACTUAL_FILE_INVENTORY.md` | 1.0 | 📦 Archived | Historical cleanup inventory |
-| `CLEANUP_COMPLETE.md` | 1.0 | 📦 Archived | Historical cleanup completion report |
-| `CLEANUP_SUMMARY.md` | 1.0 | 📦 Archived | Historical cleanup summary |
-| `FINAL_CLEANUP_STATUS.md` | 1.0 | 📦 Archived | Historical cleanup status |
-| `REPOSITORY_CLEANUP_REPORT.md` | 1.0 | 📦 Archived | Historical cleanup report |
 
 ---
 
@@ -198,6 +235,21 @@ docs/
 ---
 
 **Registry Maintained By:** Repository Maintainers  
-**Last Audit:** 2025-01-22  
+**Last Audit:** 2025-12-30  
 **Next Review:** After major documentation changes
+
+---
+
+## Recent Cleanup (2025-12-30)
+
+**Action:** Archived 19 legacy, duplicate, and deprecated files to `docs/reports/archive/`
+
+**Files Archived:**
+- 5 historical cleanup files (CLEANUP_*, FINAL_*, REPOSITORY_*, ACTUAL_*)
+- 6 Next.js audit iteration files (AUDIT_* critique/correction files)
+- 2 MCP setup files (MCP_INTEGRATION_SUMMARY, MCP_TOOL_USAGE_CORRECTION)
+- 5 Vendor Portal duplicate files (consolidated into VENDOR_PORTAL_IMPLEMENTATION_COMPLETE.md)
+- 1 Next.js audit request (audit completed)
+
+**Result:** Clean documentation structure with only active, current files in main directories.
 

@@ -82,7 +82,7 @@ export class ExceptionRepository {
         entity_id: exceptionData.id,
         action: 'detect',
         action_by: detectedBy,
-        new_state: exceptionData,
+        new_state: exceptionData as Record<string, unknown>,
         workflow_stage: 'open',
         workflow_state: {
           exception_type: exception.exception_type,
@@ -227,8 +227,8 @@ export class ExceptionRepository {
       entity_id: exceptionId,
       action: 'resolve',
       action_by: resolvedBy,
-      old_state: currentException,
-      new_state: updatedException,
+      old_state: currentException as Record<string, unknown>,
+      new_state: updatedException as Record<string, unknown>,
       workflow_stage: 'resolved',
       workflow_state: {
         resolution_notes: resolutionNotes,

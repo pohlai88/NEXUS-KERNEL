@@ -9,3 +9,4 @@ export * from "./concept";
 export * from "./zod";
 export * from "./design_system";
 export * from "./claim"; // ✅ Added - Export Employee Claim concept
+export * from "./vendor"; // ✅ Added - Export Vendor types and validation

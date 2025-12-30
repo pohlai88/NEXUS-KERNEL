@@ -163,12 +163,12 @@ export class ConfigRepository {
       entity_id: config.id,
       action: existing ? 'update' : 'create',
       action_by: updatedBy,
-      old_state: existing || null,
-      new_state: config,
+      old_state: (existing || null) as Record<string, unknown> | undefined,
+      new_state: config as Record<string, unknown>,
       workflow_state: {
         config_type: configType,
       },
-      tenant_id: null, // Global config has no tenant
+      tenant_id: 'global', // Global config has no tenant
       ip_address: requestContext?.ip_address,
       user_agent: requestContext?.user_agent,
       request_id: requestContext?.request_id,
@@ -244,8 +244,8 @@ export class ConfigRepository {
       entity_id: tenantId,
       action: existing ? 'update' : 'create',
       action_by: updatedBy,
-      old_state: existing?.config_data || null,
-      new_state: config.config_data,
+      old_state: (existing?.config_data || null) as Record<string, unknown> | undefined,
+      new_state: config.config_data as Record<string, unknown>,
       workflow_state: {
         tenant_id: tenantId,
       },
@@ -331,8 +331,8 @@ export class ConfigRepository {
       entity_id: tenantId,
       action: existing ? 'update' : 'create',
       action_by: updatedBy,
-      old_state: existing?.config_data || null,
-      new_state: config.config_data,
+      old_state: (existing?.config_data || null) as Record<string, unknown> | undefined,
+      new_state: config.config_data as Record<string, unknown>,
       workflow_state: {
         tenant_id: tenantId,
       },
@@ -419,8 +419,8 @@ export class ConfigRepository {
       entity_id: `${tenantId}:${userId}`,
       action: existing ? 'update' : 'create',
       action_by: userId,
-      old_state: existing?.config_data || null,
-      new_state: config.config_data,
+      old_state: (existing?.config_data || null) as Record<string, unknown> | undefined,
+      new_state: config.config_data as Record<string, unknown>,
       workflow_state: {
         tenant_id: tenantId,
         user_id: userId,
@@ -507,12 +507,12 @@ export class ConfigRepository {
       entity_id: vendorId,
       action: existing ? 'update' : 'create',
       action_by: updatedBy,
-      old_state: existing?.config_data || null,
-      new_state: config.config_data,
+      old_state: (existing?.config_data || null) as Record<string, unknown> | undefined,
+      new_state: config.config_data as Record<string, unknown>,
       workflow_state: {
         vendor_id: vendorId,
       },
-      tenant_id: null, // Vendor config may span tenants
+      tenant_id: 'global', // Vendor config may span tenants
       ip_address: requestContext?.ip_address,
       user_agent: requestContext?.user_agent,
       request_id: requestContext?.request_id,
@@ -595,13 +595,13 @@ export class ConfigRepository {
       entity_id: `${vendorId}:${userId}`,
       action: existing ? 'update' : 'create',
       action_by: userId,
-      old_state: existing?.config_data || null,
-      new_state: config.config_data,
+      old_state: (existing?.config_data || null) as Record<string, unknown> | undefined,
+      new_state: config.config_data as Record<string, unknown>,
       workflow_state: {
         vendor_id: vendorId,
         user_id: userId,
       },
-      tenant_id: null,
+      tenant_id: 'global',
       ip_address: requestContext?.ip_address,
       user_agent: requestContext?.user_agent,
       request_id: requestContext?.request_id,

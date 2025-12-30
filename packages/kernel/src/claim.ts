@@ -115,16 +115,5 @@ export const CLAIM_POLICY_LIMITS = {
   OTHER: { max_per_claim: 500, requires_approval: true },
 } as const;
 
-/**
- * Export for use in other layers
- */
-export {
-  VendorType,
-  ClaimCategory,
-  ClaimStatus,
-  EmployeeClaimSchema,
-  type EmployeeClaimPayload,
-  EMPLOYEE_CLAIM_CONCEPT as EmployeeClaimConcept,
-  CLAIM_POLICY_LIMITS,
-};
+// Exports are already defined inline above - no need for duplicate export block
 

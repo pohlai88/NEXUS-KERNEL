@@ -183,9 +183,9 @@ export class CaseRepository {
       entity_id: caseId,
       action: 'update',
       action_by: updatedBy,
-      old_state: currentCase,
-      new_state: updatedCase,
-      changes,
+      old_state: currentCase as Record<string, unknown>,
+      new_state: updatedCase as Record<string, unknown>,
+      changes: changes as Record<string, unknown>,
       workflow_stage: updatedCase.status,
       workflow_state: {
         status: updatedCase.status,

@@ -5,7 +5,8 @@
  * Version tracking, who uploaded, when
  */
 
-import { DocumentRepository } from '@/src/repositories/document-repository';
+import { Suspense } from 'react';
+import { DocumentRepository, type DocumentVersion } from '@/src/repositories/document-repository';
 import { DocumentGrid } from '@/components/documents/DocumentGrid';
 import { DocumentPreview } from '@/components/documents/DocumentPreview';
 
@@ -44,7 +45,7 @@ export default async function DocumentsPage({ searchParams }: DocumentsPageProps
 
   // Fetch selected document with versions
   let selectedDocument = null;
-  let documentVersions = [];
+  let documentVersions: DocumentVersion[] = [];
   if (searchParams.document_id) {
     selectedDocument = await docRepo.getById(searchParams.document_id);
     if (selectedDocument) {

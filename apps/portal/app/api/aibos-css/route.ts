@@ -11,7 +11,7 @@ export async function GET() {
     // Try to read from public folder first
     const publicPath = join(process.cwd(), 'public', 'aibos-design-system.css');
     let cssContent: string;
-    
+
     try {
       cssContent = readFileSync(publicPath, 'utf-8');
     } catch {

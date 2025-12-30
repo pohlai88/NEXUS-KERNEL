@@ -1,249 +1,464 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 /**
- * Helper function to get AIBOS status classes
- */
-function getStatusClass(variant: 'success' | 'error' | 'warning' | 'pending'): string {
-  const map = {
-    success: 'na-status ok',
-    error: 'na-status bad',
-    warning: 'na-status warn',
-    pending: 'na-status pending',
-  };
-  return map[variant];
-}
-
-/**
- * Nexus Canon Portal - Beast Mode Dashboard
- * Using AIBOS Beast Mode Patterns:
- * - Radio Button State Machine (0ms latency view switching)
- * - Bi-directional Sticky Grid (Frozen panes)
- * - Omni Shell Layout (Grid-based application shell)
+ * Nexus Canon Portal - Premium Landing Experience
+ *
+ * Built with:
+ * - 254 AIBOS Design Tokens (colors, spacing, typography, shadows, radius)
+ * - Beast Mode Patterns (Radio State Machine, Omni Shell, Frozen Grid)
+ * - Premium Creative Design (no typical SaaS patterns)
+ * - Cursor IDE Never-Reach Quality
  */
 export default function Home() {
   const router = useRouter();
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const metrics = [
-    { label: 'Total Vendors', value: '1,247', change: '+12%', status: 'success' as const },
-    { label: 'Active Orders', value: '342', change: '+8%', status: 'success' as const },
-    { label: 'Pending Reviews', value: '23', change: '-5%', status: 'warning' as const },
-    { label: 'Revenue (MTD)', value: '$2.4M', change: '+24%', status: 'success' as const },
-  ];
+  useEffect(() => {
+    setIsLoaded(true);
 
-  const vendors = [
-    { id: '1', name: 'Acme Corporation', amount: '$45,200', status: 'approved' as const, date: '2025-01-22' },
-    { id: '2', name: 'Tech Solutions Inc', amount: '$12,800', status: 'pending' as const, date: '2025-01-21' },
-    { id: '3', name: 'Global Supplies Ltd', amount: '$89,500', status: 'approved' as const, date: '2025-01-20' },
-    { id: '4', name: 'Prime Logistics', amount: '$23,100', status: 'pending' as const, date: '2025-01-19' },
-    { id: '5', name: 'Digital Dynamics', amount: '$67,300', status: 'approved' as const, date: '2025-01-18' },
-    { id: '6', name: 'Supply Chain Pro', amount: '$34,600', status: 'warning' as const, date: '2025-01-17' },
-  ];
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth) * 100,
+        y: (e.clientY / window.innerHeight) * 100,
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Beast Mode: Radio State Machine for View Switching (0ms latency)
+  const [activeView, setActiveView] = useState<'hero' | 'features' | 'showcase'>('hero');
 
   return (
-    <>
-      {/* Beast Mode: Radio Button State Machine for View Switching (0ms latency) */}
-      <input type="radio" name="view" id="v-dashboard" className="na-state-radio" defaultChecked suppressHydrationWarning />
-      <input type="radio" name="view" id="v-table" className="na-state-radio" suppressHydrationWarning />
-      <input type="radio" name="view" id="v-cards" className="na-state-radio" suppressHydrationWarning />
+    <div className="vmp-creative vmp-marketing" style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden', background: 'var(--color-void)' }}>
+      {/* Beast Mode: Radio State Machine - Pure CSS View Switching */}
+      <input
+        type="radio"
+        name="home-view"
+        id="view-hero"
+        className="na-state-radio"
+        defaultChecked
+        suppressHydrationWarning
+      />
+      <input
+        type="radio"
+        name="home-view"
+        id="view-features"
+        className="na-state-radio"
+        suppressHydrationWarning
+      />
+      <input
+        type="radio"
+        name="home-view"
+        id="view-showcase"
+        className="na-state-radio"
+        suppressHydrationWarning
+      />
 
-      {/* Beast Mode: Omni Shell Layout (Grid-based application shell) */}
-      <div className="na-shell-omni min-h-screen" suppressHydrationWarning>
-        {/* Header */}
-        <header className="na-shell-head na-flex na-items-center justify-between na-px-6">
-          <div className="na-flex na-items-center na-gap-4">
-            <div className="na-h4">Nexus Canon</div>
-            <div className="na-metadata">Portal</div>
+      {/* Dynamic Gradient Background - Uses AIBOS Color Tokens */}
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          pointerEvents: 'none',
+          opacity: 0.15,
+          background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%,
+            var(--color-info) 0%,
+            var(--color-void) 60%)`,
+          transition: 'background 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          zIndex: 0,
+        }}
+      />
+
+      {/* Subtle Grid Pattern - Uses AIBOS Spacing Tokens */}
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          pointerEvents: 'none',
+          opacity: 0.03,
+          backgroundImage: `
+            linear-gradient(var(--color-stroke) 1px, transparent 1px),
+            linear-gradient(90deg, var(--color-stroke) 1px, transparent 1px)
+          `,
+          backgroundSize: 'var(--spacing-12) var(--spacing-12)',
+          zIndex: 0,
+        }}
+      />
+
+      {/* Beast Mode: Omni Shell Layout */}
+      <div className="na-shell-omni" style={{ minHeight: '100vh', position: 'relative', zIndex: 10 }}>
+        {/* Header - Beast Mode Omni Shell Head */}
+        <header className="na-shell-head" style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: 'var(--spacing-6) var(--spacing-8)',
+          borderBottom: '1px solid var(--color-stroke)',
+          background: 'var(--color-paper)',
+          backdropFilter: 'blur(20px)',
+          position: 'sticky',
+          top: 0,
+          zIndex: 100,
+        }}>
+          <div className="na-flex na-items-center" style={{ gap: 'var(--spacing-4)' }}>
+            <div className="na-h4" style={{ color: 'var(--color-lux)' }}>Nexus Canon</div>
+            <div className="na-metadata" style={{ color: 'var(--color-clay)' }}>Portal</div>
           </div>
-          
-          {/* View Switcher - Radio State Machine (Beast Mode) */}
-          <div className="na-flex na-items-center na-gap-2 na-view-controls">
-            <label htmlFor="v-dashboard" id="lbl-dashboard" className="na-state-label">
-              Dashboard
+
+          {/* Beast Mode: View Switcher - Radio State Machine */}
+          <div className="na-flex na-items-center" style={{ gap: 'var(--spacing-2)' }}>
+            <label htmlFor="view-hero" id="lbl-hero" className="na-state-label">
+              Hero
             </label>
-            <label htmlFor="v-table" id="lbl-table" className="na-state-label">
-              Table
+            <label htmlFor="view-features" id="lbl-features" className="na-state-label">
+              Features
             </label>
-            <label htmlFor="v-cards" id="lbl-cards" className="na-state-label">
-              Cards
+            <label htmlFor="view-showcase" id="lbl-showcase" className="na-state-label">
+              Showcase
             </label>
           </div>
 
-          <div className="na-flex na-items-center na-gap-4">
-            <span className={getStatusClass('success')} role="status">Live</span>
-            <button 
+          <div className="na-flex na-items-center" style={{ gap: 'var(--spacing-4)' }}>
+            <span className="na-status ok" role="status">Live</span>
+            <button
               className="na-btn na-btn-ghost"
-              onClick={() => router.push('/demo')}
+              onClick={() => router.push('/omni-dashboard')}
             >
-              Components
+              Enter Portal
             </button>
           </div>
         </header>
 
-        {/* Sidebar Rail */}
-        <aside className="na-shell-rail">
-          <div className="na-metadata na-mb-4">Menu</div>
-          <div className="na-flex na-flex-col na-gap-2 w-full">
-            <button className="na-btn na-btn-ghost" style={{ justifyContent: 'flex-start' }}>📊 Dashboard</button>
-            <button className="na-btn na-btn-ghost" style={{ justifyContent: 'flex-start' }}>📦 Vendors</button>
-            <button className="na-btn na-btn-ghost" style={{ justifyContent: 'flex-start' }}>💰 Finance</button>
-            <button className="na-btn na-btn-ghost" style={{ justifyContent: 'flex-start' }}>📈 Reports</button>
-          </div>
-        </aside>
+        {/* Main Content Area - Beast Mode Omni Shell Main */}
+        <main className="na-shell-main" style={{ position: 'relative' }}>
+          {/* View 1: Hero Section */}
+          <div id="view-hero" className="na-view-pane" style={{
+            minHeight: 'calc(100vh - 80px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 'var(--spacing-8) var(--spacing-4)',
+          }}>
+            <div style={{ maxWidth: '1200px', width: '100%', textAlign: 'center' }}>
+              {/* Version Badge - Uses AIBOS Tokens */}
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 'var(--spacing-2)',
+                  padding: 'var(--spacing-2) var(--spacing-4)',
+                  borderRadius: 'var(--radius-full)',
+                  marginBottom: 'var(--spacing-8)',
+                  background: 'linear-gradient(135deg, var(--color-info) 0%, var(--color-success) 100%)',
+                  backgroundOpacity: 0.1,
+                  border: '1px solid var(--color-stroke-strong)',
+                  backdropFilter: 'blur(10px)',
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
+                  transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                }}
+              >
+                <span
+                  style={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: 'var(--radius-full)',
+                    background: 'var(--color-success)',
+                    animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                  }}
+                />
+                <span className="na-metadata" style={{ color: 'var(--color-lux)' }}>
+                  AIBOS Design System v2.0 • 254 Tokens • Beast Mode
+                </span>
+              </div>
 
-        {/* Main Content Area */}
-        <main className="na-shell-main">
-          {/* View 1: Dashboard (Default) */}
-          <div id="view-dashboard" className="na-view-pane">
-            <div className="na-container na-mx-auto na-p-8">
-              {/* Metrics Grid */}
-              <div className="grid gap-6 na-mb-12 na-grid-responsive-4">
-                {metrics.map((metric, index) => (
-                  <div 
-                    key={index} 
-                    className="na-card na-p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer"
+              {/* Main Headline - Uses AIBOS Typography Tokens */}
+              <h1
+                className="na-h1"
+                style={{
+                  fontSize: 'clamp(3rem, 8vw, 6rem)',
+                  fontWeight: 'var(--font-weight-bold)',
+                  lineHeight: 'var(--line-height-tight)',
+                  letterSpacing: 'var(--letter-spacing-tight)',
+                  marginBottom: 'var(--spacing-6)',
+                  background: `linear-gradient(135deg,
+                    var(--color-lux) 0%,
+                    var(--color-clay) 50%,
+                    var(--color-lux) 100%)`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+                  transition: 'all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s',
+                }}
+              >
+                Business Operating
+                <br />
+                <span style={{
+                  background: `linear-gradient(135deg,
+                    var(--color-info) 0%,
+                    var(--color-success) 50%,
+                    var(--color-warning) 100%)`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}>
+                  System Redefined
+                </span>
+              </h1>
+
+              {/* Subheading - Uses AIBOS Typography */}
+              <p
+                className="na-body"
+                style={{
+                  fontSize: 'clamp(1.125rem, 2vw, 1.5rem)',
+                  color: 'var(--color-clay)',
+                  lineHeight: 'var(--line-height-relaxed)',
+                  fontWeight: 'var(--font-weight-light)',
+                  maxWidth: '700px',
+                  margin: '0 auto var(--spacing-12)',
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+                  transition: 'all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s',
+                }}
+              >
+                Experience the future with 254 design tokens, Beast Mode patterns,
+                and enterprise-grade architecture. Zero latency. Pure elegance.
+              </p>
+
+              {/* CTA Buttons - Uses AIBOS Button Classes */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'var(--spacing-4)',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 'var(--spacing-16)',
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+                  transition: 'all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.6s',
+                }}
+              >
+                <button
+                  onClick={() => router.push('/omni-dashboard')}
+                  className="na-btn na-btn-primary"
+                  style={{
+                    padding: 'var(--spacing-4) var(--spacing-8)',
+                    fontSize: 'var(--font-size-lg)',
+                    fontWeight: 'var(--font-weight-semibold)',
+                    borderRadius: 'var(--radius-lg)',
+                    background: `linear-gradient(135deg,
+                      var(--color-info) 0%,
+                      var(--color-success) 100%)`,
+                    color: 'var(--color-void)',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'all var(--default-transition-duration)',
+                    boxShadow: 'var(--shadow-lg)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-xl)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
+                  }}
+                >
+                  Enter Portal
+                </button>
+
+                <button
+                  onClick={() => router.push('/demo')}
+                  className="na-btn na-btn-ghost"
+                  style={{
+                    padding: 'var(--spacing-4) var(--spacing-8)',
+                    fontSize: 'var(--font-size-lg)',
+                    fontWeight: 'var(--font-weight-semibold)',
+                    borderRadius: 'var(--radius-lg)',
+                    border: '2px solid var(--color-stroke-strong)',
+                  }}
+                >
+                  View Components
+                </button>
+              </div>
+
+              {/* Stats Grid - Uses AIBOS Card Classes */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                  gap: 'var(--spacing-4)',
+                  maxWidth: '900px',
+                  margin: '0 auto',
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+                  transition: 'all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.8s',
+                }}
+              >
+                {[
+                  { value: '254', label: 'Design Tokens', trend: 'Complete' },
+                  { value: '450+', label: 'shadcn Components', trend: 'Available' },
+                  { value: '0ms', label: 'View Latency', trend: 'Beast Mode' },
+                  { value: '100%', label: 'AIBOS Coverage', trend: 'Pure CSS' },
+                ].map((stat, index) => (
+                  <div
+                    key={index}
+                    className="na-card"
+                    style={{
+                      padding: 'var(--spacing-6)',
+                      borderRadius: 'var(--radius-lg)',
+                      background: 'var(--color-paper)',
+                      border: '1px solid var(--color-stroke)',
+                      backdropFilter: 'blur(10px)',
+                      transition: 'all var(--default-transition-duration)',
+                      cursor: 'pointer',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.05) translateY(-4px)';
+                      e.currentTarget.style.boxShadow = 'var(--shadow-xl)';
+                      e.currentTarget.style.borderColor = 'var(--color-stroke-strong)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                      e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                      e.currentTarget.style.borderColor = 'var(--color-stroke)';
+                    }}
                   >
-                    <div className="na-metadata na-mb-2">{metric.label}</div>
-                    <div className="na-data-large na-mb-2">{metric.value}</div>
-                    <span className={getStatusClass(metric.status)} role="status">{metric.change}</span>
+                    <div className="na-data-large" style={{ color: 'var(--color-lux)', marginBottom: 'var(--spacing-2)' }}>
+                      {stat.value}
+                    </div>
+                    <div className="na-metadata" style={{ color: 'var(--color-clay)', marginBottom: 'var(--spacing-1)' }}>
+                      {stat.label}
+                    </div>
+                    <div className="na-status ok" style={{ fontSize: 'var(--font-size-xs)' }}>
+                      {stat.trend}
+                    </div>
                   </div>
                 ))}
-              </div>
-
-              {/* Quick Actions */}
-              <div className="grid gap-6 na-mb-12 na-grid-responsive-3">
-                <div className="na-card na-p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                  <h2 className="na-h4 na-mb-4">Quick Actions</h2>
-                  <div className="space-y-3">
-                    <button className="na-btn na-btn-primary w-full">
-                      Create Vendor
-                    </button>
-                    <button className="na-btn na-btn-secondary w-full">
-                      View Reports
-                    </button>
-                    <button className="na-btn na-btn-ghost w-full">
-                      Settings
-                    </button>
-                  </div>
-                </div>
-
-                <div className="na-card na-p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                  <h2 className="na-h4 na-mb-4">Recent Activity</h2>
-                  <div className="space-y-3">
-                    {vendors.slice(0, 3).map((vendor) => (
-                      <div key={vendor.id} className="flex items-center justify-between na-p-3 rounded border border-[var(--color-stroke)] hover:bg-[var(--color-paper-2)] transition-colors">
-                        <div>
-                          <div className="na-h4">{vendor.name}</div>
-                          <div className="na-data text-sm">{vendor.amount}</div>
-                        </div>
-                        <span className={getStatusClass(vendor.status === 'approved' ? 'success' : vendor.status === 'warning' ? 'warning' : 'pending')} role="status">
-                          {vendor.status}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="na-card na-p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                  <h2 className="na-h4 na-mb-4">System Status</h2>
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div className="na-data">API</div>
-                      <span className={getStatusClass('success')} role="status">Online</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="na-data">Database</div>
-                      <span className={getStatusClass('success')} role="status">Synced</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="na-data">Cache</div>
-                      <span className={getStatusClass('success')} role="status">Warm</span>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
 
-          {/* View 2: Table View - Beast Mode Bi-directional Sticky Grid */}
-          <div id="view-table" className="na-view-pane">
-            <div className="na-grid-frozen" style={{ height: 'calc(100vh - 200px)' }}>
-              <table className="na-table-frozen">
-                <thead>
-                  <tr>
-                    <th>Vendor Name</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {vendors.map((vendor) => (
-                    <tr key={vendor.id}>
-                      <td className="na-h4">{vendor.name}</td>
-                      <td className="na-data">{vendor.amount}</td>
-                      <td>
-                        <span className={getStatusClass(vendor.status === 'approved' ? 'success' : vendor.status === 'warning' ? 'warning' : 'pending')} role="status">
-                          {vendor.status}
-                        </span>
-                      </td>
-                      <td className="na-metadata">{vendor.date}</td>
-                      <td className="na-metadata">Supply Chain</td>
-                      <td>
-                        <button className="na-btn na-btn-ghost text-sm">View</button>
-                      </td>
-                    </tr>
-                  ))}
-                  {/* Add more rows to demonstrate sticky behavior */}
-                  {Array.from({ length: 20 }).map((_, i) => {
-                    // Use deterministic calculation instead of Math.random() to avoid hydration mismatch
-                    // Formula: base amount + (index * multiplier) for consistent values
-                    const amount = (25000 + (i * 3247.83)).toFixed(2);
-                    return (
-                      <tr key={`extra-${i}`}>
-                        <td className="na-h4">Vendor {i + 7}</td>
-                        <td className="na-data">${amount}</td>
-                        <td>
-                          <span className={getStatusClass(i % 2 === 0 ? 'success' : 'pending')} role="status">
-                            {i % 2 === 0 ? 'Approved' : 'Pending'}
-                          </span>
-                        </td>
-                        <td className="na-metadata">2025-01-{15 - i}</td>
-                        <td className="na-metadata">Category {i % 3}</td>
-                        <td>
-                          <button className="na-btn na-btn-ghost text-sm">View</button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          {/* View 2: Features Section - Beast Mode Pattern Showcase */}
+          <div id="view-features" className="na-view-pane" style={{
+            minHeight: 'calc(100vh - 80px)',
+            padding: 'var(--spacing-16) var(--spacing-4)',
+            display: 'none',
+          }}>
+            <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+              <div className="na-h2" style={{
+                textAlign: 'center',
+                marginBottom: 'var(--spacing-12)',
+                color: 'var(--color-lux)',
+              }}>
+                Beast Mode Patterns
+              </div>
 
-          {/* View 3: Cards View */}
-          <div id="view-cards" className="na-view-pane">
-            <div className="na-container na-mx-auto na-p-8">
-              <div className="grid gap-6 na-grid-responsive-3-cards">
-                {vendors.map((vendor) => (
-                  <div key={vendor.id} className="na-card na-p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                    <h3 className="na-h4 na-mb-4">{vendor.name}</h3>
-                    <div className="na-data-large na-mb-2">{vendor.amount}</div>
-                    <div className="flex items-center justify-between na-mb-4">
-                      <span className={getStatusClass(vendor.status === 'approved' ? 'success' : vendor.status === 'warning' ? 'warning' : 'pending')} role="status">
-                        {vendor.status}
-                      </span>
-                      <div className="na-metadata">{vendor.date}</div>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                gap: 'var(--spacing-6)',
+              }}>
+                {[
+                  {
+                    title: 'Radio State Machine',
+                    description: '0ms latency view switching with pure CSS',
+                    icon: '⚡',
+                    pattern: 'na-state-radio',
+                  },
+                  {
+                    title: 'Frozen Grid',
+                    description: 'Excel-like bi-directional sticky tables',
+                    icon: '🎯',
+                    pattern: 'na-grid-frozen',
+                  },
+                  {
+                    title: 'Omni Shell',
+                    description: 'Professional grid-based application shell',
+                    icon: '🚀',
+                    pattern: 'na-shell-omni',
+                  },
+                ].map((feature, index) => (
+                  <div
+                    key={index}
+                    className="na-card"
+                    style={{
+                      padding: 'var(--spacing-8)',
+                      borderRadius: 'var(--radius-xl)',
+                      background: 'var(--color-paper)',
+                      border: '1px solid var(--color-stroke)',
+                      transition: 'all var(--default-transition-duration)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.02)';
+                      e.currentTarget.style.boxShadow = 'var(--shadow-xl)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale(1)';
+                      e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                    }}
+                  >
+                    <div style={{ fontSize: '3rem', marginBottom: 'var(--spacing-4)' }}>
+                      {feature.icon}
                     </div>
-                    <button className="na-btn na-btn-primary w-full">
-                      View Details
-                    </button>
+                    <div className="na-h4" style={{ color: 'var(--color-lux)', marginBottom: 'var(--spacing-2)' }}>
+                      {feature.title}
+                    </div>
+                    <div className="na-body" style={{ color: 'var(--color-clay)', marginBottom: 'var(--spacing-4)' }}>
+                      {feature.description}
+                    </div>
+                    <div className="na-metadata" style={{
+                      color: 'var(--color-info)',
+                      fontFamily: 'var(--font-mono)',
+                    }}>
+                      .{feature.pattern}
+                    </div>
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+
+          {/* View 3: Showcase Section */}
+          <div id="view-showcase" className="na-view-pane" style={{
+            minHeight: 'calc(100vh - 80px)',
+            padding: 'var(--spacing-16) var(--spacing-4)',
+            display: 'none',
+          }}>
+            <div style={{ maxWidth: '1400px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="na-h2" style={{
+                marginBottom: 'var(--spacing-12)',
+                color: 'var(--color-lux)',
+              }}>
+                254 Design Tokens • 450+ Components
+              </div>
+              <p className="na-body" style={{
+                color: 'var(--color-clay)',
+                maxWidth: '600px',
+                margin: '0 auto var(--spacing-12)',
+              }}>
+                Every color, spacing, typography, shadow, and radius token from AIBOS Design System.
+                Combined with 450+ shadcn components for unlimited possibilities.
+              </p>
+              <button
+                onClick={() => router.push('/demo')}
+                className="na-btn na-btn-primary"
+                style={{
+                  padding: 'var(--spacing-4) var(--spacing-8)',
+                  fontSize: 'var(--font-size-lg)',
+                }}
+              >
+                Explore Components
+              </button>
             </div>
           </div>
         </main>
@@ -252,28 +467,26 @@ export default function Home() {
       {/* Beast Mode CSS - Radio State Machine Logic (Pure CSS, 0ms latency) */}
       <style jsx global>{`
         /* Radio State Machine - 0ms latency view switching (Pure CSS) */
-        #v-dashboard:checked ~ .na-shell-omni #lbl-dashboard,
-        #v-table:checked ~ .na-shell-omni #lbl-table,
-        #v-cards:checked ~ .na-shell-omni #lbl-cards {
+        #view-hero:checked ~ .na-shell-omni #lbl-hero,
+        #view-features:checked ~ .na-shell-omni #lbl-features,
+        #view-showcase:checked ~ .na-shell-omni #lbl-showcase {
           background: var(--color-paper-2);
           color: var(--color-lux);
           border: 1px solid var(--color-stroke-strong);
         }
 
-        #v-dashboard:checked ~ .na-shell-omni #view-dashboard {
+        #view-hero:checked ~ .na-shell-omni #view-hero {
+          display: flex !important;
+        }
+        #view-features:checked ~ .na-shell-omni #view-features {
           display: block !important;
         }
-        #v-table:checked ~ .na-shell-omni #view-table {
-          display: block !important;
-        }
-        #v-cards:checked ~ .na-shell-omni #view-cards {
+        #view-showcase:checked ~ .na-shell-omni #view-showcase {
           display: block !important;
         }
 
         .na-view-pane {
           display: none;
-          height: 100%;
-          overflow: auto;
         }
 
         .na-state-label {
@@ -285,6 +498,7 @@ export default function Home() {
           font-size: var(--font-size-xs);
           font-weight: var(--font-weight-medium);
           transition: all var(--default-transition-duration);
+          cursor: pointer;
         }
 
         .na-state-label:hover {
@@ -292,44 +506,34 @@ export default function Home() {
           color: var(--color-lux);
         }
 
-        /* Responsive Grid Utilities using AIBOS tokens */
-        .na-grid-responsive-4 {
-          grid-template-columns: repeat(1, 1fr);
-        }
-        @media (width >= 768px) {
-          .na-grid-responsive-4 {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (width >= 1024px) {
-          .na-grid-responsive-4 {
-            grid-template-columns: repeat(4, 1fr);
-          }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
         }
 
-        .na-grid-responsive-3 {
-          grid-template-columns: repeat(1, 1fr);
-        }
-        @media (width >= 768px) {
-          .na-grid-responsive-3 {
-            grid-template-columns: repeat(3, 1fr);
-          }
+        /* Smooth scroll */
+        html {
+          scroll-behavior: smooth;
         }
 
-        .na-grid-responsive-3-cards {
-          grid-template-columns: repeat(1, 1fr);
+        /* Custom scrollbar using AIBOS tokens */
+        ::-webkit-scrollbar {
+          width: var(--spacing-2);
         }
-        @media (width >= 768px) {
-          .na-grid-responsive-3-cards {
-            grid-template-columns: repeat(2, 1fr);
-          }
+
+        ::-webkit-scrollbar-track {
+          background: var(--color-void);
         }
-        @media (width >= 1024px) {
-          .na-grid-responsive-3-cards {
-            grid-template-columns: repeat(3, 1fr);
-          }
+
+        ::-webkit-scrollbar-thumb {
+          background: var(--color-stroke-strong);
+          border-radius: var(--radius-sm);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+          background: var(--color-stroke);
         }
       `}</style>
-    </>
+    </div>
   );
 }

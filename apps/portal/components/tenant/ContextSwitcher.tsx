@@ -1,6 +1,6 @@
 /**
  * Context Switcher Component
- * 
+ *
  * Omni-Dashboard: Switch between "All Companies" vs "Subsidiary A" vs "Subsidiary B"
  * Zero logging out - single sign-on with context switching.
  */

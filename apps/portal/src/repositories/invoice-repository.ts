@@ -374,3 +374,6 @@ export class InvoiceRepository {
   }
 }
 
+// Re-export types for convenience
+export type { InvoiceUploadData, AutoLinkResult } from '../services/invoice-auto-link-service';
+

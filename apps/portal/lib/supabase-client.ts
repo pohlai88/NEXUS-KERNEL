@@ -1,6 +1,6 @@
 /**
  * Supabase Client Utility
- * 
+ *
  * Creates Supabase client for database operations.
  * Uses environment variables for configuration.
  */
@@ -17,6 +17,10 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 export function createClient() {
+  // TypeScript guard: we've already checked these are defined above
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Supabase configuration error');
+  }
   return createSupabaseClient(supabaseUrl, supabaseAnonKey);
 }
 

@@ -204,7 +204,7 @@ export class PaymentRepository {
       entity_id: paymentData.id,
       action: 'create',
       action_by: createdBy,
-      new_state: paymentData,
+      new_state: paymentData as Record<string, unknown>,
       workflow_stage: status,
       workflow_state: {
         payment_mode: 'standalone',
@@ -271,8 +271,8 @@ export class PaymentRepository {
         entity_id: existing.id,
         action: 'sync_update',
         action_by: syncedBy,
-        old_state: existing,
-        new_state: updatedPayment,
+        old_state: existing as Record<string, unknown>,
+        new_state: updatedPayment as Record<string, unknown>,
         workflow_stage: params.status,
         workflow_state: {
           payment_mode: 'erp_sync',
@@ -323,7 +323,7 @@ export class PaymentRepository {
       entity_id: paymentData.id,
       action: 'sync_create',
       action_by: syncedBy,
-      new_state: paymentData,
+      new_state: paymentData as Record<string, unknown>,
       workflow_stage: params.status,
       workflow_state: {
         payment_mode: 'erp_sync',
@@ -381,8 +381,8 @@ export class PaymentRepository {
       entity_id: paymentId,
       action: 'process',
       action_by: processedBy,
-      old_state: payment,
-      new_state: updatedPayment,
+      old_state: payment as Record<string, unknown>,
+      new_state: updatedPayment as Record<string, unknown>,
       workflow_stage: 'processing',
       workflow_state: {
         transaction_id: transactionId,
