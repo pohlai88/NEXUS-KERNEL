@@ -10,7 +10,7 @@
  * - erp_system: 'sap' | 'oracle' | 'netsuite' | 'custom' (if erp_sync)
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export interface Payment {
@@ -72,7 +72,7 @@ export interface TenantPaymentConfig {
 }
 
 export class PaymentRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

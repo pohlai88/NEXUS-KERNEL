@@ -1,6 +1,6 @@
 /**
  * Vendor Case Management Page
- * 
+ *
  * PRD S-02: No Manual Communication Dependency
  * - View all cases (Open, In Progress, Resolved)
  * - Create new case (Dispute, Question, Request)
@@ -9,48 +9,40 @@
  * - Case status tracking
  */
 
-import { Suspense } from 'react';
-import { createClient } from '@/lib/supabase-client';
-import { CaseRepository } from '@/src/repositories/case-repository';
-import { VendorGroupRepository } from '@/src/repositories/vendor-group-repository';
-import Link from 'next/link';
-
-// TODO: Get RequestContext from authentication middleware
-function getRequestContext() {
-  return {
-    actor: {
-      userId: 'system', // TODO: Get from auth
-      vendorGroupId: 'default', // TODO: Get from vendor_user_access
-      roles: [],
-    },
-    requestId: crypto.randomUUID(),
-  };
-}
+import { getRequestContext } from "@/lib/dev-auth-context";
+import { createServiceClient } from "@/lib/supabase-client";
+import { CaseRepository } from "@/src/repositories/case-repository";
+import { VendorGroupRepository } from "@/src/repositories/vendor-group-repository";
+import Link from "next/link";
 
 interface VendorCasesPageProps {
-  searchParams: {
+  searchParams: Promise<{
     status?: string;
     case_type?: string;
     search?: string;
-  };
+  }>;
 }
 
-export default async function VendorCasesPage({ searchParams }: VendorCasesPageProps) {
+export default async function VendorCasesPage({
+  searchParams,
+}: VendorCasesPageProps) {
   const ctx = getRequestContext();
-  const supabase = createClient();
+  const params = await searchParams;
+  const supabase = createServiceClient();
   const caseRepo = new CaseRepository();
   const vendorGroupRepo = new VendorGroupRepository();
 
   // Get accessible subsidiaries
-  const accessibleSubsidiaries = await vendorGroupRepo.getAccessibleSubsidiaries(ctx.actor.userId);
+  const accessibleSubsidiaries =
+    await vendorGroupRepo.getAccessibleSubsidiaries(ctx.actor.userId);
   const accessibleTenantIds = accessibleSubsidiaries.map((s) => s.tenant_id);
 
   // Get vendor IDs from accessible subsidiaries
   // In production, this would query vendor_user_access -> vendor_group -> vmp_vendors
   const { data: vendorAccess } = await supabase
-    .from('vendor_user_access')
-    .select('vendor_group_id')
-    .eq('user_id', ctx.actor.userId)
+    .from("vendor_user_access")
+    .select("vendor_group_id")
+    .eq("user_id", ctx.actor.userId)
     .limit(1)
     .single();
 
@@ -58,9 +50,14 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
 
   // Build case query
   let query = supabase
-    .from('vmp_cases')
-    .select('id, case_type, status, subject, owner_team, sla_due_at, escalation_level, created_at, updated_at, vmp_companies!inner(name), vmp_vendors!inner(name)')
-    .in('tenant_id', accessibleTenantIds.length > 0 ? accessibleTenantIds : ['']);
+    .from("vmp_cases")
+    .select(
+      "id, case_type, status, subject, owner_team, sla_due_at, escalation_level, created_at, updated_at, vmp_companies!inner(name), vmp_vendors!inner(name)"
+    )
+    .in(
+      "tenant_id",
+      accessibleTenantIds.length > 0 ? accessibleTenantIds : [""]
+    );
 
   if (vendorGroupId) {
     // Filter by vendor group (in production, would use vendor_id from vendor_user_access)
@@ -68,33 +65,33 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
   }
 
   // Apply filters
-  if (searchParams.status) {
-    query = query.eq('status', searchParams.status);
+  if (params.status) {
+    query = query.eq("status", params.status);
   }
 
-  if (searchParams.case_type) {
-    query = query.eq('case_type', searchParams.case_type);
+  if (params.case_type) {
+    query = query.eq("case_type", params.case_type);
   }
 
-  if (searchParams.search) {
-    query = query.ilike('subject', `%${searchParams.search}%`);
+  if (params.search) {
+    query = query.ilike("subject", `%${params.search}%`);
   }
 
-  query = query.order('created_at', { ascending: false });
+  query = query.order("created_at", { ascending: false });
 
   const { data: cases, error } = await query.limit(100);
 
-  if (error) {
-    console.error('Error fetching cases:', error);
-  }
-
-  const caseList = cases || [];
+  // Graceful error handling - return empty list on error
+  const caseList = error ? [] : cases || [];
 
   // Get status counts
   const { data: statusCounts } = await supabase
-    .from('vmp_cases')
-    .select('status')
-    .in('tenant_id', accessibleTenantIds.length > 0 ? accessibleTenantIds : ['']);
+    .from("vmp_cases")
+    .select("status")
+    .in(
+      "tenant_id",
+      accessibleTenantIds.length > 0 ? accessibleTenantIds : [""]
+    );
 
   const statusCountMap = (statusCounts || []).reduce((acc, c) => {
     acc[c.status] = (acc[c.status] || 0) + 1;
@@ -120,13 +117,15 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
               <label className="na-metadata na-mb-2 na-block">Status</label>
               <select
                 name="status"
-                defaultValue={searchParams.status || ''}
+                defaultValue={params.status || ""}
                 className="na-input na-w-full"
               >
                 <option value="">All Statuses</option>
                 <option value="open">Open</option>
                 <option value="waiting_supplier">Waiting for Supplier</option>
-                <option value="waiting_internal">Waiting for Internal Team</option>
+                <option value="waiting_internal">
+                  Waiting for Internal Team
+                </option>
                 <option value="resolved">Resolved</option>
                 <option value="blocked">Blocked</option>
               </select>
@@ -137,7 +136,7 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
               <label className="na-metadata na-mb-2 na-block">Case Type</label>
               <select
                 name="case_type"
-                defaultValue={searchParams.case_type || ''}
+                defaultValue={params.case_type || ""}
                 className="na-input na-w-full"
               >
                 <option value="">All Types</option>
@@ -156,7 +155,7 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
                 type="text"
                 name="search"
                 placeholder="Search by subject..."
-                defaultValue={searchParams.search || ''}
+                defaultValue={params.search || ""}
                 className="na-input na-w-full"
               />
             </div>
@@ -176,7 +175,9 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
         <div className="na-flex na-flex-wrap na-gap-2 na-mt-4">
           <Link
             href="/vendor/cases"
-            className={`na-btn na-btn-sm ${!searchParams.status ? 'na-btn-primary' : 'na-btn-ghost'}`}
+            className={`na-btn na-btn-sm ${
+              !params.status ? "na-btn-primary" : "na-btn-ghost"
+            }`}
           >
             All ({caseList.length})
           </Link>
@@ -184,9 +185,11 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
             <Link
               key={status}
               href={`/vendor/cases?status=${status}`}
-              className={`na-btn na-btn-sm ${searchParams.status === status ? 'na-btn-primary' : 'na-btn-ghost'}`}
+              className={`na-btn na-btn-sm ${
+                params.status === status ? "na-btn-primary" : "na-btn-ghost"
+              }`}
             >
-              {status.replace('_', ' ')} ({count})
+              {status.replace("_", " ")} ({count})
             </Link>
           ))}
         </div>
@@ -198,7 +201,10 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
         {caseList.length === 0 ? (
           <div className="na-text-center na-p-6">
             <p className="na-body">No cases found.</p>
-            <Link href="/vendor/cases/new" className="na-btn na-btn-primary na-mt-4">
+            <Link
+              href="/vendor/cases/new"
+              className="na-btn na-btn-primary na-mt-4"
+            >
               Create Your First Case
             </Link>
           </div>
@@ -230,18 +236,20 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
                         <h3 className="na-h4">{c.subject}</h3>
                         <span
                           className={`na-status na-status-${
-                            c.status === 'resolved'
-                              ? 'ok'
-                              : c.status === 'blocked'
-                                ? 'bad'
-                                : c.status === 'waiting_supplier'
-                                  ? 'warn'
-                                  : 'pending'
+                            c.status === "resolved"
+                              ? "ok"
+                              : c.status === "blocked"
+                              ? "bad"
+                              : c.status === "waiting_supplier"
+                              ? "warn"
+                              : "pending"
                           }`}
                         >
-                          {c.status.replace('_', ' ')}
+                          {c.status.replace("_", " ")}
                         </span>
-                        <span className="na-metadata na-text-xs">{c.case_type}</span>
+                        <span className="na-metadata na-text-xs">
+                          {c.case_type}
+                        </span>
                       </div>
                       <div className="na-metadata na-text-sm na-mb-2">
                         Assigned to: {c.owner_team} team
@@ -251,7 +259,8 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
                         Created: {new Date(c.created_at).toLocaleDateString()}
                         {c.sla_due_at && (
                           <span className="na-ml-4">
-                            SLA Due: {new Date(c.sla_due_at).toLocaleDateString()}
+                            SLA Due:{" "}
+                            {new Date(c.sla_due_at).toLocaleDateString()}
                           </span>
                         )}
                         {c.escalation_level > 0 && (
@@ -262,7 +271,9 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
                       </div>
                     </div>
                     <div className="na-flex-shrink-0">
-                      <span className="na-btn na-btn-ghost na-btn-sm">View →</span>
+                      <span className="na-btn na-btn-ghost na-btn-sm">
+                        View →
+                      </span>
                     </div>
                   </div>
                 </Link>
@@ -274,4 +285,3 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
     </div>
   );
 }
-

@@ -5,7 +5,7 @@
  * Prevents "Domino Effect" - one weak vendor cannot accumulate massive liability.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export interface GroupRiskWatchlist {
@@ -52,7 +52,7 @@ export interface RiskCheckResult {
 }
 
 export class RiskManagementRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

@@ -11,7 +11,7 @@
  * - "Soft rejections" without system record
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 import { InvoiceStatusRepository } from './invoice-status-repository';
 import { RejectionEnforcementService, type RejectionReasonCode } from '../services/rejection-enforcement-service';
@@ -23,7 +23,7 @@ export interface RejectInvoiceParams {
 }
 
 export class RejectionRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
   private statusRepo = new InvoiceStatusRepository();
   private enforcementService = new RejectionEnforcementService();

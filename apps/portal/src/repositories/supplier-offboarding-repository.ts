@@ -5,7 +5,7 @@
  * Every offboarding action creates an immutable audit record.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 import { CaseRepository } from './case-repository';
 
@@ -46,7 +46,7 @@ export interface UpdateOffboardingStageParams {
 }
 
 export class SupplierOffboardingRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
   private caseRepo = new CaseRepository();
 

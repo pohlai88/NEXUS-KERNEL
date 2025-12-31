@@ -5,7 +5,7 @@
  * Group of Companies: Users can access multiple subsidiaries without logging out.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 
 export interface TenantAccess {
   id: string;
@@ -41,7 +41,7 @@ export interface Group {
 }
 
 export class TenantAccessRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
 
   /**
    * Get accessible tenants for current user

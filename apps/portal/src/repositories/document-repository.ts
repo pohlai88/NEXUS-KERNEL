@@ -6,7 +6,7 @@
  * Direct Kernel alignment - NO mapping layer.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import type { SoftDeleteRecord } from '@nexus/cruds';
 
 export interface DocumentFilters {
@@ -99,7 +99,7 @@ interface DocumentVersionRow {
 }
 
 export class DocumentRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
 
   /**
    * List documents with filters

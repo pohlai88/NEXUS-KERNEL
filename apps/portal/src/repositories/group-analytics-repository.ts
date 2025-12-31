@@ -5,7 +5,7 @@
  * "How much do we spend on shipping?" → "$1,245,678.00" instantly.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 
 export interface SpendAnalytics {
   category: string;
@@ -29,7 +29,7 @@ export interface GroupAnalyticsFilters {
 }
 
 export class GroupAnalyticsRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
 
   /**
    * Get consolidated spend by category

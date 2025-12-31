@@ -5,7 +5,7 @@
  * Uses pg_trgm for fuzzy matching and meaning understanding.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 
 export interface VendorSearchResult {
   vendor: {
@@ -20,7 +20,7 @@ export interface VendorSearchResult {
 }
 
 export class VendorSearchRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
 
   /**
    * Semantic search for vendors (Duplicate Destroyer)

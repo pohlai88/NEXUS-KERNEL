@@ -6,12 +6,17 @@
  * - Severity tagging: 🔴 Blocking, 🟠 Needs action, 🟢 Safe
  */
 
-import { createClient } from '@/lib/supabase-client';
-import { AuditTrailRepository } from './audit-trail-repository';
-import { ExceptionDetectionService, type InvoiceException, type ExceptionType, type ExceptionSeverity } from '../services/exception-detection-service';
+import { createServiceClient } from "@/lib/supabase-client";
+import {
+  ExceptionDetectionService,
+  type ExceptionSeverity,
+  type ExceptionType,
+  type InvoiceException,
+} from "../services/exception-detection-service";
+import { AuditTrailRepository } from "./audit-trail-repository";
 
 export interface ExceptionFilters {
-  status?: 'open' | 'in_progress' | 'resolved' | 'ignored';
+  status?: "open" | "in_progress" | "resolved" | "ignored";
   severity?: ExceptionSeverity;
   exception_type?: ExceptionType;
   invoice_id?: string;
@@ -28,7 +33,7 @@ export interface ExceptionSummary {
 }
 
 export class ExceptionRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
   private detectionService = new ExceptionDetectionService();
 
@@ -39,24 +44,35 @@ export class ExceptionRepository {
     invoiceId: string,
     tenantId: string,
     detectedBy: string,
-    requestContext?: { ip_address?: string; user_agent?: string; request_id?: string }
+    requestContext?: {
+      ip_address?: string;
+      user_agent?: string;
+      request_id?: string;
+    }
   ): Promise<InvoiceException[]> {
     // Detect exceptions
-    const detectedExceptions = await this.detectionService.detectExceptions(invoiceId, tenantId);
+    const detectedExceptions = await this.detectionService.detectExceptions(
+      invoiceId,
+      tenantId
+    );
 
     // Create exception records
     const createdExceptions: InvoiceException[] = [];
 
     for (const exception of detectedExceptions) {
       // Check if exception already exists
-      const existing = await this.getByInvoiceAndType(invoiceId, exception.exception_type, tenantId);
-      if (existing && existing.status === 'open') {
+      const existing = await this.getByInvoiceAndType(
+        invoiceId,
+        exception.exception_type,
+        tenantId
+      );
+      if (existing && existing.status === "open") {
         continue; // Skip if already exists and open
       }
 
       // Create exception
       const { data: exceptionData, error } = await this.supabase
-        .from('invoice_exceptions')
+        .from("invoice_exceptions")
         .insert({
           tenant_id: tenantId,
           invoice_id: invoiceId,
@@ -78,12 +94,12 @@ export class ExceptionRepository {
 
       // Create audit trail
       await this.auditTrail.insert({
-        entity_type: 'invoice_exception',
+        entity_type: "invoice_exception",
         entity_id: exceptionData.id,
-        action: 'detect',
+        action: "detect",
         action_by: detectedBy,
         new_state: exceptionData as Record<string, unknown>,
-        workflow_stage: 'open',
+        workflow_stage: "open",
         workflow_state: {
           exception_type: exception.exception_type,
           severity: exception.severity,
@@ -105,34 +121,37 @@ export class ExceptionRepository {
    * Get exceptions with filters (Exception-First View)
    * PRD A-01: Default view shows only problems
    */
-  async getExceptions(filters?: ExceptionFilters, tenantId?: string): Promise<InvoiceException[]> {
+  async getExceptions(
+    filters?: ExceptionFilters,
+    tenantId?: string
+  ): Promise<InvoiceException[]> {
     let query = this.supabase
-      .from('invoice_exceptions')
-      .select('*')
-      .order('severity', { ascending: false }) // Critical first
-      .order('detected_at', { ascending: false }); // Newest first
+      .from("invoice_exceptions")
+      .select("*")
+      .order("severity", { ascending: false }) // Critical first
+      .order("detected_at", { ascending: false }); // Newest first
 
     if (tenantId) {
-      query = query.eq('tenant_id', tenantId);
+      query = query.eq("tenant_id", tenantId);
     }
 
     if (filters?.status) {
-      query = query.eq('status', filters.status);
+      query = query.eq("status", filters.status);
     } else {
       // Default: Only show open exceptions (Exception-First)
-      query = query.eq('status', 'open');
+      query = query.eq("status", "open");
     }
 
     if (filters?.severity) {
-      query = query.eq('severity', filters.severity);
+      query = query.eq("severity", filters.severity);
     }
 
     if (filters?.exception_type) {
-      query = query.eq('exception_type', filters.exception_type);
+      query = query.eq("exception_type", filters.exception_type);
     }
 
     if (filters?.invoice_id) {
-      query = query.eq('invoice_id', filters.invoice_id);
+      query = query.eq("invoice_id", filters.invoice_id);
     }
 
     const { data, error } = await query;
@@ -149,10 +168,10 @@ export class ExceptionRepository {
    */
   async getSummary(tenantId: string): Promise<ExceptionSummary> {
     const { data, error } = await this.supabase
-      .from('invoice_exceptions')
-      .select('exception_type, severity, status')
-      .eq('tenant_id', tenantId)
-      .eq('status', 'open');
+      .from("invoice_exceptions")
+      .select("exception_type, severity, status")
+      .eq("tenant_id", tenantId)
+      .eq("status", "open");
 
     if (error) {
       throw new Error(`Failed to get exception summary: ${error.message}`);
@@ -178,9 +197,9 @@ export class ExceptionRepository {
       summary.by_type[type] = (summary.by_type[type] || 0) + 1;
 
       // Count by category
-      if (severity === 'critical' || severity === 'high') {
+      if (severity === "critical" || severity === "high") {
         summary.blocking++;
-      } else if (severity === 'medium') {
+      } else if (severity === "medium") {
         summary.needs_action++;
       } else {
         summary.safe++;
@@ -197,23 +216,27 @@ export class ExceptionRepository {
     exceptionId: string,
     resolvedBy: string,
     resolutionNotes: string,
-    requestContext?: { ip_address?: string; user_agent?: string; request_id?: string }
+    requestContext?: {
+      ip_address?: string;
+      user_agent?: string;
+      request_id?: string;
+    }
   ): Promise<InvoiceException> {
     const currentException = await this.getById(exceptionId);
     if (!currentException) {
-      throw new Error('Exception not found');
+      throw new Error("Exception not found");
     }
 
     const { data: updatedException, error } = await this.supabase
-      .from('invoice_exceptions')
+      .from("invoice_exceptions")
       .update({
-        status: 'resolved',
+        status: "resolved",
         resolved_at: new Date().toISOString(),
         resolved_by: resolvedBy,
         resolution_notes: resolutionNotes,
         updated_at: new Date().toISOString(),
       })
-      .eq('id', exceptionId)
+      .eq("id", exceptionId)
       .select()
       .single();
 
@@ -223,13 +246,13 @@ export class ExceptionRepository {
 
     // Create audit trail
     await this.auditTrail.insert({
-      entity_type: 'invoice_exception',
+      entity_type: "invoice_exception",
       entity_id: exceptionId,
-      action: 'resolve',
+      action: "resolve",
       action_by: resolvedBy,
       old_state: currentException,
       new_state: updatedException,
-      workflow_stage: 'resolved',
+      workflow_stage: "resolved",
       workflow_state: {
         resolution_notes: resolutionNotes,
       },
@@ -247,13 +270,13 @@ export class ExceptionRepository {
    */
   async getById(exceptionId: string): Promise<InvoiceException | null> {
     const { data, error } = await this.supabase
-      .from('invoice_exceptions')
-      .select('*')
-      .eq('id', exceptionId)
+      .from("invoice_exceptions")
+      .select("*")
+      .eq("id", exceptionId)
       .single();
 
     if (error) {
-      if (error.code === 'PGRST116') {
+      if (error.code === "PGRST116") {
         return null;
       }
       throw new Error(`Failed to get exception: ${error.message}`);
@@ -271,17 +294,17 @@ export class ExceptionRepository {
     tenantId: string
   ): Promise<InvoiceException | null> {
     const { data, error } = await this.supabase
-      .from('invoice_exceptions')
-      .select('*')
-      .eq('invoice_id', invoiceId)
-      .eq('exception_type', exceptionType)
-      .eq('tenant_id', tenantId)
-      .eq('status', 'open')
+      .from("invoice_exceptions")
+      .select("*")
+      .eq("invoice_id", invoiceId)
+      .eq("exception_type", exceptionType)
+      .eq("tenant_id", tenantId)
+      .eq("status", "open")
       .limit(1)
       .single();
 
     if (error) {
-      if (error.code === 'PGRST116') {
+      if (error.code === "PGRST116") {
         return null;
       }
       return null;
@@ -301,7 +324,7 @@ export class ExceptionRepository {
       invoice_id: r.invoice_id as string,
       exception_type: r.exception_type as ExceptionType,
       severity: r.severity as ExceptionSeverity,
-      status: r.status as 'open' | 'in_progress' | 'resolved' | 'ignored',
+      status: r.status as "open" | "in_progress" | "resolved" | "ignored",
       title: r.title as string,
       description: r.description as string,
       exception_data: (r.exception_data as Record<string, unknown>) || {},
@@ -314,4 +337,3 @@ export class ExceptionRepository {
     };
   }
 }
-

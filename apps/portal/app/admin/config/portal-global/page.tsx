@@ -1,24 +1,14 @@
 /**
  * Portal Global Configuration Page
- * 
+ *
  * Allows portal admins to configure system-wide defaults for:
  * - Tenant defaults
  * - Vendor defaults
  * - System defaults
  */
 
-import { ConfigRepository } from '@/src/repositories/config-repository';
-
-function getRequestContext() {
-  return {
-    actor: {
-      userId: 'system', // TODO: Get from auth
-      tenantId: null,
-      roles: [],
-    },
-    requestId: crypto.randomUUID(),
-  };
-}
+import { getRequestContext } from "@/lib/dev-auth-context";
+import { ConfigRepository } from "@/src/repositories/config-repository";
 
 export default async function PortalGlobalConfigPage() {
   const ctx = getRequestContext();
@@ -26,9 +16,9 @@ export default async function PortalGlobalConfigPage() {
 
   // Get all portal global configs
   const [tenantDefaults, vendorDefaults, systemDefaults] = await Promise.all([
-    configRepo.getPortalGlobalConfig('tenant_defaults'),
-    configRepo.getPortalGlobalConfig('vendor_defaults'),
-    configRepo.getPortalGlobalConfig('system_defaults'),
+    configRepo.getPortalGlobalConfig("tenant_defaults"),
+    configRepo.getPortalGlobalConfig("vendor_defaults"),
+    configRepo.getPortalGlobalConfig("system_defaults"),
   ]);
 
   return (
@@ -36,8 +26,8 @@ export default async function PortalGlobalConfigPage() {
       <div className="na-mb-8">
         <h1 className="na-h1 na-mb-2">Portal Global Configuration</h1>
         <p className="na-body na-text-muted">
-          System-wide defaults that apply to all tenants and vendors. These are the base configuration
-          that all other levels inherit from.
+          System-wide defaults that apply to all tenants and vendors. These are
+          the base configuration that all other levels inherit from.
         </p>
       </div>
 
@@ -46,28 +36,34 @@ export default async function PortalGlobalConfigPage() {
         <div className="na-card na-p-6">
           <h2 className="na-h3 na-mb-4">Tenant Defaults</h2>
           <p className="na-body na-text-muted na-mb-4">
-            Default configuration for all tenants. Can be overridden by tenant admins.
+            Default configuration for all tenants. Can be overridden by tenant
+            admins.
           </p>
           <div className="na-bg-muted na-p-4 na-rounded na-mb-4">
             <pre className="na-text-sm na-overflow-auto">
               {JSON.stringify(tenantDefaults?.config_data || {}, null, 2)}
             </pre>
           </div>
-          <button className="na-btn na-btn-primary">Edit Tenant Defaults</button>
+          <button className="na-btn na-btn-primary">
+            Edit Tenant Defaults
+          </button>
         </div>
 
         {/* Vendor Defaults */}
         <div className="na-card na-p-6">
           <h2 className="na-h3 na-mb-4">Vendor Defaults</h2>
           <p className="na-body na-text-muted na-mb-4">
-            Default configuration for all vendors. Can be overridden by vendor admins.
+            Default configuration for all vendors. Can be overridden by vendor
+            admins.
           </p>
           <div className="na-bg-muted na-p-4 na-rounded na-mb-4">
             <pre className="na-text-sm na-overflow-auto">
               {JSON.stringify(vendorDefaults?.config_data || {}, null, 2)}
             </pre>
           </div>
-          <button className="na-btn na-btn-primary">Edit Vendor Defaults</button>
+          <button className="na-btn na-btn-primary">
+            Edit Vendor Defaults
+          </button>
         </div>
 
         {/* System Defaults */}
@@ -81,7 +77,9 @@ export default async function PortalGlobalConfigPage() {
               {JSON.stringify(systemDefaults?.config_data || {}, null, 2)}
             </pre>
           </div>
-          <button className="na-btn na-btn-primary">Edit System Defaults</button>
+          <button className="na-btn na-btn-primary">
+            Edit System Defaults
+          </button>
         </div>
       </div>
 
@@ -90,7 +88,9 @@ export default async function PortalGlobalConfigPage() {
         <div className="na-space-y-2 na-text-sm">
           <div className="na-flex na-items-center na-gap-2">
             <span className="na-font-medium">1. Portal Global</span>
-            <span className="na-text-muted">(Lowest Priority - System Defaults)</span>
+            <span className="na-text-muted">
+              (Lowest Priority - System Defaults)
+            </span>
           </div>
           <div className="na-flex na-items-center na-gap-2">
             <span className="na-font-medium">2. Tenant Config</span>
@@ -102,11 +102,12 @@ export default async function PortalGlobalConfigPage() {
           </div>
           <div className="na-flex na-items-center na-gap-2">
             <span className="na-font-medium">4. User Personal</span>
-            <span className="na-text-muted">(Highest Priority - User Preferences)</span>
+            <span className="na-text-muted">
+              (Highest Priority - User Preferences)
+            </span>
           </div>
         </div>
       </div>
     </div>
   );
 }
-

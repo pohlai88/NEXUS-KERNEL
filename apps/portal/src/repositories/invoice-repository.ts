@@ -7,7 +7,7 @@
  * - Missing items trigger specific prompts with upload actions
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 import { InvoiceAutoLinkService, type InvoiceUploadData, type AutoLinkResult } from '../services/invoice-auto-link-service';
 import { InvoiceStatusRepository } from './invoice-status-repository';
@@ -64,7 +64,7 @@ export interface UploadInvoiceResult {
 }
 
 export class InvoiceRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
   private autoLinkService = new InvoiceAutoLinkService();
   private statusRepo = new InvoiceStatusRepository();

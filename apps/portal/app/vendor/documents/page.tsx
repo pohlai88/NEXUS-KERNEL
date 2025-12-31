@@ -1,59 +1,51 @@
 /**
  * Vendor Document Library Page
- * 
+ *
  * View all documents (Compliance, Certificates, Contracts), Upload new documents,
  * Document categories, Version history, Expiry tracking.
  */
 
-import { Suspense } from 'react';
-import { createClient } from '@/lib/supabase-client';
-import { DocumentRepository } from '@/src/repositories/document-repository';
-import { VendorGroupRepository } from '@/src/repositories/vendor-group-repository';
-import Link from 'next/link';
-import { DocumentUpload } from '@/components/documents/DocumentUpload';
-
-// TODO: Get RequestContext from authentication middleware
-function getRequestContext() {
-  return {
-    actor: {
-      userId: 'system', // TODO: Get from auth
-      vendorGroupId: 'default', // TODO: Get from vendor_user_access
-      roles: [],
-    },
-    requestId: crypto.randomUUID(),
-  };
-}
+import { DocumentUpload } from "@/components/documents/DocumentUpload";
+import { getRequestContext } from "@/lib/dev-auth-context";
+import { createClient } from "@/lib/supabase-client";
+import { DocumentRepository } from "@/src/repositories/document-repository";
+import { VendorGroupRepository } from "@/src/repositories/vendor-group-repository";
+import Link from "next/link";
 
 interface VendorDocumentsPageProps {
-  searchParams: {
+  searchParams: Promise<{
     category?: string;
     search?: string;
     document_id?: string;
-  };
+  }>;
 }
 
-export default async function VendorDocumentsPage({ searchParams }: VendorDocumentsPageProps) {
+export default async function VendorDocumentsPage({
+  searchParams,
+}: VendorDocumentsPageProps) {
   const ctx = getRequestContext();
+  const params = await searchParams;
   const docRepo = new DocumentRepository();
   const vendorGroupRepo = new VendorGroupRepository();
 
   // Get accessible subsidiaries
-  const accessibleSubsidiaries = await vendorGroupRepo.getAccessibleSubsidiaries(ctx.actor.userId);
+  const accessibleSubsidiaries =
+    await vendorGroupRepo.getAccessibleSubsidiaries(ctx.actor.userId);
   const accessibleTenantIds = accessibleSubsidiaries.map((s) => s.tenant_id);
 
   // Get vendor ID (in production, from vendor_user_access -> vendor_group -> vmp_vendors)
   const supabase = createClient();
   const { data: vendorAccess } = await supabase
-    .from('vendor_user_access')
-    .select('vendor_group_id')
-    .eq('user_id', ctx.actor.userId)
+    .from("vendor_user_access")
+    .select("vendor_group_id")
+    .eq("user_id", ctx.actor.userId)
     .limit(1)
     .single();
 
   // Get vendor documents
   const documents = await docRepo.list({
-    category: searchParams.category,
-    search: searchParams.search,
+    category: params.category,
+    search: params.search,
     // vendor_id would be from vendor_user_access -> vendor_group -> vmp_vendors
     // For now, filter by accessible tenants
     organization_id: accessibleTenantIds[0] || undefined,
@@ -62,25 +54,22 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
   // Get selected document with versions
   let selectedDocument = null;
   let documentVersions: unknown[] = [];
-  if (searchParams.document_id) {
-    selectedDocument = await docRepo.getById(searchParams.document_id);
+  if (params.document_id) {
+    selectedDocument = await docRepo.getById(params.document_id);
     if (selectedDocument) {
-      documentVersions = await docRepo.getVersions(searchParams.document_id);
+      documentVersions = await docRepo.getVersions(params.document_id);
     }
   }
 
   // Group documents by category
-  const documentsByCategory = documents.reduce(
-    (acc, doc) => {
-      const category = doc.category || 'other';
-      if (!acc[category]) {
-        acc[category] = [];
-      }
-      acc[category].push(doc);
-      return acc;
-    },
-    {} as Record<string, typeof documents>
-  );
+  const documentsByCategory = documents.reduce((acc, doc) => {
+    const category = doc.category || "other";
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(doc);
+    return acc;
+  }, {} as Record<string, typeof documents>);
 
   return (
     <div className="na-container na-mx-auto na-p-6">
@@ -94,11 +83,7 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
       {/* Upload Section */}
       <div className="na-card na-p-6 na-mb-6">
         <h2 className="na-h3 na-mb-4">Upload New Document</h2>
-        <DocumentUpload
-          onUploadComplete={() => {
-            // Handle upload completion
-          }}
-        />
+        <DocumentUpload />
       </div>
 
       {/* Filters */}
@@ -106,7 +91,11 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
         <form method="get" className="na-flex na-gap-4 na-items-end">
           <div>
             <label className="na-metadata na-mb-2 na-block">Category</label>
-            <select name="category" className="na-input" defaultValue={searchParams.category || ''}>
+            <select
+              name="category"
+              className="na-input"
+              defaultValue={params.category || ""}
+            >
               <option value="">All Categories</option>
               <option value="compliance">Compliance</option>
               <option value="certificate">Certificate</option>
@@ -124,7 +113,7 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
               name="search"
               className="na-input na-w-full"
               placeholder="Search documents..."
-              defaultValue={searchParams.search || ''}
+              defaultValue={params.search || ""}
             />
           </div>
           <button type="submit" className="na-btn na-btn-secondary">
@@ -143,7 +132,9 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
           {Object.keys(documentsByCategory).length === 0 ? (
             <div className="na-card na-p-6 na-text-center">
               <h2 className="na-h4">No Documents Found</h2>
-              <p className="na-body na-mt-2">Upload your first document to get started.</p>
+              <p className="na-body na-mt-2">
+                Upload your first document to get started.
+              </p>
             </div>
           ) : (
             <div className="na-space-y-6">
@@ -163,7 +154,9 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
                             {new Date(doc.created_at).toLocaleDateString()}
                           </div>
                         </div>
-                        <div className="na-metadata na-text-sm">{doc.file_type}</div>
+                        <div className="na-metadata na-text-sm">
+                          {doc.file_type}
+                        </div>
                       </Link>
                     ))}
                   </div>
@@ -184,17 +177,23 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
                   <div className="na-body">{selectedDocument.name}</div>
                 </div>
                 <div>
-                  <label className="na-metadata na-mb-2 na-block">Category</label>
+                  <label className="na-metadata na-mb-2 na-block">
+                    Category
+                  </label>
                   <div className="na-body">{selectedDocument.category}</div>
                 </div>
                 <div>
-                  <label className="na-metadata na-mb-2 na-block">Created</label>
+                  <label className="na-metadata na-mb-2 na-block">
+                    Created
+                  </label>
                   <div className="na-body">
                     {new Date(selectedDocument.created_at).toLocaleString()}
                   </div>
                 </div>
                 <div>
-                  <label className="na-metadata na-mb-2 na-block">File Type</label>
+                  <label className="na-metadata na-mb-2 na-block">
+                    File Type
+                  </label>
                   <div className="na-body">{selectedDocument.file_type}</div>
                 </div>
                 <a
@@ -213,11 +212,16 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
                   <h4 className="na-h5 na-mb-4">Version History</h4>
                   <div className="na-space-y-2">
                     {documentVersions.map((version: unknown) => {
-                      const v = version as { id: string; version_number: number; created_at: string };
+                      const v = version as {
+                        id: string;
+                        version_number: number;
+                        created_at: string;
+                      };
                       return (
                         <div key={v.id} className="na-card na-p-3">
                           <div className="na-metadata na-text-sm">
-                            Version {v.version_number} - {new Date(v.created_at).toLocaleDateString()}
+                            Version {v.version_number} -{" "}
+                            {new Date(v.created_at).toLocaleDateString()}
                           </div>
                         </div>
                       );

@@ -1,55 +1,50 @@
 /**
  * Document Storage Management Page
- * 
+ *
  * Grid view (left) + Preview (right)
  * Version tracking, who uploaded, when
  */
 
-import { Suspense } from 'react';
-import { DocumentRepository, type DocumentVersion } from '@/src/repositories/document-repository';
-import { DocumentGrid } from '@/components/documents/DocumentGrid';
-import { DocumentPreview } from '@/components/documents/DocumentPreview';
-
-// TODO: Get RequestContext from authentication middleware
-function getRequestContext() {
-  return {
-    actor: {
-      userId: 'system', // TODO: Get from auth
-      tenantId: 'default', // TODO: Get from auth
-      roles: [],
-    },
-    requestId: crypto.randomUUID(),
-  };
-}
+import { DocumentGrid } from "@/components/documents/DocumentGrid";
+import { DocumentPreview } from "@/components/documents/DocumentPreview";
+import { getRequestContext } from "@/lib/dev-auth-context";
+import {
+  DocumentRepository,
+  type DocumentVersion,
+} from "@/src/repositories/document-repository";
+import { Suspense } from "react";
 
 interface DocumentsPageProps {
-  searchParams: {
+  searchParams: Promise<{
     category?: string;
     search?: string;
     vendor_id?: string;
     document_id?: string;
-  };
+  }>;
 }
 
-export default async function DocumentsPage({ searchParams }: DocumentsPageProps) {
+export default async function DocumentsPage({
+  searchParams,
+}: DocumentsPageProps) {
   const ctx = getRequestContext();
+  const params = await searchParams;
   const docRepo = new DocumentRepository();
 
   // Fetch documents
   const documents = await docRepo.list({
-    category: searchParams.category,
-    search: searchParams.search,
-    vendor_id: searchParams.vendor_id,
+    category: params.category,
+    search: params.search,
+    vendor_id: params.vendor_id,
     organization_id: ctx.actor.tenantId,
   });
 
   // Fetch selected document with versions
   let selectedDocument = null;
   let documentVersions: DocumentVersion[] = [];
-  if (searchParams.document_id) {
-    selectedDocument = await docRepo.getById(searchParams.document_id);
+  if (params.document_id) {
+    selectedDocument = await docRepo.getById(params.document_id);
     if (selectedDocument) {
-      documentVersions = await docRepo.getVersions(searchParams.document_id);
+      documentVersions = await docRepo.getVersions(params.document_id);
     }
   }
 
@@ -67,7 +62,11 @@ export default async function DocumentsPage({ searchParams }: DocumentsPageProps
         <form method="get" className="na-flex na-gap-4 na-items-end">
           <div>
             <label className="na-metadata na-mb-2 na-block">Category</label>
-            <select name="category" className="na-input" defaultValue={searchParams.category || ''}>
+            <select
+              name="category"
+              className="na-input"
+              defaultValue={params.category || ""}
+            >
               <option value="">All</option>
               <option value="invoice">Invoice</option>
               <option value="contract">Contract</option>
@@ -82,7 +81,7 @@ export default async function DocumentsPage({ searchParams }: DocumentsPageProps
               name="search"
               className="na-input na-w-full"
               placeholder="Search documents..."
-              defaultValue={searchParams.search || ''}
+              defaultValue={params.search || ""}
             />
           </div>
           <button type="submit" className="na-btn na-btn-secondary">
@@ -97,18 +96,20 @@ export default async function DocumentsPage({ searchParams }: DocumentsPageProps
         <div className="lg:na-col-span-1">
           <DocumentGrid
             documents={documents}
-            selectedDocumentId={searchParams.document_id}
+            selectedDocumentId={params.document_id}
           />
         </div>
 
         {/* Right: Document Preview */}
         <div className="lg:na-col-span-2">
-          <Suspense fallback={
-            <div className="na-card na-p-6">
-              <div className="na-spinner" />
-              <p className="na-metadata na-mt-2">Loading preview...</p>
-            </div>
-          }>
+          <Suspense
+            fallback={
+              <div className="na-card na-p-6">
+                <div className="na-spinner" />
+                <p className="na-metadata na-mt-2">Loading preview...</p>
+              </div>
+            }
+          >
             {selectedDocument ? (
               <DocumentPreview
                 document={selectedDocument}
@@ -128,4 +129,3 @@ export default async function DocumentsPage({ searchParams }: DocumentsPageProps
     </div>
   );
 }
-

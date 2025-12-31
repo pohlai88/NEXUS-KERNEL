@@ -5,7 +5,7 @@
  * Every matching operation creates an immutable audit record.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export interface ThreeWayMatch {
@@ -46,7 +46,7 @@ export interface MatchResult {
 }
 
 export class ThreeWayMatchingRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

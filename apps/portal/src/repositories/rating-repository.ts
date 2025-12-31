@@ -5,7 +5,7 @@
  * Transparency: Blackbox (private) or Whitebox (public).
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export interface Rating {
@@ -82,7 +82,7 @@ export interface CreateRatingParams {
 }
 
 export class RatingRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

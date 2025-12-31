@@ -4,7 +4,7 @@
  * GRN operations for vendors: Submit, Track status.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 import { DocumentRepository } from './document-repository';
 
@@ -34,7 +34,7 @@ export interface SubmitGRNParams {
 }
 
 export class GRNRepository {
-    private supabase = createClient();
+    private supabase = createServiceClient();
     private auditTrail = new AuditTrailRepository();
     private documentRepo = new DocumentRepository();
 

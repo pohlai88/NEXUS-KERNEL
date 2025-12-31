@@ -1,27 +1,14 @@
 /**
  * Vendor Profile Page
- * 
+ *
  * Profile management for vendors - View/Edit profile, bank details, compliance documents.
  */
 
-import { Suspense } from 'react';
-import { createClient } from '@/lib/supabase-client';
-import { VendorRepository } from '@/src/repositories/vendor-repository';
-import { VendorProfileEdit } from '@/components/vendor/VendorProfileEdit';
-import Link from 'next/link';
-
-// TODO: Get RequestContext from authentication middleware
-function getRequestContext() {
-  return {
-    actor: {
-      userId: 'system', // TODO: Get from auth
-      vendorId: 'default', // TODO: Get from vendor_user_access -> vendor_group -> vmp_vendors
-      tenantId: null, // null = all subsidiaries
-      roles: [],
-    },
-    requestId: crypto.randomUUID(),
-  };
-}
+import { VendorProfileEdit } from "@/components/vendor/VendorProfileEdit";
+import { getRequestContext } from "@/lib/dev-auth-context";
+import { createClient } from "@/lib/supabase-client";
+import { VendorRepository } from "@/src/repositories/vendor-repository";
+import Link from "next/link";
 
 export default async function VendorProfilePage() {
   const ctx = getRequestContext();
@@ -30,12 +17,33 @@ export default async function VendorProfilePage() {
   // Get vendor profile with all fields including bank details
   // In production, this would query vendor_user_access -> vendor_group -> vmp_vendors
   const supabase = createClient();
-  const vendorId = ctx.actor.vendorId || 'default'; // TODO: Get from vendor_user_access
-  
+  const vendorId = ctx.actor.vendorId;
+
+  if (!vendorId) {
+    return (
+      <div className="na-container na-mx-auto na-p-6">
+        <div className="na-card na-p-6 na-text-center">
+          <h2 className="na-h4">Vendor Access Required</h2>
+          <p className="na-body na-mt-2">
+            You need vendor access to view your profile.
+          </p>
+          <Link
+            href="/vendor/dashboard"
+            className="na-btn na-btn-primary na-mt-4"
+          >
+            ← Back to Dashboard
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   const { data: vendorData, error: vendorError } = await supabase
-    .from('vmp_vendors')
-    .select('id, legal_name, display_name, email, phone, address, tax_id, country_code, status, bank_name, account_number, swift_code, bank_address, account_holder_name, official_aliases')
-    .eq('id', vendorId)
+    .from("vmp_vendors")
+    .select(
+      "id, legal_name, display_name, email, phone, address, tax_id, country_code, status, bank_name, account_number, swift_code, bank_address, account_holder_name, official_aliases"
+    )
+    .eq("id", vendorId)
     .single();
 
   if (vendorError || !vendorData) {
@@ -46,7 +54,10 @@ export default async function VendorProfilePage() {
           <p className="na-body na-mt-2">
             Your vendor profile could not be loaded. Please contact support.
           </p>
-          <Link href="/vendor/dashboard" className="na-btn na-btn-primary na-mt-4">
+          <Link
+            href="/vendor/dashboard"
+            className="na-btn na-btn-primary na-mt-4"
+          >
             ← Back to Dashboard
           </Link>
         </div>
@@ -90,7 +101,8 @@ export default async function VendorProfilePage() {
         <h2 className="na-h3 na-mb-4">Compliance Documents</h2>
         <div className="na-card na-p-4 na-bg-paper-2">
           <p className="na-body na-mb-4">
-            Upload and manage your compliance documents (certificates, licenses, contracts).
+            Upload and manage your compliance documents (certificates, licenses,
+            contracts).
           </p>
           <Link href="/vendor/documents" className="na-btn na-btn-secondary">
             View Document Library
@@ -100,4 +112,3 @@ export default async function VendorProfilePage() {
     </div>
   );
 }
-

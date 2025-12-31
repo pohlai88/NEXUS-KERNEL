@@ -1,0 +1,263 @@
+# Kernel Doctrine: CI Guardrails
+#
+# Enforces L0 Kernel integrity on every PR:
+# - Drift detection (validates CONCEPT_*/VALUESET_* tokens)
+# - Type checking (no TypeScript errors)
+# - Lint validation (ESLint clean)
+#
+# Phase 1: L2 Enforced (December 2025)
+
+name: Kernel Guardrails
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "20"
+  PNPM_VERSION: "10.23.0"
+
+jobs:
+  # ============================================================================
+  # INSTALL DEPENDENCIES (cached)
+  # ============================================================================
+  install:
+    name: 📦 Install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+
+  # ============================================================================
+  # TYPECHECK
+  # ============================================================================
+  typecheck:
+    name: 🔍 TypeCheck
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run TypeCheck
+        run: pnpm typecheck
+
+  # ============================================================================
+  # LINT
+  # ============================================================================
+  lint:
+    name: 🧹 Lint
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Lint
+        run: pnpm lint
+
+  # ============================================================================
+  # KERNEL DRIFT DETECTION (L0 Enforcement)
+  # ============================================================================
+  kernel-drift:
+    name: 🛡️ Kernel Drift
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify registry snapshot exists
+        run: |
+          if [ ! -f "docs/kernel/registry.snapshot.json" ]; then
+            echo "❌ Registry snapshot not found!"
+            echo "   Run 'pnpm kernel:export-snapshot' locally and commit the snapshot."
+            exit 1
+          fi
+          echo "✅ Registry snapshot found"
+          cat docs/kernel/registry.snapshot.json | head -20
+
+      - name: Run Root Drift Check
+        run: pnpm audit:no-drift
+
+      - name: Run Portal Drift Check
+        working-directory: apps/portal
+        run: pnpm audit:l0-drift
+
+  # ============================================================================
+  # PORTAL BUILD
+  # ============================================================================
+  build-portal:
+    name: 🏗️ Build Portal
+    runs-on: ubuntu-latest
+    needs: [typecheck, lint, kernel-drift]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+        env:
+          # Supabase env vars for build - secrets must be configured in GitHub repo settings
+          # These are only needed if build-time data fetching occurs
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co' }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key' }}
+
+  # ============================================================================
+  # PORTAL TESTS
+  # ============================================================================
+  test-portal:
+    name: 🧪 Test Portal
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Portal Tests
+        working-directory: apps/portal
+        run: pnpm test

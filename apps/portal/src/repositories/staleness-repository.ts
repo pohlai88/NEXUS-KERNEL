@@ -6,7 +6,7 @@
  * - System detects and notifies on staleness
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 import { StalenessDetectionService, type InvoiceStaleness, type StalenessLevel } from '../services/staleness-detection-service';
 import { NotificationRepository } from './notification-repository';
@@ -27,7 +27,7 @@ export interface StalenessSummary {
 }
 
 export class StalenessRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
   private detectionService = new StalenessDetectionService();
   private notificationRepo = new NotificationRepository();

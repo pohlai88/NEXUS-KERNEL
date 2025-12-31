@@ -5,7 +5,7 @@
  * Every notification creates an audit record.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export interface Notification {
@@ -63,7 +63,7 @@ export interface MagicLinkParams {
 }
 
 export class NotificationRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

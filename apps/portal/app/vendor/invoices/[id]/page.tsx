@@ -10,32 +10,23 @@
  * - Audit trail
  */
 
-import { Suspense } from 'react';
-import { createClient } from '@/lib/supabase-client';
-import { InvoiceRepository } from '@/src/repositories/invoice-repository';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-
-// TODO: Get RequestContext from authentication middleware
-function getRequestContext() {
-  return {
-    actor: {
-      userId: 'system', // TODO: Get from auth
-      vendorGroupId: 'default', // TODO: Get from vendor_user_access
-      roles: [],
-    },
-    requestId: crypto.randomUUID(),
-  };
-}
+import { getRequestContext } from "@/lib/dev-auth-context";
+import { createClient } from "@/lib/supabase-client";
+import { InvoiceRepository } from "@/src/repositories/invoice-repository";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 interface InvoiceDetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailPageProps) {
+export default async function VendorInvoiceDetailPage({
+  params: paramsPromise,
+}: InvoiceDetailPageProps) {
   const ctx = getRequestContext();
+  const params = await paramsPromise;
   const invoiceRepo = new InvoiceRepository();
 
   // Get invoice
@@ -48,50 +39,59 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
   // Get status timeline from audit trail
   const supabase = createClient();
   const { data: auditTrail } = await supabase
-    .from('audit_events')
-    .select('*')
-    .eq('entity_type', 'invoice')
-    .eq('entity_id', params.id)
-    .order('created_at', { ascending: true });
+    .from("audit_events")
+    .select("*")
+    .eq("entity_type", "invoice")
+    .eq("entity_id", params.id)
+    .order("created_at", { ascending: true });
 
   // Get linked documents
   const { data: documents } = await supabase
-    .from('documents')
-    .select('*')
-    .eq('linked_entity_type', 'invoice')
-    .eq('linked_entity_id', params.id)
-    .order('created_at', { ascending: false });
+    .from("documents")
+    .select("*")
+    .eq("linked_entity_type", "invoice")
+    .eq("linked_entity_id", params.id)
+    .order("created_at", { ascending: false });
 
   // Get 3-way matching status
   const { data: matching } = await supabase
-    .from('three_way_matches')
-    .select('*')
-    .eq('invoice_id', params.id)
+    .from("three_way_matches")
+    .select("*")
+    .eq("invoice_id", params.id)
     .single();
 
   // Calculate expected payment date (invoice_date + payment_terms)
   const expectedPaymentDate = invoice.due_date
     ? new Date(invoice.due_date)
     : invoice.invoice_date
-      ? new Date(new Date(invoice.invoice_date).getTime() + 30 * 24 * 60 * 60 * 1000) // Default 30 days
-      : null;
+    ? new Date(
+        new Date(invoice.invoice_date).getTime() + 30 * 24 * 60 * 60 * 1000
+      ) // Default 30 days
+    : null;
 
   // Determine current status display (PRD V-01: Canonical statuses)
   const getStatusDisplay = (status: string) => {
-    const statusMap: Record<string, { label: string; variant: 'ok' | 'bad' | 'warn' | 'pending' }> =
-      {
-        received: { label: 'RECEIVED', variant: 'pending' },
-        pending: { label: 'UNDER_REVIEW', variant: 'pending' },
-        under_review: { label: 'UNDER_REVIEW', variant: 'pending' },
-        matched: { label: 'UNDER_REVIEW', variant: 'pending' },
-        approved: { label: 'APPROVED_FOR_PAYMENT', variant: 'ok' },
-        rejected: { label: 'REJECTED', variant: 'bad' },
-        paid: { label: 'PAID', variant: 'ok' },
-        disputed: { label: 'DISPUTED', variant: 'warn' },
-        cancelled: { label: 'CANCELLED', variant: 'bad' },
-      };
+    const statusMap: Record<
+      string,
+      { label: string; variant: "ok" | "bad" | "warn" | "pending" }
+    > = {
+      received: { label: "RECEIVED", variant: "pending" },
+      pending: { label: "UNDER_REVIEW", variant: "pending" },
+      under_review: { label: "UNDER_REVIEW", variant: "pending" },
+      matched: { label: "UNDER_REVIEW", variant: "pending" },
+      approved: { label: "APPROVED_FOR_PAYMENT", variant: "ok" },
+      rejected: { label: "REJECTED", variant: "bad" },
+      paid: { label: "PAID", variant: "ok" },
+      disputed: { label: "DISPUTED", variant: "warn" },
+      cancelled: { label: "CANCELLED", variant: "bad" },
+    };
 
-    return statusMap[status.toLowerCase()] || { label: status.toUpperCase(), variant: 'pending' };
+    return (
+      statusMap[status.toLowerCase()] || {
+        label: status.toUpperCase(),
+        variant: "pending",
+      }
+    );
   };
 
   const statusDisplay = getStatusDisplay(invoice.status);
@@ -114,7 +114,9 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
       <div className="na-card na-p-6 na-mb-6">
         <h2 className="na-h3 na-mb-4">Current Status</h2>
         <div className="na-flex na-items-center na-gap-4 na-mb-4">
-          <span className={`na-status na-status-${statusDisplay.variant} na-text-lg`}>
+          <span
+            className={`na-status na-status-${statusDisplay.variant} na-text-lg`}
+          >
             {statusDisplay.label}
           </span>
           <div className="na-metadata na-text-sm">
@@ -126,15 +128,18 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
         <div className="na-card na-p-4 na-bg-paper-2 na-mt-4">
           <div className="na-metadata na-mb-2">Expected Next Step</div>
           <div className="na-body">
-            {invoice.status === 'approved'
-              ? `Payment scheduled for ${expectedPaymentDate?.toLocaleDateString() || 'TBD'}`
-              : invoice.status === 'pending' || invoice.status === 'under_review'
-                ? 'Invoice is under review. You will be notified when status changes.'
-                : invoice.status === 'rejected'
-                  ? 'Invoice was rejected. Please review rejection reason below.'
-                  : invoice.status === 'paid'
-                    ? 'Invoice has been paid.'
-                    : 'Status update pending.'}
+            {invoice.status === "approved"
+              ? `Payment scheduled for ${
+                  expectedPaymentDate?.toLocaleDateString() || "TBD"
+                }`
+              : invoice.status === "pending" ||
+                invoice.status === "under_review"
+              ? "Invoice is under review. You will be notified when status changes."
+              : invoice.status === "rejected"
+              ? "Invoice was rejected. Please review rejection reason below."
+              : invoice.status === "paid"
+              ? "Invoice has been paid."
+              : "Status update pending."}
           </div>
         </div>
 
@@ -142,7 +147,9 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
         {expectedPaymentDate && (
           <div className="na-card na-p-4 na-bg-paper-2 na-mt-4">
             <div className="na-metadata na-mb-2">Expected Payment Date</div>
-            <div className="na-data-large">{expectedPaymentDate.toLocaleDateString()}</div>
+            <div className="na-data-large">
+              {expectedPaymentDate.toLocaleDateString()}
+            </div>
             <div className="na-metadata na-text-sm na-mt-2">
               Based on invoice date and payment terms
             </div>
@@ -155,26 +162,35 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
         <h2 className="na-h3 na-mb-4">Invoice Details</h2>
         <div className="na-grid na-grid-cols-1 md:na-grid-cols-2 na-gap-4">
           <div>
-            <label className="na-metadata na-mb-2 na-block">Invoice Number</label>
+            <label className="na-metadata na-mb-2 na-block">
+              Invoice Number
+            </label>
             <div className="na-data">{invoice.invoice_num}</div>
           </div>
           <div>
             <label className="na-metadata na-mb-2 na-block">Invoice Date</label>
             <div className="na-data">
-              {invoice.invoice_date ? new Date(invoice.invoice_date).toLocaleDateString() : 'N/A'}
+              {invoice.invoice_date
+                ? new Date(invoice.invoice_date).toLocaleDateString()
+                : "N/A"}
             </div>
           </div>
           <div>
             <label className="na-metadata na-mb-2 na-block">Amount</label>
             <div className="na-data-large">
-              ${(invoice.amount ?? 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}{' '}
-              {invoice.currency_code || 'USD'}
+              $
+              {(invoice.amount ?? 0).toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+              })}{" "}
+              {invoice.currency_code || "USD"}
             </div>
           </div>
           <div>
             <label className="na-metadata na-mb-2 na-block">Due Date</label>
             <div className="na-data">
-              {invoice.due_date ? new Date(invoice.due_date).toLocaleDateString() : 'N/A'}
+              {invoice.due_date
+                ? new Date(invoice.due_date).toLocaleDateString()
+                : "N/A"}
             </div>
           </div>
         </div>
@@ -218,25 +234,33 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
             <div>
               <label className="na-metadata na-mb-2 na-block">PO Match</label>
               <span
-                className={`na-status na-status-${matching.po_match ? 'ok' : 'bad'}`}
+                className={`na-status na-status-${
+                  matching.po_match ? "ok" : "bad"
+                }`}
               >
-                {matching.po_match ? 'Matched' : 'Not Matched'}
+                {matching.po_match ? "Matched" : "Not Matched"}
               </span>
             </div>
             <div>
               <label className="na-metadata na-mb-2 na-block">GRN Match</label>
               <span
-                className={`na-status na-status-${matching.grn_match ? 'ok' : 'bad'}`}
+                className={`na-status na-status-${
+                  matching.grn_match ? "ok" : "bad"
+                }`}
               >
-                {matching.grn_match ? 'Matched' : 'Not Matched'}
+                {matching.grn_match ? "Matched" : "Not Matched"}
               </span>
             </div>
             <div>
-              <label className="na-metadata na-mb-2 na-block">Overall Match</label>
+              <label className="na-metadata na-mb-2 na-block">
+                Overall Match
+              </label>
               <span
-                className={`na-status na-status-${matching.match_score >= 0.8 ? 'ok' : 'warn'}`}
+                className={`na-status na-status-${
+                  matching.match_score >= 0.8 ? "ok" : "warn"
+                }`}
               >
-                {matching.match_score >= 0.8 ? 'Complete' : 'Incomplete'}
+                {matching.match_score >= 0.8 ? "Complete" : "Incomplete"}
               </span>
             </div>
           </div>
@@ -251,7 +275,10 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
             {documents.map((doc: unknown) => {
               const d = doc as { id: string; name: string; file_url: string };
               return (
-                <div key={d.id} className="na-card na-p-4 na-flex na-items-center na-justify-between">
+                <div
+                  key={d.id}
+                  className="na-card na-p-4 na-flex na-items-center na-justify-between"
+                >
                   <div>
                     <div className="na-body">{d.name}</div>
                     <div className="na-metadata na-text-sm">Document</div>
@@ -272,15 +299,15 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
       )}
 
       {/* Rejection Reason (if rejected) */}
-      {invoice.status === 'rejected' && (
+      {invoice.status === "rejected" && (
         <div className="na-card na-p-6 na-bg-danger-subtle na-text-danger">
           <h2 className="na-h4 na-mb-2">Rejection Reason</h2>
           <p className="na-body">
-            {(invoice as unknown as { rejection_reason?: string }).rejection_reason || 'No rejection reason provided.'}
+            {(invoice as unknown as { rejection_reason?: string })
+              .rejection_reason || "No rejection reason provided."}
           </p>
         </div>
       )}
     </div>
   );
 }
-

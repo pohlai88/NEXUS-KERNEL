@@ -9,8 +9,14 @@
     "start": "next start -p 9000",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
     "analyze": "ANALYZE=true next build",
-    "check:l0-drift": "tsx scripts/check-l0-drift.ts"
+    "kernel:registry:snapshot": "tsx scripts/generate-kernel-registry-snapshot.ts",
+    "audit:l0-drift": "tsx scripts/check-l0-drift.ts",
+    "audit:l0-drift:live": "tsx scripts/check-l0-drift.ts --live"
   },
   "dependencies": {
     "@nexus/cruds": "workspace:*",
@@ -23,19 +29,25 @@
     "next": "16.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "web-vitals": "^5.1.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.1.1",
     "@nexus/eslint-plugin-canon": "workspace:*",
     "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5.1.2",
+    "@vitest/coverage-v8": "^4.0.16",
+    "@vitest/ui": "4.0.16",
     "dotenv": "^17.2.3",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
+    "jsdom": "^27.4.0",
     "typescript": "^5.6.3",
     "vitest": "^4.0.16"
   }

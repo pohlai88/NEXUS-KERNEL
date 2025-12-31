@@ -1,37 +1,28 @@
 /**
  * Vendor PO Detail & Acknowledgment Page
- * 
+ *
  * View PO details, Acknowledge PO (Accept/Reject), Add comments, Upload acknowledgment document.
  */
 
-import { Suspense } from 'react';
-import { createClient } from '@/lib/supabase-client';
-import { PORepository } from '@/src/repositories/po-repository';
-import { DocumentRepository } from '@/src/repositories/document-repository';
-import { VendorGroupRepository } from '@/src/repositories/vendor-group-repository';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-
-// TODO: Get RequestContext from authentication middleware
-function getRequestContext() {
-  return {
-    actor: {
-      userId: 'system', // TODO: Get from auth
-      vendorGroupId: 'default', // TODO: Get from vendor_user_access
-      roles: [],
-    },
-    requestId: crypto.randomUUID(),
-  };
-}
+import { getRequestContext } from "@/lib/dev-auth-context";
+import { createClient } from "@/lib/supabase-client";
+import { DocumentRepository } from "@/src/repositories/document-repository";
+import { PORepository } from "@/src/repositories/po-repository";
+import { VendorGroupRepository } from "@/src/repositories/vendor-group-repository";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 interface PODetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default async function VendorPODetailPage({ params }: PODetailPageProps) {
+export default async function VendorPODetailPage({
+  params: paramsPromise,
+}: PODetailPageProps) {
   const ctx = getRequestContext();
+  const params = await paramsPromise;
   const poRepo = new PORepository();
   const docRepo = new DocumentRepository();
   const vendorGroupRepo = new VendorGroupRepository();
@@ -44,7 +35,8 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
   }
 
   // Get accessible subsidiaries
-  const accessibleSubsidiaries = await vendorGroupRepo.getAccessibleSubsidiaries(ctx.actor.userId);
+  const accessibleSubsidiaries =
+    await vendorGroupRepo.getAccessibleSubsidiaries(ctx.actor.userId);
   const accessibleTenantIds = accessibleSubsidiaries.map((s) => s.tenant_id);
 
   // Verify vendor has access to this PO (using company_id)
@@ -56,11 +48,11 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
   // Get PO documents
   const supabase = createClient();
   const { data: documents } = await supabase
-    .from('documents')
-    .select('*')
-    .eq('linked_entity_type', 'purchase_order')
-    .eq('linked_entity_id', params.id)
-    .order('created_at', { ascending: false });
+    .from("documents")
+    .select("*")
+    .eq("linked_entity_type", "purchase_order")
+    .eq("linked_entity_id", params.id)
+    .order("created_at", { ascending: false });
 
   // Get acknowledgment document if exists
   const acknowledgmentDoc = po.acknowledgment_document_id
@@ -69,11 +61,11 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
 
   // Get audit trail for status timeline
   const { data: auditTrail } = await supabase
-    .from('audit_events')
-    .select('*')
-    .eq('entity_type', 'purchase_order')
-    .eq('entity_id', params.id)
-    .order('created_at', { ascending: true });
+    .from("audit_events")
+    .select("*")
+    .eq("entity_type", "purchase_order")
+    .eq("entity_id", params.id)
+    .order("created_at", { ascending: true });
 
   return (
     <div className="na-container na-mx-auto na-p-6">
@@ -84,7 +76,10 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
             Created: {new Date(po.created_at).toLocaleDateString()}
           </p>
         </div>
-        <Link href="/vendor-omni-dashboard?type=pos" className="na-btn na-btn-ghost">
+        <Link
+          href="/vendor-omni-dashboard?type=pos"
+          className="na-btn na-btn-ghost"
+        >
           ← Back to POs
         </Link>
       </div>
@@ -95,11 +90,11 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
         <div className="na-flex na-items-center na-gap-4 na-mb-4">
           <span
             className={`na-status na-status-${
-              po.status === 'acknowledged'
-                ? 'ok'
-                : po.status === 'rejected'
-                  ? 'bad'
-                  : 'pending'
+              po.status === "acknowledged"
+                ? "ok"
+                : po.status === "rejected"
+                ? "bad"
+                : "pending"
             }`}
           >
             {po.status.toUpperCase()}
@@ -113,11 +108,13 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
           <div className="na-card na-p-4 na-bg-paper-2 na-mt-4">
             <div className="na-metadata na-mb-2">Acknowledged</div>
             <div className="na-body">
-              {po.status === 'acknowledged' ? 'Accepted' : 'Rejected'} on{' '}
+              {po.status === "acknowledged" ? "Accepted" : "Rejected"} on{" "}
               {new Date(po.acknowledged_at).toLocaleString()}
             </div>
             {po.acknowledgment_notes && (
-              <div className="na-metadata na-text-sm na-mt-2">Notes: {po.acknowledgment_notes}</div>
+              <div className="na-metadata na-text-sm na-mt-2">
+                Notes: {po.acknowledgment_notes}
+              </div>
             )}
           </div>
         )}
@@ -133,14 +130,18 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
           </div>
           <div>
             <label className="na-metadata na-mb-2 na-block">Created Date</label>
-            <div className="na-data">{new Date(po.created_at).toLocaleDateString()}</div>
+            <div className="na-data">
+              {new Date(po.created_at).toLocaleDateString()}
+            </div>
           </div>
           <div>
             <label className="na-metadata na-mb-2 na-block">Amount</label>
             <div className="na-data-large">
               {po.total_amount
-                ? `$${po.total_amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
-                : 'N/A'}
+                ? `$${po.total_amount.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                  })}`
+                : "N/A"}
             </div>
           </div>
           <div>
@@ -148,11 +149,11 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
             <div>
               <span
                 className={`na-status na-status-${
-                  po.status === 'acknowledged'
-                    ? 'ok'
-                    : po.status === 'rejected'
-                      ? 'bad'
-                      : 'pending'
+                  po.status === "acknowledged"
+                    ? "ok"
+                    : po.status === "rejected"
+                    ? "bad"
+                    : "pending"
                 }`}
               >
                 {po.status}
@@ -166,9 +167,17 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
       {!po.acknowledged_at && (
         <div className="na-card na-p-6 na-mb-6">
           <h2 className="na-h3 na-mb-4">Acknowledge PO</h2>
-          <form action="/vendor/purchase-orders/acknowledge" method="post" className="na-space-y-4">
+          <form
+            action="/vendor/purchase-orders/acknowledge"
+            method="post"
+            className="na-space-y-4"
+          >
             <input type="hidden" name="po_id" value={po.id} />
-            <input type="hidden" name="acknowledged_by" value={ctx.actor.userId} />
+            <input
+              type="hidden"
+              name="acknowledged_by"
+              value={ctx.actor.userId}
+            />
 
             <div>
               <label className="na-metadata na-mb-2 na-block">Action</label>
@@ -180,7 +189,9 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
             </div>
 
             <div>
-              <label className="na-metadata na-mb-2 na-block">Notes/Comments</label>
+              <label className="na-metadata na-mb-2 na-block">
+                Notes/Comments
+              </label>
               <textarea
                 name="notes"
                 className="na-input na-w-full"
@@ -190,8 +201,15 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
             </div>
 
             <div>
-              <label className="na-metadata na-mb-2 na-block">Upload Acknowledgment Document (Optional)</label>
-              <input type="file" name="document" className="na-input na-w-full" accept=".pdf,.jpg,.png" />
+              <label className="na-metadata na-mb-2 na-block">
+                Upload Acknowledgment Document (Optional)
+              </label>
+              <input
+                type="file"
+                name="document"
+                className="na-input na-w-full"
+                accept=".pdf,.jpg,.png"
+              />
               <p className="na-metadata na-text-sm na-mt-2">
                 Upload signed PO or acknowledgment document
               </p>
@@ -201,7 +219,10 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
               <button type="submit" className="na-btn na-btn-primary">
                 Submit Acknowledgment
               </button>
-              <Link href="/vendor-omni-dashboard?type=pos" className="na-btn na-btn-ghost">
+              <Link
+                href="/vendor-omni-dashboard?type=pos"
+                className="na-btn na-btn-ghost"
+              >
                 Cancel
               </Link>
             </div>
@@ -244,7 +265,10 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
             {documents.map((doc: unknown) => {
               const d = doc as { id: string; name: string; file_url: string };
               return (
-                <div key={d.id} className="na-card na-p-4 na-flex na-items-center na-justify-between">
+                <div
+                  key={d.id}
+                  className="na-card na-p-4 na-flex na-items-center na-justify-between"
+                >
                   <div>
                     <div className="na-body">{d.name}</div>
                     <div className="na-metadata na-text-sm">Document</div>
@@ -271,7 +295,9 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
           <div className="na-card na-p-4 na-flex na-items-center na-justify-between">
             <div>
               <div className="na-body">{acknowledgmentDoc.name}</div>
-              <div className="na-metadata na-text-sm">Uploaded on acknowledgment</div>
+              <div className="na-metadata na-text-sm">
+                Uploaded on acknowledgment
+              </div>
             </div>
             <a
               href={acknowledgmentDoc.file_url}
@@ -287,4 +313,3 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
     </div>
   );
 }
-

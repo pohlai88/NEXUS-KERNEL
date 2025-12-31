@@ -10,7 +10,7 @@
 
 import { PaymentRepository, type CreatePaymentParams } from '../repositories/payment-repository';
 import { InvoiceStatusRepository } from '../repositories/invoice-status-repository';
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 
 export interface AutoProcessPaymentParams {
   invoice_id: string;
@@ -35,7 +35,7 @@ export interface AutoProcessPaymentResult {
 export class PaymentAutoProcessor {
   private paymentRepo = new PaymentRepository();
   private statusRepo = new InvoiceStatusRepository();
-  private supabase = createClient();
+  private supabase = createServiceClient();
 
   /**
    * Auto-process payment after invoice approval

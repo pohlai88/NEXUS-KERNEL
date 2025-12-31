@@ -12,7 +12,7 @@
  * - Email-based corrections
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 
 export interface AutoLinkResult {
   vendor_id: string | null;
@@ -45,7 +45,7 @@ export interface InvoiceUploadData {
 }
 
 export class InvoiceAutoLinkService {
-  private supabase = createClient();
+  private supabase = createServiceClient();
 
   /**
    * Auto-link vendor data from invoice upload

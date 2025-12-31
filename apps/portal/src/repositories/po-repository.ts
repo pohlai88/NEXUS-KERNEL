@@ -4,7 +4,7 @@
  * PO operations for vendors: View, Acknowledge, Track status.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export interface PurchaseOrder {
@@ -31,7 +31,7 @@ export interface AcknowledgePOParams {
 }
 
 export class PORepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

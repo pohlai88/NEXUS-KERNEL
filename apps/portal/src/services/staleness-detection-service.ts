@@ -7,7 +7,7 @@
  * - Automatic notifications sent when staleness detected
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 
 export type StalenessLevel = 'warning' | 'critical' | 'severe';
 
@@ -36,7 +36,7 @@ export interface StalenessDetectionResult {
 }
 
 export class StalenessDetectionService {
-  private supabase = createClient();
+  private supabase = createServiceClient();
 
   // Staleness thresholds (days)
   private readonly WARNING_THRESHOLD = 3; // 3 days without update

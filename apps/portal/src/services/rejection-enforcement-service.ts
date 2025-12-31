@@ -11,7 +11,7 @@
  * - "Soft rejections" without system record
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 
 export interface RejectionReasonCode {
   id: string;
@@ -45,7 +45,7 @@ export interface RuleCheckResult {
 }
 
 export class RejectionEnforcementService {
-  private supabase = createClient();
+  private supabase = createServiceClient();
 
   /**
    * Check if invoice violates any approval rules

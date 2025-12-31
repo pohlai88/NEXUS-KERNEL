@@ -14,7 +14,9 @@
     "typecheck:strict": "tsc --project tsconfig.strict.json --noEmit",
     "typecheck:portal": "cd apps/portal && pnpm tsc --noEmit",
     "precommit": "pnpm typecheck:portal && pnpm lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "kernel:export-snapshot": "tsx scripts/export-kernel-registry.ts",
+    "audit:no-drift": "tsx scripts/audit-kernel-drift.ts"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -25,8 +27,12 @@
     ]
   },
   "devDependencies": {
+    "@supabase/supabase-js": "^2.89.0",
+    "@types/node": "^20.19.27",
+    "glob": "^13.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
+    "tsx": "^4.21.0",
     "turbo": "^2.0.0",
     "typescript": "^5.6.3"
   }

@@ -18,7 +18,7 @@
  * - Vendor User Personal: Individual vendor user preferences
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export interface ConfigValue {
@@ -82,7 +82,7 @@ export interface ResolvedConfig {
 }
 
 export class ConfigRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

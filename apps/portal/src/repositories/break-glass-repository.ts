@@ -5,7 +5,7 @@
  * "I cannot find anyone in the company" → Break Glass → Senior Manager notified.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 import { NotificationRepository } from './notification-repository';
 
@@ -48,7 +48,7 @@ export interface CreateEscalationParams {
 }
 
 export class BreakGlassRepository {
-    private supabase = createClient();
+    private supabase = createServiceClient();
     private auditTrail = new AuditTrailRepository();
     private notificationRepo = new NotificationRepository();
 

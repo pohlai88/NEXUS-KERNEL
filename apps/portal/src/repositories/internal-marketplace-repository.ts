@@ -5,7 +5,7 @@
  * "Subsidiary A has 50 extra laptops. Subsidiary B needs laptops and requests transfer."
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export interface InventoryItem {
@@ -55,7 +55,7 @@ export interface InventorySearchFilters {
 }
 
 export class InternalMarketplaceRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

@@ -10,7 +10,7 @@
  * - Each invoice must show: current status, last updated time, expected next step, expected payment date
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export type InvoiceStatus = 'RECEIVED' | 'UNDER_REVIEW' | 'REJECTED' | 'APPROVED_FOR_PAYMENT' | 'PAID';
@@ -62,7 +62,7 @@ export interface UpdateInvoiceStatusParams {
 }
 
 export class InvoiceStatusRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

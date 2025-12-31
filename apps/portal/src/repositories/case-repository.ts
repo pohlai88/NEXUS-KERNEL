@@ -5,7 +5,7 @@
  * Every case action creates an immutable audit record.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export interface Case {
@@ -66,7 +66,7 @@ export interface UpdateCaseParams {
 }
 
 export class CaseRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

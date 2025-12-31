@@ -1,21 +1,24 @@
 /**
  * Invoice Detail Page
- * 
+ *
  * Shows invoice details with status display, timeline, and rejection form
  */
 
-import { Suspense } from 'react';
-import { InvoiceStatusDisplay } from '@/components/invoices/InvoiceStatusDisplay';
-import { InvoiceRejectionForm } from '@/components/invoices/InvoiceRejectionForm';
-import { getInvoiceStatusInfoAction } from '@/app/invoices/status/actions';
+import { getInvoiceStatusInfoAction } from "@/app/invoices/status/actions";
+import { InvoiceRejectionForm } from "@/components/invoices/InvoiceRejectionForm";
+import { InvoiceStatusDisplay } from "@/components/invoices/InvoiceStatusDisplay";
+import { Suspense } from "react";
 
 interface InvoiceDetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default async function InvoiceDetailPage({ params }: InvoiceDetailPageProps) {
+export default async function InvoiceDetailPage({
+  params: paramsPromise,
+}: InvoiceDetailPageProps) {
+  const params = await paramsPromise;
   const statusInfo = await getInvoiceStatusInfoAction(params.id);
 
   return (
@@ -30,29 +33,32 @@ export default async function InvoiceDetailPage({ params }: InvoiceDetailPagePro
       <div className="na-grid na-grid-cols-1 lg:na-grid-cols-2 na-gap-6">
         {/* Status Display */}
         <div>
-          <Suspense fallback={<div className="na-card na-p-6">Loading status...</div>}>
+          <Suspense
+            fallback={<div className="na-card na-p-6">Loading status...</div>}
+          >
             <InvoiceStatusDisplay
               invoiceId={params.id}
-              initialStatus={statusInfo.success ? statusInfo.status_info : undefined}
+              initialStatus={
+                statusInfo.success ? statusInfo.status_info : undefined
+              }
             />
           </Suspense>
         </div>
 
         {/* Rejection Form (if not already rejected/paid) */}
-        {statusInfo.success && 
-         statusInfo.status_info?.current_status !== 'REJECTED' && 
-         statusInfo.status_info?.current_status !== 'PAID' && (
-          <div>
-            <InvoiceRejectionForm
-              invoiceId={params.id}
-              onRejected={() => {
-                // Page will refresh via router refresh in Next.js
-              }}
-            />
-          </div>
-        )}
+        {statusInfo.success &&
+          statusInfo.status_info?.current_status !== "REJECTED" &&
+          statusInfo.status_info?.current_status !== "PAID" && (
+            <div>
+              <InvoiceRejectionForm
+                invoiceId={params.id}
+                onRejected={() => {
+                  // Page will refresh via router refresh in Next.js
+                }}
+              />
+            </div>
+          )}
       </div>
     </div>
   );
 }
-

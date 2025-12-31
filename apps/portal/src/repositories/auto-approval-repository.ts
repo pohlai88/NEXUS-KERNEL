@@ -5,7 +5,7 @@
  * "The 100 Years Back Dream: Total Silence & Total Control"
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 import { ThreeWayMatchingRepository } from './three-way-matching-repository';
 
@@ -36,7 +36,7 @@ export interface AutoApprovalResult {
 }
 
 export class AutoApprovalRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
   private matchingRepo = new ThreeWayMatchingRepository();
 

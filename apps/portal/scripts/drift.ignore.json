@@ -1,0 +1,12 @@
+{
+  "concepts": [],
+  "valueSets": [],
+  "_comment": "Allowlist for intentional L0 drift exceptions. Add tokens here ONLY with team review. Format: CONCEPT_NAME or VALUESET_NAME. Example entries commented below.",
+  "_exampleConcepts": [
+    "CONCEPT_DRAFT (internal state, not in registry)",
+    "CONCEPT_TEMP_EXPERIMENT (P1 candidate, defer to next migration)"
+  ],
+  "_exampleValueSets": [
+    "VALUESET_EXPERIMENTAL (temporary feature flag, not in registry)"
+  ]
+}

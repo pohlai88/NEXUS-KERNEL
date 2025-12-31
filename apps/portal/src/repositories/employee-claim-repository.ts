@@ -5,7 +5,7 @@
  * Employee = Vendor (Shadow Vendor).
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { ClaimPolicyEngine, type PolicyCheckContext } from '../domains/claims/claim-policy-engine';
 import { AuditTrailRepository } from './audit-trail-repository';
 import { EmployeeClaimSchema, type EmployeeClaimPayload } from '@nexus/kernel';
@@ -43,7 +43,7 @@ export interface CreateClaimParams extends EmployeeClaimPayload {
 }
 
 export class EmployeeClaimRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private policyEngine = new ClaimPolicyEngine();
   private auditTrail = new AuditTrailRepository();
 

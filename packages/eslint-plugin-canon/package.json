@@ -5,17 +5,15 @@
   "type": "module",
   "main": "./src/index.js",
   "exports": {
-    ".": "./src/index.js"
-  },
-  "dependencies": {
-    "@typescript-eslint/utils": "^8.0.0"
+    ".": {
+      "import": "./src/index.js",
+      "default": "./src/index.js"
+    }
   },
   "peerDependencies": {
-    "eslint": "^9.0.0",
-    "typescript": "^5.0.0"
+    "eslint": "^9.0.0"
   },
   "scripts": {
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "lint": "eslint src"
   }
 }
-

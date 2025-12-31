@@ -7,7 +7,7 @@
  * - AP staff discovers issues before vendor escalation
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 
 export type ExceptionType =
   | 'MISSING_DOCUMENT'
@@ -47,7 +47,7 @@ export interface ExceptionDetectionResult {
 }
 
 export class ExceptionDetectionService {
-  private supabase = createClient();
+  private supabase = createServiceClient();
 
   /**
    * Detect all exceptions for an invoice

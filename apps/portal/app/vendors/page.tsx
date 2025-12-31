@@ -1,42 +1,31 @@
 /**
  * Vendor List Page
- * 
+ *
  * Server Component - Fetches vendors server-side.
  * Uses vendorCRUD for data access.
  */
 
-import { vendorCRUD } from '@/src/cruds/vendor-crud';
-import { VendorTable } from '@/components/vendors/VendorTable';
-import type { RequestContext } from '@nexus/cruds';
-
-// TODO: Get RequestContext from authentication middleware
-function getRequestContext(): RequestContext {
-  return {
-    actor: {
-      userId: 'system', // TODO: Get from auth
-      tenantId: 'default', // TODO: Get from auth
-      roles: [],
-    },
-    requestId: crypto.randomUUID(),
-  };
-}
+import { VendorTable } from "@/components/vendors/VendorTable";
+import { getRequestContext } from "@/lib/dev-auth-context";
+import { vendorCRUD } from "@/src/cruds/vendor-crud";
 
 interface VendorsPageProps {
-  searchParams: {
+  searchParams: Promise<{
     status?: string;
     search?: string;
     country?: string;
-  };
+  }>;
 }
 
 export default async function VendorsPage({ searchParams }: VendorsPageProps) {
   const ctx = getRequestContext();
+  const params = await searchParams;
 
   // Fetch vendors with filters
   const vendors = await vendorCRUD.list(ctx, {
-    status: searchParams.status,
-    search: searchParams.search,
-    country_code: searchParams.country,
+    status: params.status,
+    search: params.search,
+    country_code: params.country,
   });
 
   return (
@@ -56,7 +45,7 @@ export default async function VendorsPage({ searchParams }: VendorsPageProps) {
             <select
               name="status"
               className="na-input"
-              defaultValue={searchParams.status || ''}
+              defaultValue={params.status || ""}
             >
               <option value="">All</option>
               <option value="PENDING">Pending</option>
@@ -73,7 +62,7 @@ export default async function VendorsPage({ searchParams }: VendorsPageProps) {
               name="search"
               className="na-input na-w-full"
               placeholder="Search by name..."
-              defaultValue={searchParams.search || ''}
+              defaultValue={params.search || ""}
             />
           </div>
           <button type="submit" className="na-btn na-btn-secondary">
@@ -87,7 +76,8 @@ export default async function VendorsPage({ searchParams }: VendorsPageProps) {
         <div className="na-card na-p-6">
           <h2 className="na-h4">No Vendors Found</h2>
           <p className="na-data na-mb-4">
-            No vendors have been created yet. Create your first vendor to get started.
+            No vendors have been created yet. Create your first vendor to get
+            started.
           </p>
           <a href="/vendors/new" className="na-btn na-btn-primary">
             Create First Vendor
@@ -99,4 +89,3 @@ export default async function VendorsPage({ searchParams }: VendorsPageProps) {
     </div>
   );
 }
-

@@ -1,67 +1,56 @@
 /**
  * Internal Marketplace Page
- * 
+ *
  * Group Inventory Visibility: Subsidiaries can see inventory from other subsidiaries.
  * "Subsidiary A has 50 extra laptops. Subsidiary B needs laptops and requests transfer."
  */
 
-import { Suspense } from 'react';
-import { InternalMarketplaceRepository } from '@/src/repositories/internal-marketplace-repository';
-import { ContextSwitcher } from '@/components/tenant/ContextSwitcher';
-
-// TODO: Get RequestContext from authentication middleware
-function getRequestContext() {
-  return {
-    actor: {
-      userId: 'system', // TODO: Get from auth
-      groupId: 'default', // TODO: Get from auth
-      tenantId: null, // null = all companies
-      roles: [],
-    },
-    requestId: crypto.randomUUID(),
-  };
-}
+import { ContextSwitcher } from "@/components/tenant/ContextSwitcher";
+import { getRequestContext } from "@/lib/dev-auth-context";
+import { InternalMarketplaceRepository } from "@/src/repositories/internal-marketplace-repository";
+import { Suspense } from "react";
 
 interface InternalMarketplacePageProps {
-  searchParams: {
+  searchParams: Promise<{
     item_code?: string;
     item_name?: string;
     category?: string;
     tenant_id?: string;
-  };
+  }>;
 }
 
-export default async function InternalMarketplacePage({ searchParams }: InternalMarketplacePageProps) {
+export default async function InternalMarketplacePage({
+  searchParams,
+}: InternalMarketplacePageProps) {
   const ctx = getRequestContext();
+  const params = await searchParams;
   const marketplaceRepo = new InternalMarketplaceRepository();
 
   // Search inventory across group
-  const inventoryItems = await marketplaceRepo.searchInventory(ctx.actor.groupId || 'default', {
-    item_code: searchParams.item_code,
-    item_name: searchParams.item_name,
-    category: searchParams.category,
-    tenant_id: searchParams.tenant_id,
-  });
+  const inventoryItems = await marketplaceRepo.searchInventory(
+    ctx.actor.groupId || "default",
+    {
+      item_code: params.item_code,
+      item_name: params.item_name,
+      category: params.category,
+      tenant_id: params.tenant_id,
+    }
+  );
 
   return (
     <div className="na-container na-mx-auto na-p-6">
       <div className="na-flex na-items-center na-justify-between na-mb-6">
         <h1 className="na-h1">Internal Marketplace</h1>
-        <p className="na-metadata">Group inventory visibility across all subsidiaries</p>
+        <p className="na-metadata">
+          Group inventory visibility across all subsidiaries
+        </p>
       </div>
 
-      <Suspense fallback={<div className="na-card na-p-6">Loading context...</div>}>
+      <Suspense
+        fallback={<div className="na-card na-p-6">Loading context...</div>}
+      >
         <ContextSwitcher
-          currentTenantId={searchParams.tenant_id || null}
-          onTenantChange={(tenantId) => {
-            const params = new URLSearchParams(searchParams as Record<string, string>);
-            if (tenantId) {
-              params.set('tenant_id', tenantId);
-            } else {
-              params.delete('tenant_id');
-            }
-            window.location.href = `/internal-marketplace?${params.toString()}`;
-          }}
+          currentTenantId={params.tenant_id || null}
           userId={ctx.actor.userId}
         />
       </Suspense>
@@ -76,12 +65,16 @@ export default async function InternalMarketplacePage({ searchParams }: Internal
               name="item_name"
               className="na-input na-w-full"
               placeholder="Search items..."
-              defaultValue={searchParams.item_name || ''}
+              defaultValue={params.item_name || ""}
             />
           </div>
           <div>
             <label className="na-metadata na-mb-2 na-block">Category</label>
-            <select name="category" className="na-input" defaultValue={searchParams.category || ''}>
+            <select
+              name="category"
+              className="na-input"
+              defaultValue={params.category || ""}
+            >
               <option value="">All Categories</option>
               <option value="electronics">Electronics</option>
               <option value="office_supplies">Office Supplies</option>
@@ -111,7 +104,9 @@ export default async function InternalMarketplacePage({ searchParams }: Internal
                   <h3 className="na-h5">{item.item_name}</h3>
                   <p className="na-metadata na-text-sm">{item.item_code}</p>
                 </div>
-                <span className="na-badge na-badge-info">{item.tenant_name}</span>
+                <span className="na-badge na-badge-info">
+                  {item.tenant_name}
+                </span>
               </div>
               <div className="na-mb-4">
                 <div className="na-metadata">Available</div>
@@ -135,4 +130,3 @@ export default async function InternalMarketplacePage({ searchParams }: Internal
     </div>
   );
 }
-

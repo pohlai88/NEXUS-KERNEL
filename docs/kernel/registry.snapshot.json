@@ -1,0 +1,116 @@
+{
+  "concepts": [
+    "CONCEPT_APPROVAL",
+    "CONCEPT_APPROVAL_LEVEL",
+    "CONCEPT_AUDIT",
+    "CONCEPT_BANK",
+    "CONCEPT_CASE",
+    "CONCEPT_CLAIM",
+    "CONCEPT_COMPANY",
+    "CONCEPT_COUNTRY",
+    "CONCEPT_CURRENCY",
+    "CONCEPT_DOCUMENT",
+    "CONCEPT_DOCUMENT_REQUEST",
+    "CONCEPT_ESCALATION",
+    "CONCEPT_EXCEPTION",
+    "CONCEPT_GROUP_MEMBERSHIP",
+    "CONCEPT_IDENTITY",
+    "CONCEPT_INVOICE",
+    "CONCEPT_INVOICE_VENDOR_LINK",
+    "CONCEPT_ONBOARDING",
+    "CONCEPT_PARTY",
+    "CONCEPT_PAYMENT",
+    "CONCEPT_PAYMENT_METHOD",
+    "CONCEPT_PRIORITY",
+    "CONCEPT_RATING",
+    "CONCEPT_REJECTION",
+    "CONCEPT_RELATIONSHIP",
+    "CONCEPT_RISK",
+    "CONCEPT_STATUS",
+    "CONCEPT_VENDOR",
+    "CONCEPT_VENDOR_COMPANY_LINK",
+    "CONCEPT_WORKFLOW"
+  ],
+  "valueSets": [
+    "VALUESET_GLOBAL_APPROVAL_ACTION",
+    "VALUESET_GLOBAL_AUDIT_EVENT_TYPE",
+    "VALUESET_GLOBAL_COUNTRIES",
+    "VALUESET_GLOBAL_CURRENCIES",
+    "VALUESET_GLOBAL_DOCUMENT_TYPE",
+    "VALUESET_GLOBAL_IDENTITY_TYPE",
+    "VALUESET_GLOBAL_PARTY_TYPE",
+    "VALUESET_GLOBAL_PRIORITY_LEVEL",
+    "VALUESET_GLOBAL_RELATIONSHIP_TYPE",
+    "VALUESET_GLOBAL_RISK_FLAG",
+    "VALUESET_GLOBAL_STATUS_GENERAL",
+    "VALUESET_GLOBAL_WORKFLOW_STATE"
+  ],
+  "valuesBySet": {
+    "VALUESET_GLOBAL_COUNTRIES": ["MY", "SG", "US", "GB"],
+    "VALUESET_GLOBAL_CURRENCIES": ["USD", "EUR", "MYR", "SGD", "GBP"],
+    "VALUESET_GLOBAL_STATUS_GENERAL": [
+      "active",
+      "inactive",
+      "suspended",
+      "archived"
+    ],
+    "VALUESET_GLOBAL_WORKFLOW_STATE": [
+      "draft",
+      "pending",
+      "in_review",
+      "completed",
+      "failed"
+    ],
+    "VALUESET_GLOBAL_APPROVAL_ACTION": [
+      "submitted",
+      "approved",
+      "rejected",
+      "returned",
+      "cancelled"
+    ],
+    "VALUESET_GLOBAL_DOCUMENT_TYPE": [
+      "invoice",
+      "po",
+      "grn",
+      "dn",
+      "cn",
+      "contract",
+      "pod",
+      "soa",
+      "other"
+    ],
+    "VALUESET_GLOBAL_PARTY_TYPE": [
+      "tenant",
+      "client",
+      "vendor",
+      "user",
+      "agent"
+    ],
+    "VALUESET_GLOBAL_RELATIONSHIP_TYPE": [
+      "client_of",
+      "vendor_of",
+      "belongs_to",
+      "managed_by"
+    ],
+    "VALUESET_GLOBAL_IDENTITY_TYPE": [
+      "email",
+      "phone",
+      "reg_no",
+      "tax_id",
+      "uuid"
+    ],
+    "VALUESET_GLOBAL_AUDIT_EVENT_TYPE": [
+      "create",
+      "update",
+      "delete",
+      "restore",
+      "approve",
+      "reject",
+      "login"
+    ],
+    "VALUESET_GLOBAL_RISK_FLAG": ["none", "low", "medium", "high", "critical"],
+    "VALUESET_GLOBAL_PRIORITY_LEVEL": ["low", "medium", "high", "urgent"]
+  },
+  "exportedAt": "2025-12-31T00:00:00.000Z",
+  "snapshotVersion": "1.0.0"
+}

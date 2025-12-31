@@ -8,29 +8,19 @@
  * - Download data export (if available)
  */
 
-import { Suspense } from 'react';
-import { createClient } from '@/lib/supabase-client';
-import { SupplierOffboardingRepository } from '@/src/repositories/supplier-offboarding-repository';
-import { VendorRepository } from '@/src/repositories/vendor-repository';
-import { CaseRepository } from '@/src/repositories/case-repository';
-import Link from 'next/link';
-import { createOffboardingAction, cancelOffboardingAction } from '@/app/offboarding/actions';
+import {
+  cancelOffboardingAction,
+  createOffboardingAction,
+} from "@/app/offboarding/actions";
+import { getRequestContext } from "@/lib/dev-auth-context";
+import { createClient } from "@/lib/supabase-client";
+import { CaseRepository } from "@/src/repositories/case-repository";
+import { SupplierOffboardingRepository } from "@/src/repositories/supplier-offboarding-repository";
+import { VendorRepository } from "@/src/repositories/vendor-repository";
+import Link from "next/link";
 
 // Type for form actions that return results (Next.js 16 pattern)
 type FormAction = (formData: FormData) => void | Promise<void>;
-
-// TODO: Get RequestContext from authentication middleware
-function getRequestContext() {
-  return {
-    actor: {
-      userId: 'system', // TODO: Get from auth
-      vendorId: 'default', // TODO: Get from vendor_user_access
-      tenantId: null,
-      roles: [],
-    },
-    requestId: crypto.randomUUID(),
-  };
-}
 
 export default async function VendorOffboardingPage() {
   const ctx = getRequestContext();
@@ -40,7 +30,26 @@ export default async function VendorOffboardingPage() {
   const caseRepo = new CaseRepository();
 
   // Get vendor ID from user access
-  const vendorId = ctx.actor.vendorId || 'default';
+  const vendorId = ctx.actor.vendorId;
+
+  if (!vendorId) {
+    return (
+      <div className="na-container na-mx-auto na-p-6">
+        <div className="na-card na-p-6 na-text-center">
+          <h2 className="na-h4">Vendor Access Required</h2>
+          <p className="na-body na-mt-2">
+            You need vendor access to view offboarding status.
+          </p>
+          <Link
+            href="/vendor/dashboard"
+            className="na-btn na-btn-primary na-mt-4"
+          >
+            ← Back to Dashboard
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   // Get vendor
   const vendor = await vendorRepo.findById(vendorId);
@@ -53,7 +62,10 @@ export default async function VendorOffboardingPage() {
           <p className="na-body na-mt-2">
             Your vendor profile could not be loaded. Please contact support.
           </p>
-          <Link href="/vendor/dashboard" className="na-btn na-btn-primary na-mt-4">
+          <Link
+            href="/vendor/dashboard"
+            className="na-btn na-btn-primary na-mt-4"
+          >
             ← Back to Dashboard
           </Link>
         </div>
@@ -81,10 +93,15 @@ export default async function VendorOffboardingPage() {
     cancelled: 0,
   };
 
-  const currentProgress = offboarding ? stageProgress[offboarding.stage] || 0 : 0;
+  const currentProgress = offboarding
+    ? stageProgress[offboarding.stage] || 0
+    : 0;
 
   // Check if vendor can request offboarding (no active request)
-  const canRequest = !offboarding || offboarding.status === 'cancelled' || offboarding.status === 'rejected';
+  const canRequest =
+    !offboarding ||
+    offboarding.status === "cancelled" ||
+    offboarding.status === "rejected";
 
   return (
     <div className="na-container na-mx-auto na-p-6">
@@ -100,13 +117,18 @@ export default async function VendorOffboardingPage() {
         <h2 className="na-h3 na-mb-4 na-text-warn">⚠️ Important Notice</h2>
         <div className="na-space-y-2">
           <p className="na-body">
-            <strong>Account deactivation is permanent.</strong> Once your account is deactivated:
+            <strong>Account deactivation is permanent.</strong> Once your
+            account is deactivated:
           </p>
           <ul className="na-list-disc na-list-inside na-body na-text-sm na-space-y-1">
             <li>You will lose access to the vendor portal</li>
-            <li>All pending invoices will be handled according to company policy</li>
+            <li>
+              All pending invoices will be handled according to company policy
+            </li>
             <li>You will receive a data export of your account information</li>
-            <li>You can request reactivation by contacting your procurement team</li>
+            <li>
+              You can request reactivation by contacting your procurement team
+            </li>
           </ul>
         </div>
       </div>
@@ -115,13 +137,17 @@ export default async function VendorOffboardingPage() {
         /* Request Offboarding Form */
         <div className="na-card na-p-6">
           <h2 className="na-h3 na-mb-4">Request Account Deactivation</h2>
-          <form action={createOffboardingAction as unknown as FormAction} className="na-space-y-4">
+          <form
+            action={createOffboardingAction as unknown as FormAction}
+            className="na-space-y-4"
+          >
             <input type="hidden" name="vendor_id" value={vendorId} />
             <input type="hidden" name="company_id" value={vendor.tenant_id} />
 
             <div>
               <label className="na-metadata na-mb-2 na-block">
-                Reason for Deactivation <span className="na-text-danger">*</span>
+                Reason for Deactivation{" "}
+                <span className="na-text-danger">*</span>
               </label>
               <textarea
                 name="reason"
@@ -136,26 +162,36 @@ export default async function VendorOffboardingPage() {
             </div>
 
             <div>
-              <label className="na-metadata na-mb-2 na-block">Effective Date (Optional)</label>
+              <label className="na-metadata na-mb-2 na-block">
+                Effective Date (Optional)
+              </label>
               <input
                 type="date"
                 name="effective_date"
                 className="na-input na-w-full"
-                min={new Date().toISOString().split('T')[0]}
+                min={new Date().toISOString().split("T")[0]}
               />
               <div className="na-metadata na-text-sm na-mt-1">
-                When should the deactivation take effect? Leave blank for immediate processing.
+                When should the deactivation take effect? Leave blank for
+                immediate processing.
               </div>
             </div>
 
             <div className="na-card na-p-4 na-bg-paper-2">
               <p className="na-body na-text-sm">
-                <strong>By submitting this request, you acknowledge that:</strong>
+                <strong>
+                  By submitting this request, you acknowledge that:
+                </strong>
               </p>
               <ul className="na-list-disc na-list-inside na-body na-text-sm na-mt-2 na-space-y-1">
                 <li>Your account will be deactivated after approval</li>
-                <li>All pending transactions will be handled according to company policy</li>
-                <li>You will receive a data export of your account information</li>
+                <li>
+                  All pending transactions will be handled according to company
+                  policy
+                </li>
+                <li>
+                  You will receive a data export of your account information
+                </li>
                 <li>You can contact support to request reactivation</li>
               </ul>
             </div>
@@ -181,7 +217,8 @@ export default async function VendorOffboardingPage() {
             <div className="na-mb-6">
               <div className="na-flex na-items-center na-justify-between na-mb-2">
                 <span className="na-body na-font-semibold">
-                  Current Stage: {offboarding.stage.replace('_', ' ').toUpperCase()}
+                  Current Stage:{" "}
+                  {offboarding.stage.replace("_", " ").toUpperCase()}
                 </span>
                 <span className="na-metadata">{currentProgress}%</span>
               </div>
@@ -197,15 +234,15 @@ export default async function VendorOffboardingPage() {
             <div className="na-mb-4">
               <span
                 className={`na-status na-status-${
-                  offboarding.status === 'completed'
-                    ? 'ok'
-                    : offboarding.status === 'rejected'
-                      ? 'bad'
-                      : offboarding.status === 'in_progress'
-                        ? 'warn'
-                      : offboarding.status === 'cancelled'
-                        ? 'pending'
-                        : 'pending'
+                  offboarding.status === "completed"
+                    ? "ok"
+                    : offboarding.status === "rejected"
+                    ? "bad"
+                    : offboarding.status === "in_progress"
+                    ? "warn"
+                    : offboarding.status === "cancelled"
+                    ? "pending"
+                    : "pending"
                 }`}
               >
                 {offboarding.status.toUpperCase()}
@@ -216,14 +253,18 @@ export default async function VendorOffboardingPage() {
             <div className="na-card na-p-4 na-bg-paper-2 na-mt-4">
               <div className="na-grid na-grid-cols-1 md:na-grid-cols-2 na-gap-4">
                 <div>
-                  <label className="na-metadata na-mb-2 na-block">Requested Date</label>
+                  <label className="na-metadata na-mb-2 na-block">
+                    Requested Date
+                  </label>
                   <div className="na-body">
                     {new Date(offboarding.requested_at).toLocaleString()}
                   </div>
                 </div>
                 {offboarding.approved_at && (
                   <div>
-                    <label className="na-metadata na-mb-2 na-block">Approved Date</label>
+                    <label className="na-metadata na-mb-2 na-block">
+                      Approved Date
+                    </label>
                     <div className="na-body">
                       {new Date(offboarding.approved_at).toLocaleString()}
                     </div>
@@ -231,7 +272,9 @@ export default async function VendorOffboardingPage() {
                 )}
                 {offboarding.completed_at && (
                   <div>
-                    <label className="na-metadata na-mb-2 na-block">Completed Date</label>
+                    <label className="na-metadata na-mb-2 na-block">
+                      Completed Date
+                    </label>
                     <div className="na-body">
                       {new Date(offboarding.completed_at).toLocaleString()}
                     </div>
@@ -254,7 +297,10 @@ export default async function VendorOffboardingPage() {
               <div className="na-card na-p-4 na-bg-paper-2">
                 <p className="na-body">{offboarding.rejected_reason}</p>
               </div>
-              <Link href="/vendor/cases" className="na-btn na-btn-primary na-mt-4">
+              <Link
+                href="/vendor/cases"
+                className="na-btn na-btn-primary na-mt-4"
+              >
                 View Case Details
               </Link>
             </div>
@@ -291,13 +337,22 @@ export default async function VendorOffboardingPage() {
           )}
 
           {/* Cancel Request (if pending) */}
-          {offboarding.status === 'pending' && (
+          {offboarding.status === "pending" && (
             <div className="na-card na-p-6">
               <h2 className="na-h3 na-mb-4">Cancel Request</h2>
-              <form action={cancelOffboardingAction.bind(null, offboarding.id) as unknown as FormAction} className="na-space-y-4">
+              <form
+                action={
+                  cancelOffboardingAction.bind(
+                    null,
+                    offboarding.id
+                  ) as unknown as FormAction
+                }
+                className="na-space-y-4"
+              >
                 <div>
                   <label className="na-metadata na-mb-2 na-block">
-                    Cancellation Reason <span className="na-text-danger">*</span>
+                    Cancellation Reason{" "}
+                    <span className="na-text-danger">*</span>
                   </label>
                   <textarea
                     name="cancellation_reason"
@@ -321,10 +376,17 @@ export default async function VendorOffboardingPage() {
               <div className="na-card na-p-4 na-bg-paper-2">
                 <div className="na-flex na-items-center na-justify-between">
                   <div>
-                    <div className="na-body na-font-semibold">{caseData.subject}</div>
-                    <div className="na-metadata na-text-sm">Case ID: {caseData.id}</div>
+                    <div className="na-body na-font-semibold">
+                      {caseData.subject}
+                    </div>
+                    <div className="na-metadata na-text-sm">
+                      Case ID: {caseData.id}
+                    </div>
                   </div>
-                  <Link href={`/vendor/cases?case_id=${caseData.id}`} className="na-btn na-btn-secondary">
+                  <Link
+                    href={`/vendor/cases?case_id=${caseData.id}`}
+                    className="na-btn na-btn-secondary"
+                  >
                     View Case
                   </Link>
                 </div>
@@ -336,4 +398,3 @@ export default async function VendorOffboardingPage() {
     </div>
   );
 }
-

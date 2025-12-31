@@ -5,7 +5,7 @@
  * AP Clerk sees all pending invoices from all companies in one view.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { TenantAccessRepository } from './tenant-access-repository';
 
 export interface SSCWorkItem {
@@ -33,7 +33,7 @@ export interface SSCWorkQueueFilters {
 }
 
 export class SSCWorkQueueRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private tenantAccessRepo = new TenantAccessRepository();
 
   /**

@@ -5,7 +5,7 @@
  * "When do I get paid?" - Instant answers, zero calls.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export interface StatusInquiry {
@@ -32,7 +32,7 @@ export interface InquiryRequest {
 }
 
 export class StatusBotRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

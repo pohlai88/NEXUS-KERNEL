@@ -5,7 +5,7 @@
  * Every onboarding stage creates an immutable audit record.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 import { CaseRepository } from './case-repository';
 
@@ -45,7 +45,7 @@ export interface UpdateOnboardingStageParams {
 }
 
 export class SupplierOnboardingRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
   private caseRepo = new CaseRepository();
 

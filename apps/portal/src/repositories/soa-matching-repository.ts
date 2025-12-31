@@ -5,7 +5,7 @@
  * Every matching operation creates an immutable audit record.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export interface SOAMatch {
@@ -60,7 +60,7 @@ export interface AutoMatchResult {
 }
 
 export class SOAMatchingRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

@@ -5,7 +5,7 @@
  * Zero-touch settlement between subsidiaries.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import { AuditTrailRepository } from './audit-trail-repository';
 
 export interface InterCompanyTransaction {
@@ -41,7 +41,7 @@ export interface AutoFlipParams {
 }
 
 export class InterCompanyRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
   private auditTrail = new AuditTrailRepository();
 
   /**

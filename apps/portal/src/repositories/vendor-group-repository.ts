@@ -5,7 +5,7 @@
  * One vendor group can serve multiple subsidiaries, one vendor user can represent multiple vendor groups.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 
 export interface VendorGroup {
   id: string;
@@ -46,7 +46,7 @@ export interface VendorUserAccess {
 }
 
 export class VendorGroupRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
 
   /**
    * Get vendor groups for user

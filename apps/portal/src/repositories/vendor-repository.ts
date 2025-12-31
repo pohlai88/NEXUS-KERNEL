@@ -6,7 +6,7 @@
  * Use VendorPayload for API contract validation when needed.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 import type { VendorPayload } from '@nexus/kernel';
 import type { Repository, SoftDeleteRecord } from '@nexus/cruds';
 
@@ -56,7 +56,7 @@ interface DatabaseVendorRow {
 }
 
 export class VendorRepository implements Repository<Vendor> {
-  public supabase = createClient(); // Made public for multi-tenant queries
+  public supabase = createServiceClient(); // Made public for multi-tenant queries
 
   /**
    * Find vendor by ID

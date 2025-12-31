@@ -5,7 +5,7 @@
  * Every action creates an audit record with cryptographic proof.
  */
 
-import { createClient } from '@/lib/supabase-client';
+import { createServiceClient } from '@/lib/supabase-client';
 
 export interface AuditTrailRecord {
   id: string;
@@ -46,7 +46,7 @@ export interface AuditTrailFilters {
 type AuditState = Record<string, unknown> | object | null | undefined;
 
 export class AuditTrailRepository {
-  private supabase = createClient();
+  private supabase = createServiceClient();
 
   /**
    * Convert any state object to Record<string, unknown> for storage

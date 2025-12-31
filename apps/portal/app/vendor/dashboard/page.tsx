@@ -1,26 +1,14 @@
 /**
  * Vendor Dashboard Page
- * 
+ *
  * Home page for vendors - Summary cards, recent activity, quick actions.
  * First thing vendor sees when logging in.
  */
 
-import { Suspense } from 'react';
-import { createClient } from '@/lib/supabase-client';
-import { VendorGroupRepository } from '@/src/repositories/vendor-group-repository';
-import Link from 'next/link';
-
-// TODO: Get RequestContext from authentication middleware
-function getRequestContext() {
-  return {
-    actor: {
-      userId: 'system', // TODO: Get from auth
-      vendorGroupId: 'default', // TODO: Get from vendor_user_access
-      roles: [],
-    },
-    requestId: crypto.randomUUID(),
-  };
-}
+import { getRequestContext } from "@/lib/dev-auth-context";
+import { createClient } from "@/lib/supabase-client";
+import { VendorGroupRepository } from "@/src/repositories/vendor-group-repository";
+import Link from "next/link";
 
 export default async function VendorDashboardPage() {
   const ctx = getRequestContext();
@@ -28,7 +16,8 @@ export default async function VendorDashboardPage() {
   const vendorGroupRepo = new VendorGroupRepository();
 
   // Get accessible subsidiaries
-  const accessibleSubsidiaries = await vendorGroupRepo.getAccessibleSubsidiaries(ctx.actor.userId);
+  const accessibleSubsidiaries =
+    await vendorGroupRepo.getAccessibleSubsidiaries(ctx.actor.userId);
   const accessibleTenantIds = accessibleSubsidiaries.map((s) => s.tenant_id);
 
   // Get summary data
@@ -41,30 +30,30 @@ export default async function VendorDashboardPage() {
   if (accessibleTenantIds.length > 0) {
     // Get pending invoices count
     const { data: pendingData } = await supabase
-      .from('vmp_invoices')
-      .select('id, amount')
-      .in('tenant_id', accessibleTenantIds)
-      .in('status', ['pending', 'matched', 'under_review'])
+      .from("vmp_invoices")
+      .select("id, amount")
+      .in("tenant_id", accessibleTenantIds)
+      .in("status", ["pending", "matched", "under_review"])
       .limit(1000);
 
     pendingInvoices = pendingData?.length || 0;
 
     // Get approved invoices count
     const { data: approvedData } = await supabase
-      .from('vmp_invoices')
-      .select('id, amount')
-      .in('tenant_id', accessibleTenantIds)
-      .eq('status', 'approved')
+      .from("vmp_invoices")
+      .select("id, amount")
+      .in("tenant_id", accessibleTenantIds)
+      .eq("status", "approved")
       .limit(1000);
 
     approvedInvoices = approvedData?.length || 0;
 
     // Calculate total outstanding
     const { data: outstandingData } = await supabase
-      .from('vmp_invoices')
-      .select('amount')
-      .in('tenant_id', accessibleTenantIds)
-      .in('status', ['approved', 'matched'])
+      .from("vmp_invoices")
+      .select("amount")
+      .in("tenant_id", accessibleTenantIds)
+      .in("status", ["approved", "matched"])
       .limit(1000);
 
     totalOutstanding = (outstandingData || []).reduce(
@@ -74,12 +63,12 @@ export default async function VendorDashboardPage() {
 
     // Get next payment date (earliest due_date from approved invoices)
     const { data: nextPaymentData } = await supabase
-      .from('vmp_invoices')
-      .select('due_date')
-      .in('tenant_id', accessibleTenantIds)
-      .eq('status', 'approved')
-      .not('due_date', 'is', null)
-      .order('due_date', { ascending: true })
+      .from("vmp_invoices")
+      .select("due_date")
+      .in("tenant_id", accessibleTenantIds)
+      .eq("status", "approved")
+      .not("due_date", "is", null)
+      .order("due_date", { ascending: true })
       .limit(1)
       .single();
 
@@ -87,10 +76,12 @@ export default async function VendorDashboardPage() {
 
     // Get recent invoices (last 5)
     const { data: recentData } = await supabase
-      .from('vmp_invoices')
-      .select('id, invoice_num, amount, status, invoice_date, tenant_id, tenants!inner(name)')
-      .in('tenant_id', accessibleTenantIds)
-      .order('created_at', { ascending: false })
+      .from("vmp_invoices")
+      .select(
+        "id, invoice_num, amount, status, invoice_date, tenant_id, tenants!inner(name)"
+      )
+      .in("tenant_id", accessibleTenantIds)
+      .order("created_at", { ascending: false })
       .limit(5);
 
     recentInvoices = recentData || [];
@@ -108,19 +99,27 @@ export default async function VendorDashboardPage() {
         <div className="na-card na-p-6">
           <div className="na-metadata na-mb-2">Pending Invoices</div>
           <div className="na-data-large na-text-warn">{pendingInvoices}</div>
-          <div className="na-metadata na-text-sm na-mt-2">Awaiting approval</div>
+          <div className="na-metadata na-text-sm na-mt-2">
+            Awaiting approval
+          </div>
         </div>
 
         <div className="na-card na-p-6">
           <div className="na-metadata na-mb-2">Approved Invoices</div>
           <div className="na-data-large na-text-ok">{approvedInvoices}</div>
-          <div className="na-metadata na-text-sm na-mt-2">Ready for payment</div>
+          <div className="na-metadata na-text-sm na-mt-2">
+            Ready for payment
+          </div>
         </div>
 
         <div className="na-card na-p-6">
           <div className="na-metadata na-mb-2">Total Outstanding</div>
           <div className="na-data-large na-text-primary">
-            ${totalOutstanding.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            $
+            {totalOutstanding.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </div>
           <div className="na-metadata na-text-sm na-mt-2">Unpaid invoices</div>
         </div>
@@ -130,10 +129,10 @@ export default async function VendorDashboardPage() {
           <div className="na-data-large">
             {nextPaymentDate
               ? new Date(nextPaymentDate).toLocaleDateString()
-              : 'No scheduled payments'}
+              : "No scheduled payments"}
           </div>
           <div className="na-metadata na-text-sm na-mt-2">
-            {nextPaymentDate ? 'Earliest due date' : 'No approved invoices'}
+            {nextPaymentDate ? "Earliest due date" : "No approved invoices"}
           </div>
         </div>
       </div>
@@ -166,7 +165,10 @@ export default async function VendorDashboardPage() {
         {recentInvoices.length === 0 ? (
           <div className="na-text-center na-p-6">
             <p className="na-body">No recent invoices.</p>
-            <Link href="/invoices/upload" className="na-btn na-btn-primary na-mt-4">
+            <Link
+              href="/invoices/upload"
+              className="na-btn na-btn-primary na-mt-4"
+            >
               Upload Your First Invoice
             </Link>
           </div>
@@ -195,10 +197,17 @@ export default async function VendorDashboardPage() {
                   };
                   return (
                     <tr key={i.id} className="na-tr na-hover-bg-paper-2">
-                      <td className="na-td na-font-semibold">{i.invoice_num}</td>
-                      <td className="na-td na-text-sm">{i.tenants?.name || 'Unknown'}</td>
+                      <td className="na-td na-font-semibold">
+                        {i.invoice_num}
+                      </td>
+                      <td className="na-td na-text-sm">
+                        {i.tenants?.name || "Unknown"}
+                      </td>
                       <td className="na-td na-data">
-                        ${i.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                        $
+                        {i.amount.toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                        })}
                       </td>
                       <td className="na-td na-text-sm">
                         {new Date(i.invoice_date).toLocaleDateString()}
@@ -206,11 +215,11 @@ export default async function VendorDashboardPage() {
                       <td className="na-td">
                         <span
                           className={`na-status na-status-${
-                            i.status === 'approved'
-                              ? 'ok'
-                              : i.status === 'rejected'
-                                ? 'bad'
-                                : 'pending'
+                            i.status === "approved"
+                              ? "ok"
+                              : i.status === "rejected"
+                              ? "bad"
+                              : "pending"
                           }`}
                         >
                           {i.status}
@@ -235,4 +244,3 @@ export default async function VendorDashboardPage() {
     </div>
   );
 }
-
