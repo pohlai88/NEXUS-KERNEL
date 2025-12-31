@@ -1,0 +1,33 @@
+{
+  "name": "@nexus/canon-vendor",
+  "version": "1.0.0",
+  "description": "AIBOS VPM Canon: Vendor Domain (L1/L3) - Schemas, statuses, and policies for vendor management",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "keywords": [
+    "aibos",
+    "vpm",
+    "vendor",
+    "canon",
+    "l1",
+    "domain"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@aibos/kernel": "workspace:*",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}

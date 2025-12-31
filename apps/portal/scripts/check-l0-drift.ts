@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint-disable @nexus/canon/no-kernel-string-literals -- Drift scanner dynamically constructs identifiers */
+
 /**
  * check-l0-drift.ts
  *

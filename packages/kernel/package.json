@@ -1,19 +1,46 @@
 {
-  "name": "@nexus/kernel",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@aibos/kernel",
+  "version": "1.0.0",
+  "description": "AIBOS Kernel - The Business Constitution (L0 SSOT)",
+  "private": false,
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "registry.snapshot.json",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "keywords": [
+    "kernel",
+    "aibos",
+    "nexus",
+    "ssot",
+    "governance",
+    "l0"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pohlai88/NEXUS-KERNEL.git",
+    "directory": "packages/kernel"
   },
   "dependencies": {
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "typescript": "^5.7.3",
     "vitest": "^4.0.16"
   },
   "scripts": {
-    "build": "echo \"kernel: build handled by Next transpile\"",
+    "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"

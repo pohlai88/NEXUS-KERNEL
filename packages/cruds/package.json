@@ -7,7 +7,7 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "@nexus/kernel": "workspace:*"
+    "@aibos/kernel": "workspace:*"
   },
   "scripts": {
     "build": "echo \"cruds: build handled by Next transpile\"",

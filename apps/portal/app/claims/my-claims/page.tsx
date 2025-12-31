@@ -8,7 +8,7 @@
 import { MobileUpload } from "@/components/documents/MobileUpload";
 import { getRequestContext } from "@/lib/dev-auth-context";
 import { EmployeeClaimRepository } from "@/src/repositories/employee-claim-repository";
-import { ClaimCategory } from "@nexus/kernel";
+import { ClaimCategory } from "@nexus/canon-claim";
 
 export default async function MyClaimsPage() {
   const ctx = getRequestContext();

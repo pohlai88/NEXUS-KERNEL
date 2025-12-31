@@ -38,9 +38,10 @@ const nextConfig: NextConfig = {
 
   // Transpile monorepo packages and external packages with TypeScript/React components
   transpilePackages: [
-    "@nexus/kernel",
+    "@aibos/kernel",
     "@nexus/cruds",
-    "@nexus/ui-actions",
+    "@nexus/canon-claim",
+    "@nexus/canon-vendor",
     "aibos-design-system", // Required for React components (TypeScript files)
     // TODO: Audit in P1 - verify all packages are needed (see PRODUCTION_TIMELINE.txt)
   ],

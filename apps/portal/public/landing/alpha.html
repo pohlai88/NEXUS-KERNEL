@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS CANON // MORPHOLOGY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700;900&family=Playfair+Display:ital,wght@1,400&family=Space+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #000000;
+            --ink: #ffffff;
+            --grid-line: rgba(255, 255, 255, 0.3);
+            --border-thick: 2px solid #ffffff;
+            --border-thin: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- TYPOGRAPHY AS WEAPON --- */
+        .type-mega {
+            font-size: clamp(4rem, 15vw, 16rem);
+            font-weight: 900;
+            line-height: 0.8;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+        }
+
+        .type-hud {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .type-serif {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        .type-body {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            font-weight: 300;
+            max-width: 40ch;
+        }
+
+        /* --- THE THREAD (Morphology) --- */
+        .morph-thread {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4vw;
+            position: relative;
+            z-index: 10;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        /* --- COMPONENT: THE CARDS --- */
+        .card {
+            border: var(--border-thin);
+            padding: 3rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+            transition: border-color 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #fff;
+        }
+
+        .card.solid {
+            background: var(--ink);
+            color: var(--bg);
+            border: none;
+        }
+
+        /* The vertical HUD lines inside cards */
+        .hud-bars {
+            display: flex;
+            gap: 4px;
+            margin-top: 2rem;
+        }
+        .hud-bar {
+            width: 1px;
+            height: 40px;
+            background: currentColor;
+            opacity: 0.5;
+        }
+
+        /* --- SECTION SPECIFICS --- */
+
+        /* Header */
+        header {
+            padding-top: 4rem;
+            border-top: 2px solid var(--ink); /* The Top Line */
+            margin-bottom: 6rem;
+        }
+
+        /* The Clash Section (1+1 vs Psychology) */
+        .clash-section {
+            margin-bottom: 8rem;
+        }
+
+        /* The Bridge (Vertical Line Text) */
+        .bridge {
+            margin: 6rem 0;
+            padding-left: 2rem;
+            border-left: 2px solid var(--ink);
+        }
+
+        /* The Game Grid */
+        .game-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 0; /* Tidy/Messy Tension */
+            margin-top: 4rem;
+        }
+
+        .game-card-dark {
+            background: #0a0a0a;
+            padding: 4rem;
+            border: var(--border-thin);
+        }
+
+        .game-card-light {
+            background: white;
+            color: black;
+            padding: 4rem;
+            position: relative;
+            /* The Messy Element: Overlap */
+            transform: translateY(2rem);
+            z-index: 20;
+        }
+
+        .hud-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: var(--border-thin);
+            margin-top: 2rem;
+        }
+        .hud-cell {
+            aspect-ratio: 1;
+            border-right: var(--border-thin);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* Why Forensic Section */
+        .why-section {
+            margin-top: 15rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-text-layer {
+            position: absolute;
+            top: 50%;
+            left: -5%;
+            transform: translateY(-50%);
+            font-size: 20vw;
+            font-weight: 900;
+            white-space: nowrap;
+            opacity: 0.1;
+            z-index: -1;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* DNA Section */
+        .dna-section {
+            margin-top: 10rem;
+            border-top: var(--border-thick);
+            padding-top: 4rem;
+        }
+
+        .dna-card {
+            border: var(--border-thin);
+            padding: 2rem;
+            aspect-ratio: 1;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 10rem;
+            padding-bottom: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .ampersand {
+            font-size: 10rem;
+            font-family: 'Playfair Display', serif;
+            line-height: 0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .grid-2, .grid-3, .game-grid { grid-template-columns: 1fr; }
+            .game-card-light { transform: none; }
+            .type-mega { font-size: 15vw; }
+        }
+
+        /* GRAIN */
+        .grain {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%220.07%22/%3E%3C/svg%3E');
+            pointer-events: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grain"></div>
+
+    <svg class="morph-thread">
+        <path d="M 50% 100 L 50% 400 L 10% 400 L 10% 1200" stroke="rgba(255,255,255,0.1)" fill="none" stroke-width="1" />
+    </svg>
+
+    <div class="container">
+        <header>
+            <div class="type-hud" style="margin-bottom: 1rem;">FORENSIC ACCOUNTING ERP</div>
+            <h1 class="type-mega">NEXUS<br>CANON</h1>
+        </header>
+
+        <section class="clash-section grid-2">
+            <div class="card">
+                <div>
+                    <div class="type-hud">ACCOUNTING</div>
+                    <div style="font-size: 5rem; font-weight: 700; line-height: 1; margin-top: 1rem;">
+                        1+1<br>=2
+                    </div>
+                </div>
+                <div>
+                    <p class="type-hud" style="margin-bottom: 1rem;">Unchanging. Mathematical.<br>100 years ago. Today. Tomorrow.<br>The same precision.</p>
+                </div>
+            </div>
+
+            <div class="card" style="border-style: dashed;">
+                <div>
+                    <div class="type-hud">FORENSIC</div>
+                    <div style="font-size: 3rem; font-weight: 700; line-height: 1.1; margin-top: 1rem;">
+                        THE<br>
+                        PSYCHOLOGY<br>
+                        OF NUMBERS
+                    </div>
+                </div>
+                <div>
+                    <p class="type-hud">Investigation. Evolution. Brain Game.</p>
+                    <div class="hud-bars">
+                        <div class="hud-bar" style="height: 30px"></div>
+                        <div class="hud-bar" style="height: 50px"></div>
+                        <div class="hud-bar" style="height: 20px"></div>
+                        <div class="hud-bar" style="height: 40px"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="bridge">
+            <p class="type-body">
+                Where traditional accounting meets forensic intelligence.<br>
+                Where numbers tell stories. Where data becomes <span class="type-serif">evidence</span>.
+            </p>
+        </div>
+
+        <section>
+            <div style="display: flex; align-items: baseline; gap: 2rem;">
+                <h2 style="font-size: 5rem; font-weight: 900;">THE GAME</h2>
+                <span class="type-hud">MORPHOLOGY</span>
+            </div>
+
+            <div class="game-grid">
+                <div class="game-card-dark">
+                    <div class="type-hud">01 . INVESTIGATION</div>
+                    <h3 style="font-size: 4rem; font-weight: 700; line-height: 1; margin: 2rem 0;">
+                        TRAIL<br>OF DATA
+                    </h3>
+                    <div class="type-hud" style="border-left: 2px solid white; padding-left: 1rem;">
+                        Pattern Recognition<br>
+                        Anomaly Detection<br>
+                        Evidence Chain
+                    </div>
+                </div>
+
+                <div class="game-card-light">
+                    <div class="type-hud">02 . PSYCHOLOGY</div>
+                    <div style="font-size: 4rem; margin: 1rem 0;">∞</div>
+                    <h3 style="font-size: 3rem; font-weight: 800; text-transform: uppercase;">
+                        Infinite<br>Variables
+                    </h3>
+                    <p class="type-hud" style="margin-top: 2rem; color: black; opacity: 1;">
+                        Every transaction tells a story.<br>
+                        Every pattern reveals intent.<br>
+                        Every number is evidence.
+                    </p>
+                </div>
+            </div>
+
+            <div style="max-width: 60%; margin-left: auto;">
+                <div class="hud-row">
+                    <div class="hud-cell">$</div>
+                    <div class="hud-cell" style="background: white;"></div>
+                    <div class="hud-cell"></div>
+                    <div class="hud-cell">%</div>
+                </div>
+                <div class="type-hud" style="margin-top: 1rem; display: flex; justify-content: space-between;">
+                    <span>TRANSACTION</span>
+                    <span>PATTERN</span>
+                    <span>EVIDENCE</span>
+                    <span>PROOF</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-section">
+            <div class="bg-text-layer">WHY FORENSIC?</div>
+
+            <div class="grid-2" style="align-items: center;">
+                <div>
+                    <h2 style="font-size: 6rem; line-height: 0.9; font-weight: 800;">
+                        WHY<br>FORENSIC?
+                    </h2>
+                    <div style="width: 2px; height: 100px; background: white; margin-top: 2rem;"></div>
+                </div>
+
+                <div style="position: relative; top: 5rem;">
+                    <p class="type-body" style="font-size: 1.5rem;">
+                        Because accounting and forensic always go together.
+                    </p>
+                    <p class="type-hud" style="margin-top: 2rem;">
+                        But forensic is the morphology.<br>
+                        The psychology. The brain game.
+                    </p>
+
+                    <div style="display: flex; gap: 4rem; margin-top: 4rem;">
+                        <div>
+                            <div style="font-size: 3rem; font-weight: 700;">100</div>
+                            <div class="type-hud">YEARS</div>
+                        </div>
+                        <div style="background: white; color: black; padding: 1rem 2rem;">
+                            <div style="font-size: 2rem;">∞</div>
+                            <div class="type-hud" style="color: black;">EVOLUTION</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dna-section">
+            <h2 style="font-size: 4rem; font-weight: 900; margin-bottom: 1rem;">NEXUSCANON DNA</h2>
+            <div class="type-hud" style="margin-bottom: 4rem;">PRECISION . INTELLIGENCE . EVOLUTION</div>
+
+            <div class="grid-3">
+                <div class="dna-card">
+                    <div class="type-hud">FEATURE</div>
+                    <h3 style="font-size: 2.5rem; font-weight: 700; margin: 1rem 0;">FORENSIC<br>LENS</h3>
+                    <p class="type-hud" style="margin-top: auto; padding-top: 2rem; border-top: 1px solid #333;">See beyond numbers. Detect patterns. Uncover anomalies.</p>
+                </div>
+                <div class="dna-card solid">
+                    <div class="type-hud" style="color: black;">FEATURE</div>
+                    <h3 style="font-size: 2.5rem; font-weight: 700; margin: 1rem 0;">MORPHO<br>LOGIC</h3>
+                    <p class="type-hud" style="margin-top: auto; padding-top: 2rem; border-top: 1px solid #ddd; color: black;">Watch transactions morph. Lines become threads. Stories become truth.</p>
+                </div>
+                <div class="dna-card">
+                    <div class="type-hud">FEATURE</div>
+                    <h3 style="font-size: 2.5rem; font-weight: 700; margin: 1rem 0;">BRAIN<br>GAME</h3>
+                    <p class="type-hud" style="margin-top: auto; padding-top: 2rem; border-top: 1px solid #333;">The deeper you understand, the deeper you see.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div>
+                <p class="type-body">Accounting never changes.<br>Forensic never stops evolving.</p>
+                <h3 style="margin-top: 4rem; font-size: 2rem; font-weight: 800; letter-spacing: 0.1em;">NEXUSCANON</h3>
+                <div class="type-hud">FORENSIC ACCOUNTING ERP</div>
+            </div>
+            <div class="ampersand">&</div>
+        </footer>
+    </div>
+
+</body>
+</html>

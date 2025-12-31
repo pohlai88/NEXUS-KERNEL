@@ -1,10 +1,10 @@
-import { CanonError } from "@nexus/kernel";
+import { CanonError } from "@aibos/kernel";
 import type {
-  RequestContext,
-  Repository,
-  SoftDeleteRecord,
-  PolicyCheck,
   AuditHook,
+  PolicyCheck,
+  Repository,
+  RequestContext,
+  SoftDeleteRecord,
 } from "./types";
 
 export interface CrudSOptions<T extends SoftDeleteRecord> {
@@ -35,7 +35,10 @@ export function crudS<T extends SoftDeleteRecord>(options: CrudSOptions<T>) {
       return rec;
     },
 
-    list: async (ctx: RequestContext, filters?: Record<string, unknown>): Promise<T[]> => {
+    list: async (
+      ctx: RequestContext,
+      filters?: Record<string, unknown>
+    ): Promise<T[]> => {
       await policyCheck?.(ctx, `${entity}:list`);
       const all = await repo.findAll(filters);
       return all.filter((rec) => !rec.deletedAt);
@@ -66,18 +69,28 @@ export function crudS<T extends SoftDeleteRecord>(options: CrudSOptions<T>) {
       return out;
     },
 
-    softDelete: async (ctx: RequestContext, id: string, reason: string): Promise<T> => {
+    softDelete: async (
+      ctx: RequestContext,
+      id: string,
+      reason: string
+    ): Promise<T> => {
       await policyCheck?.(ctx, `${entity}:soft_delete`);
       const rec = await ensureExists(id);
       if (rec.deletedAt) {
-        throw new CanonError("CONFLICT", `${entity} is already deleted`, { id });
+        throw new CanonError("CONFLICT", `${entity} is already deleted`, {
+          id,
+        });
       }
       const out = await repo.softDelete(id, ctx.actor.userId);
       await audit?.(ctx, `${entity}.soft_deleted`, out.id, { reason });
       return out;
     },
 
-    restore: async (ctx: RequestContext, id: string, reason: string): Promise<T> => {
+    restore: async (
+      ctx: RequestContext,
+      id: string,
+      reason: string
+    ): Promise<T> => {
       await policyCheck?.(ctx, `${entity}:restore`);
       const rec = await ensureExists(id);
       if (!rec.deletedAt) {
@@ -88,7 +101,11 @@ export function crudS<T extends SoftDeleteRecord>(options: CrudSOptions<T>) {
       return out;
     },
 
-    hardDelete: async (ctx: RequestContext, id: string, reason: string): Promise<void> => {
+    hardDelete: async (
+      ctx: RequestContext,
+      id: string,
+      reason: string
+    ): Promise<void> => {
       await policyCheck?.(ctx, `${entity}:hard_delete`);
       await ensureExists(id);
       await repo.hardDelete(id);
@@ -96,4 +113,3 @@ export function crudS<T extends SoftDeleteRecord>(options: CrudSOptions<T>) {
     },
   };
 }
-

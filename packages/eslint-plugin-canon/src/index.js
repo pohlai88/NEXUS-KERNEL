@@ -133,6 +133,88 @@ const requireSchemaHeader = {
 };
 
 /**
+ * Rule: no-kernel-string-literals
+ * Prevents raw CONCEPT_*, VALUESET_*, VALUE_* string literals.
+ * These identifiers must be imported from @aibos/kernel, not hardcoded.
+ */
+const noKernelStringLiterals = {
+  meta: {
+    type: "problem",
+    docs: {
+      description:
+        "Forbid raw kernel identifier strings. Use CONCEPT/VALUESET/VALUE exports from @aibos/kernel.",
+      category: "Best Practices",
+      recommended: true,
+    },
+    messages: {
+      rawConceptLiteral:
+        'Raw CONCEPT identifier "{{ value }}" detected. Import from @aibos/kernel: import { CONCEPT } from "@aibos/kernel"; then use CONCEPT.{{ name }}',
+      rawValueSetLiteral:
+        'Raw VALUESET identifier "{{ value }}" detected. Import from @aibos/kernel: import { VALUESET } from "@aibos/kernel"; then use VALUESET.{{ name }}',
+      rawValueLiteral:
+        'Raw VALUE identifier "{{ value }}" detected. Import from @aibos/kernel: import { VALUE } from "@aibos/kernel"; then use VALUE.<set>.<name>',
+      templateLiteralKernel:
+        "Template literal constructing kernel identifier detected. Use typed exports from @aibos/kernel instead.",
+    },
+    schema: [],
+  },
+  create(context) {
+    // Patterns for kernel identifiers (uppercase snake_case after prefix)
+    const CONCEPT_PATTERN = /^CONCEPT_[A-Z][A-Z0-9_]*$/;
+    const VALUESET_PATTERN = /^VALUESET_[A-Z][A-Z0-9_]*$/;
+    const VALUE_PATTERN = /^VALUE_[A-Z][A-Z0-9_]*$/;
+
+    // Extract the name portion after the prefix for the fix hint
+    const extractName = (value, prefix) => value.slice(prefix.length + 1); // +1 for underscore
+
+    return {
+      Literal(node) {
+        if (typeof node.value !== "string") return;
+
+        const value = node.value;
+
+        if (CONCEPT_PATTERN.test(value)) {
+          context.report({
+            node,
+            messageId: "rawConceptLiteral",
+            data: { value, name: extractName(value, "CONCEPT") },
+          });
+        } else if (VALUESET_PATTERN.test(value)) {
+          context.report({
+            node,
+            messageId: "rawValueSetLiteral",
+            data: { value, name: extractName(value, "VALUESET") },
+          });
+        } else if (VALUE_PATTERN.test(value)) {
+          context.report({
+            node,
+            messageId: "rawValueLiteral",
+            data: { value },
+          });
+        }
+      },
+      TemplateLiteral(node) {
+        // Check if template builds a kernel identifier pattern
+        // e.g. `CONCEPT_${name}` or `VALUESET_${type}`
+        if (node.quasis.length > 0) {
+          const firstQuasi = node.quasis[0].value.raw;
+          if (
+            firstQuasi.startsWith("CONCEPT_") ||
+            firstQuasi.startsWith("VALUESET_") ||
+            firstQuasi.startsWith("VALUE_")
+          ) {
+            context.report({
+              node,
+              messageId: "templateLiteralKernel",
+            });
+          }
+        }
+      },
+    };
+  },
+};
+
+/**
  * Rule: forbid-bypass-imports
  * Forbids bypassing @nexus/kernel imports.
  */
@@ -193,12 +275,13 @@ const forbidBypassImports = {
 const plugin = {
   meta: {
     name: "@nexus/eslint-plugin-canon",
-    version: "0.1.0",
+    version: "0.2.0",
   },
   rules: {
     "forbid-free-string-status": forbidFreeStringStatus,
     "require-schema-header": requireSchemaHeader,
     "forbid-bypass-imports": forbidBypassImports,
+    "no-kernel-string-literals": noKernelStringLiterals,
   },
 };
 

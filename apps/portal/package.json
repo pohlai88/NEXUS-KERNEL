@@ -19,9 +19,10 @@
     "audit:l0-drift:live": "tsx scripts/check-l0-drift.ts --live"
   },
   "dependencies": {
+    "@nexus/canon-claim": "workspace:*",
+    "@nexus/canon-vendor": "workspace:*",
     "@nexus/cruds": "workspace:*",
-    "@nexus/kernel": "workspace:*",
-    "@nexus/ui-actions": "workspace:*",
+    "@aibos/kernel": "workspace:*",
     "@supabase/supabase-js": "^2.89.0",
     "@vercel/speed-insights": "^1.0.0",
     "aibos-design-system": "^1.1.0",

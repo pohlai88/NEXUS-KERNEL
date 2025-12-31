@@ -6,9 +6,8 @@
  * Use VendorPayload for API contract validation when needed.
  */
 
-import { createServiceClient } from '@/lib/supabase-client';
-import type { VendorPayload } from '@nexus/kernel';
-import type { Repository, SoftDeleteRecord } from '@nexus/cruds';
+import { createServiceClient } from "@/lib/supabase-client";
+import type { Repository, SoftDeleteRecord } from "@nexus/cruds";
 
 export interface VendorFilters {
   status?: string;
@@ -18,8 +17,8 @@ export interface VendorFilters {
 
 // Official alias types (matching Kernel structure)
 export type OfficialAlias =
-  | { type: 'SSM'; value: string; jurisdiction: 'MY' }
-  | { type: 'TAX_ID'; value: string; jurisdiction: string };
+  | { type: "SSM"; value: string; jurisdiction: "MY" }
+  | { type: "TAX_ID"; value: string; jurisdiction: string };
 
 // Vendor database entity type (does not extend VendorPayload)
 // Schema header fields are NOT stored in database
@@ -35,7 +34,7 @@ export interface Vendor extends SoftDeleteRecord {
   country_code: string;
   email?: string;
   phone?: string;
-  status: 'PENDING' | 'SUBMITTED' | 'APPROVED' | 'REJECTED' | 'SUSPENDED';
+  status: "PENDING" | "SUBMITTED" | "APPROVED" | "REJECTED" | "SUSPENDED";
   official_aliases: OfficialAlias[];
 }
 
@@ -63,14 +62,14 @@ export class VendorRepository implements Repository<Vendor> {
    */
   async findById(id: string): Promise<Vendor | null> {
     const { data, error } = await this.supabase
-      .from('vmp_vendors')
-      .select('*')
-      .eq('id', id)
-      .is('deleted_at', null) // Soft delete filter
+      .from("vmp_vendors")
+      .select("*")
+      .eq("id", id)
+      .is("deleted_at", null) // Soft delete filter
       .single();
 
     if (error) {
-      if (error.code === 'PGRST116') {
+      if (error.code === "PGRST116") {
         return null; // Not found
       }
       throw new Error(`Failed to get vendor: ${error.message}`);
@@ -84,20 +83,20 @@ export class VendorRepository implements Repository<Vendor> {
    */
   async findAll(filters?: Record<string, unknown>): Promise<Vendor[]> {
     let query = this.supabase
-      .from('vmp_vendors')
-      .select('*')
-      .is('deleted_at', null) // Soft delete filter
-      .order('created_at', { ascending: false });
+      .from("vmp_vendors")
+      .select("*")
+      .is("deleted_at", null) // Soft delete filter
+      .order("created_at", { ascending: false });
 
     // Apply filters
     const vendorFilters = filters as VendorFilters | undefined;
 
     if (vendorFilters?.status) {
-      query = query.eq('status', vendorFilters.status);
+      query = query.eq("status", vendorFilters.status);
     }
 
     if (vendorFilters?.country_code) {
-      query = query.eq('country_code', vendorFilters.country_code);
+      query = query.eq("country_code", vendorFilters.country_code);
     }
 
     if (vendorFilters?.search) {
@@ -118,14 +117,16 @@ export class VendorRepository implements Repository<Vendor> {
   /**
    * Create new vendor
    */
-  async create(data: Omit<Vendor, 'id' | 'deletedAt' | 'deletedBy'>): Promise<Vendor> {
+  async create(
+    data: Omit<Vendor, "id" | "deletedAt" | "deletedBy">
+  ): Promise<Vendor> {
     // Extract tenant_id from data (should be provided by RequestContext)
     const tenantId = (data as unknown as { tenant_id: string }).tenant_id;
     if (!tenantId) {
-      throw new Error('tenant_id is required');
+      throw new Error("tenant_id is required");
     }
 
-    const row: Omit<DatabaseVendorRow, 'id' | 'created_at' | 'updated_at'> = {
+    const row: Omit<DatabaseVendorRow, "id" | "created_at" | "updated_at"> = {
       tenant_id: tenantId,
       legal_name: data.legal_name, // ✅ Direct Kernel field (no mapping)
       display_name: data.display_name || null,
@@ -138,7 +139,7 @@ export class VendorRepository implements Repository<Vendor> {
     };
 
     const { data: inserted, error } = await this.supabase
-      .from('vmp_vendors')
+      .from("vmp_vendors")
       .insert(row)
       .select()
       .single();
@@ -155,25 +156,28 @@ export class VendorRepository implements Repository<Vendor> {
    */
   async update(
     id: string,
-    data: Partial<Omit<Vendor, 'id' | 'deletedAt' | 'deletedBy'>>
+    data: Partial<Omit<Vendor, "id" | "deletedAt" | "deletedBy">>
   ): Promise<Vendor> {
     const updateData: Partial<DatabaseVendorRow> = {};
 
     // Only include fields that are provided
     if (data.legal_name !== undefined) updateData.legal_name = data.legal_name;
-    if (data.display_name !== undefined) updateData.display_name = data.display_name || null;
-    if (data.country_code !== undefined) updateData.country_code = data.country_code;
+    if (data.display_name !== undefined)
+      updateData.display_name = data.display_name || null;
+    if (data.country_code !== undefined)
+      updateData.country_code = data.country_code;
     if (data.email !== undefined) updateData.email = data.email || null;
     if (data.phone !== undefined) updateData.phone = data.phone || null;
     if (data.status !== undefined) updateData.status = data.status;
-    if (data.official_aliases !== undefined) updateData.official_aliases = data.official_aliases;
+    if (data.official_aliases !== undefined)
+      updateData.official_aliases = data.official_aliases;
 
     updateData.updated_at = new Date().toISOString();
 
     const { data: updated, error } = await this.supabase
-      .from('vmp_vendors')
+      .from("vmp_vendors")
       .update(updateData)
-      .eq('id', id)
+      .eq("id", id)
       .select()
       .single();
 
@@ -189,12 +193,12 @@ export class VendorRepository implements Repository<Vendor> {
    */
   async softDelete(id: string, deletedBy: string): Promise<Vendor> {
     const { data, error } = await this.supabase
-      .from('vmp_vendors')
+      .from("vmp_vendors")
       .update({
         deleted_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       })
-      .eq('id', id)
+      .eq("id", id)
       .select()
       .single();
 
@@ -210,12 +214,12 @@ export class VendorRepository implements Repository<Vendor> {
    */
   async restore(id: string): Promise<Vendor> {
     const { data, error } = await this.supabase
-      .from('vmp_vendors')
+      .from("vmp_vendors")
       .update({
         deleted_at: null,
         updated_at: new Date().toISOString(),
       })
-      .eq('id', id)
+      .eq("id", id)
       .select()
       .single();
 
@@ -230,7 +234,10 @@ export class VendorRepository implements Repository<Vendor> {
    * Hard delete vendor (permanent)
    */
   async hardDelete(id: string): Promise<void> {
-    const { error } = await this.supabase.from('vmp_vendors').delete().eq('id', id);
+    const { error } = await this.supabase
+      .from("vmp_vendors")
+      .delete()
+      .eq("id", id);
 
     if (error) {
       throw new Error(`Failed to hard delete vendor: ${error.message}`);
@@ -249,7 +256,7 @@ export class VendorRepository implements Repository<Vendor> {
       country_code: row.country_code,
       email: row.email || undefined,
       phone: row.phone || undefined,
-      status: row.status as Vendor['status'], // ✅ Typed status
+      status: row.status as Vendor["status"], // ✅ Typed status
       official_aliases: (row.official_aliases as OfficialAlias[]) || [],
       created_at: row.created_at,
       updated_at: row.updated_at,
@@ -259,4 +266,3 @@ export class VendorRepository implements Repository<Vendor> {
     };
   }
 }
-

@@ -1,0 +1,586 @@
+{
+  "kernelVersion": "1.0.0",
+  "snapshotId": "snapshot:1.0.0:12ff1ea5",
+  "generatedAt": "2025-12-31T07:21:35.987Z",
+  "counts": {
+    "concepts": 30,
+    "valueSets": 12,
+    "values": 62
+  },
+  "concepts": [
+    {
+      "key": "APPROVAL",
+      "id": "CONCEPT_APPROVAL",
+      "category": "OPERATION"
+    },
+    {
+      "key": "APPROVAL_LEVEL",
+      "id": "CONCEPT_APPROVAL_LEVEL",
+      "category": "ATTRIBUTE"
+    },
+    {
+      "key": "AUDIT",
+      "id": "CONCEPT_AUDIT",
+      "category": "OPERATION"
+    },
+    {
+      "key": "BANK",
+      "id": "CONCEPT_BANK",
+      "category": "ENTITY"
+    },
+    {
+      "key": "CASE",
+      "id": "CONCEPT_CASE",
+      "category": "ENTITY"
+    },
+    {
+      "key": "CLAIM",
+      "id": "CONCEPT_CLAIM",
+      "category": "ENTITY"
+    },
+    {
+      "key": "COMPANY",
+      "id": "CONCEPT_COMPANY",
+      "category": "ENTITY"
+    },
+    {
+      "key": "COUNTRY",
+      "id": "CONCEPT_COUNTRY",
+      "category": "ENTITY"
+    },
+    {
+      "key": "CURRENCY",
+      "id": "CONCEPT_CURRENCY",
+      "category": "ENTITY"
+    },
+    {
+      "key": "DOCUMENT",
+      "id": "CONCEPT_DOCUMENT",
+      "category": "ENTITY"
+    },
+    {
+      "key": "DOCUMENT_REQUEST",
+      "id": "CONCEPT_DOCUMENT_REQUEST",
+      "category": "OPERATION"
+    },
+    {
+      "key": "ESCALATION",
+      "id": "CONCEPT_ESCALATION",
+      "category": "OPERATION"
+    },
+    {
+      "key": "EXCEPTION",
+      "id": "CONCEPT_EXCEPTION",
+      "category": "ENTITY"
+    },
+    {
+      "key": "GROUP_MEMBERSHIP",
+      "id": "CONCEPT_GROUP_MEMBERSHIP",
+      "category": "RELATIONSHIP"
+    },
+    {
+      "key": "IDENTITY",
+      "id": "CONCEPT_IDENTITY",
+      "category": "ATTRIBUTE"
+    },
+    {
+      "key": "INVOICE",
+      "id": "CONCEPT_INVOICE",
+      "category": "ENTITY"
+    },
+    {
+      "key": "INVOICE_VENDOR_LINK",
+      "id": "CONCEPT_INVOICE_VENDOR_LINK",
+      "category": "RELATIONSHIP"
+    },
+    {
+      "key": "ONBOARDING",
+      "id": "CONCEPT_ONBOARDING",
+      "category": "OPERATION"
+    },
+    {
+      "key": "PARTY",
+      "id": "CONCEPT_PARTY",
+      "category": "ENTITY"
+    },
+    {
+      "key": "PAYMENT",
+      "id": "CONCEPT_PAYMENT",
+      "category": "OPERATION"
+    },
+    {
+      "key": "PAYMENT_METHOD",
+      "id": "CONCEPT_PAYMENT_METHOD",
+      "category": "ATTRIBUTE"
+    },
+    {
+      "key": "PRIORITY",
+      "id": "CONCEPT_PRIORITY",
+      "category": "ATTRIBUTE"
+    },
+    {
+      "key": "RATING",
+      "id": "CONCEPT_RATING",
+      "category": "ENTITY"
+    },
+    {
+      "key": "REJECTION",
+      "id": "CONCEPT_REJECTION",
+      "category": "OPERATION"
+    },
+    {
+      "key": "RELATIONSHIP",
+      "id": "CONCEPT_RELATIONSHIP",
+      "category": "RELATIONSHIP"
+    },
+    {
+      "key": "RISK",
+      "id": "CONCEPT_RISK",
+      "category": "ATTRIBUTE"
+    },
+    {
+      "key": "STATUS",
+      "id": "CONCEPT_STATUS",
+      "category": "ATTRIBUTE"
+    },
+    {
+      "key": "VENDOR",
+      "id": "CONCEPT_VENDOR",
+      "category": "ENTITY"
+    },
+    {
+      "key": "VENDOR_COMPANY_LINK",
+      "id": "CONCEPT_VENDOR_COMPANY_LINK",
+      "category": "RELATIONSHIP"
+    },
+    {
+      "key": "WORKFLOW",
+      "id": "CONCEPT_WORKFLOW",
+      "category": "OPERATION"
+    }
+  ],
+  "valueSets": [
+    {
+      "key": "APPROVAL_ACTION",
+      "id": "VALUESET_GLOBAL_APPROVAL_ACTION"
+    },
+    {
+      "key": "AUDIT_EVENT_TYPE",
+      "id": "VALUESET_GLOBAL_AUDIT_EVENT_TYPE"
+    },
+    {
+      "key": "COUNTRIES",
+      "id": "VALUESET_GLOBAL_COUNTRIES"
+    },
+    {
+      "key": "CURRENCIES",
+      "id": "VALUESET_GLOBAL_CURRENCIES"
+    },
+    {
+      "key": "DOCUMENT_TYPE",
+      "id": "VALUESET_GLOBAL_DOCUMENT_TYPE"
+    },
+    {
+      "key": "IDENTITY_TYPE",
+      "id": "VALUESET_GLOBAL_IDENTITY_TYPE"
+    },
+    {
+      "key": "PARTY_TYPE",
+      "id": "VALUESET_GLOBAL_PARTY_TYPE"
+    },
+    {
+      "key": "PRIORITY_LEVEL",
+      "id": "VALUESET_GLOBAL_PRIORITY_LEVEL"
+    },
+    {
+      "key": "RELATIONSHIP_TYPE",
+      "id": "VALUESET_GLOBAL_RELATIONSHIP_TYPE"
+    },
+    {
+      "key": "RISK_FLAG",
+      "id": "VALUESET_GLOBAL_RISK_FLAG"
+    },
+    {
+      "key": "STATUS_GENERAL",
+      "id": "VALUESET_GLOBAL_STATUS_GENERAL"
+    },
+    {
+      "key": "WORKFLOW_STATE",
+      "id": "VALUESET_GLOBAL_WORKFLOW_STATE"
+    }
+  ],
+  "values": [
+    {
+      "valueSetKey": "APPROVAL_ACTION",
+      "valueSetId": "VALUESET_GLOBAL_APPROVAL_ACTION",
+      "key": "APPROVED",
+      "id": "APP_APPROVED"
+    },
+    {
+      "valueSetKey": "APPROVAL_ACTION",
+      "valueSetId": "VALUESET_GLOBAL_APPROVAL_ACTION",
+      "key": "CANCELLED",
+      "id": "APP_CANCELLED"
+    },
+    {
+      "valueSetKey": "APPROVAL_ACTION",
+      "valueSetId": "VALUESET_GLOBAL_APPROVAL_ACTION",
+      "key": "REJECTED",
+      "id": "APP_REJECTED"
+    },
+    {
+      "valueSetKey": "APPROVAL_ACTION",
+      "valueSetId": "VALUESET_GLOBAL_APPROVAL_ACTION",
+      "key": "RETURNED",
+      "id": "APP_RETURNED"
+    },
+    {
+      "valueSetKey": "APPROVAL_ACTION",
+      "valueSetId": "VALUESET_GLOBAL_APPROVAL_ACTION",
+      "key": "SUBMITTED",
+      "id": "APP_SUBMITTED"
+    },
+    {
+      "valueSetKey": "AUDIT_EVENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_AUDIT_EVENT_TYPE",
+      "key": "APPROVE",
+      "id": "AUD_APPROVE"
+    },
+    {
+      "valueSetKey": "AUDIT_EVENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_AUDIT_EVENT_TYPE",
+      "key": "CREATE",
+      "id": "AUD_CREATE"
+    },
+    {
+      "valueSetKey": "AUDIT_EVENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_AUDIT_EVENT_TYPE",
+      "key": "DELETE",
+      "id": "AUD_DELETE"
+    },
+    {
+      "valueSetKey": "AUDIT_EVENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_AUDIT_EVENT_TYPE",
+      "key": "LOGIN",
+      "id": "AUD_LOGIN"
+    },
+    {
+      "valueSetKey": "AUDIT_EVENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_AUDIT_EVENT_TYPE",
+      "key": "REJECT",
+      "id": "AUD_REJECT"
+    },
+    {
+      "valueSetKey": "AUDIT_EVENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_AUDIT_EVENT_TYPE",
+      "key": "RESTORE",
+      "id": "AUD_RESTORE"
+    },
+    {
+      "valueSetKey": "AUDIT_EVENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_AUDIT_EVENT_TYPE",
+      "key": "UPDATE",
+      "id": "AUD_UPDATE"
+    },
+    {
+      "valueSetKey": "COUNTRIES",
+      "valueSetId": "VALUESET_GLOBAL_COUNTRIES",
+      "key": "UNITED_KINGDOM",
+      "id": "COUNTRY_GB"
+    },
+    {
+      "valueSetKey": "COUNTRIES",
+      "valueSetId": "VALUESET_GLOBAL_COUNTRIES",
+      "key": "MALAYSIA",
+      "id": "COUNTRY_MY"
+    },
+    {
+      "valueSetKey": "COUNTRIES",
+      "valueSetId": "VALUESET_GLOBAL_COUNTRIES",
+      "key": "SINGAPORE",
+      "id": "COUNTRY_SG"
+    },
+    {
+      "valueSetKey": "COUNTRIES",
+      "valueSetId": "VALUESET_GLOBAL_COUNTRIES",
+      "key": "UNITED_STATES",
+      "id": "COUNTRY_US"
+    },
+    {
+      "valueSetKey": "CURRENCIES",
+      "valueSetId": "VALUESET_GLOBAL_CURRENCIES",
+      "key": "EUR",
+      "id": "CURRENCY_EUR"
+    },
+    {
+      "valueSetKey": "CURRENCIES",
+      "valueSetId": "VALUESET_GLOBAL_CURRENCIES",
+      "key": "GBP",
+      "id": "CURRENCY_GBP"
+    },
+    {
+      "valueSetKey": "CURRENCIES",
+      "valueSetId": "VALUESET_GLOBAL_CURRENCIES",
+      "key": "MYR",
+      "id": "CURRENCY_MYR"
+    },
+    {
+      "valueSetKey": "CURRENCIES",
+      "valueSetId": "VALUESET_GLOBAL_CURRENCIES",
+      "key": "SGD",
+      "id": "CURRENCY_SGD"
+    },
+    {
+      "valueSetKey": "CURRENCIES",
+      "valueSetId": "VALUESET_GLOBAL_CURRENCIES",
+      "key": "USD",
+      "id": "CURRENCY_USD"
+    },
+    {
+      "valueSetKey": "DOCUMENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_DOCUMENT_TYPE",
+      "key": "CREDIT_NOTE",
+      "id": "DOC_CN"
+    },
+    {
+      "valueSetKey": "DOCUMENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_DOCUMENT_TYPE",
+      "key": "CONTRACT",
+      "id": "DOC_CONTRACT"
+    },
+    {
+      "valueSetKey": "DOCUMENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_DOCUMENT_TYPE",
+      "key": "DELIVERY_NOTE",
+      "id": "DOC_DN"
+    },
+    {
+      "valueSetKey": "DOCUMENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_DOCUMENT_TYPE",
+      "key": "GRN",
+      "id": "DOC_GRN"
+    },
+    {
+      "valueSetKey": "DOCUMENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_DOCUMENT_TYPE",
+      "key": "INVOICE",
+      "id": "DOC_INVOICE"
+    },
+    {
+      "valueSetKey": "DOCUMENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_DOCUMENT_TYPE",
+      "key": "OTHER",
+      "id": "DOC_OTHER"
+    },
+    {
+      "valueSetKey": "DOCUMENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_DOCUMENT_TYPE",
+      "key": "PURCHASE_ORDER",
+      "id": "DOC_PO"
+    },
+    {
+      "valueSetKey": "DOCUMENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_DOCUMENT_TYPE",
+      "key": "PROOF_OF_DELIVERY",
+      "id": "DOC_POD"
+    },
+    {
+      "valueSetKey": "DOCUMENT_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_DOCUMENT_TYPE",
+      "key": "STATEMENT_OF_ACCOUNT",
+      "id": "DOC_SOA"
+    },
+    {
+      "valueSetKey": "IDENTITY_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_IDENTITY_TYPE",
+      "key": "EMAIL",
+      "id": "ID_EMAIL"
+    },
+    {
+      "valueSetKey": "IDENTITY_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_IDENTITY_TYPE",
+      "key": "PHONE",
+      "id": "ID_PHONE"
+    },
+    {
+      "valueSetKey": "IDENTITY_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_IDENTITY_TYPE",
+      "key": "REGISTRATION_NO",
+      "id": "ID_REG_NO"
+    },
+    {
+      "valueSetKey": "IDENTITY_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_IDENTITY_TYPE",
+      "key": "TAX_ID",
+      "id": "ID_TAX_ID"
+    },
+    {
+      "valueSetKey": "IDENTITY_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_IDENTITY_TYPE",
+      "key": "UUID",
+      "id": "ID_UUID"
+    },
+    {
+      "valueSetKey": "PARTY_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_PARTY_TYPE",
+      "key": "AGENT",
+      "id": "PARTY_AGENT"
+    },
+    {
+      "valueSetKey": "PARTY_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_PARTY_TYPE",
+      "key": "CLIENT",
+      "id": "PARTY_CLIENT"
+    },
+    {
+      "valueSetKey": "PARTY_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_PARTY_TYPE",
+      "key": "TENANT",
+      "id": "PARTY_TENANT"
+    },
+    {
+      "valueSetKey": "PARTY_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_PARTY_TYPE",
+      "key": "USER",
+      "id": "PARTY_USER"
+    },
+    {
+      "valueSetKey": "PARTY_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_PARTY_TYPE",
+      "key": "VENDOR",
+      "id": "PARTY_VENDOR"
+    },
+    {
+      "valueSetKey": "PRIORITY_LEVEL",
+      "valueSetId": "VALUESET_GLOBAL_PRIORITY_LEVEL",
+      "key": "HIGH",
+      "id": "PRI_HIGH"
+    },
+    {
+      "valueSetKey": "PRIORITY_LEVEL",
+      "valueSetId": "VALUESET_GLOBAL_PRIORITY_LEVEL",
+      "key": "LOW",
+      "id": "PRI_LOW"
+    },
+    {
+      "valueSetKey": "PRIORITY_LEVEL",
+      "valueSetId": "VALUESET_GLOBAL_PRIORITY_LEVEL",
+      "key": "MEDIUM",
+      "id": "PRI_MEDIUM"
+    },
+    {
+      "valueSetKey": "PRIORITY_LEVEL",
+      "valueSetId": "VALUESET_GLOBAL_PRIORITY_LEVEL",
+      "key": "URGENT",
+      "id": "PRI_URGENT"
+    },
+    {
+      "valueSetKey": "RELATIONSHIP_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_RELATIONSHIP_TYPE",
+      "key": "BELONGS_TO",
+      "id": "REL_BELONGS_TO"
+    },
+    {
+      "valueSetKey": "RELATIONSHIP_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_RELATIONSHIP_TYPE",
+      "key": "CLIENT_OF",
+      "id": "REL_CLIENT_OF"
+    },
+    {
+      "valueSetKey": "RELATIONSHIP_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_RELATIONSHIP_TYPE",
+      "key": "MANAGED_BY",
+      "id": "REL_MANAGED_BY"
+    },
+    {
+      "valueSetKey": "RELATIONSHIP_TYPE",
+      "valueSetId": "VALUESET_GLOBAL_RELATIONSHIP_TYPE",
+      "key": "VENDOR_OF",
+      "id": "REL_VENDOR_OF"
+    },
+    {
+      "valueSetKey": "RISK_FLAG",
+      "valueSetId": "VALUESET_GLOBAL_RISK_FLAG",
+      "key": "CRITICAL",
+      "id": "RISK_CRITICAL"
+    },
+    {
+      "valueSetKey": "RISK_FLAG",
+      "valueSetId": "VALUESET_GLOBAL_RISK_FLAG",
+      "key": "HIGH",
+      "id": "RISK_HIGH"
+    },
+    {
+      "valueSetKey": "RISK_FLAG",
+      "valueSetId": "VALUESET_GLOBAL_RISK_FLAG",
+      "key": "LOW",
+      "id": "RISK_LOW"
+    },
+    {
+      "valueSetKey": "RISK_FLAG",
+      "valueSetId": "VALUESET_GLOBAL_RISK_FLAG",
+      "key": "MEDIUM",
+      "id": "RISK_MEDIUM"
+    },
+    {
+      "valueSetKey": "RISK_FLAG",
+      "valueSetId": "VALUESET_GLOBAL_RISK_FLAG",
+      "key": "NONE",
+      "id": "RISK_NONE"
+    },
+    {
+      "valueSetKey": "STATUS_GENERAL",
+      "valueSetId": "VALUESET_GLOBAL_STATUS_GENERAL",
+      "key": "ACTIVE",
+      "id": "STATUS_ACTIVE"
+    },
+    {
+      "valueSetKey": "STATUS_GENERAL",
+      "valueSetId": "VALUESET_GLOBAL_STATUS_GENERAL",
+      "key": "ARCHIVED",
+      "id": "STATUS_ARCHIVED"
+    },
+    {
+      "valueSetKey": "STATUS_GENERAL",
+      "valueSetId": "VALUESET_GLOBAL_STATUS_GENERAL",
+      "key": "INACTIVE",
+      "id": "STATUS_INACTIVE"
+    },
+    {
+      "valueSetKey": "STATUS_GENERAL",
+      "valueSetId": "VALUESET_GLOBAL_STATUS_GENERAL",
+      "key": "SUSPENDED",
+      "id": "STATUS_SUSPENDED"
+    },
+    {
+      "valueSetKey": "WORKFLOW_STATE",
+      "valueSetId": "VALUESET_GLOBAL_WORKFLOW_STATE",
+      "key": "COMPLETED",
+      "id": "WF_COMPLETED"
+    },
+    {
+      "valueSetKey": "WORKFLOW_STATE",
+      "valueSetId": "VALUESET_GLOBAL_WORKFLOW_STATE",
+      "key": "DRAFT",
+      "id": "WF_DRAFT"
+    },
+    {
+      "valueSetKey": "WORKFLOW_STATE",
+      "valueSetId": "VALUESET_GLOBAL_WORKFLOW_STATE",
+      "key": "FAILED",
+      "id": "WF_FAILED"
+    },
+    {
+      "valueSetKey": "WORKFLOW_STATE",
+      "valueSetId": "VALUESET_GLOBAL_WORKFLOW_STATE",
+      "key": "IN_REVIEW",
+      "id": "WF_IN_REVIEW"
+    },
+    {
+      "valueSetKey": "WORKFLOW_STATE",
+      "valueSetId": "VALUESET_GLOBAL_WORKFLOW_STATE",
+      "key": "PENDING",
+      "id": "WF_PENDING"
+    }
+  ]
+}

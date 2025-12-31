@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>NexusCanon — SOLARIS (Bio-Inversion)</title>
+  <style>
+    :root{
+      --void: #000000;
+      --mass: #ffffff;
+      --mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Arial;
+      --ser: "Iowan Old Style", "Times New Roman", serif;
+      --pad: clamp(20px, 4vw, 60px);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+
+    body{
+      margin:0;
+      /* THE POSITIVE STATE: The crushing weight of the ledger */
+      background: var(--mass);
+      color: var(--void);
+      font-family: var(--sans);
+      overflow-x:hidden;
+      cursor: none;
+    }
+
+    /* BIOLOGICAL GRAIN (The texture of paper/skin) */
+    body:before {
+      content: "";
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 50;
+      opacity: 0.4;
+    }
+
+    /* THE LENS (The Microscope) */
+    .lens{
+      position:fixed; top:0; left:0;
+      width: 30px; height: 30px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events:none; z-index:999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease-out, height 0.2s ease-out;
+      /* PHYSICS: Difference Mode.
+         White Lens on White BG = Black Spot.
+         White Lens on Black Text = White Text.
+      */
+      mix-blend-mode: difference;
+    }
+    .lens.active{ width:180px; height:180px; }
+
+    /* LAYOUT */
+    .wrap{ position:relative; z-index:2; }
+    .section{
+      min-height: 100vh;
+      display: flex; flex-direction:column; justify-content: center;
+      padding: var(--pad);
+      position: relative;
+    }
+
+    /* TYPOGRAPHY */
+    .h1{
+      font-size: clamp(80px, 14vw, 220px);
+      line-height: 0.85;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      margin: 0;
+      color: var(--void); /* Ink */
+      will-change: transform;
+    }
+
+    .narrative{
+      font-family: var(--ser);
+      font-size: clamp(18px, 2vw, 26px);
+      line-height: 1.5;
+      max-width: 540px;
+      margin-top: 40px;
+      font-style: italic;
+    }
+
+    /* THE INVERTER (The Solar Event)
+       This layer sits between the background and the text.
+       BUT to effect the text, it must be on top.
+       We use mix-blend-mode: difference.
+    */
+    .inverter{
+      position: fixed; inset: 0;
+      z-index: 10; /* Above text */
+      pointer-events: none;
+      mix-blend-mode: difference;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .engine svg{
+      width: 100vw; height: 100vh;
+      display: block;
+    }
+
+    /* NAV */
+    nav{
+      position:fixed; top:var(--pad); right:var(--pad); z-index:100;
+      font-family: var(--mono);
+      font-size: 10px;
+      writing-mode: vertical-rl;
+      mix-blend-mode: exclusion; /* Visible on both white and black */
+      color: #fff;
+      display:flex; gap:30px;
+      letter-spacing: 0.2em;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="lens" id="cursor"></div>
+
+  <nav>
+    <span>PHASE IV</span>
+    <span>SOLARIS</span>
+    <span>INVERSION</span>
+  </nav>
+
+  <div class="inverter">
+    <div class="engine">
+      <svg id="solaris" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <filter id="boil">
+            <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" result="warp" />
+            <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="30" in="SourceGraphic" in2="warp" />
+          </filter>
+        </defs>
+
+        <circle id="sun" cx="500" cy="500" r="0" fill="white" filter="url(#boil)" />
+
+        <rect id="horizon" x="-100" y="1000" width="1200" height="0" fill="white" />
+      </svg>
+    </div>
+  </div>
+
+  <main class="wrap">
+
+    <section class="section">
+      <div class="h1">Matter<br>vs<br>Anti-Matter</div>
+      <div class="narrative">
+        Hover over this. The lens reveals the negative.<br>
+        We do not read the ink. We read the void the ink leaves behind.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="h1" style="text-align:right">Solar<br>Collapse</div>
+      <div class="narrative" style="margin-left:auto; text-align:right">
+        Scroll. Watch the physics break.<br>
+        As the ledger tightens, the sun expands.<br>
+        White swallows white to create darkness.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="h1" style="font-size:clamp(40px, 8vw, 100px); letter-spacing:0em; text-transform:none; font-family:var(--ser); text-align:center;">
+        "The truth is in<br>the negative."
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="h1" style="text-align:center; font-size:clamp(20px, 4vw, 40px); letter-spacing:0.4em;">
+        NEXUS CANON<br>LOCKED
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // ============================================================
+    // THE BIOLOGY ENGINE
+    // ============================================================
+
+    const sun = document.getElementById('sun');
+    const horizon = document.getElementById('horizon');
+    const turbulence = document.querySelector('#boil feTurbulence');
+    const doc = document.documentElement;
+
+    // Maths
+    const lerp = (start, end, t) => start * (1 - t) + end * t;
+    const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
+
+    // State
+    let scrollY = 0;
+    let time = 0;
+
+    // SCROLL LOOP (The Physics)
+    function frame() {
+      scrollY = window.scrollY;
+      time += 0.01;
+
+      const height = doc.scrollHeight - doc.clientHeight;
+      const progress = clamp(scrollY / height, 0, 1);
+
+      // 1. The Solar Expansion
+      // The sun grows, eating the screen.
+      // Progress 0.0 to 0.6
+      const sunProgress = clamp((progress - 0.1) * 2.5, 0, 1);
+      const sunRadius = lerp(0, 800, sunProgress * sunProgress); // Exponential growth
+      sun.setAttribute('r', sunRadius);
+
+      // 2. The Biological Boil
+      // The sun edges move like bacteria
+      // We animate the baseFrequency of the turbulence
+      const boilSpeed = 0.015 + (Math.sin(time) * 0.005);
+      turbulence.setAttribute('baseFrequency', boilSpeed);
+
+      // 3. The Horizon (Final Verdict)
+      // Progress 0.7 to 1.0
+      const horizonProgress = clamp((progress - 0.7) * 3.3, 0, 1);
+      const horizonY = lerp(1000, 0, horizonProgress);
+      const horizonH = lerp(0, 1200, horizonProgress);
+
+      horizon.setAttribute('y', horizonY);
+      horizon.setAttribute('height', horizonH);
+
+      requestAnimationFrame(frame);
+    }
+
+    // CURSOR LOOP (The Interrogation)
+    const cursor = document.getElementById('cursor');
+    let mX = window.innerWidth/2, mY = window.innerHeight/2;
+    let cX = window.innerWidth/2, cY = window.innerHeight/2;
+
+    document.addEventListener('mousemove', (e) => {
+      mX = e.clientX;
+      mY = e.clientY;
+      // Slap the cursor active state on move
+      cursor.classList.add('active');
+    });
+
+    function cursorFrame() {
+      // Heavy lag for "Physical" feel
+      cX = lerp(cX, mX, 0.12);
+      cY = lerp(cY, mY, 0.12);
+
+      cursor.style.transform = `translate(${cX}px, ${cY}px) translate(-50%, -50%)`;
+      requestAnimationFrame(cursorFrame);
+    }
+
+    // Init
+    frame();
+    cursorFrame();
+
+  </script>
+</body>
+</html>

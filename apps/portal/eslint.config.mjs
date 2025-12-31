@@ -15,6 +15,8 @@ const eslintConfig = defineConfig([
       "@nexus/canon/forbid-free-string-status": "error",
       "@nexus/canon/require-schema-header": "warn",
       "@nexus/canon/forbid-bypass-imports": "warn",
+      // Kernel SSOT enforcement - prevents raw identifier strings
+      "@nexus/canon/no-kernel-string-literals": "error",
     },
   },
   // TypeScript strict rules - PREVENTION IS BETTER THAN CURE

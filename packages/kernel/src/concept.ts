@@ -1,25 +1,26 @@
-import { z } from "zod";
 import { CanonId } from "./canonId";
 
-export type ConceptId = CanonId;
+// Note: ConceptId is now exported from ./concepts.ts as a typed union
+// This file uses CanonId for backwards compatibility with runtime helpers
+type RuntimeConceptId = CanonId;
 
 export type JurisdictionCode = string; // ISO country code or "GLOBAL"
 
 export interface ConceptDefinition {
-  id: ConceptId;
+  id: RuntimeConceptId;
   name: string;
   description?: string;
   version: string;
 }
 
 export interface JurisdictionalValueSet {
-  conceptId: ConceptId;
+  conceptId: RuntimeConceptId;
   jurisdiction: JurisdictionCode;
   values: readonly string[];
   metadata?: Record<string, unknown>;
 }
 
-const conceptRegistry = new Map<ConceptId, ConceptDefinition>();
+const conceptRegistry = new Map<RuntimeConceptId, ConceptDefinition>();
 const valueSetRegistry = new Map<string, JurisdictionalValueSet>();
 
 /**
@@ -49,7 +50,9 @@ export function registerValueSet(valueSet: JurisdictionalValueSet): void {
 /**
  * Get a concept definition by ID.
  */
-export function getConcept(conceptId: ConceptId): ConceptDefinition | undefined {
+export function getConcept(
+  conceptId: RuntimeConceptId
+): ConceptDefinition | undefined {
   return conceptRegistry.get(conceptId);
 }
 
@@ -57,7 +60,7 @@ export function getConcept(conceptId: ConceptId): ConceptDefinition | undefined 
  * Get a value set for a concept and jurisdiction.
  */
 export function getValueSet(
-  conceptId: ConceptId,
+  conceptId: RuntimeConceptId,
   jurisdiction: JurisdictionCode
 ): JurisdictionalValueSet | undefined {
   const key = `${conceptId}:${jurisdiction}`;
@@ -74,7 +77,10 @@ export function listConcepts(): ConceptDefinition[] {
 /**
  * List all value sets for a concept.
  */
-export function listValueSets(conceptId: ConceptId): JurisdictionalValueSet[] {
-  return Array.from(valueSetRegistry.values()).filter((vs) => vs.conceptId === conceptId);
+export function listValueSets(
+  conceptId: RuntimeConceptId
+): JurisdictionalValueSet[] {
+  return Array.from(valueSetRegistry.values()).filter(
+    (vs) => vs.conceptId === conceptId
+  );
 }
-
