@@ -1,0 +1,173 @@
+{
+  "id": "warehouse",
+  "name": "Warehouse & Logistics",
+  "version": "1.0.0",
+  "domain": "WAREHOUSE",
+  "description": "Core warehouse and logistics concepts for picking, packing, shipping, transfers, and delivery - connects Inventory, Sales, Purchase",
+  "priority": 10,
+  "authoritative_for": { "concepts": [], "value_sets": ["DELIVERY_STATUS"] },
+  "concepts": [
+    {
+      "code": "WAREHOUSE_ZONE",
+      "category": "ENTITY",
+      "domain": "WAREHOUSE",
+      "description": "Warehouse zone (area grouping for bins/locations)",
+      "tags": ["warehouse", "location"]
+    },
+    {
+      "code": "WAREHOUSE_BIN",
+      "category": "ENTITY",
+      "domain": "WAREHOUSE",
+      "description": "Warehouse bin/location (put-away and picking location)",
+      "tags": ["warehouse", "location"]
+    },
+    {
+      "code": "PICK_LIST",
+      "category": "ENTITY",
+      "domain": "WAREHOUSE",
+      "description": "Pick list document generated for fulfillment",
+      "tags": ["warehouse", "picking"]
+    },
+    {
+      "code": "PICK_LIST_LINE",
+      "category": "ENTITY",
+      "domain": "WAREHOUSE",
+      "description": "Pick list line (item, quantity, bin, batch/lot reference)",
+      "tags": ["warehouse", "picking"]
+    },
+    {
+      "code": "PACK_LIST",
+      "category": "ENTITY",
+      "domain": "WAREHOUSE",
+      "description": "Pack list document generated after picking",
+      "tags": ["warehouse", "packing"]
+    },
+    {
+      "code": "PACK_LIST_LINE",
+      "category": "ENTITY",
+      "domain": "WAREHOUSE",
+      "description": "Pack list line (item, quantity, package reference)",
+      "tags": ["warehouse", "packing"]
+    },
+    {
+      "code": "SHIPMENT",
+      "category": "ENTITY",
+      "domain": "WAREHOUSE",
+      "description": "Shipment document for outbound delivery",
+      "tags": ["warehouse", "shipping", "logistics"]
+    },
+    {
+      "code": "SHIPMENT_LINE",
+      "category": "ENTITY",
+      "domain": "WAREHOUSE",
+      "description": "Shipment line (item, quantity, package reference)",
+      "tags": ["warehouse", "shipping", "logistics"]
+    },
+    {
+      "code": "DELIVERY_ROUTE",
+      "category": "ENTITY",
+      "domain": "WAREHOUSE",
+      "description": "Delivery route definition (sequence or grouping for deliveries)",
+      "tags": ["warehouse", "delivery"]
+    },
+    {
+      "code": "DELIVERY_TRIP",
+      "category": "ENTITY",
+      "domain": "WAREHOUSE",
+      "description": "Delivery trip (a run using a vehicle/driver on a given date)",
+      "tags": ["warehouse", "delivery"]
+    },
+    {
+      "code": "DELIVERY_TRIP_LINE",
+      "category": "ENTITY",
+      "domain": "WAREHOUSE",
+      "description": "Delivery trip line (shipment stop/customer drop)",
+      "tags": ["warehouse", "delivery"]
+    },
+    {
+      "code": "CARRIER",
+      "category": "ENTITY",
+      "domain": "WAREHOUSE",
+      "description": "Carrier/shipping provider",
+      "tags": ["warehouse", "carrier"]
+    },
+    {
+      "code": "DELIVERY_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "WAREHOUSE",
+      "description": "Delivery status classification",
+      "tags": ["warehouse", "delivery", "status"]
+    },
+    {
+      "code": "PICK_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "WAREHOUSE",
+      "description": "Picking status classification",
+      "tags": ["warehouse", "picking", "status"]
+    },
+    {
+      "code": "SHIPMENT_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "WAREHOUSE",
+      "description": "Shipment lifecycle status classification",
+      "tags": ["warehouse", "shipping", "status"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "PICK_STATUS",
+      "domain": "WAREHOUSE",
+      "description": "Picking statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["warehouse", "picking", "status"],
+      "metadata": { "prefix": "PKS" }
+    },
+    {
+      "code": "SHIPMENT_STATUS",
+      "domain": "WAREHOUSE",
+      "description": "Shipment statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["warehouse", "shipping", "status"],
+      "metadata": { "prefix": "SPS" }
+    },
+    {
+      "code": "DELIVERY_STATUS",
+      "domain": "WAREHOUSE",
+      "description": "Delivery statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["warehouse", "delivery", "status"],
+      "metadata": { "prefix": "DLS" }
+    },
+    {
+      "code": "TRANSFER_TYPE",
+      "domain": "WAREHOUSE",
+      "description": "Stock transfer types (for warehouse moves and inter-warehouse transfers)",
+      "jurisdiction": "GLOBAL",
+      "tags": ["warehouse", "transfer", "inventory"],
+      "metadata": { "prefix": "TRF" }
+    }
+  ],
+  "values": [
+    { "code": "DRAFT", "value_set_code": "PICK_STATUS", "label": "Draft", "description": "Pick list created", "sort_order": 1 },
+    { "code": "RELEASED", "value_set_code": "PICK_STATUS", "label": "Released", "description": "Released for picking", "sort_order": 2 },
+    { "code": "PICKING", "value_set_code": "PICK_STATUS", "label": "Picking", "description": "Picking in progress", "sort_order": 3 },
+    { "code": "PICKED", "value_set_code": "PICK_STATUS", "label": "Picked", "description": "Picking completed", "sort_order": 4 },
+    { "code": "CANCELLED", "value_set_code": "PICK_STATUS", "label": "Cancelled", "description": "Pick list cancelled", "sort_order": 5 },
+    { "code": "DRAFT", "value_set_code": "SHIPMENT_STATUS", "label": "Draft", "description": "Shipment created", "sort_order": 1 },
+    { "code": "PACKED", "value_set_code": "SHIPMENT_STATUS", "label": "Packed", "description": "Packed and ready to ship", "sort_order": 2 },
+    { "code": "SHIPPED", "value_set_code": "SHIPMENT_STATUS", "label": "Shipped", "description": "Shipped/outbound", "sort_order": 3 },
+    { "code": "DELIVERED", "value_set_code": "SHIPMENT_STATUS", "label": "Delivered", "description": "Delivered to customer", "sort_order": 4 },
+    { "code": "RETURNED", "value_set_code": "SHIPMENT_STATUS", "label": "Returned", "description": "Returned shipment", "sort_order": 5 },
+    { "code": "CANCELLED", "value_set_code": "SHIPMENT_STATUS", "label": "Cancelled", "description": "Shipment cancelled", "sort_order": 6 },
+    { "code": "PLANNED", "value_set_code": "DELIVERY_STATUS", "label": "Planned", "description": "Delivery planned", "sort_order": 1 },
+    { "code": "OUT_FOR_DELIVERY", "value_set_code": "DELIVERY_STATUS", "label": "Out for Delivery", "description": "On the way to deliver", "sort_order": 2 },
+    { "code": "DELIVERED", "value_set_code": "DELIVERY_STATUS", "label": "Delivered", "description": "Delivered successfully", "sort_order": 3 },
+    { "code": "FAILED", "value_set_code": "DELIVERY_STATUS", "label": "Failed", "description": "Delivery failed", "sort_order": 4 },
+    { "code": "CANCELLED", "value_set_code": "DELIVERY_STATUS", "label": "Cancelled", "description": "Delivery cancelled", "sort_order": 5 },
+    { "code": "INTERNAL", "value_set_code": "TRANSFER_TYPE", "label": "Internal Transfer", "description": "Transfer within same warehouse/site", "sort_order": 1 },
+    { "code": "INTER_WAREHOUSE", "value_set_code": "TRANSFER_TYPE", "label": "Inter-Warehouse Transfer", "description": "Transfer between warehouses", "sort_order": 2 },
+    { "code": "CUSTOMER_RETURN", "value_set_code": "TRANSFER_TYPE", "label": "Customer Return Transfer", "description": "Return flow to warehouse", "sort_order": 3 },
+    { "code": "SUPPLIER_RETURN", "value_set_code": "TRANSFER_TYPE", "label": "Supplier Return Transfer", "description": "Return flow back to supplier", "sort_order": 4 }
+  ]
+}
+

@@ -1,0 +1,342 @@
+{
+  "id": "purchase",
+  "name": "Purchase & Procure-to-Pay",
+  "version": "1.0.0",
+  "domain": "PURCHASE",
+  "description": "Purchase concepts, value sets, and values for Procure-to-Pay transaction spine - P0 critical",
+  "priority": 10,
+  "authoritative_for": {
+    "concepts": [],
+    "value_sets": []
+  },
+  "concepts": [
+    {
+      "code": "SUPPLIER",
+      "category": "ENTITY",
+      "domain": "PURCHASE",
+      "description": "Supplier master data",
+      "tags": ["purchase", "supplier"]
+    },
+    {
+      "code": "SUPPLIER_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "PURCHASE",
+      "description": "Supplier classification type",
+      "tags": ["purchase", "supplier"]
+    },
+    {
+      "code": "RFQ",
+      "category": "ENTITY",
+      "domain": "PURCHASE",
+      "description": "Request for Quotation",
+      "tags": ["purchase", "rfq"]
+    },
+    {
+      "code": "PURCHASE_ORDER",
+      "category": "ENTITY",
+      "domain": "PURCHASE",
+      "description": "Purchase order",
+      "tags": ["purchase", "order"]
+    },
+    {
+      "code": "PURCHASE_ORDER_LINE",
+      "category": "ENTITY",
+      "domain": "PURCHASE",
+      "description": "Purchase order line item",
+      "tags": ["purchase", "order"]
+    },
+    {
+      "code": "GOODS_RECEIPT",
+      "category": "ENTITY",
+      "domain": "PURCHASE",
+      "description": "Goods receipt note",
+      "tags": ["purchase", "receipt"]
+    },
+    {
+      "code": "GOODS_RECEIPT_LINE",
+      "category": "ENTITY",
+      "domain": "PURCHASE",
+      "description": "Goods receipt line item",
+      "tags": ["purchase", "receipt"]
+    },
+    {
+      "code": "PURCHASE_INVOICE",
+      "category": "ENTITY",
+      "domain": "PURCHASE",
+      "description": "Purchase invoice",
+      "tags": ["purchase", "invoice"]
+    },
+    {
+      "code": "PURCHASE_INVOICE_LINE",
+      "category": "ENTITY",
+      "domain": "PURCHASE",
+      "description": "Purchase invoice line item",
+      "tags": ["purchase", "invoice"]
+    },
+    {
+      "code": "PURCHASE_RETURN",
+      "category": "ENTITY",
+      "domain": "PURCHASE",
+      "description": "Purchase return",
+      "tags": ["purchase", "return"]
+    },
+    {
+      "code": "RFQ_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "PURCHASE",
+      "description": "RFQ status",
+      "tags": ["purchase", "status"]
+    },
+    {
+      "code": "PURCHASE_ORDER_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "PURCHASE",
+      "description": "Purchase order status",
+      "tags": ["purchase", "status"]
+    },
+    {
+      "code": "GOODS_RECEIPT_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "PURCHASE",
+      "description": "Goods receipt status",
+      "tags": ["purchase", "status"]
+    },
+    {
+      "code": "PURCHASE_INVOICE_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "PURCHASE",
+      "description": "Purchase invoice status",
+      "tags": ["purchase", "status"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "SUPPLIER_TYPE",
+      "domain": "PURCHASE",
+      "description": "Supplier type classification",
+      "jurisdiction": "GLOBAL",
+      "tags": ["purchase", "supplier"],
+      "metadata": {
+        "prefix": "SUP"
+      }
+    },
+    {
+      "code": "RFQ_STATUS",
+      "domain": "PURCHASE",
+      "description": "RFQ status",
+      "jurisdiction": "GLOBAL",
+      "tags": ["purchase", "status"],
+      "metadata": {
+        "prefix": "RFQ"
+      }
+    },
+    {
+      "code": "PURCHASE_ORDER_STATUS",
+      "domain": "PURCHASE",
+      "description": "Purchase order status",
+      "jurisdiction": "GLOBAL",
+      "tags": ["purchase", "status"],
+      "metadata": {
+        "prefix": "POS"
+      }
+    },
+    {
+      "code": "GOODS_RECEIPT_STATUS",
+      "domain": "PURCHASE",
+      "description": "Goods receipt status",
+      "jurisdiction": "GLOBAL",
+      "tags": ["purchase", "status"],
+      "metadata": {
+        "prefix": "GRS"
+      }
+    },
+    {
+      "code": "PURCHASE_INVOICE_STATUS",
+      "domain": "PURCHASE",
+      "description": "Purchase invoice status",
+      "jurisdiction": "GLOBAL",
+      "tags": ["purchase", "status"],
+      "metadata": {
+        "prefix": "PIS"
+      }
+    }
+  ],
+  "values": [
+    {
+      "code": "MANUFACTURER",
+      "value_set_code": "SUPPLIER_TYPE",
+      "label": "Manufacturer",
+      "description": "Manufacturing supplier",
+      "sort_order": 1
+    },
+    {
+      "code": "DISTRIBUTOR",
+      "value_set_code": "SUPPLIER_TYPE",
+      "label": "Distributor",
+      "description": "Distribution supplier",
+      "sort_order": 2
+    },
+    {
+      "code": "RETAILER",
+      "value_set_code": "SUPPLIER_TYPE",
+      "label": "Retailer",
+      "description": "Retail supplier",
+      "sort_order": 3
+    },
+    {
+      "code": "SERVICE",
+      "value_set_code": "SUPPLIER_TYPE",
+      "label": "Service",
+      "description": "Service provider supplier",
+      "sort_order": 4
+    },
+    {
+      "code": "DRAFT",
+      "value_set_code": "RFQ_STATUS",
+      "label": "Draft",
+      "description": "Draft RFQ",
+      "sort_order": 1
+    },
+    {
+      "code": "SENT",
+      "value_set_code": "RFQ_STATUS",
+      "label": "Sent",
+      "description": "RFQ sent to suppliers",
+      "sort_order": 2
+    },
+    {
+      "code": "RECEIVED",
+      "value_set_code": "RFQ_STATUS",
+      "label": "Received",
+      "description": "Quotations received",
+      "sort_order": 3
+    },
+    {
+      "code": "AWARDED",
+      "value_set_code": "RFQ_STATUS",
+      "label": "Awarded",
+      "description": "RFQ awarded to supplier",
+      "sort_order": 4
+    },
+    {
+      "code": "CANCELLED",
+      "value_set_code": "RFQ_STATUS",
+      "label": "Cancelled",
+      "description": "RFQ cancelled",
+      "sort_order": 5
+    },
+    {
+      "code": "DRAFT",
+      "value_set_code": "PURCHASE_ORDER_STATUS",
+      "label": "Draft",
+      "description": "Draft purchase order",
+      "sort_order": 1
+    },
+    {
+      "code": "APPROVED",
+      "value_set_code": "PURCHASE_ORDER_STATUS",
+      "label": "Approved",
+      "description": "Purchase order approved",
+      "sort_order": 2
+    },
+    {
+      "code": "RECEIVED",
+      "value_set_code": "PURCHASE_ORDER_STATUS",
+      "label": "Received",
+      "description": "Goods received",
+      "sort_order": 3
+    },
+    {
+      "code": "COMPLETED",
+      "value_set_code": "PURCHASE_ORDER_STATUS",
+      "label": "Completed",
+      "description": "Purchase order completed",
+      "sort_order": 4
+    },
+    {
+      "code": "CANCELLED",
+      "value_set_code": "PURCHASE_ORDER_STATUS",
+      "label": "Cancelled",
+      "description": "Purchase order cancelled",
+      "sort_order": 5
+    },
+    {
+      "code": "PENDING",
+      "value_set_code": "GOODS_RECEIPT_STATUS",
+      "label": "Pending",
+      "description": "Receipt pending",
+      "sort_order": 1
+    },
+    {
+      "code": "PARTIAL",
+      "value_set_code": "GOODS_RECEIPT_STATUS",
+      "label": "Partial",
+      "description": "Partial receipt",
+      "sort_order": 2
+    },
+    {
+      "code": "RECEIVED",
+      "value_set_code": "GOODS_RECEIPT_STATUS",
+      "label": "Received",
+      "description": "Fully received",
+      "sort_order": 3
+    },
+    {
+      "code": "REJECTED",
+      "value_set_code": "GOODS_RECEIPT_STATUS",
+      "label": "Rejected",
+      "description": "Receipt rejected",
+      "sort_order": 4
+    },
+    {
+      "code": "CANCELLED",
+      "value_set_code": "GOODS_RECEIPT_STATUS",
+      "label": "Cancelled",
+      "description": "Receipt cancelled",
+      "sort_order": 5
+    },
+    {
+      "code": "DRAFT",
+      "value_set_code": "PURCHASE_INVOICE_STATUS",
+      "label": "Draft",
+      "description": "Draft purchase invoice",
+      "sort_order": 1
+    },
+    {
+      "code": "POSTED",
+      "value_set_code": "PURCHASE_INVOICE_STATUS",
+      "label": "Posted",
+      "description": "Invoice posted to accounts payable",
+      "sort_order": 2
+    },
+    {
+      "code": "PARTIALLY_PAID",
+      "value_set_code": "PURCHASE_INVOICE_STATUS",
+      "label": "Partially Paid",
+      "description": "Invoice partially paid",
+      "sort_order": 3
+    },
+    {
+      "code": "PAID",
+      "value_set_code": "PURCHASE_INVOICE_STATUS",
+      "label": "Paid",
+      "description": "Invoice fully paid",
+      "sort_order": 4
+    },
+    {
+      "code": "VOIDED",
+      "value_set_code": "PURCHASE_INVOICE_STATUS",
+      "label": "Voided",
+      "description": "Invoice voided",
+      "sort_order": 5
+    },
+    {
+      "code": "OVERDUE",
+      "value_set_code": "PURCHASE_INVOICE_STATUS",
+      "label": "Overdue",
+      "description": "Invoice overdue",
+      "sort_order": 6
+    }
+  ]
+}
+

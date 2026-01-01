@@ -53,6 +53,9 @@
     "dev:watch": "pnpm run build:watch",
     "dev:server": "node scripts/dev-server.js",
     "generate": "tsx scripts/generate-kernel.ts",
-    "generate:watch": "tsx watch scripts/generate-kernel.ts"
+    "generate:watch": "tsx watch scripts/generate-kernel.ts",
+    "release:kernel": "tsx scripts/release-kernel.ts",
+    "changelog:generate": "tsx scripts/generate-changelog.ts",
+    "validate:kernel": "pnpm generate && pnpm typecheck && pnpm test"
   }
 }

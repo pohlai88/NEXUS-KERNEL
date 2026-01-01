@@ -1,0 +1,106 @@
+{
+  "id": "admin",
+  "name": "Settings & Administration",
+  "version": "1.0.0",
+  "domain": "ADMIN",
+  "description": "Core tenant/admin concepts for identity, RBAC, configuration, workflow, and notifications - platform spine",
+  "priority": 10,
+  "authoritative_for": { "concepts": [], "value_sets": [] },
+  "concepts": [
+    { "code": "TENANT", "category": "ENTITY", "domain": "ADMIN", "description": "Tenant/organization record", "tags": ["admin", "tenant"] },
+    { "code": "SUBSCRIPTION", "category": "ENTITY", "domain": "ADMIN", "description": "Subscription record for tenant plan and billing state", "tags": ["admin", "billing"] },
+    { "code": "PLAN", "category": "ENTITY", "domain": "ADMIN", "description": "Product plan definition (tiers, limits, features)", "tags": ["admin", "billing"] },
+    { "code": "USER", "category": "ENTITY", "domain": "ADMIN", "description": "User identity record", "tags": ["admin", "identity"] },
+    { "code": "ROLE", "category": "ENTITY", "domain": "ADMIN", "description": "Role definition for RBAC", "tags": ["admin", "rbac"] },
+    { "code": "PERMISSION", "category": "ENTITY", "domain": "ADMIN", "description": "Permission definition (action/resource)", "tags": ["admin", "rbac"] },
+    { "code": "USER_ROLE", "category": "ENTITY", "domain": "ADMIN", "description": "User to role assignment record", "tags": ["admin", "rbac"] },
+    { "code": "ROLE_PERMISSION", "category": "ENTITY", "domain": "ADMIN", "description": "Role to permission assignment record", "tags": ["admin", "rbac"] },
+    { "code": "API_KEY", "category": "ENTITY", "domain": "ADMIN", "description": "API key for integrations", "tags": ["admin", "security", "integration"] },
+    { "code": "API_KEY_STATUS", "category": "ATTRIBUTE", "domain": "ADMIN", "description": "API key lifecycle status", "tags": ["admin", "security", "status"] },
+    { "code": "FEATURE_FLAG", "category": "ENTITY", "domain": "ADMIN", "description": "Feature flag toggle record", "tags": ["admin", "feature-flag"] },
+    { "code": "FEATURE_FLAG_STATUS", "category": "ATTRIBUTE", "domain": "ADMIN", "description": "Feature flag status (enabled/disabled)", "tags": ["admin", "feature-flag", "status"] },
+    { "code": "SYSTEM_SETTING", "category": "ENTITY", "domain": "ADMIN", "description": "System setting key/value (tenant-scoped)", "tags": ["admin", "settings"] },
+    { "code": "SETTING_SCOPE", "category": "ATTRIBUTE", "domain": "ADMIN", "description": "Setting scope classification", "tags": ["admin", "settings"] },
+    { "code": "WORKFLOW", "category": "ENTITY", "domain": "ADMIN", "description": "Workflow definition for approvals and automation", "tags": ["admin", "workflow"] },
+    { "code": "WORKFLOW_STEP", "category": "ENTITY", "domain": "ADMIN", "description": "Workflow step definition", "tags": ["admin", "workflow"] },
+    { "code": "WORKFLOW_STATUS", "category": "ATTRIBUTE", "domain": "ADMIN", "description": "Workflow status classification", "tags": ["admin", "workflow", "status"] },
+    { "code": "NOTIFICATION", "category": "ENTITY", "domain": "ADMIN", "description": "Notification record (in-app/email)", "tags": ["admin", "notification"] },
+    { "code": "NOTIFICATION_STATUS", "category": "ATTRIBUTE", "domain": "ADMIN", "description": "Notification delivery status", "tags": ["admin", "notification", "status"] },
+    { "code": "NOTIFICATION_CHANNEL", "category": "ATTRIBUTE", "domain": "ADMIN", "description": "Notification channel type", "tags": ["admin", "notification"] }
+  ],
+  "value_sets": [
+    {
+      "code": "API_KEY_STATUS",
+      "domain": "ADMIN",
+      "description": "API key statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["admin", "security", "status"],
+      "metadata": { "prefix": "AKS" }
+    },
+    {
+      "code": "FEATURE_FLAG_STATUS",
+      "domain": "ADMIN",
+      "description": "Feature flag statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["admin", "feature-flag", "status"],
+      "metadata": { "prefix": "FFS" }
+    },
+    {
+      "code": "SETTING_SCOPE",
+      "domain": "ADMIN",
+      "description": "Setting scopes",
+      "jurisdiction": "GLOBAL",
+      "tags": ["admin", "settings"],
+      "metadata": { "prefix": "SSC" }
+    },
+    {
+      "code": "WORKFLOW_STATUS",
+      "domain": "ADMIN",
+      "description": "Workflow statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["admin", "workflow", "status"],
+      "metadata": { "prefix": "WFS" }
+    },
+    {
+      "code": "NOTIFICATION_STATUS",
+      "domain": "ADMIN",
+      "description": "Notification statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["admin", "notification", "status"],
+      "metadata": { "prefix": "NTS" }
+    },
+    {
+      "code": "NOTIFICATION_CHANNEL",
+      "domain": "ADMIN",
+      "description": "Notification channels",
+      "jurisdiction": "GLOBAL",
+      "tags": ["admin", "notification"],
+      "metadata": { "prefix": "NTC" }
+    }
+  ],
+  "values": [
+    { "code": "ACTIVE", "value_set_code": "API_KEY_STATUS", "label": "Active", "description": "API key active", "sort_order": 1 },
+    { "code": "REVOKED", "value_set_code": "API_KEY_STATUS", "label": "Revoked", "description": "API key revoked", "sort_order": 2 },
+    { "code": "EXPIRED", "value_set_code": "API_KEY_STATUS", "label": "Expired", "description": "API key expired", "sort_order": 3 },
+    { "code": "ENABLED", "value_set_code": "FEATURE_FLAG_STATUS", "label": "Enabled", "description": "Flag enabled", "sort_order": 1 },
+    { "code": "DISABLED", "value_set_code": "FEATURE_FLAG_STATUS", "label": "Disabled", "description": "Flag disabled", "sort_order": 2 },
+    { "code": "RETIRED", "value_set_code": "FEATURE_FLAG_STATUS", "label": "Retired", "description": "Flag retired (no longer active)", "sort_order": 3 },
+    { "code": "TENANT", "value_set_code": "SETTING_SCOPE", "label": "Tenant", "description": "Tenant-scoped setting", "sort_order": 1 },
+    { "code": "USER", "value_set_code": "SETTING_SCOPE", "label": "User", "description": "User-scoped setting", "sort_order": 2 },
+    { "code": "GLOBAL", "value_set_code": "SETTING_SCOPE", "label": "Global", "description": "Global/system setting", "sort_order": 3 },
+    { "code": "DRAFT", "value_set_code": "WORKFLOW_STATUS", "label": "Draft", "description": "Workflow in draft state", "sort_order": 1 },
+    { "code": "ACTIVE", "value_set_code": "WORKFLOW_STATUS", "label": "Active", "description": "Workflow active", "sort_order": 2 },
+    { "code": "SUSPENDED", "value_set_code": "WORKFLOW_STATUS", "label": "Suspended", "description": "Workflow suspended", "sort_order": 3 },
+    { "code": "RETIRED", "value_set_code": "WORKFLOW_STATUS", "label": "Retired", "description": "Workflow retired", "sort_order": 4 },
+    { "code": "QUEUED", "value_set_code": "NOTIFICATION_STATUS", "label": "Queued", "description": "Notification queued", "sort_order": 1 },
+    { "code": "SENT", "value_set_code": "NOTIFICATION_STATUS", "label": "Sent", "description": "Notification sent", "sort_order": 2 },
+    { "code": "DELIVERED", "value_set_code": "NOTIFICATION_STATUS", "label": "Delivered", "description": "Notification delivered", "sort_order": 3 },
+    { "code": "FAILED", "value_set_code": "NOTIFICATION_STATUS", "label": "Failed", "description": "Notification failed", "sort_order": 4 },
+    { "code": "CANCELLED", "value_set_code": "NOTIFICATION_STATUS", "label": "Cancelled", "description": "Notification cancelled", "sort_order": 5 },
+    { "code": "IN_APP", "value_set_code": "NOTIFICATION_CHANNEL", "label": "In-App", "description": "In-app notification channel", "sort_order": 1 },
+    { "code": "EMAIL", "value_set_code": "NOTIFICATION_CHANNEL", "label": "Email", "description": "Email channel", "sort_order": 2 },
+    { "code": "SMS", "value_set_code": "NOTIFICATION_CHANNEL", "label": "SMS", "description": "SMS channel", "sort_order": 3 },
+    { "code": "WEBHOOK", "value_set_code": "NOTIFICATION_CHANNEL", "label": "Webhook", "description": "Webhook channel", "sort_order": 4 }
+  ]
+}
+

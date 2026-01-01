@@ -1,0 +1,220 @@
+    {
+        "id": "inventory",
+        "name": "Inventory Management",
+        "version": "1.0.0",
+        "domain": "INVENTORY",
+        "description": "Core inventory concepts, value sets, and values for stock management - P0 critical",
+        "priority": 10,
+        "authoritative_for": {
+            "concepts": [],
+            "value_sets": []
+        },
+        "concepts": [
+            {
+                "code": "ITEM",
+                "category": "ENTITY",
+                "domain": "INVENTORY",
+                "description": "Product or service item",
+                "tags": [
+                    "inventory",
+                    "stock"
+                ]
+            },
+            {
+                "code": "ITEM_TYPE",
+                "category": "ATTRIBUTE",
+                "domain": "INVENTORY",
+                "description": "Item classification type",
+                "tags": [
+                    "inventory"
+                ]
+            },
+            {
+                "code": "WAREHOUSE",
+                "category": "ENTITY",
+                "domain": "INVENTORY",
+                "description": "Storage location for inventory",
+                "tags": [
+                    "inventory",
+                    "warehouse"
+                ]
+            },
+            {
+                "code": "STOCK_ENTRY",
+                "category": "ENTITY",
+                "domain": "INVENTORY",
+                "description": "Stock movement transaction",
+                "tags": [
+                    "inventory",
+                    "stock"
+                ]
+            },
+            {
+                "code": "STOCK_ENTRY_LINE",
+                "category": "ENTITY",
+                "domain": "INVENTORY",
+                "description": "Stock entry line item",
+                "tags": [
+                    "inventory",
+                    "stock"
+                ]
+            },
+            {
+                "code": "UOM",
+                "category": "ENTITY",
+                "domain": "INVENTORY",
+                "description": "Unit of Measure",
+                "tags": [
+                    "inventory",
+                    "uom"
+                ]
+            }
+        ],
+        "value_sets": [
+            {
+                "code": "ITEM_TYPE",
+                "domain": "INVENTORY",
+                "description": "Item type classification",
+                "jurisdiction": "GLOBAL",
+                "tags": [
+                    "inventory"
+                ],
+                "metadata": {
+                    "prefix": "ITM"
+                }
+            },
+            {
+                "code": "STOCK_ENTRY_TYPE",
+                "domain": "INVENTORY",
+                "description": "Stock entry transaction types",
+                "jurisdiction": "GLOBAL",
+                "tags": [
+                    "inventory",
+                    "stock"
+                ],
+                "metadata": {
+                    "prefix": "STE"
+                }
+            },
+            {
+                "code": "UOM_CATEGORY",
+                "domain": "INVENTORY",
+                "description": "Unit of measure categories",
+                "jurisdiction": "GLOBAL",
+                "tags": [
+                    "inventory",
+                    "uom"
+                ],
+                "metadata": {
+                    "prefix": "UOM"
+                }
+            }
+        ],
+        "values": [
+            {
+                "code": "STOCK",
+                "value_set_code": "ITEM_TYPE",
+                "label": "Stock Item",
+                "description": "Physical inventory item",
+                "sort_order": 1
+            },
+            {
+                "code": "SERVICE",
+                "value_set_code": "ITEM_TYPE",
+                "label": "Service",
+                "description": "Service item (non-inventory)",
+                "sort_order": 2
+            },
+            {
+                "code": "BUNDLE",
+                "value_set_code": "ITEM_TYPE",
+                "label": "Bundle",
+                "description": "Item bundle/kit",
+                "sort_order": 3
+            },
+            {
+                "code": "ASSEMBLY",
+                "value_set_code": "ITEM_TYPE",
+                "label": "Assembly",
+                "description": "Manufactured assembly",
+                "sort_order": 4
+            },
+            {
+                "code": "RECEIPT",
+                "value_set_code": "STOCK_ENTRY_TYPE",
+                "label": "Receipt",
+                "description": "Stock receipt (inbound)",
+                "sort_order": 1
+            },
+            {
+                "code": "ISSUE",
+                "value_set_code": "STOCK_ENTRY_TYPE",
+                "label": "Issue",
+                "description": "Stock issue (outbound)",
+                "sort_order": 2
+            },
+            {
+                "code": "TRANSFER",
+                "value_set_code": "STOCK_ENTRY_TYPE",
+                "label": "Transfer",
+                "description": "Stock transfer between warehouses",
+                "sort_order": 3
+            },
+            {
+                "code": "ADJUSTMENT",
+                "value_set_code": "STOCK_ENTRY_TYPE",
+                "label": "Adjustment",
+                "description": "Stock adjustment/correction",
+                "sort_order": 4
+            },
+            {
+                "code": "RETURN",
+                "value_set_code": "STOCK_ENTRY_TYPE",
+                "label": "Return",
+                "description": "Stock return",
+                "sort_order": 5
+            },
+            {
+                "code": "WEIGHT",
+                "value_set_code": "UOM_CATEGORY",
+                "label": "Weight",
+                "description": "Weight-based unit (kg, lb, etc.)",
+                "sort_order": 1
+            },
+            {
+                "code": "VOLUME",
+                "value_set_code": "UOM_CATEGORY",
+                "label": "Volume",
+                "description": "Volume-based unit (L, gal, etc.)",
+                "sort_order": 2
+            },
+            {
+                "code": "LENGTH",
+                "value_set_code": "UOM_CATEGORY",
+                "label": "Length",
+                "description": "Length-based unit (m, ft, etc.)",
+                "sort_order": 3
+            },
+            {
+                "code": "COUNT",
+                "value_set_code": "UOM_CATEGORY",
+                "label": "Count",
+                "description": "Count-based unit (pcs, units, etc.)",
+                "sort_order": 4
+            },
+            {
+                "code": "AREA",
+                "value_set_code": "UOM_CATEGORY",
+                "label": "Area",
+                "description": "Area-based unit (m², ft², etc.)",
+                "sort_order": 5
+            },
+            {
+                "code": "TIME",
+                "value_set_code": "UOM_CATEGORY",
+                "label": "Time",
+                "description": "Time-based unit (hr, min, etc.)",
+                "sort_order": 6
+            }
+        ]
+    }

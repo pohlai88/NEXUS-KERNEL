@@ -1,0 +1,247 @@
+{
+  "id": "manufacturing",
+  "name": "Manufacturing",
+  "version": "1.0.0",
+  "domain": "MANUFACTURING",
+  "description": "Core manufacturing concepts, value sets, and values for BOM, work orders, routing, and production execution - P1 high multiplier",
+  "priority": 10,
+  "authoritative_for": {
+    "concepts": [],
+    "value_sets": []
+  },
+  "concepts": [
+    {
+      "code": "BOM",
+      "category": "ENTITY",
+      "domain": "MANUFACTURING",
+      "description": "Bill of Materials (structure defining components required to produce an item)",
+      "tags": ["manufacturing", "bom"]
+    },
+    {
+      "code": "BOM_LINE",
+      "category": "ENTITY",
+      "domain": "MANUFACTURING",
+      "description": "Bill of Materials line (component item, quantity, and UOM requirements)",
+      "tags": ["manufacturing", "bom"]
+    },
+    {
+      "code": "WORK_CENTER",
+      "category": "ENTITY",
+      "domain": "MANUFACTURING",
+      "description": "Manufacturing work center (machine, station, or production area)",
+      "tags": ["manufacturing", "workcenter"]
+    },
+    {
+      "code": "ROUTING",
+      "category": "ENTITY",
+      "domain": "MANUFACTURING",
+      "description": "Manufacturing routing (sequence of operations required for production)",
+      "tags": ["manufacturing", "routing"]
+    },
+    {
+      "code": "OPERATION",
+      "category": "ENTITY",
+      "domain": "MANUFACTURING",
+      "description": "Manufacturing operation step within a routing",
+      "tags": ["manufacturing", "routing"]
+    },
+    {
+      "code": "WORK_ORDER",
+      "category": "ENTITY",
+      "domain": "MANUFACTURING",
+      "description": "Work order (instruction to produce a quantity of an item)",
+      "tags": ["manufacturing", "workorder"]
+    },
+    {
+      "code": "WORK_ORDER_LINE",
+      "category": "ENTITY",
+      "domain": "MANUFACTURING",
+      "description": "Work order line (item, quantity, scheduling and execution details)",
+      "tags": ["manufacturing", "workorder"]
+    },
+    {
+      "code": "PRODUCTION_ORDER",
+      "category": "ENTITY",
+      "domain": "MANUFACTURING",
+      "description": "Production order (execution record of a work order, including consumption and output)",
+      "tags": ["manufacturing", "production"]
+    },
+    {
+      "code": "PRODUCTION_ORDER_LINE",
+      "category": "ENTITY",
+      "domain": "MANUFACTURING",
+      "description": "Production order line (item, quantity, consumption and output details)",
+      "tags": ["manufacturing", "production"]
+    },
+    {
+      "code": "MATERIAL_REQUEST",
+      "category": "ENTITY",
+      "domain": "MANUFACTURING",
+      "description": "Material request (requisition of components for production or maintenance)",
+      "tags": ["manufacturing", "material"]
+    },
+    {
+      "code": "SCRAP",
+      "category": "ENTITY",
+      "domain": "MANUFACTURING",
+      "description": "Scrap record (waste/loss generated during production)",
+      "tags": ["manufacturing", "scrap"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "BOM_TYPE",
+      "domain": "MANUFACTURING",
+      "description": "Types of Bills of Materials",
+      "jurisdiction": "GLOBAL",
+      "tags": ["manufacturing", "bom"],
+      "metadata": { "prefix": "BOM" }
+    },
+    {
+      "code": "WORK_ORDER_STATUS",
+      "domain": "MANUFACTURING",
+      "description": "Work order lifecycle statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["manufacturing", "workorder", "status"],
+      "metadata": { "prefix": "WOS" }
+    },
+    {
+      "code": "OPERATION_TYPE",
+      "domain": "MANUFACTURING",
+      "description": "Types of manufacturing operations",
+      "jurisdiction": "GLOBAL",
+      "tags": ["manufacturing", "routing"],
+      "metadata": { "prefix": "OPT" }
+    },
+    {
+      "code": "PRODUCTION_STATUS",
+      "domain": "MANUFACTURING",
+      "description": "Production execution statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["manufacturing", "production", "status"],
+      "metadata": { "prefix": "PRS" }
+    }
+  ],
+  "values": [
+    {
+      "code": "STANDARD",
+      "value_set_code": "BOM_TYPE",
+      "label": "Standard",
+      "description": "Standard BOM for normal production",
+      "sort_order": 1
+    },
+    {
+      "code": "VARIANT",
+      "value_set_code": "BOM_TYPE",
+      "label": "Variant",
+      "description": "BOM variant for product variations",
+      "sort_order": 2
+    },
+    {
+      "code": "PHANTOM",
+      "value_set_code": "BOM_TYPE",
+      "label": "Phantom",
+      "description": "Phantom BOM (not stocked; exploded at production time)",
+      "sort_order": 3
+    },
+    {
+      "code": "DRAFT",
+      "value_set_code": "WORK_ORDER_STATUS",
+      "label": "Draft",
+      "description": "Work order created but not released",
+      "sort_order": 1
+    },
+    {
+      "code": "RELEASED",
+      "value_set_code": "WORK_ORDER_STATUS",
+      "label": "Released",
+      "description": "Work order released for execution",
+      "sort_order": 2
+    },
+    {
+      "code": "IN_PROGRESS",
+      "value_set_code": "WORK_ORDER_STATUS",
+      "label": "In Progress",
+      "description": "Work order currently being executed",
+      "sort_order": 3
+    },
+    {
+      "code": "COMPLETED",
+      "value_set_code": "WORK_ORDER_STATUS",
+      "label": "Completed",
+      "description": "Work order completed successfully",
+      "sort_order": 4
+    },
+    {
+      "code": "CANCELLED",
+      "value_set_code": "WORK_ORDER_STATUS",
+      "label": "Cancelled",
+      "description": "Work order cancelled",
+      "sort_order": 5
+    },
+    {
+      "code": "SETUP",
+      "value_set_code": "OPERATION_TYPE",
+      "label": "Setup",
+      "description": "Setup and preparation operation",
+      "sort_order": 1
+    },
+    {
+      "code": "MACHINING",
+      "value_set_code": "OPERATION_TYPE",
+      "label": "Machining",
+      "description": "Machining / processing operation",
+      "sort_order": 2
+    },
+    {
+      "code": "ASSEMBLY",
+      "value_set_code": "OPERATION_TYPE",
+      "label": "Assembly",
+      "description": "Assembly operation",
+      "sort_order": 3
+    },
+    {
+      "code": "INSPECTION",
+      "value_set_code": "OPERATION_TYPE",
+      "label": "Inspection",
+      "description": "Inspection / quality check operation",
+      "sort_order": 4
+    },
+    {
+      "code": "PLANNED",
+      "value_set_code": "PRODUCTION_STATUS",
+      "label": "Planned",
+      "description": "Production planned but not started",
+      "sort_order": 1
+    },
+    {
+      "code": "IN_PROGRESS",
+      "value_set_code": "PRODUCTION_STATUS",
+      "label": "In Progress",
+      "description": "Production running",
+      "sort_order": 2
+    },
+    {
+      "code": "COMPLETED",
+      "value_set_code": "PRODUCTION_STATUS",
+      "label": "Completed",
+      "description": "Production completed",
+      "sort_order": 3
+    },
+    {
+      "code": "SCRAPPED",
+      "value_set_code": "PRODUCTION_STATUS",
+      "label": "Scrapped",
+      "description": "Production scrapped due to quality or error",
+      "sort_order": 4
+    },
+    {
+      "code": "CANCELLED",
+      "value_set_code": "PRODUCTION_STATUS",
+      "label": "Cancelled",
+      "description": "Production cancelled",
+      "sort_order": 5
+    }
+  ]
+}
+

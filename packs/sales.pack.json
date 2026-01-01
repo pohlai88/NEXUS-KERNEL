@@ -1,0 +1,387 @@
+{
+  "id": "sales",
+  "name": "Sales & Order-to-Cash",
+  "version": "1.0.0",
+  "domain": "SALES",
+  "description": "Sales concepts, value sets, and values for Order-to-Cash transaction spine - P0 critical",
+  "priority": 10,
+  "authoritative_for": {
+    "concepts": [],
+    "value_sets": []
+  },
+  "concepts": [
+    {
+      "code": "CUSTOMER",
+      "category": "ENTITY",
+      "domain": "SALES",
+      "description": "Customer master data",
+      "tags": ["sales", "customer"]
+    },
+    {
+      "code": "CUSTOMER_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "SALES",
+      "description": "Customer classification type",
+      "tags": ["sales", "customer"]
+    },
+    {
+      "code": "SALES_QUOTATION",
+      "category": "ENTITY",
+      "domain": "SALES",
+      "description": "Sales quotation/proposal",
+      "tags": ["sales", "quotation"]
+    },
+    {
+      "code": "SALES_QUOTATION_LINE",
+      "category": "ENTITY",
+      "domain": "SALES",
+      "description": "Sales quotation line item",
+      "tags": ["sales", "quotation"]
+    },
+    {
+      "code": "SALES_ORDER",
+      "category": "ENTITY",
+      "domain": "SALES",
+      "description": "Sales order",
+      "tags": ["sales", "order"]
+    },
+    {
+      "code": "SALES_ORDER_LINE",
+      "category": "ENTITY",
+      "domain": "SALES",
+      "description": "Sales order line item",
+      "tags": ["sales", "order"]
+    },
+    {
+      "code": "DELIVERY_NOTE",
+      "category": "ENTITY",
+      "domain": "SALES",
+      "description": "Delivery note/shipment",
+      "tags": ["sales", "delivery"]
+    },
+    {
+      "code": "DELIVERY_NOTE_LINE",
+      "category": "ENTITY",
+      "domain": "SALES",
+      "description": "Delivery note line item",
+      "tags": ["sales", "delivery"]
+    },
+    {
+      "code": "SALES_INVOICE",
+      "category": "ENTITY",
+      "domain": "SALES",
+      "description": "Sales invoice",
+      "tags": ["sales", "invoice"]
+    },
+    {
+      "code": "SALES_INVOICE_LINE",
+      "category": "ENTITY",
+      "domain": "SALES",
+      "description": "Sales invoice line item",
+      "tags": ["sales", "invoice"]
+    },
+    {
+      "code": "SALES_RETURN",
+      "category": "ENTITY",
+      "domain": "SALES",
+      "description": "Sales return",
+      "tags": ["sales", "return"]
+    },
+    {
+      "code": "QUOTATION_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "SALES",
+      "description": "Quotation status",
+      "tags": ["sales", "status"]
+    },
+    {
+      "code": "SALES_ORDER_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "SALES",
+      "description": "Sales order status",
+      "tags": ["sales", "status"]
+    },
+    {
+      "code": "DELIVERY_NOTE_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "SALES",
+      "description": "Delivery note document status",
+      "tags": ["sales", "status"]
+    },
+    {
+      "code": "INVOICE_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "SALES",
+      "description": "Sales invoice status",
+      "tags": ["sales", "status"]
+    },
+    {
+      "code": "PRICE_LIST_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "SALES",
+      "description": "Price list type",
+      "tags": ["sales", "pricing"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "CUSTOMER_TYPE",
+      "domain": "SALES",
+      "description": "Customer type classification",
+      "jurisdiction": "GLOBAL",
+      "tags": ["sales", "customer"],
+      "metadata": {
+        "prefix": "CUS"
+      }
+    },
+    {
+      "code": "QUOTATION_STATUS",
+      "domain": "SALES",
+      "description": "Sales quotation status",
+      "jurisdiction": "GLOBAL",
+      "tags": ["sales", "status"],
+      "metadata": {
+        "prefix": "QTN"
+      }
+    },
+    {
+      "code": "SALES_ORDER_STATUS",
+      "domain": "SALES",
+      "description": "Sales order status",
+      "jurisdiction": "GLOBAL",
+      "tags": ["sales", "status"],
+      "metadata": {
+        "prefix": "SOS"
+      }
+    },
+    {
+      "code": "DELIVERY_NOTE_STATUS",
+      "domain": "SALES",
+      "description": "Delivery note document status",
+      "jurisdiction": "GLOBAL",
+      "tags": ["sales", "status"],
+      "metadata": {
+        "prefix": "DNS"
+      }
+    },
+    {
+      "code": "INVOICE_STATUS",
+      "domain": "SALES",
+      "description": "Sales invoice status",
+      "jurisdiction": "GLOBAL",
+      "tags": ["sales", "status"],
+      "metadata": {
+        "prefix": "INV"
+      }
+    },
+    {
+      "code": "PRICE_LIST_TYPE",
+      "domain": "SALES",
+      "description": "Price list type",
+      "jurisdiction": "GLOBAL",
+      "tags": ["sales", "pricing"],
+      "metadata": {
+        "prefix": "PLT"
+      }
+    }
+  ],
+  "values": [
+    {
+      "code": "INDIVIDUAL",
+      "value_set_code": "CUSTOMER_TYPE",
+      "label": "Individual",
+      "description": "Individual customer",
+      "sort_order": 1
+    },
+    {
+      "code": "COMPANY",
+      "value_set_code": "CUSTOMER_TYPE",
+      "label": "Company",
+      "description": "Corporate customer",
+      "sort_order": 2
+    },
+    {
+      "code": "GOVERNMENT",
+      "value_set_code": "CUSTOMER_TYPE",
+      "label": "Government",
+      "description": "Government entity",
+      "sort_order": 3
+    },
+    {
+      "code": "DRAFT",
+      "value_set_code": "QUOTATION_STATUS",
+      "label": "Draft",
+      "description": "Draft quotation",
+      "sort_order": 1
+    },
+    {
+      "code": "SENT",
+      "value_set_code": "QUOTATION_STATUS",
+      "label": "Sent",
+      "description": "Quotation sent to customer",
+      "sort_order": 2
+    },
+    {
+      "code": "ACCEPTED",
+      "value_set_code": "QUOTATION_STATUS",
+      "label": "Accepted",
+      "description": "Quotation accepted by customer",
+      "sort_order": 3
+    },
+    {
+      "code": "REJECTED",
+      "value_set_code": "QUOTATION_STATUS",
+      "label": "Rejected",
+      "description": "Quotation rejected by customer",
+      "sort_order": 4
+    },
+    {
+      "code": "EXPIRED",
+      "value_set_code": "QUOTATION_STATUS",
+      "label": "Expired",
+      "description": "Quotation expired",
+      "sort_order": 5
+    },
+    {
+      "code": "DRAFT",
+      "value_set_code": "SALES_ORDER_STATUS",
+      "label": "Draft",
+      "description": "Draft sales order",
+      "sort_order": 1
+    },
+    {
+      "code": "CONFIRMED",
+      "value_set_code": "SALES_ORDER_STATUS",
+      "label": "Confirmed",
+      "description": "Order confirmed",
+      "sort_order": 2
+    },
+    {
+      "code": "DELIVERED",
+      "value_set_code": "SALES_ORDER_STATUS",
+      "label": "Delivered",
+      "description": "Order delivered",
+      "sort_order": 3
+    },
+    {
+      "code": "COMPLETED",
+      "value_set_code": "SALES_ORDER_STATUS",
+      "label": "Completed",
+      "description": "Order completed",
+      "sort_order": 4
+    },
+    {
+      "code": "CANCELLED",
+      "value_set_code": "SALES_ORDER_STATUS",
+      "label": "Cancelled",
+      "description": "Order cancelled",
+      "sort_order": 5
+    },
+    {
+      "code": "PENDING",
+      "value_set_code": "DELIVERY_NOTE_STATUS",
+      "label": "Pending",
+      "description": "Delivery pending",
+      "sort_order": 1
+    },
+    {
+      "code": "PICKED",
+      "value_set_code": "DELIVERY_NOTE_STATUS",
+      "label": "Picked",
+      "description": "Items picked from warehouse",
+      "sort_order": 2
+    },
+    {
+      "code": "SHIPPED",
+      "value_set_code": "DELIVERY_NOTE_STATUS",
+      "label": "Shipped",
+      "description": "Items shipped",
+      "sort_order": 3
+    },
+    {
+      "code": "DELIVERED",
+      "value_set_code": "DELIVERY_NOTE_STATUS",
+      "label": "Delivered",
+      "description": "Items delivered to customer",
+      "sort_order": 4
+    },
+    {
+      "code": "RETURNED",
+      "value_set_code": "DELIVERY_NOTE_STATUS",
+      "label": "Returned",
+      "description": "Delivery returned",
+      "sort_order": 5
+    },
+    {
+      "code": "CANCELLED",
+      "value_set_code": "DELIVERY_NOTE_STATUS",
+      "label": "Cancelled",
+      "description": "Delivery cancelled",
+      "sort_order": 6
+    },
+    {
+      "code": "DRAFT",
+      "value_set_code": "INVOICE_STATUS",
+      "label": "Draft",
+      "description": "Draft invoice",
+      "sort_order": 1
+    },
+    {
+      "code": "ISSUED",
+      "value_set_code": "INVOICE_STATUS",
+      "label": "Issued",
+      "description": "Invoice issued",
+      "sort_order": 2
+    },
+    {
+      "code": "PARTIALLY_PAID",
+      "value_set_code": "INVOICE_STATUS",
+      "label": "Partially Paid",
+      "description": "Invoice partially paid",
+      "sort_order": 3
+    },
+    {
+      "code": "PAID",
+      "value_set_code": "INVOICE_STATUS",
+      "label": "Paid",
+      "description": "Invoice fully paid",
+      "sort_order": 4
+    },
+    {
+      "code": "VOIDED",
+      "value_set_code": "INVOICE_STATUS",
+      "label": "Voided",
+      "description": "Invoice voided",
+      "sort_order": 5
+    },
+    {
+      "code": "OVERDUE",
+      "value_set_code": "INVOICE_STATUS",
+      "label": "Overdue",
+      "description": "Invoice overdue",
+      "sort_order": 6
+    },
+    {
+      "code": "STANDARD",
+      "value_set_code": "PRICE_LIST_TYPE",
+      "label": "Standard",
+      "description": "Standard price list",
+      "sort_order": 1
+    },
+    {
+      "code": "PROMOTIONAL",
+      "value_set_code": "PRICE_LIST_TYPE",
+      "label": "Promotional",
+      "description": "Promotional price list",
+      "sort_order": 2
+    },
+    {
+      "code": "VOLUME_DISCOUNT",
+      "value_set_code": "PRICE_LIST_TYPE",
+      "label": "Volume Discount",
+      "description": "Volume discount price list",
+      "sort_order": 3
+    }
+  ]
+}
+

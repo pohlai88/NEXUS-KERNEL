@@ -1,0 +1,177 @@
+{
+  "id": "payments",
+  "name": "Payments & Banking",
+  "version": "1.0.0",
+  "domain": "PAYMENTS",
+  "description": "Core payments and banking concepts for receipts, disbursements, payment batches, bank statements, and reconciliation - connects Finance, Sales, Purchase",
+  "priority": 10,
+  "authoritative_for": { "concepts": [], "value_sets": ["RECEIPT_STATUS"] },
+  "concepts": [
+    {
+      "code": "BANK",
+      "category": "ENTITY",
+      "domain": "PAYMENTS",
+      "description": "Bank master record",
+      "tags": ["payments", "bank"]
+    },
+    {
+      "code": "BANK_ACCOUNT",
+      "category": "ENTITY",
+      "domain": "PAYMENTS",
+      "description": "Bank account master record used for receipts and payments",
+      "tags": ["payments", "bank"]
+    },
+    {
+      "code": "PAYMENT",
+      "category": "ENTITY",
+      "domain": "PAYMENTS",
+      "description": "Payment transaction (outgoing disbursement)",
+      "tags": ["payments", "ap"]
+    },
+    {
+      "code": "PAYMENT_LINE",
+      "category": "ENTITY",
+      "domain": "PAYMENTS",
+      "description": "Payment line item (allocation to invoices/transactions)",
+      "tags": ["payments", "ap"]
+    },
+    {
+      "code": "RECEIPT",
+      "category": "ENTITY",
+      "domain": "PAYMENTS",
+      "description": "Receipt transaction (incoming cash collection)",
+      "tags": ["payments", "ar"]
+    },
+    {
+      "code": "RECEIPT_LINE",
+      "category": "ENTITY",
+      "domain": "PAYMENTS",
+      "description": "Receipt line item (allocation to invoices/transactions)",
+      "tags": ["payments", "ar"]
+    },
+    {
+      "code": "PAYMENT_BATCH",
+      "category": "ENTITY",
+      "domain": "PAYMENTS",
+      "description": "Payment batch for bulk processing (e.g., bank file export)",
+      "tags": ["payments", "batch"]
+    },
+    {
+      "code": "PAYMENT_BATCH_LINE",
+      "category": "ENTITY",
+      "domain": "PAYMENTS",
+      "description": "Payment batch line (individual payment within a batch)",
+      "tags": ["payments", "batch"]
+    },
+    {
+      "code": "BANK_STATEMENT",
+      "category": "ENTITY",
+      "domain": "PAYMENTS",
+      "description": "Imported bank statement (header)",
+      "tags": ["payments", "bank", "reconciliation"]
+    },
+    {
+      "code": "BANK_STATEMENT_LINE",
+      "category": "ENTITY",
+      "domain": "PAYMENTS",
+      "description": "Imported bank statement line (transaction line)",
+      "tags": ["payments", "bank", "reconciliation"]
+    },
+    {
+      "code": "BANK_RECONCILIATION",
+      "category": "ENTITY",
+      "domain": "PAYMENTS",
+      "description": "Bank reconciliation session/document",
+      "tags": ["payments", "reconciliation"]
+    },
+    {
+      "code": "BANK_RECONCILIATION_LINE",
+      "category": "ENTITY",
+      "domain": "PAYMENTS",
+      "description": "Bank reconciliation line (matched/unmatched mapping)",
+      "tags": ["payments", "reconciliation"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "PAYMENT_STATUS",
+      "domain": "PAYMENTS",
+      "description": "Payment transaction statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["payments", "status"],
+      "metadata": { "prefix": "PST" }
+    },
+    {
+      "code": "RECEIPT_STATUS",
+      "domain": "PAYMENTS",
+      "description": "Receipt transaction statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["payments", "status"],
+      "metadata": { "prefix": "RPT" }
+    },
+    {
+      "code": "PAYMENT_BATCH_STATUS",
+      "domain": "PAYMENTS",
+      "description": "Payment batch processing statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["payments", "batch", "status"],
+      "metadata": { "prefix": "PBS" }
+    },
+    {
+      "code": "BANK_STATEMENT_STATUS",
+      "domain": "PAYMENTS",
+      "description": "Bank statement import statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["payments", "bank", "status"],
+      "metadata": { "prefix": "BSS" }
+    },
+    {
+      "code": "RECONCILIATION_STATUS",
+      "domain": "PAYMENTS",
+      "description": "Reconciliation statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["payments", "reconciliation", "status"],
+      "metadata": { "prefix": "RCS" }
+    },
+    {
+      "code": "MATCHING_METHOD",
+      "domain": "PAYMENTS",
+      "description": "Matching methods for bank reconciliation",
+      "jurisdiction": "GLOBAL",
+      "tags": ["payments", "reconciliation"],
+      "metadata": { "prefix": "MTM" }
+    }
+  ],
+  "values": [
+    { "code": "DRAFT", "value_set_code": "PAYMENT_STATUS", "label": "Draft", "description": "Payment created but not approved/processed", "sort_order": 1 },
+    { "code": "APPROVED", "value_set_code": "PAYMENT_STATUS", "label": "Approved", "description": "Payment approved for processing", "sort_order": 2 },
+    { "code": "PROCESSING", "value_set_code": "PAYMENT_STATUS", "label": "Processing", "description": "Payment is being processed", "sort_order": 3 },
+    { "code": "PAID", "value_set_code": "PAYMENT_STATUS", "label": "Paid", "description": "Payment completed", "sort_order": 4 },
+    { "code": "FAILED", "value_set_code": "PAYMENT_STATUS", "label": "Failed", "description": "Payment failed", "sort_order": 5 },
+    { "code": "CANCELLED", "value_set_code": "PAYMENT_STATUS", "label": "Cancelled", "description": "Payment cancelled", "sort_order": 6 },
+    { "code": "DRAFT", "value_set_code": "RECEIPT_STATUS", "label": "Draft", "description": "Receipt created but not confirmed", "sort_order": 1 },
+    { "code": "CONFIRMED", "value_set_code": "RECEIPT_STATUS", "label": "Confirmed", "description": "Receipt confirmed", "sort_order": 2 },
+    { "code": "DEPOSITED", "value_set_code": "RECEIPT_STATUS", "label": "Deposited", "description": "Receipt deposited into bank", "sort_order": 3 },
+    { "code": "ALLOCATED", "value_set_code": "RECEIPT_STATUS", "label": "Allocated", "description": "Receipt allocated to invoices", "sort_order": 4 },
+    { "code": "REVERSED", "value_set_code": "RECEIPT_STATUS", "label": "Reversed", "description": "Receipt reversed/voided", "sort_order": 5 },
+    { "code": "CLOSED", "value_set_code": "RECEIPT_STATUS", "label": "Closed", "description": "Receipt closed (final state)", "sort_order": 6 },
+    { "code": "DRAFT", "value_set_code": "PAYMENT_BATCH_STATUS", "label": "Draft", "description": "Batch created", "sort_order": 1 },
+    { "code": "APPROVED", "value_set_code": "PAYMENT_BATCH_STATUS", "label": "Approved", "description": "Batch approved", "sort_order": 2 },
+    { "code": "EXPORTED", "value_set_code": "PAYMENT_BATCH_STATUS", "label": "Exported", "description": "Bank file exported", "sort_order": 3 },
+    { "code": "SUBMITTED", "value_set_code": "PAYMENT_BATCH_STATUS", "label": "Submitted", "description": "Submitted to bank", "sort_order": 4 },
+    { "code": "COMPLETED", "value_set_code": "PAYMENT_BATCH_STATUS", "label": "Completed", "description": "Batch completed", "sort_order": 5 },
+    { "code": "CANCELLED", "value_set_code": "PAYMENT_BATCH_STATUS", "label": "Cancelled", "description": "Batch cancelled", "sort_order": 6 },
+    { "code": "IMPORTED", "value_set_code": "BANK_STATEMENT_STATUS", "label": "Imported", "description": "Statement imported", "sort_order": 1 },
+    { "code": "VALIDATED", "value_set_code": "BANK_STATEMENT_STATUS", "label": "Validated", "description": "Statement validated", "sort_order": 2 },
+    { "code": "POSTED", "value_set_code": "BANK_STATEMENT_STATUS", "label": "Posted", "description": "Statement posted/locked", "sort_order": 3 },
+    { "code": "CLOSED", "value_set_code": "BANK_STATEMENT_STATUS", "label": "Closed", "description": "Statement closed (final state)", "sort_order": 4 },
+    { "code": "OPEN", "value_set_code": "RECONCILIATION_STATUS", "label": "Open", "description": "Reconciliation open", "sort_order": 1 },
+    { "code": "IN_PROGRESS", "value_set_code": "RECONCILIATION_STATUS", "label": "In Progress", "description": "Matching in progress", "sort_order": 2 },
+    { "code": "COMPLETED", "value_set_code": "RECONCILIATION_STATUS", "label": "Completed", "description": "Reconciliation completed", "sort_order": 3 },
+    { "code": "CLOSED", "value_set_code": "RECONCILIATION_STATUS", "label": "Closed", "description": "Reconciliation closed/archived", "sort_order": 4 },
+    { "code": "AUTO", "value_set_code": "MATCHING_METHOD", "label": "Auto", "description": "Automatic matching", "sort_order": 1 },
+    { "code": "MANUAL", "value_set_code": "MATCHING_METHOD", "label": "Manual", "description": "Manual matching", "sort_order": 2 },
+    { "code": "RULE_BASED", "value_set_code": "MATCHING_METHOD", "label": "Rule-Based", "description": "Matching via defined rules", "sort_order": 3 }
+  ]
+}
+

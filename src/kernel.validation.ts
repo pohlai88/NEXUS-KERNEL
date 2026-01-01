@@ -8,6 +8,7 @@ import {
     ConceptShapeSchema,
     ValueSetShapeSchema,
     ValueShapeSchema,
+    PackShapeSchema,
     KernelRegistryShapeSchema,
     type ConceptShape,
     type ValueSetShape,
@@ -237,19 +238,7 @@ function validatePackInvariants(registry: KernelRegistryShape): void {
  * @throws CanonError on validation failure
  */
 export function validatePack(pack: unknown): void {
-    // Import PackShapeSchema when packs are implemented
-    // For now, validate basic structure
-    const schema = z.object({
-        id: z.string(),
-        name: z.string(),
-        version: z.string(),
-        domain: z.string(),
-        concepts: z.array(ConceptShapeSchema),
-        value_sets: z.array(ValueSetShapeSchema),
-        values: z.array(ValueShapeSchema),
-    });
-
-    const result = schema.safeParse(pack);
+    const result = PackShapeSchema.safeParse(pack);
     if (!result.success) {
         throw new CanonError(
             "VALIDATION_FAILED",

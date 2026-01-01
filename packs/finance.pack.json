@@ -4,97 +4,139 @@
   "version": "1.0.1",
   "domain": "FINANCE",
   "description": "Core financial concepts, value sets, and values for accounting operations - Production-ready P0 set",
+  "priority": 10,
+  "authoritative_for": {
+    "concepts": [],
+    "value_sets": []
+  },
   "concepts": [
     {
       "code": "ACCOUNT",
       "category": "ENTITY",
       "domain": "FINANCE",
       "description": "Chart of Accounts entry",
-      "tags": ["accounting", "gl"]
+      "tags": [
+        "accounting",
+        "gl"
+      ]
     },
     {
       "code": "ACCOUNT_TYPE",
       "category": "ATTRIBUTE",
       "domain": "FINANCE",
       "description": "Account classification type",
-      "tags": ["accounting"]
+      "tags": [
+        "accounting"
+      ]
     },
     {
       "code": "JOURNAL_ENTRY",
       "category": "ENTITY",
       "domain": "FINANCE",
       "description": "Accounting journal entry",
-      "tags": ["accounting", "gl"]
+      "tags": [
+        "accounting",
+        "gl"
+      ]
     },
     {
-      "code": "JOURNAL_LINE",
+      "code": "JOURNAL_ENTRY_LINE",
       "category": "ENTITY",
       "domain": "FINANCE",
       "description": "Journal entry line item (debit/credit)",
-      "tags": ["accounting", "gl"]
+      "tags": [
+        "accounting",
+        "gl"
+      ]
     },
     {
       "code": "JOURNAL_TYPE",
       "category": "ATTRIBUTE",
       "domain": "FINANCE",
       "description": "Type of journal entry",
-      "tags": ["accounting"]
+      "tags": [
+        "accounting"
+      ]
     },
     {
       "code": "FISCAL_YEAR",
       "category": "ENTITY",
       "domain": "FINANCE",
       "description": "Financial year period",
-      "tags": ["accounting", "period"]
+      "tags": [
+        "accounting",
+        "period"
+      ]
     },
     {
       "code": "FISCAL_PERIOD",
       "category": "ENTITY",
       "domain": "FINANCE",
       "description": "Financial period (month, quarter, year)",
-      "tags": ["accounting", "period"]
+      "tags": [
+        "accounting",
+        "period"
+      ]
     },
     {
       "code": "CURRENCY",
       "category": "ATTRIBUTE",
       "domain": "FINANCE",
       "description": "Currency attribute for monetary values",
-      "tags": ["accounting", "multi-currency"]
+      "tags": [
+        "accounting",
+        "multi-currency"
+      ]
     },
     {
       "code": "EXCHANGE_RATE",
       "category": "ENTITY",
       "domain": "FINANCE",
       "description": "Currency exchange rate",
-      "tags": ["accounting", "multi-currency"]
+      "tags": [
+        "accounting",
+        "multi-currency"
+      ]
     },
     {
       "code": "TAX_CODE",
       "category": "ENTITY",
       "domain": "FINANCE",
       "description": "Tax code for tax calculations",
-      "tags": ["accounting", "tax"]
+      "tags": [
+        "accounting",
+        "tax"
+      ]
     },
     {
       "code": "PAYMENT_TERM",
       "category": "ENTITY",
       "domain": "FINANCE",
       "description": "Payment terms (Net 30, etc.)",
-      "tags": ["accounting", "payment"]
+      "tags": [
+        "accounting",
+        "payment"
+      ]
     },
     {
       "code": "COST_CENTER",
       "category": "ENTITY",
       "domain": "FINANCE",
       "description": "Cost center for cost allocation",
-      "tags": ["accounting", "costing"]
+      "tags": [
+        "accounting",
+        "costing"
+      ]
     },
     {
       "code": "PROFIT_CENTER",
       "category": "ENTITY",
       "domain": "FINANCE",
       "description": "Profit center for profit allocation",
-      "tags": ["accounting", "costing"]
+      "tags": [
+        "accounting",
+        "costing"
+      ]
     }
   ],
   "value_sets": [
@@ -103,7 +145,9 @@
       "domain": "FINANCE",
       "description": "Account type classification",
       "jurisdiction": "GLOBAL",
-      "tags": ["accounting"],
+      "tags": [
+        "accounting"
+      ],
       "metadata": {
         "prefix": "ACC"
       }
@@ -113,7 +157,9 @@
       "domain": "FINANCE",
       "description": "Journal entry types",
       "jurisdiction": "GLOBAL",
-      "tags": ["accounting"],
+      "tags": [
+        "accounting"
+      ],
       "metadata": {
         "prefix": "JRN"
       }
@@ -123,7 +169,10 @@
       "domain": "FINANCE",
       "description": "Fiscal period types",
       "jurisdiction": "GLOBAL",
-      "tags": ["accounting", "period"],
+      "tags": [
+        "accounting",
+        "period"
+      ],
       "metadata": {
         "prefix": "PER"
       }
@@ -258,4 +307,3 @@
     }
   ]
 }
-

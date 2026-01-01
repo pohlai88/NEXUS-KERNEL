@@ -1,0 +1,128 @@
+{
+  "id": "tax",
+  "name": "Tax",
+  "version": "1.0.0",
+  "domain": "TAX",
+  "description": "Core tax concepts, value sets, and values for tax codes, tax types, treatments, and jurisdiction - connects Finance, Sales, and Purchase",
+  "priority": 10,
+  "authoritative_for": { "concepts": ["TAX_CODE"], "value_sets": [] },
+  "concepts": [
+    {
+      "code": "TAX_CODE",
+      "category": "ENTITY",
+      "domain": "TAX",
+      "description": "Tax code master used for sales and purchase transactions",
+      "tags": ["tax", "master"]
+    },
+    {
+      "code": "TAX_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "TAX",
+      "description": "Tax type classification (GST/VAT/SST/WHT etc.)",
+      "tags": ["tax", "classification"]
+    },
+    {
+      "code": "TAX_TREATMENT",
+      "category": "ATTRIBUTE",
+      "domain": "TAX",
+      "description": "Tax treatment for a transaction line (standard/zero/exempt/out of scope)",
+      "tags": ["tax", "treatment"]
+    },
+    {
+      "code": "TAX_JURISDICTION",
+      "category": "ENTITY",
+      "domain": "TAX",
+      "description": "Tax jurisdiction (country/state authority) that owns a tax regime",
+      "tags": ["tax", "jurisdiction"]
+    },
+    {
+      "code": "TAX_RATE",
+      "category": "ENTITY",
+      "domain": "TAX",
+      "description": "Tax rate definition (percentage, effective date range, jurisdiction)",
+      "tags": ["tax", "rate"]
+    },
+    {
+      "code": "WITHHOLDING_TAX",
+      "category": "ENTITY",
+      "domain": "TAX",
+      "description": "Withholding tax configuration (rate and applicability rules)",
+      "tags": ["tax", "withholding"]
+    },
+    {
+      "code": "TAX_REPORTING_CATEGORY",
+      "category": "ATTRIBUTE",
+      "domain": "TAX",
+      "description": "Tax reporting category mapping for tax return boxes/lines",
+      "tags": ["tax", "reporting"]
+    },
+    {
+      "code": "TAX_POSTING_RULE",
+      "category": "ENTITY",
+      "domain": "TAX",
+      "description": "Posting rule defining which accounts receive tax amounts (input/output/withholding)",
+      "tags": ["tax", "posting", "gl"]
+    },
+    {
+      "code": "TAX_POSTING_RULE_LINE",
+      "category": "ENTITY",
+      "domain": "TAX",
+      "description": "Posting rule line details (debit/credit, account mapping, rounding behavior)",
+      "tags": ["tax", "posting", "gl"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "TAX_TYPE",
+      "domain": "TAX",
+      "description": "Tax types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["tax", "classification"],
+      "metadata": { "prefix": "TXT" }
+    },
+    {
+      "code": "TAX_TREATMENT",
+      "domain": "TAX",
+      "description": "Tax treatments",
+      "jurisdiction": "GLOBAL",
+      "tags": ["tax", "treatment"],
+      "metadata": { "prefix": "TRT" }
+    },
+    {
+      "code": "TAX_REPORTING_CATEGORY",
+      "domain": "TAX",
+      "description": "Tax reporting categories for returns",
+      "jurisdiction": "GLOBAL",
+      "tags": ["tax", "reporting"],
+      "metadata": { "prefix": "TRC" }
+    },
+    {
+      "code": "ROUNDING_METHOD",
+      "domain": "TAX",
+      "description": "Rounding methods for tax calculations",
+      "jurisdiction": "GLOBAL",
+      "tags": ["tax", "calculation"],
+      "metadata": { "prefix": "RND" }
+    }
+  ],
+  "values": [
+    { "code": "GST", "value_set_code": "TAX_TYPE", "label": "GST", "description": "Goods and Services Tax", "sort_order": 1 },
+    { "code": "VAT", "value_set_code": "TAX_TYPE", "label": "VAT", "description": "Value Added Tax", "sort_order": 2 },
+    { "code": "SST", "value_set_code": "TAX_TYPE", "label": "SST", "description": "Sales and Service Tax", "sort_order": 3 },
+    { "code": "WITHHOLDING", "value_set_code": "TAX_TYPE", "label": "Withholding Tax", "description": "Withholding tax", "sort_order": 4 },
+    { "code": "CUSTOMS_DUTY", "value_set_code": "TAX_TYPE", "label": "Customs Duty", "description": "Import/export duty", "sort_order": 5 },
+    { "code": "STANDARD", "value_set_code": "TAX_TREATMENT", "label": "Standard Rated", "description": "Standard rated supplies/purchases", "sort_order": 1 },
+    { "code": "ZERO_RATED", "value_set_code": "TAX_TREATMENT", "label": "Zero Rated", "description": "Zero rated supplies/purchases", "sort_order": 2 },
+    { "code": "EXEMPT", "value_set_code": "TAX_TREATMENT", "label": "Exempt", "description": "Exempt supplies/purchases", "sort_order": 3 },
+    { "code": "OUT_OF_SCOPE", "value_set_code": "TAX_TREATMENT", "label": "Out of Scope", "description": "Outside the scope of tax", "sort_order": 4 },
+    { "code": "OUTPUT_TAX", "value_set_code": "TAX_REPORTING_CATEGORY", "label": "Output Tax", "description": "Tax on sales (output)", "sort_order": 1 },
+    { "code": "INPUT_TAX", "value_set_code": "TAX_REPORTING_CATEGORY", "label": "Input Tax", "description": "Tax on purchases (input)", "sort_order": 2 },
+    { "code": "WITHHOLDING_TAX", "value_set_code": "TAX_REPORTING_CATEGORY", "label": "Withholding Tax", "description": "Withholding tax reporting", "sort_order": 3 },
+    { "code": "REVERSE_CHARGE", "value_set_code": "TAX_REPORTING_CATEGORY", "label": "Reverse Charge", "description": "Reverse charge reporting", "sort_order": 4 },
+    { "code": "ROUND_HALF_UP", "value_set_code": "ROUNDING_METHOD", "label": "Round Half Up", "description": "Round .5 up", "sort_order": 1 },
+    { "code": "ROUND_HALF_EVEN", "value_set_code": "ROUNDING_METHOD", "label": "Round Half Even", "description": "Banker's rounding", "sort_order": 2 },
+    { "code": "ROUND_UP", "value_set_code": "ROUNDING_METHOD", "label": "Round Up", "description": "Always round up", "sort_order": 3 },
+    { "code": "ROUND_DOWN", "value_set_code": "ROUNDING_METHOD", "label": "Round Down", "description": "Always round down", "sort_order": 4 }
+  ]
+}
+

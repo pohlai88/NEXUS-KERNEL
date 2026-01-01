@@ -1,0 +1,154 @@
+{
+  "id": "asset",
+  "name": "Fixed Assets",
+  "version": "1.0.0",
+  "domain": "ASSET",
+  "description": "Core fixed asset concepts, value sets, and values for asset register, categorization, depreciation, and lifecycle - P1 high",
+  "priority": 10,
+  "authoritative_for": { "concepts": [], "value_sets": [] },
+  "concepts": [
+    {
+      "code": "FIXED_ASSET",
+      "category": "ENTITY",
+      "domain": "ASSET",
+      "description": "Fixed asset master record (asset register)",
+      "tags": ["asset", "fixed-asset"]
+    },
+    {
+      "code": "ASSET_CATEGORY",
+      "category": "ENTITY",
+      "domain": "ASSET",
+      "description": "Asset category/class (for grouping, depreciation rules, reporting)",
+      "tags": ["asset", "category"]
+    },
+    {
+      "code": "ASSET_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "ASSET",
+      "description": "Asset type classification (tangible/intangible/right-of-use/etc.)",
+      "tags": ["asset", "classification"]
+    },
+    {
+      "code": "ASSET_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "ASSET",
+      "description": "Asset lifecycle status",
+      "tags": ["asset", "status"]
+    },
+    {
+      "code": "DEPRECIATION_METHOD",
+      "category": "ATTRIBUTE",
+      "domain": "ASSET",
+      "description": "Depreciation method type",
+      "tags": ["asset", "depreciation"]
+    },
+    {
+      "code": "DEPRECIATION_SCHEDULE",
+      "category": "ENTITY",
+      "domain": "ASSET",
+      "description": "Depreciation schedule definition for an asset/category",
+      "tags": ["asset", "depreciation"]
+    },
+    {
+      "code": "ASSET_LOCATION",
+      "category": "ENTITY",
+      "domain": "ASSET",
+      "description": "Asset location record (site, warehouse, office, farm, etc.)",
+      "tags": ["asset", "location"]
+    },
+    {
+      "code": "ASSET_ASSIGNMENT",
+      "category": "ENTITY",
+      "domain": "ASSET",
+      "description": "Asset assignment record (assigned to employee/department/project)",
+      "tags": ["asset", "assignment"]
+    },
+    {
+      "code": "ASSET_MAINTENANCE",
+      "category": "ENTITY",
+      "domain": "ASSET",
+      "description": "Asset maintenance record (service, repair, inspection)",
+      "tags": ["asset", "maintenance"]
+    },
+    {
+      "code": "ASSET_EVENT",
+      "category": "ENTITY",
+      "domain": "ASSET",
+      "description": "Asset event transaction (acquisition, disposal, transfer, revaluation)",
+      "tags": ["asset", "lifecycle", "event"]
+    },
+    {
+      "code": "ASSET_EVENT_LINE",
+      "category": "ENTITY",
+      "domain": "ASSET",
+      "description": "Asset event line item (accounts/amounts/details for event posting)",
+      "tags": ["asset", "lifecycle", "event"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "ASSET_TYPE",
+      "domain": "ASSET",
+      "description": "Asset types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["asset", "classification"],
+      "metadata": { "prefix": "AST" }
+    },
+    {
+      "code": "ASSET_STATUS",
+      "domain": "ASSET",
+      "description": "Asset lifecycle statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["asset", "status"],
+      "metadata": { "prefix": "ASS" }
+    },
+    {
+      "code": "DEPRECIATION_METHOD",
+      "domain": "ASSET",
+      "description": "Depreciation methods",
+      "jurisdiction": "GLOBAL",
+      "tags": ["asset", "depreciation"],
+      "metadata": { "prefix": "DPM" }
+    },
+    {
+      "code": "ASSET_EVENT_TYPE",
+      "domain": "ASSET",
+      "description": "Asset event types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["asset", "event"],
+      "metadata": { "prefix": "AET" }
+    },
+    {
+      "code": "MAINTENANCE_STATUS",
+      "domain": "ASSET",
+      "description": "Maintenance record statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["asset", "maintenance", "status"],
+      "metadata": { "prefix": "MTS" }
+    }
+  ],
+  "values": [
+    { "code": "TANGIBLE", "value_set_code": "ASSET_TYPE", "label": "Tangible", "description": "Tangible fixed assets (PPE)", "sort_order": 1 },
+    { "code": "INTANGIBLE", "value_set_code": "ASSET_TYPE", "label": "Intangible", "description": "Intangible assets (software, licenses)", "sort_order": 2 },
+    { "code": "RIGHT_OF_USE", "value_set_code": "ASSET_TYPE", "label": "Right-of-Use", "description": "Right-of-use assets (leases)", "sort_order": 3 },
+    { "code": "INVESTMENT_PROPERTY", "value_set_code": "ASSET_TYPE", "label": "Investment Property", "description": "Investment property", "sort_order": 4 },
+    { "code": "DRAFT", "value_set_code": "ASSET_STATUS", "label": "Draft", "description": "Created but not yet active in register", "sort_order": 1 },
+    { "code": "ACTIVE", "value_set_code": "ASSET_STATUS", "label": "Active", "description": "Active in use", "sort_order": 2 },
+    { "code": "SUSPENDED", "value_set_code": "ASSET_STATUS", "label": "Suspended", "description": "Temporarily out of use", "sort_order": 3 },
+    { "code": "DISPOSED", "value_set_code": "ASSET_STATUS", "label": "Disposed", "description": "Disposed/sold/scrapped", "sort_order": 4 },
+    { "code": "CLOSED", "value_set_code": "ASSET_STATUS", "label": "Closed", "description": "Asset closed (final state)", "sort_order": 5 },
+    { "code": "STRAIGHT_LINE", "value_set_code": "DEPRECIATION_METHOD", "label": "Straight Line", "description": "Straight-line depreciation", "sort_order": 1 },
+    { "code": "DECLINING_BALANCE", "value_set_code": "DEPRECIATION_METHOD", "label": "Declining Balance", "description": "Reducing/declining balance depreciation", "sort_order": 2 },
+    { "code": "UNITS_OF_PRODUCTION", "value_set_code": "DEPRECIATION_METHOD", "label": "Units of Production", "description": "Depreciation based on usage/output", "sort_order": 3 },
+    { "code": "ACQUISITION", "value_set_code": "ASSET_EVENT_TYPE", "label": "Acquisition", "description": "Asset acquisition/capitalization", "sort_order": 1 },
+    { "code": "DISPOSAL", "value_set_code": "ASSET_EVENT_TYPE", "label": "Disposal", "description": "Asset disposal/sale/scrap", "sort_order": 2 },
+    { "code": "TRANSFER", "value_set_code": "ASSET_EVENT_TYPE", "label": "Transfer", "description": "Transfer between locations/custodians", "sort_order": 3 },
+    { "code": "REVALUATION", "value_set_code": "ASSET_EVENT_TYPE", "label": "Revaluation", "description": "Revaluation adjustment", "sort_order": 4 },
+    { "code": "IMPAIRMENT", "value_set_code": "ASSET_EVENT_TYPE", "label": "Impairment", "description": "Impairment recognition", "sort_order": 5 },
+    { "code": "PLANNED", "value_set_code": "MAINTENANCE_STATUS", "label": "Planned", "description": "Maintenance planned/scheduled", "sort_order": 1 },
+    { "code": "IN_PROGRESS", "value_set_code": "MAINTENANCE_STATUS", "label": "In Progress", "description": "Maintenance in progress", "sort_order": 2 },
+    { "code": "COMPLETED", "value_set_code": "MAINTENANCE_STATUS", "label": "Completed", "description": "Maintenance completed", "sort_order": 3 },
+    { "code": "CANCELLED", "value_set_code": "MAINTENANCE_STATUS", "label": "Cancelled", "description": "Maintenance cancelled", "sort_order": 4 }
+  ]
+}
+

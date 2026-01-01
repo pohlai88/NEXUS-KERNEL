@@ -1,0 +1,215 @@
+{
+  "id": "hr",
+  "name": "Human Resources",
+  "version": "1.0.0",
+  "domain": "HR",
+  "description": "Core HR concepts, value sets, and values for employee, org structure, leave, attendance, payroll, and performance - P1 high",
+  "priority": 10,
+  "authoritative_for": { "concepts": [], "value_sets": [] },
+  "concepts": [
+    {
+      "code": "EMPLOYEE",
+      "category": "ENTITY",
+      "domain": "HR",
+      "description": "Employee master record",
+      "tags": ["hr", "employee"]
+    },
+    {
+      "code": "EMPLOYEE_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "HR",
+      "description": "Employment type classification",
+      "tags": ["hr", "employee"]
+    },
+    {
+      "code": "DEPARTMENT",
+      "category": "ENTITY",
+      "domain": "HR",
+      "description": "Organizational department/unit",
+      "tags": ["hr", "org"]
+    },
+    {
+      "code": "DESIGNATION",
+      "category": "ENTITY",
+      "domain": "HR",
+      "description": "Job designation/title",
+      "tags": ["hr", "org"]
+    },
+    {
+      "code": "LEAVE_TYPE",
+      "category": "ENTITY",
+      "domain": "HR",
+      "description": "Leave type definition (annual, sick, etc.)",
+      "tags": ["hr", "leave"]
+    },
+    {
+      "code": "LEAVE_APPLICATION",
+      "category": "ENTITY",
+      "domain": "HR",
+      "description": "Leave application/request transaction",
+      "tags": ["hr", "leave"]
+    },
+    {
+      "code": "LEAVE_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "HR",
+      "description": "Leave application status",
+      "tags": ["hr", "leave", "status"]
+    },
+    {
+      "code": "ATTENDANCE",
+      "category": "ENTITY",
+      "domain": "HR",
+      "description": "Attendance record",
+      "tags": ["hr", "attendance"]
+    },
+    {
+      "code": "ATTENDANCE_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "HR",
+      "description": "Attendance status classification",
+      "tags": ["hr", "attendance", "status"]
+    },
+    {
+      "code": "PAYROLL",
+      "category": "ENTITY",
+      "domain": "HR",
+      "description": "Payroll run / payroll document",
+      "tags": ["hr", "payroll"]
+    },
+    {
+      "code": "PAYROLL_LINE",
+      "category": "ENTITY",
+      "domain": "HR",
+      "description": "Payroll line item (employee + salary component details)",
+      "tags": ["hr", "payroll"]
+    },
+    {
+      "code": "PAYROLL_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "HR",
+      "description": "Payroll processing status",
+      "tags": ["hr", "payroll", "status"]
+    },
+    {
+      "code": "SALARY_COMPONENT",
+      "category": "ENTITY",
+      "domain": "HR",
+      "description": "Salary component definition (basic, allowance, deduction, bonus)",
+      "tags": ["hr", "payroll"]
+    },
+    {
+      "code": "SALARY_COMPONENT_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "HR",
+      "description": "Salary component type classification",
+      "tags": ["hr", "payroll"]
+    },
+    {
+      "code": "TIMESHEET",
+      "category": "ENTITY",
+      "domain": "HR",
+      "description": "Timesheet for time tracking",
+      "tags": ["hr", "timesheet"]
+    },
+    {
+      "code": "TIMESHEET_LINE",
+      "category": "ENTITY",
+      "domain": "HR",
+      "description": "Timesheet line item (date, hours, project/task reference)",
+      "tags": ["hr", "timesheet"]
+    },
+    {
+      "code": "PERFORMANCE_REVIEW",
+      "category": "ENTITY",
+      "domain": "HR",
+      "description": "Performance review record",
+      "tags": ["hr", "performance"]
+    },
+    {
+      "code": "PERFORMANCE_RATING",
+      "category": "ATTRIBUTE",
+      "domain": "HR",
+      "description": "Performance rating scale",
+      "tags": ["hr", "performance"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "EMPLOYEE_TYPE",
+      "domain": "HR",
+      "description": "Employment types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["hr", "employee"],
+      "metadata": { "prefix": "EMP" }
+    },
+    {
+      "code": "LEAVE_STATUS",
+      "domain": "HR",
+      "description": "Leave request statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["hr", "leave", "status"],
+      "metadata": { "prefix": "LVS" }
+    },
+    {
+      "code": "ATTENDANCE_STATUS",
+      "domain": "HR",
+      "description": "Attendance statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["hr", "attendance", "status"],
+      "metadata": { "prefix": "ATS" }
+    },
+    {
+      "code": "PAYROLL_STATUS",
+      "domain": "HR",
+      "description": "Payroll processing statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["hr", "payroll", "status"],
+      "metadata": { "prefix": "PYS" }
+    },
+    {
+      "code": "SALARY_COMPONENT_TYPE",
+      "domain": "HR",
+      "description": "Salary component types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["hr", "payroll"],
+      "metadata": { "prefix": "SCT" }
+    },
+    {
+      "code": "PERFORMANCE_RATING",
+      "domain": "HR",
+      "description": "Performance rating scale",
+      "jurisdiction": "GLOBAL",
+      "tags": ["hr", "performance"],
+      "metadata": { "prefix": "PFR" }
+    }
+  ],
+  "values": [
+    { "code": "FULL_TIME", "value_set_code": "EMPLOYEE_TYPE", "label": "Full-time", "description": "Full-time employee", "sort_order": 1 },
+    { "code": "PART_TIME", "value_set_code": "EMPLOYEE_TYPE", "label": "Part-time", "description": "Part-time employee", "sort_order": 2 },
+    { "code": "CONTRACTOR", "value_set_code": "EMPLOYEE_TYPE", "label": "Contractor", "description": "Contract-based worker", "sort_order": 3 },
+    { "code": "INTERN", "value_set_code": "EMPLOYEE_TYPE", "label": "Intern", "description": "Intern / trainee", "sort_order": 4 },
+    { "code": "PENDING", "value_set_code": "LEAVE_STATUS", "label": "Pending", "description": "Awaiting approval", "sort_order": 1 },
+    { "code": "APPROVED", "value_set_code": "LEAVE_STATUS", "label": "Approved", "description": "Approved leave request", "sort_order": 2 },
+    { "code": "REJECTED", "value_set_code": "LEAVE_STATUS", "label": "Rejected", "description": "Rejected leave request", "sort_order": 3 },
+    { "code": "CANCELLED", "value_set_code": "LEAVE_STATUS", "label": "Cancelled", "description": "Cancelled by employee or admin", "sort_order": 4 },
+    { "code": "PRESENT", "value_set_code": "ATTENDANCE_STATUS", "label": "Present", "description": "Present at work", "sort_order": 1 },
+    { "code": "ABSENT", "value_set_code": "ATTENDANCE_STATUS", "label": "Absent", "description": "Absent from work", "sort_order": 2 },
+    { "code": "LATE", "value_set_code": "ATTENDANCE_STATUS", "label": "Late", "description": "Arrived late", "sort_order": 3 },
+    { "code": "HALF_DAY", "value_set_code": "ATTENDANCE_STATUS", "label": "Half Day", "description": "Worked half day", "sort_order": 4 },
+    { "code": "COMPLETED", "value_set_code": "ATTENDANCE_STATUS", "label": "Completed", "description": "Attendance record completed", "sort_order": 5 },
+    { "code": "DRAFT", "value_set_code": "PAYROLL_STATUS", "label": "Draft", "description": "Payroll prepared but not processed", "sort_order": 1 },
+    { "code": "PROCESSED", "value_set_code": "PAYROLL_STATUS", "label": "Processed", "description": "Payroll calculated and processed", "sort_order": 2 },
+    { "code": "PAID", "value_set_code": "PAYROLL_STATUS", "label": "Paid", "description": "Payroll paid out", "sort_order": 3 },
+    { "code": "CANCELLED", "value_set_code": "PAYROLL_STATUS", "label": "Cancelled", "description": "Payroll run cancelled", "sort_order": 4 },
+    { "code": "BASIC", "value_set_code": "SALARY_COMPONENT_TYPE", "label": "Basic", "description": "Basic salary component", "sort_order": 1 },
+    { "code": "ALLOWANCE", "value_set_code": "SALARY_COMPONENT_TYPE", "label": "Allowance", "description": "Allowance component", "sort_order": 2 },
+    { "code": "BONUS", "value_set_code": "SALARY_COMPONENT_TYPE", "label": "Bonus", "description": "Bonus component", "sort_order": 3 },
+    { "code": "DEDUCTION", "value_set_code": "SALARY_COMPONENT_TYPE", "label": "Deduction", "description": "Deduction component", "sort_order": 4 },
+    { "code": "EXCELLENT", "value_set_code": "PERFORMANCE_RATING", "label": "Excellent", "description": "Excellent performance", "sort_order": 1 },
+    { "code": "GOOD", "value_set_code": "PERFORMANCE_RATING", "label": "Good", "description": "Good performance", "sort_order": 2 },
+    { "code": "SATISFACTORY", "value_set_code": "PERFORMANCE_RATING", "label": "Satisfactory", "description": "Meets expectations", "sort_order": 3 },
+    { "code": "NEEDS_IMPROVEMENT", "value_set_code": "PERFORMANCE_RATING", "label": "Needs Improvement", "description": "Below expectations", "sort_order": 4 }
+  ]
+}
+

@@ -23,6 +23,7 @@ export type ConceptCategory = z.infer<typeof ConceptCategorySchema>;
  * FROZEN: Do not modify without major version bump
  */
 export const DomainSchema = z.enum([
+  "CORE",
   "FINANCE",
   "INVENTORY",
   "SALES",
@@ -32,6 +33,10 @@ export const DomainSchema = z.enum([
   "PROJECT",
   "ASSET",
   "TAX",
+  "PAYMENTS",
+  "WAREHOUSE",
+  "ADMIN",
+  "COMPLIANCE",
   "SYSTEM",
   "GLOBAL",
 ]);
@@ -116,6 +121,16 @@ export const PackShapeSchema = z.object({
   domain: DomainSchema,
   /** Pack description */
   description: z.string().min(1),
+  /** Pack priority (higher wins on conflicts; default: 10) */
+  priority: z.number().int().min(0).max(1000).default(10),
+  /** Concepts/value sets this pack is authoritative for (allows overwrites) */
+  authoritative_for: z
+    .object({
+      concepts: z.array(z.string()).optional().default([]),
+      value_sets: z.array(z.string()).optional().default([]),
+    })
+    .optional()
+    .default({ concepts: [], value_sets: [] }),
   /** Concepts in this pack */
   concepts: z.array(ConceptShapeSchema),
   /** Value sets in this pack */
@@ -159,29 +174,29 @@ export type KernelRegistryShape = z.infer<typeof KernelRegistryShapeSchema>;
 export const NamingLaws = {
   /** Concept ID format: CONCEPT_{CODE} */
   conceptId: (code: string): string => `CONCEPT_${code}`,
-  
+
   /** Value Set ID format: VALUESET_{JURISDICTION}_{CODE} */
   valueSetId: (code: string, jurisdiction: "GLOBAL" | "REGIONAL" | "LOCAL" = "GLOBAL"): string => {
     const prefix = jurisdiction === "GLOBAL" ? "GLOBAL" : jurisdiction;
     return `VALUESET_${prefix}_${code}`;
   },
-  
+
   /** Value ID format: {PREFIX}_{CODE} */
   valueId: (code: string, prefix: string): string => {
     // Prefix is derived from value set (e.g., ACCOUNT_TYPE -> ACC)
     return `${prefix}_${code}`;
   },
-  
+
   /** Validate concept code */
   isValidConceptCode: (code: string): boolean => {
     return /^[A-Z][A-Z0-9_]*$/.test(code);
   },
-  
+
   /** Validate value set code */
   isValidValueSetCode: (code: string): boolean => {
     return /^[A-Z][A-Z0-9_]*$/.test(code);
   },
-  
+
   /** Validate value code */
   isValidValueCode: (code: string): boolean => {
     return /^[A-Z][A-Z0-9_]*$/.test(code);
@@ -195,12 +210,12 @@ export const NamingLaws = {
 export const ExportPattern = {
   /** Concept export: CONCEPT.{CODE} = "CONCEPT_{CODE}" */
   concept: (code: string): string => NamingLaws.conceptId(code),
-  
+
   /** Value set export: VALUESET.{CODE} = "VALUESET_GLOBAL_{CODE}" */
   valueSet: (code: string, jurisdiction: "GLOBAL" | "REGIONAL" | "LOCAL" = "GLOBAL"): string => {
     return NamingLaws.valueSetId(code, jurisdiction);
   },
-  
+
   /** Value export: VALUE.{VALUE_SET_CODE}.{VALUE_CODE} = "{PREFIX}_{CODE}" */
   value: (valueSetCode: string, valueCode: string, prefix: string): string => {
     return NamingLaws.valueId(valueCode, prefix);

@@ -1,0 +1,163 @@
+{
+  "id": "project",
+  "name": "Project Management",
+  "version": "1.0.0",
+  "domain": "PROJECT",
+  "description": "Core project concepts, value sets, and values for project planning, tasks, milestones, and resource tracking - P1 high",
+  "priority": 10,
+  "authoritative_for": { "concepts": [], "value_sets": [] },
+  "concepts": [
+    {
+      "code": "PROJECT",
+      "category": "ENTITY",
+      "domain": "PROJECT",
+      "description": "Project master record",
+      "tags": ["project", "planning"]
+    },
+    {
+      "code": "PROJECT_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "PROJECT",
+      "description": "Project type classification",
+      "tags": ["project"]
+    },
+    {
+      "code": "PROJECT_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "PROJECT",
+      "description": "Project lifecycle status",
+      "tags": ["project", "status"]
+    },
+    {
+      "code": "TASK",
+      "category": "ENTITY",
+      "domain": "PROJECT",
+      "description": "Task within a project",
+      "tags": ["project", "task"]
+    },
+    {
+      "code": "TASK_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "PROJECT",
+      "description": "Task lifecycle status",
+      "tags": ["project", "task", "status"]
+    },
+    {
+      "code": "MILESTONE",
+      "category": "ENTITY",
+      "domain": "PROJECT",
+      "description": "Project milestone record",
+      "tags": ["project", "milestone"]
+    },
+    {
+      "code": "MILESTONE_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "PROJECT",
+      "description": "Milestone status",
+      "tags": ["project", "milestone", "status"]
+    },
+    {
+      "code": "RESOURCE",
+      "category": "ENTITY",
+      "domain": "PROJECT",
+      "description": "Project resource (person, role, or asset) assigned to work",
+      "tags": ["project", "resource"]
+    },
+    {
+      "code": "RESOURCE_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "PROJECT",
+      "description": "Resource type classification",
+      "tags": ["project", "resource"]
+    },
+    {
+      "code": "PROJECT_TEMPLATE",
+      "category": "ENTITY",
+      "domain": "PROJECT",
+      "description": "Project template for standardized project setup",
+      "tags": ["project", "template"]
+    },
+    {
+      "code": "EXPENSE_CLAIM",
+      "category": "ENTITY",
+      "domain": "PROJECT",
+      "description": "Project-related expense claim",
+      "tags": ["project", "expense"]
+    },
+    {
+      "code": "EXPENSE_CLAIM_LINE",
+      "category": "ENTITY",
+      "domain": "PROJECT",
+      "description": "Expense claim line item (date, amount, type, notes)",
+      "tags": ["project", "expense"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "PROJECT_TYPE",
+      "domain": "PROJECT",
+      "description": "Project types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["project"],
+      "metadata": { "prefix": "PRT" }
+    },
+    {
+      "code": "PROJECT_STATUS",
+      "domain": "PROJECT",
+      "description": "Project statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["project", "status"],
+      "metadata": { "prefix": "PJS" }
+    },
+    {
+      "code": "TASK_STATUS",
+      "domain": "PROJECT",
+      "description": "Task statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["project", "task", "status"],
+      "metadata": { "prefix": "TSK" }
+    },
+    {
+      "code": "MILESTONE_STATUS",
+      "domain": "PROJECT",
+      "description": "Milestone statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["project", "milestone", "status"],
+      "metadata": { "prefix": "MLS" }
+    },
+    {
+      "code": "RESOURCE_TYPE",
+      "domain": "PROJECT",
+      "description": "Resource types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["project", "resource"],
+      "metadata": { "prefix": "RST" }
+    }
+  ],
+  "values": [
+    { "code": "INTERNAL", "value_set_code": "PROJECT_TYPE", "label": "Internal", "description": "Internal project", "sort_order": 1 },
+    { "code": "CUSTOMER", "value_set_code": "PROJECT_TYPE", "label": "Customer", "description": "Customer/client project", "sort_order": 2 },
+    { "code": "R_AND_D", "value_set_code": "PROJECT_TYPE", "label": "R&D", "description": "Research and development project", "sort_order": 3 },
+    { "code": "MAINTENANCE", "value_set_code": "PROJECT_TYPE", "label": "Maintenance", "description": "Maintenance or support project", "sort_order": 4 },
+    { "code": "PLANNING", "value_set_code": "PROJECT_STATUS", "label": "Planning", "description": "Project is in planning stage", "sort_order": 1 },
+    { "code": "ACTIVE", "value_set_code": "PROJECT_STATUS", "label": "Active", "description": "Project is active", "sort_order": 2 },
+    { "code": "ON_HOLD", "value_set_code": "PROJECT_STATUS", "label": "On Hold", "description": "Project is temporarily on hold", "sort_order": 3 },
+    { "code": "COMPLETED", "value_set_code": "PROJECT_STATUS", "label": "Completed", "description": "Project completed successfully", "sort_order": 4 },
+    { "code": "CANCELLED", "value_set_code": "PROJECT_STATUS", "label": "Cancelled", "description": "Project cancelled", "sort_order": 5 },
+    { "code": "TODO", "value_set_code": "TASK_STATUS", "label": "To Do", "description": "Task not started", "sort_order": 1 },
+    { "code": "IN_PROGRESS", "value_set_code": "TASK_STATUS", "label": "In Progress", "description": "Task in progress", "sort_order": 2 },
+    { "code": "REVIEW", "value_set_code": "TASK_STATUS", "label": "Review", "description": "Task in review/verification", "sort_order": 3 },
+    { "code": "DONE", "value_set_code": "TASK_STATUS", "label": "Done", "description": "Task completed", "sort_order": 4 },
+    { "code": "BLOCKED", "value_set_code": "TASK_STATUS", "label": "Blocked", "description": "Task blocked", "sort_order": 5 },
+    { "code": "CANCELLED", "value_set_code": "TASK_STATUS", "label": "Cancelled", "description": "Task cancelled", "sort_order": 6 },
+    { "code": "PENDING", "value_set_code": "MILESTONE_STATUS", "label": "Pending", "description": "Milestone pending", "sort_order": 1 },
+    { "code": "ACHIEVED", "value_set_code": "MILESTONE_STATUS", "label": "Achieved", "description": "Milestone achieved", "sort_order": 2 },
+    { "code": "DELAYED", "value_set_code": "MILESTONE_STATUS", "label": "Delayed", "description": "Milestone delayed", "sort_order": 3 },
+    { "code": "CLOSED", "value_set_code": "MILESTONE_STATUS", "label": "Closed", "description": "Milestone closed (final state)", "sort_order": 4 },
+    { "code": "PERSON", "value_set_code": "RESOURCE_TYPE", "label": "Person", "description": "Human resource (employee/contractor)", "sort_order": 1 },
+    { "code": "ROLE", "value_set_code": "RESOURCE_TYPE", "label": "Role", "description": "Role-based assignment (e.g., QA, PM)", "sort_order": 2 },
+    { "code": "ASSET", "value_set_code": "RESOURCE_TYPE", "label": "Asset", "description": "Asset resource (machine, vehicle)", "sort_order": 3 },
+    { "code": "VENDOR", "value_set_code": "RESOURCE_TYPE", "label": "Vendor", "description": "External vendor resource", "sort_order": 4 }
+  ]
+}
+

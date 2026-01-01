@@ -277,35 +277,82 @@ function loadPack(packPath: string): PackShape {
 
 /**
  * Merge multiple packs into single registry
+ * Enforces Invariant E: Cross-pack duplicates must be allowed by policy
  */
 function mergePacks(packs: PackShape[]): {
   concepts: ConceptShape[];
   valueSets: ValueSetShape[];
   values: ValueShape[];
 } {
-  const concepts = new Map<string, ConceptShape>();
-  const valueSets = new Map<string, ValueSetShape>();
+  const concepts = new Map<string, { concept: ConceptShape; packId: string; priority: number; authoritative: boolean }>();
+  const valueSets = new Map<string, { valueSet: ValueSetShape; packId: string; priority: number; authoritative: boolean }>();
   const values = new Map<string, ValueShape>();
 
-  for (const pack of packs) {
+  // Sort packs by priority (higher first) to ensure authoritative packs process first
+  const sortedPacks = [...packs].sort((a, b) => (b.priority ?? 10) - (a.priority ?? 10));
+
+  for (const pack of sortedPacks) {
+    const packPriority = pack.priority ?? 10;
+    const authoritativeConcepts = new Set(pack.authoritative_for?.concepts ?? []);
+    const authoritativeValueSets = new Set(pack.authoritative_for?.value_sets ?? []);
+
+    // Merge concepts with Invariant E enforcement
     for (const concept of pack.concepts) {
-      if (concepts.has(concept.code)) {
-        throw new Error(
-          `Duplicate concept code ${concept.code} in pack ${pack.id}`
-        );
+      const existing = concepts.get(concept.code);
+      if (existing) {
+        // Invariant E: Check if overwrite is allowed
+        const isAuthoritative = authoritativeConcepts.has(concept.code);
+        const existingIsAuthoritative = existing.authoritative;
+        const canOverwrite =
+          (packPriority > existing.priority && isAuthoritative) ||
+          (packPriority === existing.priority && isAuthoritative && !existingIsAuthoritative);
+
+        if (!canOverwrite) {
+          throw new Error(
+            `Invariant E violation: Duplicate concept code ${concept.code} in pack ${pack.id}. ` +
+              `Existing: pack ${existing.packId} (priority ${existing.priority}, authoritative: ${existingIsAuthoritative}). ` +
+              `New: pack ${pack.id} (priority ${packPriority}, authoritative: ${isAuthoritative}). ` +
+              `Overwrite only allowed if new pack has higher priority AND lists code in authoritative_for.`
+          );
+        }
       }
-      concepts.set(concept.code, concept);
+      concepts.set(concept.code, {
+        concept,
+        packId: pack.id,
+        priority: packPriority,
+        authoritative: authoritativeConcepts.has(concept.code),
+      });
     }
 
+    // Merge value sets with Invariant E enforcement
     for (const valueSet of pack.value_sets) {
-      if (valueSets.has(valueSet.code)) {
-        throw new Error(
-          `Duplicate value set code ${valueSet.code} in pack ${pack.id}`
-        );
+      const existing = valueSets.get(valueSet.code);
+      if (existing) {
+        // Invariant E: Check if overwrite is allowed
+        const isAuthoritative = authoritativeValueSets.has(valueSet.code);
+        const existingIsAuthoritative = existing.authoritative;
+        const canOverwrite =
+          (packPriority > existing.priority && isAuthoritative) ||
+          (packPriority === existing.priority && isAuthoritative && !existingIsAuthoritative);
+
+        if (!canOverwrite) {
+          throw new Error(
+            `Invariant E violation: Duplicate value set code ${valueSet.code} in pack ${pack.id}. ` +
+              `Existing: pack ${existing.packId} (priority ${existing.priority}, authoritative: ${existingIsAuthoritative}). ` +
+              `New: pack ${pack.id} (priority ${packPriority}, authoritative: ${isAuthoritative}). ` +
+              `Overwrite only allowed if new pack has higher priority AND lists code in authoritative_for.`
+          );
+        }
       }
-      valueSets.set(valueSet.code, valueSet);
+      valueSets.set(valueSet.code, {
+        valueSet,
+        packId: pack.id,
+        priority: packPriority,
+        authoritative: authoritativeValueSets.has(valueSet.code),
+      });
     }
 
+    // Merge values (no cross-pack duplicates allowed - values are always unique per value set)
     for (const value of pack.values) {
       const key = `${value.value_set_code}:${value.code}`;
       if (values.has(key)) {
@@ -318,8 +365,8 @@ function mergePacks(packs: PackShape[]): {
   }
 
   return {
-    concepts: Array.from(concepts.values()),
-    valueSets: Array.from(valueSets.values()),
+    concepts: Array.from(concepts.values()).map((entry) => entry.concept),
+    valueSets: Array.from(valueSets.values()).map((entry) => entry.valueSet),
     values: Array.from(values.values()),
   };
 }
@@ -374,6 +421,11 @@ function main() {
   const { concepts, valueSets, values } = mergePacks(packs);
   console.log(`   ✅ Merged: ${concepts.length} concepts, ${valueSets.length} value sets, ${values.length} values`);
 
+  // Validate invariants before generation
+  console.log("\n🔍 Validating invariants...");
+  validateGeneratorInvariants(concepts, valueSets, values);
+  console.log("   ✅ All invariants passed");
+
   // Generate code
   console.log("\n📝 Generating TypeScript code...");
   const conceptsCode = generateConcepts(concepts);
@@ -389,10 +441,210 @@ function main() {
   console.log("\n✨ Generation complete!");
 }
 
-// Run if executed directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  main();
+/**
+ * Validate generator invariants (prevents pack rot)
+ */
+function validateGeneratorInvariants(
+  concepts: ConceptShape[],
+  valueSets: ValueSetShape[],
+  values: ValueShape[]
+): void {
+  // Group values by value set
+  const valuesBySet = new Map<string, ValueShape[]>();
+  for (const value of values) {
+    if (!valuesBySet.has(value.value_set_code)) {
+      valuesBySet.set(value.value_set_code, []);
+    }
+    valuesBySet.get(value.value_set_code)!.push(value);
+  }
+
+  // Invariant A: sort_order is continuous per value_set (1..n)
+  for (const [setCode, setValues] of valuesBySet.entries()) {
+    const valuesWithOrder = setValues.filter((v) => v.sort_order !== undefined);
+    if (valuesWithOrder.length === 0) continue; // Optional sort_order
+
+    const sortOrders = valuesWithOrder
+      .map((v) => v.sort_order!)
+      .sort((a, b) => a - b);
+
+    // Check continuity: should be 1, 2, 3, ..., n
+    for (let i = 0; i < sortOrders.length; i++) {
+      if (sortOrders[i] !== i + 1) {
+        throw new Error(
+          `Invariant A violation: sort_order must be continuous (1..n) in value set ${setCode}. ` +
+          `Expected ${i + 1}, found ${sortOrders[i]}. All orders: [${sortOrders.join(", ")}]`
+        );
+      }
+    }
+  }
+
+  // Invariant B: every value_set has ≥2 values (prevents dead enums)
+  for (const valueSet of valueSets) {
+    const setValues = valuesBySet.get(valueSet.code) || [];
+    if (setValues.length < 2) {
+      throw new Error(
+        `Invariant B violation: value set must have at least 2 values. ` +
+        `${valueSet.code} has ${setValues.length} value(s)`
+      );
+    }
+  }
+
+  // Invariant C: collision-free export IDs across namespaces
+  // CONCEPT.{code} vs VALUESET.{code} must never collide in generated exports
+  const conceptCodes = new Set(concepts.map((c) => c.code));
+  const valueSetCodes = new Set(valueSets.map((vs) => vs.code));
+
+  // Check for collisions (same code in both namespaces)
+  for (const code of conceptCodes) {
+    if (valueSetCodes.has(code)) {
+      // This is allowed (different namespaces), but we verify exports don't collide
+      // CONCEPT.ACCOUNT_TYPE vs VALUESET.ACCOUNT_TYPE are different exports
+      // This is fine - they're in different objects
+    }
+  }
+
+  // Verify generated export names don't collide
+  const conceptExportNames = new Set(
+    concepts.map((c) => `CONCEPT.${c.code}`)
+  );
+  const valueSetExportNames = new Set(
+    valueSets.map((vs) => `VALUESET.${vs.code}`)
+  );
+
+  for (const exportName of conceptExportNames) {
+    if (valueSetExportNames.has(exportName)) {
+      throw new Error(
+        `Invariant C violation: export name collision detected: ${exportName}. ` +
+        `Concept and value set cannot share the same export name.`
+      );
+    }
+  }
+
+  // Invariant D: Line concept required for order/invoice/entry entities
+  validateLineConcepts(concepts);
+
+  // Invariant F: Naming semantics validation
+  validateNamingSemantics(concepts, valueSets, values);
 }
+
+/**
+ * Invariant D: If a pack contains an "Order/Invoice/Entry" entity,
+ * enforce it also has a corresponding "*_LINE" concept.
+ */
+function validateLineConcepts(concepts: ConceptShape[]): void {
+  const conceptCodes = new Set(concepts.map((c) => c.code));
+
+  // Patterns that require line concepts
+  const lineRequiredPatterns = [
+    /^.*_ORDER$/,
+    /^.*_INVOICE$/,
+    /^.*_ENTRY$/,
+    /^.*_QUOTATION$/,
+    /^.*_RECEIPT$/,
+    /^.*_DELIVERY_NOTE$/,
+    /^.*_GOODS_RECEIPT$/,
+  ];
+
+  for (const concept of concepts) {
+    // Check if this concept matches a pattern that requires a line concept
+    for (const pattern of lineRequiredPatterns) {
+      if (pattern.test(concept.code)) {
+        const lineConceptCode = `${concept.code}_LINE`;
+        if (!conceptCodes.has(lineConceptCode)) {
+          throw new Error(
+            `Invariant D violation: Entity ${concept.code} requires corresponding line concept ${lineConceptCode}. ` +
+            `ERP spine consistency requires line concepts for order/invoice/entry entities.`
+          );
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Invariant F: Naming semantics validation
+ * - *_STATUS value sets must have ≥3 values and include terminal states
+ * - *_LINE concepts must have matching parent concept
+ * - metadata.prefix must be 3 letters, uppercase, unique globally
+ */
+function validateNamingSemantics(
+  concepts: ConceptShape[],
+  valueSets: ValueSetShape[],
+  values: ValueShape[]
+): void {
+  const conceptCodes = new Set(concepts.map((c) => c.code));
+  const valueSetCodes = new Set(valueSets.map((vs) => vs.code));
+  const valuesBySet = new Map<string, ValueShape[]>();
+  const prefixes = new Map<string, string>(); // prefix -> valueSet code
+
+  // Group values by value set
+  for (const value of values) {
+    if (!valuesBySet.has(value.value_set_code)) {
+      valuesBySet.set(value.value_set_code, []);
+    }
+    valuesBySet.get(value.value_set_code)!.push(value);
+  }
+
+  // Check *_STATUS value sets
+  for (const valueSet of valueSets) {
+    if (valueSet.code.endsWith("_STATUS")) {
+      const setValues = valuesBySet.get(valueSet.code) || [];
+      if (setValues.length < 3) {
+        throw new Error(
+          `Invariant F violation: *_STATUS value set ${valueSet.code} must have at least 3 values, found ${setValues.length}`
+        );
+      }
+
+      // Check for terminal states
+      const terminalStates = ["CANCELLED", "CLOSED", "COMPLETED", "RETIRED", "VOIDED", "EXPIRED"];
+      const hasTerminalState = setValues.some((v) =>
+        terminalStates.includes(v.code)
+      );
+      if (!hasTerminalState) {
+        throw new Error(
+          `Invariant F violation: *_STATUS value set ${valueSet.code} must include at least one terminal state ` +
+          `(CANCELLED|CLOSED|COMPLETED|RETIRED|VOIDED|EXPIRED)`
+        );
+      }
+    }
+  }
+
+  // Check *_LINE concepts have matching parent
+  for (const concept of concepts) {
+    if (concept.code.endsWith("_LINE")) {
+      const parentCode = concept.code.replace(/_LINE$/, "");
+      if (!conceptCodes.has(parentCode)) {
+        throw new Error(
+          `Invariant F violation: *_LINE concept ${concept.code} must have matching parent concept ${parentCode}`
+        );
+      }
+    }
+  }
+
+  // Check prefix uniqueness and format
+  for (const valueSet of valueSets) {
+    const prefix = valueSet.metadata?.prefix;
+    if (prefix) {
+      // Format check: 3 letters, uppercase
+      if (!/^[A-Z]{3}$/.test(prefix)) {
+        throw new Error(
+          `Invariant F violation: metadata.prefix must be exactly 3 uppercase letters, found "${prefix}" in ${valueSet.code}`
+        );
+      }
+
+      // Uniqueness check
+      if (prefixes.has(prefix)) {
+        throw new Error(
+          `Invariant F violation: prefix "${prefix}" is used by both ${prefixes.get(prefix)} and ${valueSet.code}. Prefixes must be globally unique.`
+        );
+      }
+      prefixes.set(prefix, valueSet.code);
+    }
+  }
+}
+
+// Run if executed directly
+main();
 
 export { generateConcepts, generateValues, mergePacks, loadPack };
 

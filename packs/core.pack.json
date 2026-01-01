@@ -1,0 +1,396 @@
+{
+  "id": "core",
+  "name": "Core / Common Primitives",
+  "version": "1.0.0",
+  "domain": "CORE",
+  "description": "Shared primitives used across all ERP domains (party, address, contact, document, status, payment, compliance) - P0 enabler",
+  "priority": 100,
+  "authoritative_for": {
+    "concepts": ["PARTY", "ADDRESS", "CONTACT", "DOCUMENT", "ATTACHMENT", "TRANSACTION_STATUS", "APPROVAL_STATUS", "PAYMENT_METHOD", "PRIORITY_LEVEL"],
+    "value_sets": ["PARTY_TYPE", "ADDRESS_TYPE", "CONTACT_TYPE", "TRANSACTION_STATUS", "APPROVAL_STATUS", "PAYMENT_METHOD", "PRIORITY_LEVEL"]
+  },
+  "concepts": [
+    {
+      "code": "PARTY",
+      "category": "ENTITY",
+      "domain": "CORE",
+      "description": "Generic party master (person or organization). Can unify customer/supplier/employee later",
+      "tags": ["core", "party", "master"]
+    },
+    {
+      "code": "PARTY_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "CORE",
+      "description": "Party classification type",
+      "tags": ["core", "party"]
+    },
+    {
+      "code": "ADDRESS",
+      "category": "ENTITY",
+      "domain": "CORE",
+      "description": "Address record used for billing, shipping, legal, and operational locations",
+      "tags": ["core", "address"]
+    },
+    {
+      "code": "ADDRESS_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "CORE",
+      "description": "Address usage type",
+      "tags": ["core", "address"]
+    },
+    {
+      "code": "CONTACT",
+      "category": "ENTITY",
+      "domain": "CORE",
+      "description": "Contact person record linked to a party (customer/supplier/employee)",
+      "tags": ["core", "contact"]
+    },
+    {
+      "code": "CONTACT_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "CORE",
+      "description": "Contact usage type",
+      "tags": ["core", "contact"]
+    },
+    {
+      "code": "DOCUMENT",
+      "category": "ENTITY",
+      "domain": "CORE",
+      "description": "Generic document container for ERP transactions and references",
+      "tags": ["core", "document"]
+    },
+    {
+      "code": "DOCUMENT_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "CORE",
+      "description": "Document classification type",
+      "tags": ["core", "document"]
+    },
+    {
+      "code": "ATTACHMENT",
+      "category": "ENTITY",
+      "domain": "CORE",
+      "description": "File attachment linked to any document or record (evidence, invoice PDF, image, etc.)",
+      "tags": ["core", "document", "attachment"]
+    },
+    {
+      "code": "TRANSACTION_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "CORE",
+      "description": "Generic lifecycle status for transactions and workflows",
+      "tags": ["core", "status"]
+    },
+    {
+      "code": "APPROVAL_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "CORE",
+      "description": "Generic approval workflow status",
+      "tags": ["core", "approval", "status"]
+    },
+    {
+      "code": "PAYMENT_METHOD",
+      "category": "ATTRIBUTE",
+      "domain": "CORE",
+      "description": "Payment method classification",
+      "tags": ["core", "payment"]
+    },
+    {
+      "code": "PRIORITY_LEVEL",
+      "category": "ATTRIBUTE",
+      "domain": "CORE",
+      "description": "Priority / severity level used across tasks, tickets, and workflows",
+      "tags": ["core", "priority"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "PARTY_TYPE",
+      "domain": "CORE",
+      "description": "Party types (person / company / government)",
+      "jurisdiction": "GLOBAL",
+      "tags": ["core", "party"],
+      "metadata": { "prefix": "PTY" }
+    },
+    {
+      "code": "ADDRESS_TYPE",
+      "domain": "CORE",
+      "description": "Address usage types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["core", "address"],
+      "metadata": { "prefix": "ADR" }
+    },
+    {
+      "code": "CONTACT_TYPE",
+      "domain": "CORE",
+      "description": "Contact usage types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["core", "contact"],
+      "metadata": { "prefix": "CON" }
+    },
+    {
+      "code": "TRANSACTION_STATUS",
+      "domain": "CORE",
+      "description": "Generic transaction lifecycle statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["core", "status"],
+      "metadata": { "prefix": "TXN" }
+    },
+    {
+      "code": "APPROVAL_STATUS",
+      "domain": "CORE",
+      "description": "Approval workflow statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["core", "approval", "status"],
+      "metadata": { "prefix": "APR" }
+    },
+    {
+      "code": "PAYMENT_METHOD",
+      "domain": "CORE",
+      "description": "Payment methods",
+      "jurisdiction": "GLOBAL",
+      "tags": ["core", "payment"],
+      "metadata": { "prefix": "PAY" }
+    },
+    {
+      "code": "PRIORITY_LEVEL",
+      "domain": "CORE",
+      "description": "Priority levels",
+      "jurisdiction": "GLOBAL",
+      "tags": ["core", "priority"],
+      "metadata": { "prefix": "PRI" }
+    }
+  ],
+  "values": [
+    {
+      "code": "INDIVIDUAL",
+      "value_set_code": "PARTY_TYPE",
+      "label": "Individual",
+      "description": "A person (natural person)",
+      "sort_order": 1
+    },
+    {
+      "code": "COMPANY",
+      "value_set_code": "PARTY_TYPE",
+      "label": "Company",
+      "description": "A private or public organization",
+      "sort_order": 2
+    },
+    {
+      "code": "GOVERNMENT",
+      "value_set_code": "PARTY_TYPE",
+      "label": "Government",
+      "description": "A government agency or public authority",
+      "sort_order": 3
+    },
+    {
+      "code": "BILLING",
+      "value_set_code": "ADDRESS_TYPE",
+      "label": "Billing Address",
+      "description": "Billing address used for invoicing and statements",
+      "sort_order": 1
+    },
+    {
+      "code": "SHIPPING",
+      "value_set_code": "ADDRESS_TYPE",
+      "label": "Shipping Address",
+      "description": "Shipping / delivery address used for fulfillment",
+      "sort_order": 2
+    },
+    {
+      "code": "REGISTERED",
+      "value_set_code": "ADDRESS_TYPE",
+      "label": "Registered Address",
+      "description": "Legal registered address (company registration)",
+      "sort_order": 3
+    },
+    {
+      "code": "OPERATIONAL",
+      "value_set_code": "ADDRESS_TYPE",
+      "label": "Operational Address",
+      "description": "Operational site address (warehouse, farm, office, etc.)",
+      "sort_order": 4
+    },
+    {
+      "code": "PRIMARY",
+      "value_set_code": "CONTACT_TYPE",
+      "label": "Primary",
+      "description": "Primary contact person",
+      "sort_order": 1
+    },
+    {
+      "code": "BILLING",
+      "value_set_code": "CONTACT_TYPE",
+      "label": "Billing",
+      "description": "Billing contact person",
+      "sort_order": 2
+    },
+    {
+      "code": "SHIPPING",
+      "value_set_code": "CONTACT_TYPE",
+      "label": "Shipping",
+      "description": "Shipping / logistics contact person",
+      "sort_order": 3
+    },
+    {
+      "code": "TECHNICAL",
+      "value_set_code": "CONTACT_TYPE",
+      "label": "Technical",
+      "description": "Technical / support contact person",
+      "sort_order": 4
+    },
+    {
+      "code": "DRAFT",
+      "value_set_code": "TRANSACTION_STATUS",
+      "label": "Draft",
+      "description": "Created but not yet submitted",
+      "sort_order": 1
+    },
+    {
+      "code": "SUBMITTED",
+      "value_set_code": "TRANSACTION_STATUS",
+      "label": "Submitted",
+      "description": "Submitted for approval or processing",
+      "sort_order": 2
+    },
+    {
+      "code": "PROCESSING",
+      "value_set_code": "TRANSACTION_STATUS",
+      "label": "Processing",
+      "description": "In progress / being processed",
+      "sort_order": 3
+    },
+    {
+      "code": "COMPLETED",
+      "value_set_code": "TRANSACTION_STATUS",
+      "label": "Completed",
+      "description": "Completed successfully",
+      "sort_order": 4
+    },
+    {
+      "code": "CANCELLED",
+      "value_set_code": "TRANSACTION_STATUS",
+      "label": "Cancelled",
+      "description": "Cancelled by user or system",
+      "sort_order": 5
+    },
+    {
+      "code": "FAILED",
+      "value_set_code": "TRANSACTION_STATUS",
+      "label": "Failed",
+      "description": "Failed due to error or exception",
+      "sort_order": 6
+    },
+    {
+      "code": "PENDING",
+      "value_set_code": "APPROVAL_STATUS",
+      "label": "Pending",
+      "description": "Awaiting approval decision",
+      "sort_order": 1
+    },
+    {
+      "code": "APPROVED",
+      "value_set_code": "APPROVAL_STATUS",
+      "label": "Approved",
+      "description": "Approved and allowed to proceed",
+      "sort_order": 2
+    },
+    {
+      "code": "REJECTED",
+      "value_set_code": "APPROVAL_STATUS",
+      "label": "Rejected",
+      "description": "Rejected and blocked from proceeding",
+      "sort_order": 3
+    },
+    {
+      "code": "WITHDRAWN",
+      "value_set_code": "APPROVAL_STATUS",
+      "label": "Withdrawn",
+      "description": "Withdrawn by requester before completion",
+      "sort_order": 4
+    },
+    {
+      "code": "CANCELLED",
+      "value_set_code": "APPROVAL_STATUS",
+      "label": "Cancelled",
+      "description": "Approval cancelled",
+      "sort_order": 5
+    },
+    {
+      "code": "CASH",
+      "value_set_code": "PAYMENT_METHOD",
+      "label": "Cash",
+      "description": "Cash payment",
+      "sort_order": 1
+    },
+    {
+      "code": "BANK_TRANSFER",
+      "value_set_code": "PAYMENT_METHOD",
+      "label": "Bank Transfer",
+      "description": "Payment via bank transfer",
+      "sort_order": 2
+    },
+    {
+      "code": "CREDIT_CARD",
+      "value_set_code": "PAYMENT_METHOD",
+      "label": "Credit Card",
+      "description": "Payment via credit card",
+      "sort_order": 3
+    },
+    {
+      "code": "DEBIT_CARD",
+      "value_set_code": "PAYMENT_METHOD",
+      "label": "Debit Card",
+      "description": "Payment via debit card",
+      "sort_order": 4
+    },
+    {
+      "code": "CHEQUE",
+      "value_set_code": "PAYMENT_METHOD",
+      "label": "Cheque",
+      "description": "Payment via cheque",
+      "sort_order": 5
+    },
+    {
+      "code": "E_WALLET",
+      "value_set_code": "PAYMENT_METHOD",
+      "label": "E-Wallet",
+      "description": "Payment via e-wallet (GrabPay, ShopeePay, etc.)",
+      "sort_order": 6
+    },
+    {
+      "code": "LOW",
+      "value_set_code": "PRIORITY_LEVEL",
+      "label": "Low",
+      "description": "Low priority",
+      "sort_order": 1
+    },
+    {
+      "code": "MEDIUM",
+      "value_set_code": "PRIORITY_LEVEL",
+      "label": "Medium",
+      "description": "Normal priority",
+      "sort_order": 2
+    },
+    {
+      "code": "HIGH",
+      "value_set_code": "PRIORITY_LEVEL",
+      "label": "High",
+      "description": "High priority",
+      "sort_order": 3
+    },
+    {
+      "code": "URGENT",
+      "value_set_code": "PRIORITY_LEVEL",
+      "label": "Urgent",
+      "description": "Urgent priority",
+      "sort_order": 4
+    },
+    {
+      "code": "CRITICAL",
+      "value_set_code": "PRIORITY_LEVEL",
+      "label": "Critical",
+      "description": "Critical priority",
+      "sort_order": 5
+    }
+  ]
+}
