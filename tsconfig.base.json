@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    // === STRICT NEVER WRONG Configuration ===
+    // This configuration catches real bugs while allowing practical development
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+
+    // === CORE STRICT MODE (all included in "strict") ===
+    "strict": true,
+    // "strict" includes:
+    //   - noImplicitAny: Catch missing type annotations
+    //   - strictNullChecks: Catch null/undefined bugs
+    //   - strictFunctionTypes: Catch function signature mismatches
+    //   - strictBindCallApply: Check bind/call/apply types
+    //   - strictPropertyInitialization: Catch uninitialized properties
+    //   - noImplicitThis: Catch 'this' context bugs
+    //   - useUnknownInCatchVariables: Safer catch clause handling
+
+    // === ADDITIONAL SAFETY CHECKS ===
+    "noFallthroughCasesInSwitch": true,        // Error on switch fallthrough
+    "noImplicitReturns": true,                 // Error when function doesn't return in all paths
+
+    // === TYPE SAFETY ===
+    "forceConsistentCasingInFileNames": true,  // Prevent import casing issues
+    "allowUnreachableCode": false,             // Error on unreachable code
+    "allowUnusedLabels": false,                // Error on unused labels
+
+    // === OUTPUT ===
+    "skipLibCheck": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,                   // Ensure each file can be transpiled independently
+    "esModuleInterop": true                    // Better CommonJS interop
+  }
+}
+
+// STRICT MODE OPTIONS (can enable in CI/pre-commit):
+// "noUnusedLocals": true,                  // Error on unused variables
+// "noUnusedParameters": true,              // Error on unused function parameters
+// "noUncheckedIndexedAccess": true,        // Add undefined to indexed access results
+// "exactOptionalPropertyTypes": true,      // Differentiate undefined vs missing
+// "noPropertyAccessFromIndexSignature": true // Require bracket notation for index sigs
