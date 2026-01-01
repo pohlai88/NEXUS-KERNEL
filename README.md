@@ -8,7 +8,7 @@
 
 `@aibos/kernel` is the **Single Source of Truth (SSOT)** for all platform metadata in AI-BOS. It defines:
 
-- **30 Concepts** - What business objects exist (Entity, Attribute, Operation, Relationship)
+- **31 Concepts** - What business objects exist (Entity, Attribute, Operation, Relationship)
 - **12 Value Sets** - Allowed value collections
 - **62 Values** - The actual allowed values
 
@@ -26,7 +26,7 @@ pnpm add @aibos/kernel
 
 ```typescript
 import {
-  // Concepts (30)
+  // Concepts (31)
   CONCEPT,
   ConceptId,
   CONCEPT_CATEGORY,
@@ -76,7 +76,7 @@ L0 Kernel (Constitutional) ← @aibos/kernel
 
 | Category     | Count | Examples                              |
 | ------------ | ----- | ------------------------------------- |
-| ENTITY       | 12    | INVOICE, VENDOR, CLAIM, DOCUMENT      |
+| ENTITY       | 13    | INVOICE, VENDOR, CLAIM, DOCUMENT, TENANT |
 | ATTRIBUTE    | 6     | STATUS, PRIORITY, RISK, IDENTITY      |
 | OPERATION    | 8     | APPROVAL, AUDIT, PAYMENT, WORKFLOW    |
 | RELATIONSHIP | 4     | GROUP_MEMBERSHIP, VENDOR_COMPANY_LINK |

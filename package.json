@@ -39,12 +39,20 @@
   },
   "devDependencies": {
     "typescript": "^5.7.3",
-    "vitest": "^4.0.16"
+    "vitest": "^4.0.16",
+    "@types/node": "^20.0.0",
+    "tsx": "^4.7.0"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "build:watch": "tsc -p tsconfig.build.json --watch",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "dev": "pnpm run build && node scripts/dev-server.js",
+    "dev:watch": "pnpm run build:watch",
+    "dev:server": "node scripts/dev-server.js",
+    "generate": "tsx scripts/generate-kernel.ts",
+    "generate:watch": "tsx watch scripts/generate-kernel.ts"
   }
 }

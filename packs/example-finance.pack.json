@@ -1,0 +1,126 @@
+{
+  "id": "finance",
+  "name": "Finance & Accounting",
+  "version": "1.0.0",
+  "domain": "FINANCE",
+  "description": "Core financial concepts, value sets, and values for accounting operations",
+  "concepts": [
+    {
+      "code": "ACCOUNT",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Chart of Accounts entry",
+      "tags": ["accounting", "gl"]
+    },
+    {
+      "code": "ACCOUNT_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "FINANCE",
+      "description": "Account classification type",
+      "tags": ["accounting"]
+    },
+    {
+      "code": "JOURNAL_ENTRY",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Accounting journal entry",
+      "tags": ["accounting", "gl"]
+    },
+    {
+      "code": "JOURNAL_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "FINANCE",
+      "description": "Type of journal entry",
+      "tags": ["accounting"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "ACCOUNT_TYPE",
+      "domain": "FINANCE",
+      "description": "Account type classification",
+      "jurisdiction": "GLOBAL",
+      "tags": ["accounting"]
+    },
+    {
+      "code": "JOURNAL_TYPE",
+      "domain": "FINANCE",
+      "description": "Journal entry types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["accounting"]
+    }
+  ],
+  "values": [
+    {
+      "code": "ASSET",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Asset",
+      "description": "Assets owned by the company",
+      "sort_order": 1
+    },
+    {
+      "code": "LIABILITY",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Liability",
+      "description": "Obligations owed by the company",
+      "sort_order": 2
+    },
+    {
+      "code": "EQUITY",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Equity",
+      "description": "Owner's equity",
+      "sort_order": 3
+    },
+    {
+      "code": "INCOME",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Income",
+      "description": "Revenue and income accounts",
+      "sort_order": 4
+    },
+    {
+      "code": "EXPENSE",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Expense",
+      "description": "Expense accounts",
+      "sort_order": 5
+    },
+    {
+      "code": "SALES",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Sales Journal",
+      "description": "Sales transactions",
+      "sort_order": 1
+    },
+    {
+      "code": "PURCHASE",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Purchase Journal",
+      "description": "Purchase transactions",
+      "sort_order": 2
+    },
+    {
+      "code": "PAYMENT",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Payment Journal",
+      "description": "Payment transactions",
+      "sort_order": 3
+    },
+    {
+      "code": "RECEIPT",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Receipt Journal",
+      "description": "Receipt transactions",
+      "sort_order": 4
+    },
+    {
+      "code": "GENERAL",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "General Journal",
+      "description": "General ledger entries",
+      "sort_order": 5
+    }
+  ]
+}
+

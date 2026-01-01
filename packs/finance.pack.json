@@ -1,0 +1,261 @@
+{
+  "id": "finance",
+  "name": "Finance & Accounting",
+  "version": "1.0.1",
+  "domain": "FINANCE",
+  "description": "Core financial concepts, value sets, and values for accounting operations - Production-ready P0 set",
+  "concepts": [
+    {
+      "code": "ACCOUNT",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Chart of Accounts entry",
+      "tags": ["accounting", "gl"]
+    },
+    {
+      "code": "ACCOUNT_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "FINANCE",
+      "description": "Account classification type",
+      "tags": ["accounting"]
+    },
+    {
+      "code": "JOURNAL_ENTRY",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Accounting journal entry",
+      "tags": ["accounting", "gl"]
+    },
+    {
+      "code": "JOURNAL_LINE",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Journal entry line item (debit/credit)",
+      "tags": ["accounting", "gl"]
+    },
+    {
+      "code": "JOURNAL_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "FINANCE",
+      "description": "Type of journal entry",
+      "tags": ["accounting"]
+    },
+    {
+      "code": "FISCAL_YEAR",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Financial year period",
+      "tags": ["accounting", "period"]
+    },
+    {
+      "code": "FISCAL_PERIOD",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Financial period (month, quarter, year)",
+      "tags": ["accounting", "period"]
+    },
+    {
+      "code": "CURRENCY",
+      "category": "ATTRIBUTE",
+      "domain": "FINANCE",
+      "description": "Currency attribute for monetary values",
+      "tags": ["accounting", "multi-currency"]
+    },
+    {
+      "code": "EXCHANGE_RATE",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Currency exchange rate",
+      "tags": ["accounting", "multi-currency"]
+    },
+    {
+      "code": "TAX_CODE",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Tax code for tax calculations",
+      "tags": ["accounting", "tax"]
+    },
+    {
+      "code": "PAYMENT_TERM",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Payment terms (Net 30, etc.)",
+      "tags": ["accounting", "payment"]
+    },
+    {
+      "code": "COST_CENTER",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Cost center for cost allocation",
+      "tags": ["accounting", "costing"]
+    },
+    {
+      "code": "PROFIT_CENTER",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Profit center for profit allocation",
+      "tags": ["accounting", "costing"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "ACCOUNT_TYPE",
+      "domain": "FINANCE",
+      "description": "Account type classification",
+      "jurisdiction": "GLOBAL",
+      "tags": ["accounting"],
+      "metadata": {
+        "prefix": "ACC"
+      }
+    },
+    {
+      "code": "JOURNAL_TYPE",
+      "domain": "FINANCE",
+      "description": "Journal entry types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["accounting"],
+      "metadata": {
+        "prefix": "JRN"
+      }
+    },
+    {
+      "code": "FISCAL_PERIOD",
+      "domain": "FINANCE",
+      "description": "Fiscal period types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["accounting", "period"],
+      "metadata": {
+        "prefix": "PER"
+      }
+    }
+  ],
+  "values": [
+    {
+      "code": "ASSET",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Asset",
+      "description": "Assets owned by the company",
+      "sort_order": 1
+    },
+    {
+      "code": "LIABILITY",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Liability",
+      "description": "Obligations owed by the company",
+      "sort_order": 2
+    },
+    {
+      "code": "EQUITY",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Equity",
+      "description": "Owner's equity",
+      "sort_order": 3
+    },
+    {
+      "code": "INCOME",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Income",
+      "description": "Revenue and income accounts",
+      "sort_order": 4
+    },
+    {
+      "code": "EXPENSE",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Expense",
+      "description": "Expense accounts",
+      "sort_order": 5
+    },
+    {
+      "code": "SALES",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Sales Journal",
+      "description": "Sales transactions",
+      "sort_order": 1
+    },
+    {
+      "code": "PURCHASE",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Purchase Journal",
+      "description": "Purchase transactions",
+      "sort_order": 2
+    },
+    {
+      "code": "PAYMENT",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Payment Journal",
+      "description": "Payment transactions",
+      "sort_order": 3
+    },
+    {
+      "code": "RECEIPT",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Receipt Journal",
+      "description": "Receipt transactions",
+      "sort_order": 4
+    },
+    {
+      "code": "GENERAL",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "General Journal",
+      "description": "General ledger entries",
+      "sort_order": 5
+    },
+    {
+      "code": "ADJUSTMENT",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Adjustment Journal",
+      "description": "Adjusting entries",
+      "sort_order": 6
+    },
+    {
+      "code": "OPENING",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Opening Journal",
+      "description": "Opening balance entries",
+      "sort_order": 7
+    },
+    {
+      "code": "CLOSING",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Closing Journal",
+      "description": "Closing entries",
+      "sort_order": 8
+    },
+    {
+      "code": "ACCRUAL",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Accrual Journal",
+      "description": "Accrual entries",
+      "sort_order": 9
+    },
+    {
+      "code": "REVERSAL",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Reversal Journal",
+      "description": "Reversing entries",
+      "sort_order": 10
+    },
+    {
+      "code": "MONTH",
+      "value_set_code": "FISCAL_PERIOD",
+      "label": "Month",
+      "description": "Monthly period",
+      "sort_order": 1
+    },
+    {
+      "code": "QUARTER",
+      "value_set_code": "FISCAL_PERIOD",
+      "label": "Quarter",
+      "description": "Quarterly period",
+      "sort_order": 2
+    },
+    {
+      "code": "YEAR",
+      "value_set_code": "FISCAL_PERIOD",
+      "label": "Year",
+      "description": "Annual period",
+      "sort_order": 3
+    }
+  ]
+}
+
