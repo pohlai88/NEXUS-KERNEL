@@ -7,12 +7,50 @@
   "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "typesVersions": {
+    "*": {
+      "*": ["./dist/*"]
+    }
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
       "default": "./dist/index.js"
-    }
+    },
+    "./values/lazy": {
+      "types": "./dist/values.lazy.d.ts",
+      "import": {
+        "types": "./dist/values.lazy.d.ts",
+        "default": "./dist/values.lazy.js"
+      },
+      "default": "./dist/values.lazy.js"
+    },
+    "./validation": {
+      "types": "./dist/kernel.validation.d.ts",
+      "import": {
+        "types": "./dist/kernel.validation.d.ts",
+        "default": "./dist/kernel.validation.js"
+      },
+      "default": "./dist/kernel.validation.js"
+    },
+    "./cache": {
+      "types": "./dist/kernel.validation.cache.d.ts",
+      "import": {
+        "types": "./dist/kernel.validation.cache.d.ts",
+        "default": "./dist/kernel.validation.cache.js"
+      },
+      "default": "./dist/kernel.validation.cache.js"
+    },
+    "./package.json": "./package.json"
   },
   "files": [
     "dist",
@@ -72,6 +110,8 @@
     "docs:status": "tsx scripts/generate-status-report.ts",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "perf:profile": "tsx scripts/performance-profile.ts",
+    "perf:test": "vitest run -- performance.test.ts"
   }
 }

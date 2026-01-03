@@ -9,6 +9,19 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
+## Next.js Optimized ✅
+
+This package is **fully optimized for Next.js** applications:
+- ✅ Tree-shaking support
+- ✅ Server Components compatible
+- ✅ Subpath exports for granular imports
+- ✅ Lazy loading for large value sets
+- ✅ Optimized bundle size
+
+**See:** [Next.js Optimization Guide](./docs/performance/nextjs-optimization.md)
+
+---
+
 ## Overview
 
 `@aibos/kernel` is the **Single Source of Truth (SSOT)** for all platform metadata in AI-BOS. It defines:

@@ -119,6 +119,37 @@ describe("Kernel Validation", () => {
         }
       }
     });
+
+    it("should handle value validation with caching for repeated calls", () => {
+      // Test that validation caching works for repeated validations
+      // This ensures the cache paths are exercised
+      const result1 = validateValue(sampleValue);
+      const result2 = validateValue(sampleValue); // Should use cache
+      expect(result1).toEqual(result2);
+      expect(result1.code).toBe(sampleValue.code);
+    });
+
+    it("should reject value with invalid code that passes Zod but fails naming law", () => {
+      // Create a value that passes Zod schema but fails naming law
+      // This requires a value that has all required Zod fields but invalid code format
+      const invalid = {
+        ...sampleValue,
+        code: "invalidCode123", // Passes Zod (string) but fails naming law (not UPPERCASE_SNAKE_CASE)
+      };
+      expect(() => validateValue(invalid)).toThrow(CanonError);
+      try {
+        validateValue(invalid);
+        expect.fail("Should have thrown");
+      } catch (error) {
+        expect(error).toBeInstanceOf(CanonError);
+        if (error instanceof CanonError) {
+          expect(error.code).toBe("VALIDATION_FAILED");
+          expect(error.message).toContain("UPPERCASE_SNAKE_CASE");
+          // Verify error details exist (structure may vary)
+          expect(error.details).toBeDefined();
+        }
+      }
+    });
   });
 
   describe("Pack Validation", () => {
@@ -178,20 +209,39 @@ describe("Kernel Validation", () => {
 
     it("should reject pack with value referencing unknown value set", () => {
       const invalidPack = {
-        id: "pack.test",
+        id: "pack-test", // Must be kebab-case
+        name: "Test Pack",
+        description: "Test pack description",
         version: "1.0.0",
         domain: "CORE",
         concepts: [],
-        value_sets: [],
+        value_sets: [sampleValueSet], // Pack has TEST_VALUESET
         values: [
           {
             ...sampleValue,
-            value_set_code: "UNKNOWN_VALUESET",
+            value_set_code: "UNKNOWN_VALUESET", // But value references different value set
           },
         ],
         metadata: {},
       };
       expect(() => validatePack(invalidPack)).toThrow(CanonError);
+      try {
+        validatePack(invalidPack);
+        expect.fail("Should have thrown");
+      } catch (error) {
+        expect(error).toBeInstanceOf(CanonError);
+        if (error instanceof CanonError) {
+          expect(error.code).toBe("VALIDATION_FAILED");
+          expect(error.message).toContain("unknown value set");
+          // Check that error details exist
+          expect(error.details).toBeDefined();
+          if (error.details && typeof error.details === "object") {
+            if ("error_type" in error.details) {
+              expect(error.details.error_type).toBe("INVALID_VALUESET_REFERENCE");
+            }
+          }
+        }
+      }
     });
 
     it("should reject pack with value set having less than 2 values", () => {

@@ -17,12 +17,30 @@ import {
     NamingLaws,
 } from "./kernel.contract";
 import { CanonError } from "./errors";
+import { validationCache } from "./kernel.validation.cache";
 
 /**
  * Validate a concept shape
  * @throws CanonError on validation failure
+ * 
+ * Performance: Uses optimized validation cache (WeakMap + LRU)
+ * - Object-based caching for full objects
+ * - Code-based caching for string lookups
  */
 export function validateConcept(concept: unknown): ConceptShape {
+    // Check cache first (object or code-based)
+    if (typeof concept === "object" && concept !== null) {
+        const cached = validationCache.getConcept(concept);
+        if (cached !== undefined) {
+            return cached;
+        }
+    } else if (typeof concept === "string") {
+        const cached = validationCache.getConcept(concept);
+        if (cached !== undefined) {
+            return cached;
+        }
+    }
+
     const result = ConceptShapeSchema.safeParse(concept);
     if (!result.success) {
         throw new CanonError(
@@ -41,14 +59,38 @@ export function validateConcept(concept: unknown): ConceptShape {
         );
     }
 
+    // Cache successful validation (both object and code-based)
+    if (typeof concept === "object" && concept !== null) {
+        validationCache.setConcept(concept, result.data);
+    } else if (typeof concept === "string") {
+        validationCache.setConcept(concept, result.data);
+    }
+
     return result.data;
 }
 
 /**
  * Validate a value set shape
  * @throws CanonError on validation failure
+ * 
+ * Performance: Uses optimized validation cache (WeakMap + LRU)
+ * - Object-based caching for full objects
+ * - Code-based caching for string lookups
  */
 export function validateValueSet(valueSet: unknown): ValueSetShape {
+    // Check cache first (object or code-based)
+    if (typeof valueSet === "object" && valueSet !== null) {
+        const cached = validationCache.getValueSet(valueSet);
+        if (cached !== undefined) {
+            return cached;
+        }
+    } else if (typeof valueSet === "string") {
+        const cached = validationCache.getValueSet(valueSet);
+        if (cached !== undefined) {
+            return cached;
+        }
+    }
+
     const result = ValueSetShapeSchema.safeParse(valueSet);
     if (!result.success) {
         throw new CanonError(
@@ -67,14 +109,38 @@ export function validateValueSet(valueSet: unknown): ValueSetShape {
         );
     }
 
+    // Cache successful validation (both object and code-based)
+    if (typeof valueSet === "object" && valueSet !== null) {
+        validationCache.setValueSet(valueSet, result.data);
+    } else if (typeof valueSet === "string") {
+        validationCache.setValueSet(valueSet, result.data);
+    }
+
     return result.data;
 }
 
 /**
  * Validate a value shape
  * @throws CanonError on validation failure
+ * 
+ * Performance: Uses optimized validation cache (WeakMap + LRU)
+ * - Object-based caching for full objects
+ * - Code-based caching for string lookups (format: "valueSetCode:valueCode")
  */
 export function validateValue(value: unknown): ValueShape {
+    // Check cache first (object or code-based)
+    if (typeof value === "object" && value !== null) {
+        const cached = validationCache.getValue(value);
+        if (cached !== undefined) {
+            return cached;
+        }
+    } else if (typeof value === "string") {
+        const cached = validationCache.getValue(value);
+        if (cached !== undefined) {
+            return cached;
+        }
+    }
+
     const result = ValueShapeSchema.safeParse(value);
     if (!result.success) {
         throw new CanonError(
@@ -91,6 +157,13 @@ export function validateValue(value: unknown): ValueShape {
             `Invalid value code (must be UPPERCASE_SNAKE_CASE): ${result.data.code}`,
             { code: result.data.code, error_type: "INVALID_VALUE_CODE" }
         );
+    }
+
+    // Cache successful validation (both object and code-based)
+    if (typeof value === "object" && value !== null) {
+        validationCache.setValue(value, result.data);
+    } else if (typeof value === "string") {
+        validationCache.setValue(value, result.data);
     }
 
     return result.data;
