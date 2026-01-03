@@ -16,6 +16,7 @@ export default defineConfig({
     'src/kernel.validation.cache.supabase.ts',
     'src/supabase/index.ts',
     'src/monitoring/performance.ts',
+    'src/nextjs/index.ts',
   ],
   
   // Dual format support (ESM + CJS) for maximum compatibility
@@ -54,7 +55,7 @@ export default defineConfig({
   platform: 'node',
   
   // External dependencies (don't bundle)
-  external: ['zod'],
+  external: ['zod', 'next/cache', 'next/server'],
   
   // No banner (clean output)
   banner: undefined,

@@ -53,3 +53,16 @@ export {
   type FetchedDatabaseState,
 } from "./mcp-adapter.js";
 
+// Kernel Metadata Database Integration
+export {
+  syncKernelToDatabase,
+  syncConceptsToDatabase,
+  syncValueSetsToDatabase,
+  syncValuesToDatabase,
+  getKernelMetadataFromDatabase,
+  getCurrentKernelVersion,
+  type KernelMetadataRow,
+  type SyncKernelOptions,
+  type SyncKernelResult,
+} from "./kernel-metadata.js";
+

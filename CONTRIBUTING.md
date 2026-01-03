@@ -4,11 +4,10 @@ Thank you for your interest in contributing! This is the "door" to the project.
 
 ## Quick Start
 
-1. **Read the [Contributing Guidelines](docs/governance/contributing.md)** - Full details
-2. **Set up your environment** - See [Development Setup](#development-setup)
-3. **Pick an issue** - Check [GitHub Issues](https://github.com/pohlai88/NEXUS-KERNEL/issues)
-4. **Make your changes** - Follow [Code Standards](docs/governance/code-standards.md)
-5. **Submit a PR** - See [Pull Request Process](docs/governance/contributing.md#pull-request-process)
+1. **Set up your environment** - See [Development Setup](#development-setup)
+2. **Pick an issue** - Check [GitHub Issues](https://github.com/pohlai88/NEXUS-KERNEL/issues)
+3. **Make your changes** - Follow [Key Principles](#key-principles)
+4. **Submit a PR** - See [Pull Request Checklist](#pull-request-checklist)
 
 ## Development Setup
 
@@ -49,7 +48,7 @@ docs(guides): update usage examples
 
 ## Pull Request Checklist
 
-- [ ] Code follows [Code Standards](docs/governance/code-standards.md)
+- [ ] Code follows [Key Principles](#key-principles)
 - [ ] Tests pass (`pnpm test`)
 - [ ] Type checking passes (`pnpm typecheck`)
 - [ ] Kernel validation passes (`pnpm validate:kernel`)
@@ -58,20 +57,19 @@ docs(guides): update usage examples
 
 ## Getting Help
 
-- **Documentation** - Check [docs/](docs/) directory
+- **Documentation** - Check [README.md](./README.md) and [docs/](./docs/) directory
 - **Issues** - [GitHub Issues](https://github.com/pohlai88/NEXUS-KERNEL/issues)
 - **Discussions** - [GitHub Discussions](https://github.com/pohlai88/NEXUS-KERNEL/discussions)
 
 ## Related Documentation
 
-- **[Full Contributing Guidelines](docs/governance/contributing.md)** - Complete contribution process
-- **[Code Standards](docs/governance/code-standards.md)** - Coding conventions
-- **[Release Process](docs/governance/release-process.md)** - Versioning and releases
-- **[Security Policy](docs/governance/security.md)** - Security guidelines
-- **[Automation Setup](docs/governance/automation.md)** - Documentation automation (TypeDoc, Semantic Release, SSG)
-- **[Getting Started Guide](docs/guides/getting-started.md)** - Quick start tutorial
+- **[README.md](./README.md)** - Main project documentation with Next.js integration guide
+- **[CHANGELOG.md](./CHANGELOG.md)** - Version history and changes
+- **[PRD: NPM Package](./docs/PRD-KERNEL_NPM.md)** - Product requirements
+- **[PRD: ERP Production Ready](./docs/PRD-KERNEL_ERP_PRODUCTION_READY.md)** - Production requirements
+- **[Kernel Doctrine](./docs/NEXUS_CANON_V5_KERNEL_DOCTRINE.md)** - Core principles
 
 ---
 
-**Remember:** The Kernel is the L0 SSOT. Changes here affect the entire platform. Please review the [Architecture Documentation](docs/architecture/overview.md) before making significant changes.
+**Remember:** The Kernel is the L0 SSOT. Changes here affect the entire platform. Please review the [Kernel Doctrine](./docs/NEXUS_CANON_V5_KERNEL_DOCTRINE.md) before making significant changes.
 

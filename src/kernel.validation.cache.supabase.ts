@@ -8,37 +8,36 @@ import type { ConceptShape, ValueSetShape, ValueShape } from "./kernel.contract"
 import type { CacheStats } from "./kernel.validation.cache";
 
 /**
+ * Supabase query builder interface (simplified for type safety)
+ */
+export interface SupabaseQueryBuilder {
+  eq(column: string, value: unknown): SupabaseQueryBuilder;
+  neq(column: string, value: unknown): SupabaseQueryBuilder;
+  gt(column: string, value: unknown): SupabaseQueryBuilder;
+  lt(column: string, value: unknown): SupabaseQueryBuilder;
+  limit(count: number): SupabaseQueryBuilder;
+  single(): Promise<{ data: unknown | null; error: unknown | null }>;
+  maybeSingle(): Promise<{ data: unknown | null; error: unknown | null }>;
+  then<TResult1 = { data: unknown | null; error: unknown | null }, TResult2 = never>(
+    onfulfilled?: ((value: { data: unknown | null; error: unknown | null }) => TResult1 | PromiseLike<TResult1>) | null,
+    onrejected?: ((reason: unknown) => TResult2 | PromiseLike<TResult2>) | null
+  ): Promise<TResult1 | TResult2>;
+}
+
+/**
  * Supabase client interface (compatible with @supabase/supabase-js)
  */
 export interface SupabaseClient {
   from(table: string): {
-    select(columns?: string): {
-      eq(column: string, value: unknown): {
-        eq(column2: string, value2: unknown): {
-          gt(column3: string, value3: unknown): {
-            maybeSingle(): Promise<{ data: unknown | null; error: unknown | null }>;
-          };
-          maybeSingle(): Promise<{ data: unknown | null; error: unknown | null }>;
-        };
-        gt(column2: string, value2: unknown): {
-          maybeSingle(): Promise<{ data: unknown | null; error: unknown | null }>;
-        };
-        single(): Promise<{ data: unknown | null; error: unknown | null }>;
-        maybeSingle(): Promise<{ data: unknown | null; error: unknown | null }>;
-      };
-    };
+    select(columns?: string): SupabaseQueryBuilder;
+    update(values: unknown): SupabaseQueryBuilder;
     insert(values: unknown): {
       select(columns?: string): Promise<{ data: unknown | null; error: unknown | null }>;
     };
-    upsert(values: unknown): {
+    upsert(values: unknown, options?: { onConflict?: string }): {
       select(columns?: string): Promise<{ data: unknown | null; error: unknown | null }>;
     };
-    delete(): {
-      eq(column: string, value: unknown): Promise<{ data: unknown | null; error: unknown | null }>;
-      neq(column: string, value: unknown): Promise<{ data: unknown | null; error: unknown | null }>;
-      like(column: string, pattern: string): Promise<{ data: unknown | null; error: unknown | null }>;
-      lt(column: string, value: unknown): Promise<{ data: unknown | null; error: unknown | null }>;
-    };
+    delete(): SupabaseQueryBuilder;
   };
   rpc(functionName: string, params?: Record<string, unknown>): Promise<{
     data: unknown;

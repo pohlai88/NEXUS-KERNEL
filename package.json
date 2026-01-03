@@ -116,6 +116,23 @@
       },
       "default": "./dist/monitoring/performance.js"
     },
+    "./nextjs": {
+      "@aibos/kernel/source": "./src/nextjs/index.ts",
+      "types": {
+        "import": "./dist/nextjs/index.d.ts",
+        "require": "./dist/nextjs/index.d.cts",
+        "default": "./dist/nextjs/index.d.ts"
+      },
+      "import": {
+        "types": "./dist/nextjs/index.d.ts",
+        "default": "./dist/nextjs/index.js"
+      },
+      "require": {
+        "types": "./dist/nextjs/index.d.cts",
+        "default": "./dist/nextjs/index.cjs"
+      },
+      "default": "./dist/nextjs/index.js"
+    },
     "./package.json": "./package.json",
     "./v1": {
       "types": "./dist/index.d.ts",
@@ -159,6 +176,7 @@
     "@semantic-release/npm": "^13.1.3",
     "@types/node": "^20.19.27",
     "@vitest/coverage-v8": "^4.0.16",
+    "next": "^16.1.1",
     "semantic-release": "^25.0.2",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
