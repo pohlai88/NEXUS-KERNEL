@@ -1,0 +1,1527 @@
+[**@aibos/kernel**](../README.md)
+
+***
+
+[@aibos/kernel](../README.md) / VALUE
+
+# Variable: VALUE
+
+> `const` **VALUE**: `object`
+
+Defined in: [src/values.ts:111](https://github.com/pohlai88/NEXUS-KERNEL/blob/536b1ee182a1f0e1cca915c7ff0a36317c6af611/src/values.ts#L111)
+
+VALUE - The Value Registry
+
+307 canonical values organized by value set.
+Nested structure: VALUE.<ValueSet>.<Value>
+
+## Type Declaration
+
+### ACCOUNT\_TYPE
+
+> `readonly` **ACCOUNT\_TYPE**: `object`
+
+#### ACCOUNT\_TYPE.ASSET
+
+> `readonly` **ASSET**: `"ACC_ASSET"` = `"ACC_ASSET"`
+
+#### ACCOUNT\_TYPE.EQUITY
+
+> `readonly` **EQUITY**: `"ACC_EQUITY"` = `"ACC_EQUITY"`
+
+#### ACCOUNT\_TYPE.EXPENSE
+
+> `readonly` **EXPENSE**: `"ACC_EXPENSE"` = `"ACC_EXPENSE"`
+
+#### ACCOUNT\_TYPE.INCOME
+
+> `readonly` **INCOME**: `"ACC_INCOME"` = `"ACC_INCOME"`
+
+#### ACCOUNT\_TYPE.LIABILITY
+
+> `readonly` **LIABILITY**: `"ACC_LIABILITY"` = `"ACC_LIABILITY"`
+
+### ADDRESS\_TYPE
+
+> `readonly` **ADDRESS\_TYPE**: `object`
+
+#### ADDRESS\_TYPE.BILLING
+
+> `readonly` **BILLING**: `"ADR_BILLING"` = `"ADR_BILLING"`
+
+#### ADDRESS\_TYPE.OPERATIONAL
+
+> `readonly` **OPERATIONAL**: `"ADR_OPERATIONAL"` = `"ADR_OPERATIONAL"`
+
+#### ADDRESS\_TYPE.REGISTERED
+
+> `readonly` **REGISTERED**: `"ADR_REGISTERED"` = `"ADR_REGISTERED"`
+
+#### ADDRESS\_TYPE.SHIPPING
+
+> `readonly` **SHIPPING**: `"ADR_SHIPPING"` = `"ADR_SHIPPING"`
+
+### API\_KEY\_STATUS
+
+> `readonly` **API\_KEY\_STATUS**: `object`
+
+#### API\_KEY\_STATUS.ACTIVE
+
+> `readonly` **ACTIVE**: `"AKS_ACTIVE"` = `"AKS_ACTIVE"`
+
+#### API\_KEY\_STATUS.EXPIRED
+
+> `readonly` **EXPIRED**: `"AKS_EXPIRED"` = `"AKS_EXPIRED"`
+
+#### API\_KEY\_STATUS.REVOKED
+
+> `readonly` **REVOKED**: `"AKS_REVOKED"` = `"AKS_REVOKED"`
+
+### APPROVAL\_STATUS
+
+> `readonly` **APPROVAL\_STATUS**: `object`
+
+#### APPROVAL\_STATUS.APPROVED
+
+> `readonly` **APPROVED**: `"APR_APPROVED"` = `"APR_APPROVED"`
+
+#### APPROVAL\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"APR_CANCELLED"` = `"APR_CANCELLED"`
+
+#### APPROVAL\_STATUS.PENDING
+
+> `readonly` **PENDING**: `"APR_PENDING"` = `"APR_PENDING"`
+
+#### APPROVAL\_STATUS.REJECTED
+
+> `readonly` **REJECTED**: `"APR_REJECTED"` = `"APR_REJECTED"`
+
+#### APPROVAL\_STATUS.WITHDRAWN
+
+> `readonly` **WITHDRAWN**: `"APR_WITHDRAWN"` = `"APR_WITHDRAWN"`
+
+### ASSET\_EVENT\_TYPE
+
+> `readonly` **ASSET\_EVENT\_TYPE**: `object`
+
+#### ASSET\_EVENT\_TYPE.ACQUISITION
+
+> `readonly` **ACQUISITION**: `"AET_ACQUISITION"` = `"AET_ACQUISITION"`
+
+#### ASSET\_EVENT\_TYPE.DISPOSAL
+
+> `readonly` **DISPOSAL**: `"AET_DISPOSAL"` = `"AET_DISPOSAL"`
+
+#### ASSET\_EVENT\_TYPE.IMPAIRMENT
+
+> `readonly` **IMPAIRMENT**: `"AET_IMPAIRMENT"` = `"AET_IMPAIRMENT"`
+
+#### ASSET\_EVENT\_TYPE.REVALUATION
+
+> `readonly` **REVALUATION**: `"AET_REVALUATION"` = `"AET_REVALUATION"`
+
+#### ASSET\_EVENT\_TYPE.TRANSFER
+
+> `readonly` **TRANSFER**: `"AET_TRANSFER"` = `"AET_TRANSFER"`
+
+### ASSET\_STATUS
+
+> `readonly` **ASSET\_STATUS**: `object`
+
+#### ASSET\_STATUS.ACTIVE
+
+> `readonly` **ACTIVE**: `"ASS_ACTIVE"` = `"ASS_ACTIVE"`
+
+#### ASSET\_STATUS.CLOSED
+
+> `readonly` **CLOSED**: `"ASS_CLOSED"` = `"ASS_CLOSED"`
+
+#### ASSET\_STATUS.DISPOSED
+
+> `readonly` **DISPOSED**: `"ASS_DISPOSED"` = `"ASS_DISPOSED"`
+
+#### ASSET\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"ASS_DRAFT"` = `"ASS_DRAFT"`
+
+#### ASSET\_STATUS.SUSPENDED
+
+> `readonly` **SUSPENDED**: `"ASS_SUSPENDED"` = `"ASS_SUSPENDED"`
+
+### ASSET\_TYPE
+
+> `readonly` **ASSET\_TYPE**: `object`
+
+#### ASSET\_TYPE.INTANGIBLE
+
+> `readonly` **INTANGIBLE**: `"AST_INTANGIBLE"` = `"AST_INTANGIBLE"`
+
+#### ASSET\_TYPE.INVESTMENT\_PROPERTY
+
+> `readonly` **INVESTMENT\_PROPERTY**: `"AST_INVESTMENT_PROPERTY"` = `"AST_INVESTMENT_PROPERTY"`
+
+#### ASSET\_TYPE.RIGHT\_OF\_USE
+
+> `readonly` **RIGHT\_OF\_USE**: `"AST_RIGHT_OF_USE"` = `"AST_RIGHT_OF_USE"`
+
+#### ASSET\_TYPE.TANGIBLE
+
+> `readonly` **TANGIBLE**: `"AST_TANGIBLE"` = `"AST_TANGIBLE"`
+
+### ATTENDANCE\_STATUS
+
+> `readonly` **ATTENDANCE\_STATUS**: `object`
+
+#### ATTENDANCE\_STATUS.ABSENT
+
+> `readonly` **ABSENT**: `"ATS_ABSENT"` = `"ATS_ABSENT"`
+
+#### ATTENDANCE\_STATUS.COMPLETED
+
+> `readonly` **COMPLETED**: `"ATS_COMPLETED"` = `"ATS_COMPLETED"`
+
+#### ATTENDANCE\_STATUS.HALF\_DAY
+
+> `readonly` **HALF\_DAY**: `"ATS_HALF_DAY"` = `"ATS_HALF_DAY"`
+
+#### ATTENDANCE\_STATUS.LATE
+
+> `readonly` **LATE**: `"ATS_LATE"` = `"ATS_LATE"`
+
+#### ATTENDANCE\_STATUS.PRESENT
+
+> `readonly` **PRESENT**: `"ATS_PRESENT"` = `"ATS_PRESENT"`
+
+### BANK\_STATEMENT\_STATUS
+
+> `readonly` **BANK\_STATEMENT\_STATUS**: `object`
+
+#### BANK\_STATEMENT\_STATUS.CLOSED
+
+> `readonly` **CLOSED**: `"BSS_CLOSED"` = `"BSS_CLOSED"`
+
+#### BANK\_STATEMENT\_STATUS.IMPORTED
+
+> `readonly` **IMPORTED**: `"BSS_IMPORTED"` = `"BSS_IMPORTED"`
+
+#### BANK\_STATEMENT\_STATUS.POSTED
+
+> `readonly` **POSTED**: `"BSS_POSTED"` = `"BSS_POSTED"`
+
+#### BANK\_STATEMENT\_STATUS.VALIDATED
+
+> `readonly` **VALIDATED**: `"BSS_VALIDATED"` = `"BSS_VALIDATED"`
+
+### BOM\_TYPE
+
+> `readonly` **BOM\_TYPE**: `object`
+
+#### BOM\_TYPE.PHANTOM
+
+> `readonly` **PHANTOM**: `"BOM_PHANTOM"` = `"BOM_PHANTOM"`
+
+#### BOM\_TYPE.STANDARD
+
+> `readonly` **STANDARD**: `"BOM_STANDARD"` = `"BOM_STANDARD"`
+
+#### BOM\_TYPE.VARIANT
+
+> `readonly` **VARIANT**: `"BOM_VARIANT"` = `"BOM_VARIANT"`
+
+### CONTACT\_TYPE
+
+> `readonly` **CONTACT\_TYPE**: `object`
+
+#### CONTACT\_TYPE.BILLING
+
+> `readonly` **BILLING**: `"CON_BILLING"` = `"CON_BILLING"`
+
+#### CONTACT\_TYPE.PRIMARY
+
+> `readonly` **PRIMARY**: `"CON_PRIMARY"` = `"CON_PRIMARY"`
+
+#### CONTACT\_TYPE.SHIPPING
+
+> `readonly` **SHIPPING**: `"CON_SHIPPING"` = `"CON_SHIPPING"`
+
+#### CONTACT\_TYPE.TECHNICAL
+
+> `readonly` **TECHNICAL**: `"CON_TECHNICAL"` = `"CON_TECHNICAL"`
+
+### CONTROL\_TYPE
+
+> `readonly` **CONTROL\_TYPE**: `object`
+
+#### CONTROL\_TYPE.CORRECTIVE
+
+> `readonly` **CORRECTIVE**: `"CTL_CORRECTIVE"` = `"CTL_CORRECTIVE"`
+
+#### CONTROL\_TYPE.DETECTIVE
+
+> `readonly` **DETECTIVE**: `"CTL_DETECTIVE"` = `"CTL_DETECTIVE"`
+
+#### CONTROL\_TYPE.PREVENTIVE
+
+> `readonly` **PREVENTIVE**: `"CTL_PREVENTIVE"` = `"CTL_PREVENTIVE"`
+
+### CUSTOMER\_TYPE
+
+> `readonly` **CUSTOMER\_TYPE**: `object`
+
+#### CUSTOMER\_TYPE.COMPANY
+
+> `readonly` **COMPANY**: `"CUS_COMPANY"` = `"CUS_COMPANY"`
+
+#### CUSTOMER\_TYPE.GOVERNMENT
+
+> `readonly` **GOVERNMENT**: `"CUS_GOVERNMENT"` = `"CUS_GOVERNMENT"`
+
+#### CUSTOMER\_TYPE.INDIVIDUAL
+
+> `readonly` **INDIVIDUAL**: `"CUS_INDIVIDUAL"` = `"CUS_INDIVIDUAL"`
+
+### DELIVERY\_NOTE\_STATUS
+
+> `readonly` **DELIVERY\_NOTE\_STATUS**: `object`
+
+#### DELIVERY\_NOTE\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"DNS_CANCELLED"` = `"DNS_CANCELLED"`
+
+#### DELIVERY\_NOTE\_STATUS.DELIVERED
+
+> `readonly` **DELIVERED**: `"DNS_DELIVERED"` = `"DNS_DELIVERED"`
+
+#### DELIVERY\_NOTE\_STATUS.PENDING
+
+> `readonly` **PENDING**: `"DNS_PENDING"` = `"DNS_PENDING"`
+
+#### DELIVERY\_NOTE\_STATUS.PICKED
+
+> `readonly` **PICKED**: `"DNS_PICKED"` = `"DNS_PICKED"`
+
+#### DELIVERY\_NOTE\_STATUS.RETURNED
+
+> `readonly` **RETURNED**: `"DNS_RETURNED"` = `"DNS_RETURNED"`
+
+#### DELIVERY\_NOTE\_STATUS.SHIPPED
+
+> `readonly` **SHIPPED**: `"DNS_SHIPPED"` = `"DNS_SHIPPED"`
+
+### DELIVERY\_STATUS
+
+> `readonly` **DELIVERY\_STATUS**: `object`
+
+#### DELIVERY\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"DLS_CANCELLED"` = `"DLS_CANCELLED"`
+
+#### DELIVERY\_STATUS.DELIVERED
+
+> `readonly` **DELIVERED**: `"DLS_DELIVERED"` = `"DLS_DELIVERED"`
+
+#### DELIVERY\_STATUS.FAILED
+
+> `readonly` **FAILED**: `"DLS_FAILED"` = `"DLS_FAILED"`
+
+#### DELIVERY\_STATUS.OUT\_FOR\_DELIVERY
+
+> `readonly` **OUT\_FOR\_DELIVERY**: `"DLS_OUT_FOR_DELIVERY"` = `"DLS_OUT_FOR_DELIVERY"`
+
+#### DELIVERY\_STATUS.PLANNED
+
+> `readonly` **PLANNED**: `"DLS_PLANNED"` = `"DLS_PLANNED"`
+
+### DEPRECIATION\_METHOD
+
+> `readonly` **DEPRECIATION\_METHOD**: `object`
+
+#### DEPRECIATION\_METHOD.DECLINING\_BALANCE
+
+> `readonly` **DECLINING\_BALANCE**: `"DPM_DECLINING_BALANCE"` = `"DPM_DECLINING_BALANCE"`
+
+#### DEPRECIATION\_METHOD.STRAIGHT\_LINE
+
+> `readonly` **STRAIGHT\_LINE**: `"DPM_STRAIGHT_LINE"` = `"DPM_STRAIGHT_LINE"`
+
+#### DEPRECIATION\_METHOD.UNITS\_OF\_PRODUCTION
+
+> `readonly` **UNITS\_OF\_PRODUCTION**: `"DPM_UNITS_OF_PRODUCTION"` = `"DPM_UNITS_OF_PRODUCTION"`
+
+### EMPLOYEE\_TYPE
+
+> `readonly` **EMPLOYEE\_TYPE**: `object`
+
+#### EMPLOYEE\_TYPE.CONTRACTOR
+
+> `readonly` **CONTRACTOR**: `"EMP_CONTRACTOR"` = `"EMP_CONTRACTOR"`
+
+#### EMPLOYEE\_TYPE.FULL\_TIME
+
+> `readonly` **FULL\_TIME**: `"EMP_FULL_TIME"` = `"EMP_FULL_TIME"`
+
+#### EMPLOYEE\_TYPE.INTERN
+
+> `readonly` **INTERN**: `"EMP_INTERN"` = `"EMP_INTERN"`
+
+#### EMPLOYEE\_TYPE.PART\_TIME
+
+> `readonly` **PART\_TIME**: `"EMP_PART_TIME"` = `"EMP_PART_TIME"`
+
+### FEATURE\_FLAG\_STATUS
+
+> `readonly` **FEATURE\_FLAG\_STATUS**: `object`
+
+#### FEATURE\_FLAG\_STATUS.DISABLED
+
+> `readonly` **DISABLED**: `"FFS_DISABLED"` = `"FFS_DISABLED"`
+
+#### FEATURE\_FLAG\_STATUS.ENABLED
+
+> `readonly` **ENABLED**: `"FFS_ENABLED"` = `"FFS_ENABLED"`
+
+#### FEATURE\_FLAG\_STATUS.RETIRED
+
+> `readonly` **RETIRED**: `"FFS_RETIRED"` = `"FFS_RETIRED"`
+
+### FISCAL\_PERIOD
+
+> `readonly` **FISCAL\_PERIOD**: `object`
+
+#### FISCAL\_PERIOD.MONTH
+
+> `readonly` **MONTH**: `"PER_MONTH"` = `"PER_MONTH"`
+
+#### FISCAL\_PERIOD.QUARTER
+
+> `readonly` **QUARTER**: `"PER_QUARTER"` = `"PER_QUARTER"`
+
+#### FISCAL\_PERIOD.YEAR
+
+> `readonly` **YEAR**: `"PER_YEAR"` = `"PER_YEAR"`
+
+### GOODS\_RECEIPT\_STATUS
+
+> `readonly` **GOODS\_RECEIPT\_STATUS**: `object`
+
+#### GOODS\_RECEIPT\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"GRS_CANCELLED"` = `"GRS_CANCELLED"`
+
+#### GOODS\_RECEIPT\_STATUS.PARTIAL
+
+> `readonly` **PARTIAL**: `"GRS_PARTIAL"` = `"GRS_PARTIAL"`
+
+#### GOODS\_RECEIPT\_STATUS.PENDING
+
+> `readonly` **PENDING**: `"GRS_PENDING"` = `"GRS_PENDING"`
+
+#### GOODS\_RECEIPT\_STATUS.RECEIVED
+
+> `readonly` **RECEIVED**: `"GRS_RECEIVED"` = `"GRS_RECEIVED"`
+
+#### GOODS\_RECEIPT\_STATUS.REJECTED
+
+> `readonly` **REJECTED**: `"GRS_REJECTED"` = `"GRS_REJECTED"`
+
+### INCIDENT\_STATUS
+
+> `readonly` **INCIDENT\_STATUS**: `object`
+
+#### INCIDENT\_STATUS.CLOSED
+
+> `readonly` **CLOSED**: `"INS_CLOSED"` = `"INS_CLOSED"`
+
+#### INCIDENT\_STATUS.INVESTIGATING
+
+> `readonly` **INVESTIGATING**: `"INS_INVESTIGATING"` = `"INS_INVESTIGATING"`
+
+#### INCIDENT\_STATUS.OPEN
+
+> `readonly` **OPEN**: `"INS_OPEN"` = `"INS_OPEN"`
+
+#### INCIDENT\_STATUS.RESOLVED
+
+> `readonly` **RESOLVED**: `"INS_RESOLVED"` = `"INS_RESOLVED"`
+
+### INVOICE\_STATUS
+
+> `readonly` **INVOICE\_STATUS**: `object`
+
+#### INVOICE\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"INV_DRAFT"` = `"INV_DRAFT"`
+
+#### INVOICE\_STATUS.ISSUED
+
+> `readonly` **ISSUED**: `"INV_ISSUED"` = `"INV_ISSUED"`
+
+#### INVOICE\_STATUS.OVERDUE
+
+> `readonly` **OVERDUE**: `"INV_OVERDUE"` = `"INV_OVERDUE"`
+
+#### INVOICE\_STATUS.PAID
+
+> `readonly` **PAID**: `"INV_PAID"` = `"INV_PAID"`
+
+#### INVOICE\_STATUS.PARTIALLY\_PAID
+
+> `readonly` **PARTIALLY\_PAID**: `"INV_PARTIALLY_PAID"` = `"INV_PARTIALLY_PAID"`
+
+#### INVOICE\_STATUS.VOIDED
+
+> `readonly` **VOIDED**: `"INV_VOIDED"` = `"INV_VOIDED"`
+
+### ITEM\_TYPE
+
+> `readonly` **ITEM\_TYPE**: `object`
+
+#### ITEM\_TYPE.ASSEMBLY
+
+> `readonly` **ASSEMBLY**: `"ITM_ASSEMBLY"` = `"ITM_ASSEMBLY"`
+
+#### ITEM\_TYPE.BUNDLE
+
+> `readonly` **BUNDLE**: `"ITM_BUNDLE"` = `"ITM_BUNDLE"`
+
+#### ITEM\_TYPE.SERVICE
+
+> `readonly` **SERVICE**: `"ITM_SERVICE"` = `"ITM_SERVICE"`
+
+#### ITEM\_TYPE.STOCK
+
+> `readonly` **STOCK**: `"ITM_STOCK"` = `"ITM_STOCK"`
+
+### JOURNAL\_TYPE
+
+> `readonly` **JOURNAL\_TYPE**: `object`
+
+#### JOURNAL\_TYPE.ACCRUAL
+
+> `readonly` **ACCRUAL**: `"JRN_ACCRUAL"` = `"JRN_ACCRUAL"`
+
+#### JOURNAL\_TYPE.ADJUSTMENT
+
+> `readonly` **ADJUSTMENT**: `"JRN_ADJUSTMENT"` = `"JRN_ADJUSTMENT"`
+
+#### JOURNAL\_TYPE.CLOSING
+
+> `readonly` **CLOSING**: `"JRN_CLOSING"` = `"JRN_CLOSING"`
+
+#### JOURNAL\_TYPE.GENERAL
+
+> `readonly` **GENERAL**: `"JRN_GENERAL"` = `"JRN_GENERAL"`
+
+#### JOURNAL\_TYPE.OPENING
+
+> `readonly` **OPENING**: `"JRN_OPENING"` = `"JRN_OPENING"`
+
+#### JOURNAL\_TYPE.PAYMENT
+
+> `readonly` **PAYMENT**: `"JRN_PAYMENT"` = `"JRN_PAYMENT"`
+
+#### JOURNAL\_TYPE.PURCHASE
+
+> `readonly` **PURCHASE**: `"JRN_PURCHASE"` = `"JRN_PURCHASE"`
+
+#### JOURNAL\_TYPE.RECEIPT
+
+> `readonly` **RECEIPT**: `"JRN_RECEIPT"` = `"JRN_RECEIPT"`
+
+#### JOURNAL\_TYPE.REVERSAL
+
+> `readonly` **REVERSAL**: `"JRN_REVERSAL"` = `"JRN_REVERSAL"`
+
+#### JOURNAL\_TYPE.SALES
+
+> `readonly` **SALES**: `"JRN_SALES"` = `"JRN_SALES"`
+
+### LEAVE\_STATUS
+
+> `readonly` **LEAVE\_STATUS**: `object`
+
+#### LEAVE\_STATUS.APPROVED
+
+> `readonly` **APPROVED**: `"LVS_APPROVED"` = `"LVS_APPROVED"`
+
+#### LEAVE\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"LVS_CANCELLED"` = `"LVS_CANCELLED"`
+
+#### LEAVE\_STATUS.PENDING
+
+> `readonly` **PENDING**: `"LVS_PENDING"` = `"LVS_PENDING"`
+
+#### LEAVE\_STATUS.REJECTED
+
+> `readonly` **REJECTED**: `"LVS_REJECTED"` = `"LVS_REJECTED"`
+
+### MAINTENANCE\_STATUS
+
+> `readonly` **MAINTENANCE\_STATUS**: `object`
+
+#### MAINTENANCE\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"MTS_CANCELLED"` = `"MTS_CANCELLED"`
+
+#### MAINTENANCE\_STATUS.COMPLETED
+
+> `readonly` **COMPLETED**: `"MTS_COMPLETED"` = `"MTS_COMPLETED"`
+
+#### MAINTENANCE\_STATUS.IN\_PROGRESS
+
+> `readonly` **IN\_PROGRESS**: `"MTS_IN_PROGRESS"` = `"MTS_IN_PROGRESS"`
+
+#### MAINTENANCE\_STATUS.PLANNED
+
+> `readonly` **PLANNED**: `"MTS_PLANNED"` = `"MTS_PLANNED"`
+
+### MATCHING\_METHOD
+
+> `readonly` **MATCHING\_METHOD**: `object`
+
+#### MATCHING\_METHOD.AUTO
+
+> `readonly` **AUTO**: `"MTM_AUTO"` = `"MTM_AUTO"`
+
+#### MATCHING\_METHOD.MANUAL
+
+> `readonly` **MANUAL**: `"MTM_MANUAL"` = `"MTM_MANUAL"`
+
+#### MATCHING\_METHOD.RULE\_BASED
+
+> `readonly` **RULE\_BASED**: `"MTM_RULE_BASED"` = `"MTM_RULE_BASED"`
+
+### MILESTONE\_STATUS
+
+> `readonly` **MILESTONE\_STATUS**: `object`
+
+#### MILESTONE\_STATUS.ACHIEVED
+
+> `readonly` **ACHIEVED**: `"MLS_ACHIEVED"` = `"MLS_ACHIEVED"`
+
+#### MILESTONE\_STATUS.CLOSED
+
+> `readonly` **CLOSED**: `"MLS_CLOSED"` = `"MLS_CLOSED"`
+
+#### MILESTONE\_STATUS.DELAYED
+
+> `readonly` **DELAYED**: `"MLS_DELAYED"` = `"MLS_DELAYED"`
+
+#### MILESTONE\_STATUS.PENDING
+
+> `readonly` **PENDING**: `"MLS_PENDING"` = `"MLS_PENDING"`
+
+### NOTIFICATION\_CHANNEL
+
+> `readonly` **NOTIFICATION\_CHANNEL**: `object`
+
+#### NOTIFICATION\_CHANNEL.EMAIL
+
+> `readonly` **EMAIL**: `"NTC_EMAIL"` = `"NTC_EMAIL"`
+
+#### NOTIFICATION\_CHANNEL.IN\_APP
+
+> `readonly` **IN\_APP**: `"NTC_IN_APP"` = `"NTC_IN_APP"`
+
+#### NOTIFICATION\_CHANNEL.SMS
+
+> `readonly` **SMS**: `"NTC_SMS"` = `"NTC_SMS"`
+
+#### NOTIFICATION\_CHANNEL.WEBHOOK
+
+> `readonly` **WEBHOOK**: `"NTC_WEBHOOK"` = `"NTC_WEBHOOK"`
+
+### NOTIFICATION\_STATUS
+
+> `readonly` **NOTIFICATION\_STATUS**: `object`
+
+#### NOTIFICATION\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"NTS_CANCELLED"` = `"NTS_CANCELLED"`
+
+#### NOTIFICATION\_STATUS.DELIVERED
+
+> `readonly` **DELIVERED**: `"NTS_DELIVERED"` = `"NTS_DELIVERED"`
+
+#### NOTIFICATION\_STATUS.FAILED
+
+> `readonly` **FAILED**: `"NTS_FAILED"` = `"NTS_FAILED"`
+
+#### NOTIFICATION\_STATUS.QUEUED
+
+> `readonly` **QUEUED**: `"NTS_QUEUED"` = `"NTS_QUEUED"`
+
+#### NOTIFICATION\_STATUS.SENT
+
+> `readonly` **SENT**: `"NTS_SENT"` = `"NTS_SENT"`
+
+### OPERATION\_TYPE
+
+> `readonly` **OPERATION\_TYPE**: `object`
+
+#### OPERATION\_TYPE.ASSEMBLY
+
+> `readonly` **ASSEMBLY**: `"OPT_ASSEMBLY"` = `"OPT_ASSEMBLY"`
+
+#### OPERATION\_TYPE.INSPECTION
+
+> `readonly` **INSPECTION**: `"OPT_INSPECTION"` = `"OPT_INSPECTION"`
+
+#### OPERATION\_TYPE.MACHINING
+
+> `readonly` **MACHINING**: `"OPT_MACHINING"` = `"OPT_MACHINING"`
+
+#### OPERATION\_TYPE.SETUP
+
+> `readonly` **SETUP**: `"OPT_SETUP"` = `"OPT_SETUP"`
+
+### PARTY\_TYPE
+
+> `readonly` **PARTY\_TYPE**: `object`
+
+#### PARTY\_TYPE.COMPANY
+
+> `readonly` **COMPANY**: `"PTY_COMPANY"` = `"PTY_COMPANY"`
+
+#### PARTY\_TYPE.GOVERNMENT
+
+> `readonly` **GOVERNMENT**: `"PTY_GOVERNMENT"` = `"PTY_GOVERNMENT"`
+
+#### PARTY\_TYPE.INDIVIDUAL
+
+> `readonly` **INDIVIDUAL**: `"PTY_INDIVIDUAL"` = `"PTY_INDIVIDUAL"`
+
+### PAYMENT\_BATCH\_STATUS
+
+> `readonly` **PAYMENT\_BATCH\_STATUS**: `object`
+
+#### PAYMENT\_BATCH\_STATUS.APPROVED
+
+> `readonly` **APPROVED**: `"PBS_APPROVED"` = `"PBS_APPROVED"`
+
+#### PAYMENT\_BATCH\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"PBS_CANCELLED"` = `"PBS_CANCELLED"`
+
+#### PAYMENT\_BATCH\_STATUS.COMPLETED
+
+> `readonly` **COMPLETED**: `"PBS_COMPLETED"` = `"PBS_COMPLETED"`
+
+#### PAYMENT\_BATCH\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"PBS_DRAFT"` = `"PBS_DRAFT"`
+
+#### PAYMENT\_BATCH\_STATUS.EXPORTED
+
+> `readonly` **EXPORTED**: `"PBS_EXPORTED"` = `"PBS_EXPORTED"`
+
+#### PAYMENT\_BATCH\_STATUS.SUBMITTED
+
+> `readonly` **SUBMITTED**: `"PBS_SUBMITTED"` = `"PBS_SUBMITTED"`
+
+### PAYMENT\_METHOD
+
+> `readonly` **PAYMENT\_METHOD**: `object`
+
+#### PAYMENT\_METHOD.BANK\_TRANSFER
+
+> `readonly` **BANK\_TRANSFER**: `"PAY_BANK_TRANSFER"` = `"PAY_BANK_TRANSFER"`
+
+#### PAYMENT\_METHOD.CASH
+
+> `readonly` **CASH**: `"PAY_CASH"` = `"PAY_CASH"`
+
+#### PAYMENT\_METHOD.CHEQUE
+
+> `readonly` **CHEQUE**: `"PAY_CHEQUE"` = `"PAY_CHEQUE"`
+
+#### PAYMENT\_METHOD.CREDIT\_CARD
+
+> `readonly` **CREDIT\_CARD**: `"PAY_CREDIT_CARD"` = `"PAY_CREDIT_CARD"`
+
+#### PAYMENT\_METHOD.DEBIT\_CARD
+
+> `readonly` **DEBIT\_CARD**: `"PAY_DEBIT_CARD"` = `"PAY_DEBIT_CARD"`
+
+#### PAYMENT\_METHOD.E\_WALLET
+
+> `readonly` **E\_WALLET**: `"PAY_E_WALLET"` = `"PAY_E_WALLET"`
+
+### PAYMENT\_STATUS
+
+> `readonly` **PAYMENT\_STATUS**: `object`
+
+#### PAYMENT\_STATUS.APPROVED
+
+> `readonly` **APPROVED**: `"PST_APPROVED"` = `"PST_APPROVED"`
+
+#### PAYMENT\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"PST_CANCELLED"` = `"PST_CANCELLED"`
+
+#### PAYMENT\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"PST_DRAFT"` = `"PST_DRAFT"`
+
+#### PAYMENT\_STATUS.FAILED
+
+> `readonly` **FAILED**: `"PST_FAILED"` = `"PST_FAILED"`
+
+#### PAYMENT\_STATUS.PAID
+
+> `readonly` **PAID**: `"PST_PAID"` = `"PST_PAID"`
+
+#### PAYMENT\_STATUS.PROCESSING
+
+> `readonly` **PROCESSING**: `"PST_PROCESSING"` = `"PST_PROCESSING"`
+
+### PAYROLL\_STATUS
+
+> `readonly` **PAYROLL\_STATUS**: `object`
+
+#### PAYROLL\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"PYS_CANCELLED"` = `"PYS_CANCELLED"`
+
+#### PAYROLL\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"PYS_DRAFT"` = `"PYS_DRAFT"`
+
+#### PAYROLL\_STATUS.PAID
+
+> `readonly` **PAID**: `"PYS_PAID"` = `"PYS_PAID"`
+
+#### PAYROLL\_STATUS.PROCESSED
+
+> `readonly` **PROCESSED**: `"PYS_PROCESSED"` = `"PYS_PROCESSED"`
+
+### PERFORMANCE\_RATING
+
+> `readonly` **PERFORMANCE\_RATING**: `object`
+
+#### PERFORMANCE\_RATING.EXCELLENT
+
+> `readonly` **EXCELLENT**: `"PFR_EXCELLENT"` = `"PFR_EXCELLENT"`
+
+#### PERFORMANCE\_RATING.GOOD
+
+> `readonly` **GOOD**: `"PFR_GOOD"` = `"PFR_GOOD"`
+
+#### PERFORMANCE\_RATING.NEEDS\_IMPROVEMENT
+
+> `readonly` **NEEDS\_IMPROVEMENT**: `"PFR_NEEDS_IMPROVEMENT"` = `"PFR_NEEDS_IMPROVEMENT"`
+
+#### PERFORMANCE\_RATING.SATISFACTORY
+
+> `readonly` **SATISFACTORY**: `"PFR_SATISFACTORY"` = `"PFR_SATISFACTORY"`
+
+### PICK\_STATUS
+
+> `readonly` **PICK\_STATUS**: `object`
+
+#### PICK\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"PKS_CANCELLED"` = `"PKS_CANCELLED"`
+
+#### PICK\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"PKS_DRAFT"` = `"PKS_DRAFT"`
+
+#### PICK\_STATUS.PICKED
+
+> `readonly` **PICKED**: `"PKS_PICKED"` = `"PKS_PICKED"`
+
+#### PICK\_STATUS.PICKING
+
+> `readonly` **PICKING**: `"PKS_PICKING"` = `"PKS_PICKING"`
+
+#### PICK\_STATUS.RELEASED
+
+> `readonly` **RELEASED**: `"PKS_RELEASED"` = `"PKS_RELEASED"`
+
+### POLICY\_STATUS
+
+> `readonly` **POLICY\_STATUS**: `object`
+
+#### POLICY\_STATUS.ACTIVE
+
+> `readonly` **ACTIVE**: `"PLS_ACTIVE"` = `"PLS_ACTIVE"`
+
+#### POLICY\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"PLS_DRAFT"` = `"PLS_DRAFT"`
+
+#### POLICY\_STATUS.RETIRED
+
+> `readonly` **RETIRED**: `"PLS_RETIRED"` = `"PLS_RETIRED"`
+
+### PRICE\_LIST\_TYPE
+
+> `readonly` **PRICE\_LIST\_TYPE**: `object`
+
+#### PRICE\_LIST\_TYPE.PROMOTIONAL
+
+> `readonly` **PROMOTIONAL**: `"PLT_PROMOTIONAL"` = `"PLT_PROMOTIONAL"`
+
+#### PRICE\_LIST\_TYPE.STANDARD
+
+> `readonly` **STANDARD**: `"PLT_STANDARD"` = `"PLT_STANDARD"`
+
+#### PRICE\_LIST\_TYPE.VOLUME\_DISCOUNT
+
+> `readonly` **VOLUME\_DISCOUNT**: `"PLT_VOLUME_DISCOUNT"` = `"PLT_VOLUME_DISCOUNT"`
+
+### PRIORITY\_LEVEL
+
+> `readonly` **PRIORITY\_LEVEL**: `object`
+
+#### PRIORITY\_LEVEL.CRITICAL
+
+> `readonly` **CRITICAL**: `"PRI_CRITICAL"` = `"PRI_CRITICAL"`
+
+#### PRIORITY\_LEVEL.HIGH
+
+> `readonly` **HIGH**: `"PRI_HIGH"` = `"PRI_HIGH"`
+
+#### PRIORITY\_LEVEL.LOW
+
+> `readonly` **LOW**: `"PRI_LOW"` = `"PRI_LOW"`
+
+#### PRIORITY\_LEVEL.MEDIUM
+
+> `readonly` **MEDIUM**: `"PRI_MEDIUM"` = `"PRI_MEDIUM"`
+
+#### PRIORITY\_LEVEL.URGENT
+
+> `readonly` **URGENT**: `"PRI_URGENT"` = `"PRI_URGENT"`
+
+### PRODUCTION\_STATUS
+
+> `readonly` **PRODUCTION\_STATUS**: `object`
+
+#### PRODUCTION\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"PRS_CANCELLED"` = `"PRS_CANCELLED"`
+
+#### PRODUCTION\_STATUS.COMPLETED
+
+> `readonly` **COMPLETED**: `"PRS_COMPLETED"` = `"PRS_COMPLETED"`
+
+#### PRODUCTION\_STATUS.IN\_PROGRESS
+
+> `readonly` **IN\_PROGRESS**: `"PRS_IN_PROGRESS"` = `"PRS_IN_PROGRESS"`
+
+#### PRODUCTION\_STATUS.PLANNED
+
+> `readonly` **PLANNED**: `"PRS_PLANNED"` = `"PRS_PLANNED"`
+
+#### PRODUCTION\_STATUS.SCRAPPED
+
+> `readonly` **SCRAPPED**: `"PRS_SCRAPPED"` = `"PRS_SCRAPPED"`
+
+### PROJECT\_STATUS
+
+> `readonly` **PROJECT\_STATUS**: `object`
+
+#### PROJECT\_STATUS.ACTIVE
+
+> `readonly` **ACTIVE**: `"PJS_ACTIVE"` = `"PJS_ACTIVE"`
+
+#### PROJECT\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"PJS_CANCELLED"` = `"PJS_CANCELLED"`
+
+#### PROJECT\_STATUS.COMPLETED
+
+> `readonly` **COMPLETED**: `"PJS_COMPLETED"` = `"PJS_COMPLETED"`
+
+#### PROJECT\_STATUS.ON\_HOLD
+
+> `readonly` **ON\_HOLD**: `"PJS_ON_HOLD"` = `"PJS_ON_HOLD"`
+
+#### PROJECT\_STATUS.PLANNING
+
+> `readonly` **PLANNING**: `"PJS_PLANNING"` = `"PJS_PLANNING"`
+
+### PROJECT\_TYPE
+
+> `readonly` **PROJECT\_TYPE**: `object`
+
+#### PROJECT\_TYPE.CUSTOMER
+
+> `readonly` **CUSTOMER**: `"PRT_CUSTOMER"` = `"PRT_CUSTOMER"`
+
+#### PROJECT\_TYPE.INTERNAL
+
+> `readonly` **INTERNAL**: `"PRT_INTERNAL"` = `"PRT_INTERNAL"`
+
+#### PROJECT\_TYPE.MAINTENANCE
+
+> `readonly` **MAINTENANCE**: `"PRT_MAINTENANCE"` = `"PRT_MAINTENANCE"`
+
+#### PROJECT\_TYPE.R\_AND\_D
+
+> `readonly` **R\_AND\_D**: `"PRT_R_AND_D"` = `"PRT_R_AND_D"`
+
+### PURCHASE\_INVOICE\_STATUS
+
+> `readonly` **PURCHASE\_INVOICE\_STATUS**: `object`
+
+#### PURCHASE\_INVOICE\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"PIS_DRAFT"` = `"PIS_DRAFT"`
+
+#### PURCHASE\_INVOICE\_STATUS.OVERDUE
+
+> `readonly` **OVERDUE**: `"PIS_OVERDUE"` = `"PIS_OVERDUE"`
+
+#### PURCHASE\_INVOICE\_STATUS.PAID
+
+> `readonly` **PAID**: `"PIS_PAID"` = `"PIS_PAID"`
+
+#### PURCHASE\_INVOICE\_STATUS.PARTIALLY\_PAID
+
+> `readonly` **PARTIALLY\_PAID**: `"PIS_PARTIALLY_PAID"` = `"PIS_PARTIALLY_PAID"`
+
+#### PURCHASE\_INVOICE\_STATUS.POSTED
+
+> `readonly` **POSTED**: `"PIS_POSTED"` = `"PIS_POSTED"`
+
+#### PURCHASE\_INVOICE\_STATUS.VOIDED
+
+> `readonly` **VOIDED**: `"PIS_VOIDED"` = `"PIS_VOIDED"`
+
+### PURCHASE\_ORDER\_STATUS
+
+> `readonly` **PURCHASE\_ORDER\_STATUS**: `object`
+
+#### PURCHASE\_ORDER\_STATUS.APPROVED
+
+> `readonly` **APPROVED**: `"POS_APPROVED"` = `"POS_APPROVED"`
+
+#### PURCHASE\_ORDER\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"POS_CANCELLED"` = `"POS_CANCELLED"`
+
+#### PURCHASE\_ORDER\_STATUS.COMPLETED
+
+> `readonly` **COMPLETED**: `"POS_COMPLETED"` = `"POS_COMPLETED"`
+
+#### PURCHASE\_ORDER\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"POS_DRAFT"` = `"POS_DRAFT"`
+
+#### PURCHASE\_ORDER\_STATUS.RECEIVED
+
+> `readonly` **RECEIVED**: `"POS_RECEIVED"` = `"POS_RECEIVED"`
+
+### QUOTATION\_STATUS
+
+> `readonly` **QUOTATION\_STATUS**: `object`
+
+#### QUOTATION\_STATUS.ACCEPTED
+
+> `readonly` **ACCEPTED**: `"QTN_ACCEPTED"` = `"QTN_ACCEPTED"`
+
+#### QUOTATION\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"QTN_DRAFT"` = `"QTN_DRAFT"`
+
+#### QUOTATION\_STATUS.EXPIRED
+
+> `readonly` **EXPIRED**: `"QTN_EXPIRED"` = `"QTN_EXPIRED"`
+
+#### QUOTATION\_STATUS.REJECTED
+
+> `readonly` **REJECTED**: `"QTN_REJECTED"` = `"QTN_REJECTED"`
+
+#### QUOTATION\_STATUS.SENT
+
+> `readonly` **SENT**: `"QTN_SENT"` = `"QTN_SENT"`
+
+### RECEIPT\_STATUS
+
+> `readonly` **RECEIPT\_STATUS**: `object`
+
+#### RECEIPT\_STATUS.ALLOCATED
+
+> `readonly` **ALLOCATED**: `"RPT_ALLOCATED"` = `"RPT_ALLOCATED"`
+
+#### RECEIPT\_STATUS.CLOSED
+
+> `readonly` **CLOSED**: `"RPT_CLOSED"` = `"RPT_CLOSED"`
+
+#### RECEIPT\_STATUS.CONFIRMED
+
+> `readonly` **CONFIRMED**: `"RPT_CONFIRMED"` = `"RPT_CONFIRMED"`
+
+#### RECEIPT\_STATUS.DEPOSITED
+
+> `readonly` **DEPOSITED**: `"RPT_DEPOSITED"` = `"RPT_DEPOSITED"`
+
+#### RECEIPT\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"RPT_DRAFT"` = `"RPT_DRAFT"`
+
+#### RECEIPT\_STATUS.REVERSED
+
+> `readonly` **REVERSED**: `"RPT_REVERSED"` = `"RPT_REVERSED"`
+
+### RECONCILIATION\_STATUS
+
+> `readonly` **RECONCILIATION\_STATUS**: `object`
+
+#### RECONCILIATION\_STATUS.CLOSED
+
+> `readonly` **CLOSED**: `"RCS_CLOSED"` = `"RCS_CLOSED"`
+
+#### RECONCILIATION\_STATUS.COMPLETED
+
+> `readonly` **COMPLETED**: `"RCS_COMPLETED"` = `"RCS_COMPLETED"`
+
+#### RECONCILIATION\_STATUS.IN\_PROGRESS
+
+> `readonly` **IN\_PROGRESS**: `"RCS_IN_PROGRESS"` = `"RCS_IN_PROGRESS"`
+
+#### RECONCILIATION\_STATUS.OPEN
+
+> `readonly` **OPEN**: `"RCS_OPEN"` = `"RCS_OPEN"`
+
+### RESOURCE\_TYPE
+
+> `readonly` **RESOURCE\_TYPE**: `object`
+
+#### RESOURCE\_TYPE.ASSET
+
+> `readonly` **ASSET**: `"RST_ASSET"` = `"RST_ASSET"`
+
+#### RESOURCE\_TYPE.PERSON
+
+> `readonly` **PERSON**: `"RST_PERSON"` = `"RST_PERSON"`
+
+#### RESOURCE\_TYPE.ROLE
+
+> `readonly` **ROLE**: `"RST_ROLE"` = `"RST_ROLE"`
+
+#### RESOURCE\_TYPE.VENDOR
+
+> `readonly` **VENDOR**: `"RST_VENDOR"` = `"RST_VENDOR"`
+
+### RFQ\_STATUS
+
+> `readonly` **RFQ\_STATUS**: `object`
+
+#### RFQ\_STATUS.AWARDED
+
+> `readonly` **AWARDED**: `"RFQ_AWARDED"` = `"RFQ_AWARDED"`
+
+#### RFQ\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"RFQ_CANCELLED"` = `"RFQ_CANCELLED"`
+
+#### RFQ\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"RFQ_DRAFT"` = `"RFQ_DRAFT"`
+
+#### RFQ\_STATUS.RECEIVED
+
+> `readonly` **RECEIVED**: `"RFQ_RECEIVED"` = `"RFQ_RECEIVED"`
+
+#### RFQ\_STATUS.SENT
+
+> `readonly` **SENT**: `"RFQ_SENT"` = `"RFQ_SENT"`
+
+### RISK\_SEVERITY
+
+> `readonly` **RISK\_SEVERITY**: `object`
+
+#### RISK\_SEVERITY.CRITICAL
+
+> `readonly` **CRITICAL**: `"RSK_CRITICAL"` = `"RSK_CRITICAL"`
+
+#### RISK\_SEVERITY.HIGH
+
+> `readonly` **HIGH**: `"RSK_HIGH"` = `"RSK_HIGH"`
+
+#### RISK\_SEVERITY.LOW
+
+> `readonly` **LOW**: `"RSK_LOW"` = `"RSK_LOW"`
+
+#### RISK\_SEVERITY.MEDIUM
+
+> `readonly` **MEDIUM**: `"RSK_MEDIUM"` = `"RSK_MEDIUM"`
+
+### ROUNDING\_METHOD
+
+> `readonly` **ROUNDING\_METHOD**: `object`
+
+#### ROUNDING\_METHOD.ROUND\_DOWN
+
+> `readonly` **ROUND\_DOWN**: `"RND_ROUND_DOWN"` = `"RND_ROUND_DOWN"`
+
+#### ROUNDING\_METHOD.ROUND\_HALF\_EVEN
+
+> `readonly` **ROUND\_HALF\_EVEN**: `"RND_ROUND_HALF_EVEN"` = `"RND_ROUND_HALF_EVEN"`
+
+#### ROUNDING\_METHOD.ROUND\_HALF\_UP
+
+> `readonly` **ROUND\_HALF\_UP**: `"RND_ROUND_HALF_UP"` = `"RND_ROUND_HALF_UP"`
+
+#### ROUNDING\_METHOD.ROUND\_UP
+
+> `readonly` **ROUND\_UP**: `"RND_ROUND_UP"` = `"RND_ROUND_UP"`
+
+### SALARY\_COMPONENT\_TYPE
+
+> `readonly` **SALARY\_COMPONENT\_TYPE**: `object`
+
+#### SALARY\_COMPONENT\_TYPE.ALLOWANCE
+
+> `readonly` **ALLOWANCE**: `"SCT_ALLOWANCE"` = `"SCT_ALLOWANCE"`
+
+#### SALARY\_COMPONENT\_TYPE.BASIC
+
+> `readonly` **BASIC**: `"SCT_BASIC"` = `"SCT_BASIC"`
+
+#### SALARY\_COMPONENT\_TYPE.BONUS
+
+> `readonly` **BONUS**: `"SCT_BONUS"` = `"SCT_BONUS"`
+
+#### SALARY\_COMPONENT\_TYPE.DEDUCTION
+
+> `readonly` **DEDUCTION**: `"SCT_DEDUCTION"` = `"SCT_DEDUCTION"`
+
+### SALES\_ORDER\_STATUS
+
+> `readonly` **SALES\_ORDER\_STATUS**: `object`
+
+#### SALES\_ORDER\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"SOS_CANCELLED"` = `"SOS_CANCELLED"`
+
+#### SALES\_ORDER\_STATUS.COMPLETED
+
+> `readonly` **COMPLETED**: `"SOS_COMPLETED"` = `"SOS_COMPLETED"`
+
+#### SALES\_ORDER\_STATUS.CONFIRMED
+
+> `readonly` **CONFIRMED**: `"SOS_CONFIRMED"` = `"SOS_CONFIRMED"`
+
+#### SALES\_ORDER\_STATUS.DELIVERED
+
+> `readonly` **DELIVERED**: `"SOS_DELIVERED"` = `"SOS_DELIVERED"`
+
+#### SALES\_ORDER\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"SOS_DRAFT"` = `"SOS_DRAFT"`
+
+### SETTING\_SCOPE
+
+> `readonly` **SETTING\_SCOPE**: `object`
+
+#### SETTING\_SCOPE.GLOBAL
+
+> `readonly` **GLOBAL**: `"SSC_GLOBAL"` = `"SSC_GLOBAL"`
+
+#### SETTING\_SCOPE.TENANT
+
+> `readonly` **TENANT**: `"SSC_TENANT"` = `"SSC_TENANT"`
+
+#### SETTING\_SCOPE.USER
+
+> `readonly` **USER**: `"SSC_USER"` = `"SSC_USER"`
+
+### SHIPMENT\_STATUS
+
+> `readonly` **SHIPMENT\_STATUS**: `object`
+
+#### SHIPMENT\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"SPS_CANCELLED"` = `"SPS_CANCELLED"`
+
+#### SHIPMENT\_STATUS.DELIVERED
+
+> `readonly` **DELIVERED**: `"SPS_DELIVERED"` = `"SPS_DELIVERED"`
+
+#### SHIPMENT\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"SPS_DRAFT"` = `"SPS_DRAFT"`
+
+#### SHIPMENT\_STATUS.PACKED
+
+> `readonly` **PACKED**: `"SPS_PACKED"` = `"SPS_PACKED"`
+
+#### SHIPMENT\_STATUS.RETURNED
+
+> `readonly` **RETURNED**: `"SPS_RETURNED"` = `"SPS_RETURNED"`
+
+#### SHIPMENT\_STATUS.SHIPPED
+
+> `readonly` **SHIPPED**: `"SPS_SHIPPED"` = `"SPS_SHIPPED"`
+
+### STOCK\_ENTRY\_TYPE
+
+> `readonly` **STOCK\_ENTRY\_TYPE**: `object`
+
+#### STOCK\_ENTRY\_TYPE.ADJUSTMENT
+
+> `readonly` **ADJUSTMENT**: `"STE_ADJUSTMENT"` = `"STE_ADJUSTMENT"`
+
+#### STOCK\_ENTRY\_TYPE.ISSUE
+
+> `readonly` **ISSUE**: `"STE_ISSUE"` = `"STE_ISSUE"`
+
+#### STOCK\_ENTRY\_TYPE.RECEIPT
+
+> `readonly` **RECEIPT**: `"STE_RECEIPT"` = `"STE_RECEIPT"`
+
+#### STOCK\_ENTRY\_TYPE.RETURN
+
+> `readonly` **RETURN**: `"STE_RETURN"` = `"STE_RETURN"`
+
+#### STOCK\_ENTRY\_TYPE.TRANSFER
+
+> `readonly` **TRANSFER**: `"STE_TRANSFER"` = `"STE_TRANSFER"`
+
+### SUPPLIER\_TYPE
+
+> `readonly` **SUPPLIER\_TYPE**: `object`
+
+#### SUPPLIER\_TYPE.DISTRIBUTOR
+
+> `readonly` **DISTRIBUTOR**: `"SUP_DISTRIBUTOR"` = `"SUP_DISTRIBUTOR"`
+
+#### SUPPLIER\_TYPE.MANUFACTURER
+
+> `readonly` **MANUFACTURER**: `"SUP_MANUFACTURER"` = `"SUP_MANUFACTURER"`
+
+#### SUPPLIER\_TYPE.RETAILER
+
+> `readonly` **RETAILER**: `"SUP_RETAILER"` = `"SUP_RETAILER"`
+
+#### SUPPLIER\_TYPE.SERVICE
+
+> `readonly` **SERVICE**: `"SUP_SERVICE"` = `"SUP_SERVICE"`
+
+### TASK\_STATUS
+
+> `readonly` **TASK\_STATUS**: `object`
+
+#### TASK\_STATUS.BLOCKED
+
+> `readonly` **BLOCKED**: `"TSK_BLOCKED"` = `"TSK_BLOCKED"`
+
+#### TASK\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"TSK_CANCELLED"` = `"TSK_CANCELLED"`
+
+#### TASK\_STATUS.DONE
+
+> `readonly` **DONE**: `"TSK_DONE"` = `"TSK_DONE"`
+
+#### TASK\_STATUS.IN\_PROGRESS
+
+> `readonly` **IN\_PROGRESS**: `"TSK_IN_PROGRESS"` = `"TSK_IN_PROGRESS"`
+
+#### TASK\_STATUS.REVIEW
+
+> `readonly` **REVIEW**: `"TSK_REVIEW"` = `"TSK_REVIEW"`
+
+#### TASK\_STATUS.TODO
+
+> `readonly` **TODO**: `"TSK_TODO"` = `"TSK_TODO"`
+
+### TAX\_REPORTING\_CATEGORY
+
+> `readonly` **TAX\_REPORTING\_CATEGORY**: `object`
+
+#### TAX\_REPORTING\_CATEGORY.INPUT\_TAX
+
+> `readonly` **INPUT\_TAX**: `"TRC_INPUT_TAX"` = `"TRC_INPUT_TAX"`
+
+#### TAX\_REPORTING\_CATEGORY.OUTPUT\_TAX
+
+> `readonly` **OUTPUT\_TAX**: `"TRC_OUTPUT_TAX"` = `"TRC_OUTPUT_TAX"`
+
+#### TAX\_REPORTING\_CATEGORY.REVERSE\_CHARGE
+
+> `readonly` **REVERSE\_CHARGE**: `"TRC_REVERSE_CHARGE"` = `"TRC_REVERSE_CHARGE"`
+
+#### TAX\_REPORTING\_CATEGORY.WITHHOLDING\_TAX
+
+> `readonly` **WITHHOLDING\_TAX**: `"TRC_WITHHOLDING_TAX"` = `"TRC_WITHHOLDING_TAX"`
+
+### TAX\_TREATMENT
+
+> `readonly` **TAX\_TREATMENT**: `object`
+
+#### TAX\_TREATMENT.EXEMPT
+
+> `readonly` **EXEMPT**: `"TRT_EXEMPT"` = `"TRT_EXEMPT"`
+
+#### TAX\_TREATMENT.OUT\_OF\_SCOPE
+
+> `readonly` **OUT\_OF\_SCOPE**: `"TRT_OUT_OF_SCOPE"` = `"TRT_OUT_OF_SCOPE"`
+
+#### TAX\_TREATMENT.STANDARD
+
+> `readonly` **STANDARD**: `"TRT_STANDARD"` = `"TRT_STANDARD"`
+
+#### TAX\_TREATMENT.ZERO\_RATED
+
+> `readonly` **ZERO\_RATED**: `"TRT_ZERO_RATED"` = `"TRT_ZERO_RATED"`
+
+### TAX\_TYPE
+
+> `readonly` **TAX\_TYPE**: `object`
+
+#### TAX\_TYPE.CUSTOMS\_DUTY
+
+> `readonly` **CUSTOMS\_DUTY**: `"TXT_CUSTOMS_DUTY"` = `"TXT_CUSTOMS_DUTY"`
+
+#### TAX\_TYPE.GST
+
+> `readonly` **GST**: `"TXT_GST"` = `"TXT_GST"`
+
+#### TAX\_TYPE.SST
+
+> `readonly` **SST**: `"TXT_SST"` = `"TXT_SST"`
+
+#### TAX\_TYPE.VAT
+
+> `readonly` **VAT**: `"TXT_VAT"` = `"TXT_VAT"`
+
+#### TAX\_TYPE.WITHHOLDING
+
+> `readonly` **WITHHOLDING**: `"TXT_WITHHOLDING"` = `"TXT_WITHHOLDING"`
+
+### TRANSACTION\_STATUS
+
+> `readonly` **TRANSACTION\_STATUS**: `object`
+
+#### TRANSACTION\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"TXN_CANCELLED"` = `"TXN_CANCELLED"`
+
+#### TRANSACTION\_STATUS.COMPLETED
+
+> `readonly` **COMPLETED**: `"TXN_COMPLETED"` = `"TXN_COMPLETED"`
+
+#### TRANSACTION\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"TXN_DRAFT"` = `"TXN_DRAFT"`
+
+#### TRANSACTION\_STATUS.FAILED
+
+> `readonly` **FAILED**: `"TXN_FAILED"` = `"TXN_FAILED"`
+
+#### TRANSACTION\_STATUS.PROCESSING
+
+> `readonly` **PROCESSING**: `"TXN_PROCESSING"` = `"TXN_PROCESSING"`
+
+#### TRANSACTION\_STATUS.SUBMITTED
+
+> `readonly` **SUBMITTED**: `"TXN_SUBMITTED"` = `"TXN_SUBMITTED"`
+
+### TRANSFER\_TYPE
+
+> `readonly` **TRANSFER\_TYPE**: `object`
+
+#### TRANSFER\_TYPE.CUSTOMER\_RETURN
+
+> `readonly` **CUSTOMER\_RETURN**: `"TRF_CUSTOMER_RETURN"` = `"TRF_CUSTOMER_RETURN"`
+
+#### TRANSFER\_TYPE.INTER\_WAREHOUSE
+
+> `readonly` **INTER\_WAREHOUSE**: `"TRF_INTER_WAREHOUSE"` = `"TRF_INTER_WAREHOUSE"`
+
+#### TRANSFER\_TYPE.INTERNAL
+
+> `readonly` **INTERNAL**: `"TRF_INTERNAL"` = `"TRF_INTERNAL"`
+
+#### TRANSFER\_TYPE.SUPPLIER\_RETURN
+
+> `readonly` **SUPPLIER\_RETURN**: `"TRF_SUPPLIER_RETURN"` = `"TRF_SUPPLIER_RETURN"`
+
+### UOM\_CATEGORY
+
+> `readonly` **UOM\_CATEGORY**: `object`
+
+#### UOM\_CATEGORY.AREA
+
+> `readonly` **AREA**: `"UOM_AREA"` = `"UOM_AREA"`
+
+#### UOM\_CATEGORY.COUNT
+
+> `readonly` **COUNT**: `"UOM_COUNT"` = `"UOM_COUNT"`
+
+#### UOM\_CATEGORY.LENGTH
+
+> `readonly` **LENGTH**: `"UOM_LENGTH"` = `"UOM_LENGTH"`
+
+#### UOM\_CATEGORY.TIME
+
+> `readonly` **TIME**: `"UOM_TIME"` = `"UOM_TIME"`
+
+#### UOM\_CATEGORY.VOLUME
+
+> `readonly` **VOLUME**: `"UOM_VOLUME"` = `"UOM_VOLUME"`
+
+#### UOM\_CATEGORY.WEIGHT
+
+> `readonly` **WEIGHT**: `"UOM_WEIGHT"` = `"UOM_WEIGHT"`
+
+### WORK\_ORDER\_STATUS
+
+> `readonly` **WORK\_ORDER\_STATUS**: `object`
+
+#### WORK\_ORDER\_STATUS.CANCELLED
+
+> `readonly` **CANCELLED**: `"WOS_CANCELLED"` = `"WOS_CANCELLED"`
+
+#### WORK\_ORDER\_STATUS.COMPLETED
+
+> `readonly` **COMPLETED**: `"WOS_COMPLETED"` = `"WOS_COMPLETED"`
+
+#### WORK\_ORDER\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"WOS_DRAFT"` = `"WOS_DRAFT"`
+
+#### WORK\_ORDER\_STATUS.IN\_PROGRESS
+
+> `readonly` **IN\_PROGRESS**: `"WOS_IN_PROGRESS"` = `"WOS_IN_PROGRESS"`
+
+#### WORK\_ORDER\_STATUS.RELEASED
+
+> `readonly` **RELEASED**: `"WOS_RELEASED"` = `"WOS_RELEASED"`
+
+### WORKFLOW\_STATUS
+
+> `readonly` **WORKFLOW\_STATUS**: `object`
+
+#### WORKFLOW\_STATUS.ACTIVE
+
+> `readonly` **ACTIVE**: `"WFS_ACTIVE"` = `"WFS_ACTIVE"`
+
+#### WORKFLOW\_STATUS.DRAFT
+
+> `readonly` **DRAFT**: `"WFS_DRAFT"` = `"WFS_DRAFT"`
+
+#### WORKFLOW\_STATUS.RETIRED
+
+> `readonly` **RETIRED**: `"WFS_RETIRED"` = `"WFS_RETIRED"`
+
+#### WORKFLOW\_STATUS.SUSPENDED
+
+> `readonly` **SUSPENDED**: `"WFS_SUSPENDED"` = `"WFS_SUSPENDED"`
+
+## Example
+
+```typescript
+import { VALUE } from "@aibos/kernel";
+
+const status = VALUE.APPROVAL_ACTION.APPROVED; // "APP_APPROVED"
+const country = VALUE.COUNTRIES.MALAYSIA; // "COUNTRY_MY"
+```

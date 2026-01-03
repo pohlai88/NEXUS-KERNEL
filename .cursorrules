@@ -1,0 +1,150 @@
+# Cursor Rules for NEXUS-KERNEL
+
+## Documentation Policy (STRICT)
+
+**NO documentation files are allowed in this project except the following whitelist:**
+
+### Allowed Documentation Files
+
+**Root Level:**
+- `README.md` - Main project documentation
+- `CHANGELOG.md` - Version history and changes
+- `LICENSE` - Legal license file
+
+**docs/ Directory:**
+- `docs/PRD-KERNEL_NPM.md` - Original PRD: NPM Package
+- `docs/PRD-KERNEL_ERP_PRODUCTION_READY.md` - Original PRD: ERP Production Ready
+- `docs/NEXUS_CANON_V5_KERNEL_DOCTRINE.md` - Core doctrine and architectural principles
+
+### Enforcement Rules
+
+1. **If any `.md` file is discovered that is NOT in the whitelist above, it MUST be removed immediately**
+2. **Process documents are FORBIDDEN** (checklists, task lists, compliance reports, execution guides, etc.)
+3. **Analysis/Evidence documents are FORBIDDEN** (implementation analysis, completion evidence, diff summaries, audit reports, etc.)
+4. **Temporary documentation is FORBIDDEN** (cleanup reports, migration guides, etc.)
+5. **Sub-PRD documents are FORBIDDEN** (only original PRDs are allowed)
+
+### What Gets Removed
+
+Any `.md` file that is:
+- A process document (checklists, guides, procedures)
+- An analysis or evidence document
+- A compliance or audit report
+- A diff summary or comparison document
+- A task tracking document
+- A cleanup or migration report
+- A sub-PRD or implementation detail document
+- Any other documentation not explicitly listed in the whitelist
+
+### Project Context
+
+This is `@aibos/kernel` - the L0 SSOT (Single Source of Truth) for all platform metadata in AI-BOS.
+
+**Key Principles:**
+- Kernel defines what exists (31+ concepts, 12+ value sets, 62+ values)
+- Type-safe, compile-time validation
+- One-way truth flow (L0 → L1 → L2 → L3)
+- No downstream redefinition allowed
+
+### Code Standards
+
+- TypeScript with strict mode
+- All exports must be type-safe
+- No raw strings for concepts/values
+- Use `@aibos/kernel` exports for all metadata references
+- Follow semantic versioning
+- Maintain kernel integrity invariants
+
+### When Adding Code
+
+- Always use kernel exports: `CONCEPT.*`, `VALUE.*`, `VALUESET.*`
+- Never hardcode concept/value strings
+- Validate against kernel contract
+- Follow pack-based architecture
+- Generate code from data tables (industrialization)
+
+### When Modifying Documentation
+
+- Only update whitelisted files
+- README.md should reflect current state
+- CHANGELOG.md must follow Keep a Changelog format
+- PRDs are frozen - do not modify without version bump
+- Doctrine is authoritative - changes require approval
+
+## Instruction Compliance (STRICT)
+
+**CRITICAL: The AI assistant MUST follow human instructions exactly and completely.**
+
+### Mandatory Rules
+
+1. **NO IDE Drift** - Do NOT deviate from explicit instructions
+   - If the human says "install dependencies", you MUST run `pnpm install` or equivalent
+   - If the human says "create file X", you MUST create file X exactly as specified
+   - If the human says "do Y", you MUST do Y - do not skip, delay, or modify the instruction
+
+2. **NO Skipping Steps** - Complete ALL requested actions
+   - If asked to install packages, install them immediately
+   - If asked to create files, create them immediately
+   - If asked to run commands, run them immediately
+   - Do NOT say "I'll do it later" or "planned for later" - do it NOW
+
+3. **NO Assumptions** - Follow instructions literally
+   - Do NOT assume the human meant something else
+   - Do NOT skip steps because "they're obvious"
+   - Do NOT defer actions to "later" or "Week 1"
+   - If the human asks for something, do it immediately
+
+4. **Dependency Installation** - ALWAYS install when requested
+   - If the human asks "are dependencies installed?", check and install if missing
+   - If the human asks to "install X", install X immediately
+   - Do NOT document installation steps without actually installing
+   - Do NOT say "you can install later" - install NOW if requested
+
+5. **Action Completion** - Verify actions are complete
+   - After running commands, verify they succeeded
+   - After creating files, verify they exist
+   - After installing packages, verify they're in package.json and node_modules
+   - Report completion status clearly
+
+6. **Mandatory Explanation** - MUST explain if NOT executing
+   - If you decide NOT to execute an instruction, you MUST explain WHY
+   - If you skip a step, you MUST explain the reasoning
+   - If you defer an action, you MUST explain why it's deferred
+   - If you cannot complete an instruction, you MUST explain the reason
+   - Silence or omission is FORBIDDEN - always explain non-execution
+
+### Examples of FORBIDDEN Behavior
+
+❌ **FORBIDDEN:** "I'll install dependencies later" or "Dependencies are planned for Week 1"  
+✅ **REQUIRED:** Install dependencies immediately when asked
+
+❌ **FORBIDDEN:** "You can run this command yourself"  
+✅ **REQUIRED:** Run the command yourself when requested
+
+❌ **FORBIDDEN:** Skipping steps because "they're obvious"  
+✅ **REQUIRED:** Complete all steps explicitly
+
+❌ **FORBIDDEN:** Documenting what to do instead of doing it  
+✅ **REQUIRED:** Actually perform the action
+
+❌ **FORBIDDEN:** Skipping an instruction without explanation  
+✅ **REQUIRED:** If not executing, explain reasoning: "I'm not doing X because Y"
+
+❌ **FORBIDDEN:** Silent omission or failure to act  
+✅ **REQUIRED:** Always explain why if not executing an instruction
+
+### Enforcement
+
+- The AI assistant MUST check for instruction compliance before responding
+- If a human instruction is unclear, ask for clarification - do NOT assume
+- Complete actions immediately unless explicitly told to wait
+- Report what was done, not what could be done
+- **MANDATORY:** If any instruction is NOT executed, provide explicit reasoning
+- **MANDATORY:** Never silently skip, defer, or omit requested actions
+- **MANDATORY:** Explain the "why" behind any non-execution decision
+
+---
+
+**Last Updated:** 2026-01-01  
+**Enforcement:** Automatic via Cursor AI assistant
+

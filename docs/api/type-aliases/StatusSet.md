@@ -1,0 +1,17 @@
+[**@aibos/kernel**](../README.md)
+
+***
+
+[@aibos/kernel](../README.md) / StatusSet
+
+# Type Alias: StatusSet\<T\>
+
+> **StatusSet**\<`T`\> = `ReturnType`\<*typeof* [`createStatusSet`](../functions/createStatusSet.md)\>
+
+Defined in: [src/status.ts:24](https://github.com/pohlai88/NEXUS-KERNEL/blob/536b1ee182a1f0e1cca915c7ff0a36317c6af611/src/status.ts#L24)
+
+## Type Parameters
+
+### T
+
+`T` *extends* readonly `string`[]

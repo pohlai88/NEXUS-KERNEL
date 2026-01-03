@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Kernel v1.0.0** - Complete ERP kernel with 182 concepts, 68 value sets, 307 values
+- **Kernel v1.0.0** - Complete ERP kernel with 181 concepts, 68 value sets, 307 values
 
 #### Packs (14 total)
 

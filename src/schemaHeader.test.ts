@@ -77,6 +77,16 @@ describe("createSchemaHeader", () => {
     expect(vendorHeader.type).toBe("vendor");
   });
 
+  it("should handle schema ID without colon separator", () => {
+    // This tests the ?? "unknown" fallback when split(":")[1] is undefined
+    const header = createSchemaHeader(
+      "INVALID_SCHEMA_ID" as CanonId,
+      "1.0.0",
+      { created_by: "test" }
+    );
+    expect(header.type).toBe("unknown");
+  });
+
   it("should handle optional context fields", () => {
     const header = createSchemaHeader("NEXUS:GRN:1" as CanonId, "1.0.0", {
       created_by: "system",

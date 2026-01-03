@@ -1,7 +1,7 @@
 // @aibos/kernel - L0 Concept Constants
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // ⚠️ AUTO-GENERATED: Do not edit manually. Edit data sources instead.
-// Generated: 2026-01-01T19:18:56.919Z
+// Generated: 2026-01-03T03:37:47.249Z
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
@@ -15,7 +15,7 @@ export type ConceptCategory =
 /**
  * CONCEPT - The Business Ontology
  *
- * 181 canonical concepts organized by category.
+ * 182 canonical concepts organized by category.
  * These define WHAT EXISTS in AI-BOS.
  *
  * @example
@@ -28,7 +28,7 @@ export type ConceptCategory =
  */
 export const CONCEPT = {
   // ─────────────────────────────────────────────────────────────────────────
-  // ENTITY (128) - Core business objects
+  // ENTITY (129) - Core business objects
   // ─────────────────────────────────────────────────────────────────────────
   /** Chart of Accounts entry */
   ACCOUNT: "CONCEPT_ACCOUNT",
@@ -80,6 +80,8 @@ export const CONCEPT = {
   CONTROL: "CONCEPT_CONTROL",
   /** Cost center for cost allocation */
   COST_CENTER: "CONCEPT_COST_CENTER",
+  /** Sovereign nation per ISO 3166-1 */
+  COUNTRY: "CONCEPT_COUNTRY",
   /** Customer master data */
   CUSTOMER: "CONCEPT_CUSTOMER",
   /** Delivery note/shipment */
@@ -442,6 +444,7 @@ export const CONCEPT_CATEGORY: Record<ConceptId, ConceptCategory> = {
   [CONCEPT.CONTROL]: "ENTITY",
   [CONCEPT.CONTROL_TYPE]: "ATTRIBUTE",
   [CONCEPT.COST_CENTER]: "ENTITY",
+  [CONCEPT.COUNTRY]: "ENTITY",
   [CONCEPT.CURRENCY]: "ATTRIBUTE",
   [CONCEPT.CUSTOMER]: "ENTITY",
   [CONCEPT.CUSTOMER_TYPE]: "ATTRIBUTE",
@@ -594,4 +597,4 @@ export const CONCEPT_CATEGORY: Record<ConceptId, ConceptCategory> = {
 /**
  * Concept count for validation
  */
-export const CONCEPT_COUNT = 181 as const;
+export const CONCEPT_COUNT = 182 as const;

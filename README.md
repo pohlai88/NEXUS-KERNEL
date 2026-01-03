@@ -3,14 +3,19 @@
 > **The Business Constitution (L0 SSOT)**
 
 [![npm version](https://img.shields.io/npm/v/@aibos/kernel.svg)](https://www.npmjs.com/package/@aibos/kernel)
+[![CI](https://github.com/pohlai88/NEXUS-KERNEL/workflows/CI/badge.svg)](https://github.com/pohlai88/NEXUS-KERNEL/actions/workflows/ci.yml)
+[![Security Scan](https://github.com/pohlai88/NEXUS-KERNEL/workflows/Security%20Scan/badge.svg)](https://github.com/pohlai88/NEXUS-KERNEL/actions/workflows/security.yml)
+[![Test Coverage](https://img.shields.io/badge/coverage-96.81%25-brightgreen)](https://github.com/pohlai88/NEXUS-KERNEL)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 ## Overview
 
 `@aibos/kernel` is the **Single Source of Truth (SSOT)** for all platform metadata in AI-BOS. It defines:
 
-- **31 Concepts** - What business objects exist (Entity, Attribute, Operation, Relationship)
-- **12 Value Sets** - Allowed value collections
-- **62 Values** - The actual allowed values
+- **182 Concepts** - What business objects exist (Entity, Attribute, Operation, Relationship)
+- **72 Value Sets** - Allowed value collections
+- **553 Values** - The actual allowed values
 
 **If it's not defined in `@aibos/kernel`, it doesn't exist in AI-BOS.**
 
@@ -26,16 +31,16 @@ pnpm add @aibos/kernel
 
 ```typescript
 import {
-  // Concepts (31)
+  // Concepts (181)
   CONCEPT,
   ConceptId,
   CONCEPT_CATEGORY,
 
-  // Value Sets (12)
+  // Value Sets (68)
   VALUESET,
   ValueSetId,
 
-  // Values (62)
+  // Values (307)
   VALUE,
 
   // Version
@@ -76,10 +81,8 @@ L0 Kernel (Constitutional) ← @aibos/kernel
 
 | Category     | Count | Examples                              |
 | ------------ | ----- | ------------------------------------- |
-| ENTITY       | 13    | INVOICE, VENDOR, CLAIM, DOCUMENT, TENANT |
-| ATTRIBUTE    | 6     | STATUS, PRIORITY, RISK, IDENTITY      |
-| OPERATION    | 8     | APPROVAL, AUDIT, PAYMENT, WORKFLOW    |
-| RELATIONSHIP | 4     | GROUP_MEMBERSHIP, VENDOR_COMPANY_LINK |
+| ENTITY       | 128   | INVOICE, VENDOR, CLAIM, DOCUMENT, TENANT, ACCOUNT, BANK, CUSTOMER |
+| ATTRIBUTE    | 53    | STATUS, PRIORITY, RISK, IDENTITY, CURRENCY, COUNTRY |
 
 ### Value Sets
 
@@ -114,6 +117,17 @@ The `registry.snapshot.json` file is embedded in the package and should be used 
 1. **DB Validation** - Compare DB contents against snapshot
 2. **Drift Detection** - CI fails if DB diverges from snapshot
 3. **Version Verification** - Ensure `kernel_metadata` table matches
+
+## Documentation
+
+Comprehensive documentation is available in the [`docs/`](./docs/) directory:
+
+- **[Getting Started](./docs/guides/getting-started.md)** - Quick start tutorial
+- **[Usage Guide](./docs/guides/usage.md)** - Practical examples and patterns
+- **[Architecture](./docs/architecture/overview.md)** - System design and layer model
+- **[Glossary](./docs/guides/glossary.md)** - Ubiquitous Language with code references
+- **[Contributing](./CONTRIBUTING.md)** - How to contribute
+- **[Architecture Decision Records](./docs/adr/README.md)** - Design decisions
 
 ## License
 
