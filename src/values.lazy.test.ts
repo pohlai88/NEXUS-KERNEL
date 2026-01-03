@@ -24,7 +24,7 @@ describe("Lazy Value Set Loader", () => {
       const currencies = await getCurrencies();
       
       expect(currencies).toBeDefined();
-      expect(currencies.USD).toBe(VALUE.CURRENCIES.USD);
+      expect(currencies.US_DOLLAR).toBe(VALUE.CURRENCIES.US_DOLLAR);
       expect(lazyValueSetLoader.isLoaded("CURRENCIES")).toBe(true);
     });
 

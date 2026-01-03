@@ -1,0 +1,69 @@
+name: Bundle Analysis
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main]
+  schedule:
+    # Run weekly
+    - cron: '0 2 * * 1'
+
+jobs:
+  bundle-analysis:
+    name: Bundle Size Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build package
+        run: pnpm build
+
+      - name: Run bundle analysis
+        id: bundle-analysis
+        run: |
+          echo "Running bundle analysis..."
+          pnpm tsx scripts/analyze-bundle.ts || BUNDLE_EXCEEDED=$?
+          if [ -n "$BUNDLE_EXCEEDED" ]; then
+            echo "bundle_exceeded=true" >> $GITHUB_OUTPUT
+          else
+            echo "bundle_exceeded=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Bundle size check
+        if: steps.bundle-analysis.outputs.bundle_exceeded == 'true'
+        run: |
+          echo "❌ Bundle size exceeds target (5KB gzipped)"
+          echo "Please review bundle analysis output and optimize if possible"
+          exit 1
+
+      - name: Bundle analysis report
+        if: always()
+        run: |
+          echo "## Bundle Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Target:** <5KB (gzipped)" >> $GITHUB_STEP_SUMMARY
+          echo "**Current:** Check build output for details" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.bundle-analysis.outputs.bundle_exceeded }}" == "true" ]; then
+            echo "❌ Bundle size exceeds target" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ Bundle size within target" >> $GITHUB_STEP_SUMMARY
+          fi
+

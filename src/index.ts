@@ -37,8 +37,36 @@ export * from "./manifest";
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Performance Optimization
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-export { validationCache, warmValidationCache } from "./kernel.validation.cache";
-export type { CacheStats } from "./kernel.validation.cache";
+export { validationCache, warmValidationCache, ValidationCache } from "./kernel.validation.cache";
+export type { CacheStats, CacheWarmingOptions } from "./kernel.validation.cache";
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Supabase Cache (Optional - for distributed systems using existing database)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+export { createSupabaseCache, SupabaseValidationCache } from "./kernel.validation.cache.supabase";
+export type { SupabaseClient, SupabaseCacheConfig } from "./kernel.validation.cache.supabase";
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Monitoring & Observability
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+export {
+  enablePerformanceMonitoring,
+  disablePerformanceMonitoring,
+  measurePerformance,
+  PerformanceCollector,
+  globalPerformanceCollector,
+} from "./monitoring/performance";
+export type { PerformanceMetrics, PerformanceCallback } from "./monitoring/performance";
+
+export {
+  enableErrorTracking,
+  disableErrorTracking,
+  trackError,
+  withErrorTracking,
+  ErrorCollector,
+  globalErrorCollector,
+} from "./monitoring/errors";
+export type { ErrorContext, ErrorCallback, ErrorStatistics } from "./monitoring/errors";
 
 // ⚠️ REMOVED: Domain logic moved to VPM canon packages
 // - vendor.ts → @nexus/canon-vendor

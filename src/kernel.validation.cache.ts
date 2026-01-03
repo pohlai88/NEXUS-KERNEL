@@ -313,30 +313,126 @@ class ValidationCache {
 export const validationCache = new ValidationCache();
 
 /**
+ * ValidationCache class (exported for extension)
+ */
+export { ValidationCache };
+
+/**
+ * Cache warming options
+ */
+export interface CacheWarmingOptions {
+  /** Warm concept cache (default: true) */
+  concepts?: boolean;
+  /** Warm value set cache (default: true) */
+  valueSets?: boolean;
+  /** Warm value cache (default: false - can be large) */
+  values?: boolean;
+  /** Maximum concepts to warm (default: 50) */
+  maxConcepts?: number;
+  /** Maximum value sets to warm (default: 20) */
+  maxValueSets?: number;
+  /** Maximum values to warm (default: 100) */
+  maxValues?: number;
+}
+
+/**
  * Performance optimization: Pre-validate and cache common shapes
  * Warms up the cache with frequently used validations
+ * 
+ * @param options - Cache warming options
+ * 
+ * @example
+ * ```typescript
+ * import { warmValidationCache } from '@aibos/kernel/cache';
+ * 
+ * // Warm cache on app startup
+ * warmValidationCache({
+ *   concepts: true,
+ *   valueSets: true,
+ *   maxConcepts: 100,
+ * });
+ * ```
  */
-export function warmValidationCache(): void {
-  // Common concept codes to pre-cache
-  const commonConcepts = [
-    "ACCOUNT",
-    "INVOICE",
-    "PARTY",
-    "ADDRESS",
-    "DOCUMENT",
-    "TRANSACTION",
-  ];
+export async function warmValidationCache(options: CacheWarmingOptions = {}): Promise<void> {
+  const {
+    concepts = true,
+    valueSets = true,
+    values = false,
+    maxConcepts = 50,
+    maxValueSets = 20,
+    maxValues = 100,
+  } = options;
 
-  // Common value set codes to pre-cache
-  const commonValueSets = [
-    "ACCOUNT_TYPE",
-    "TRANSACTION_STATUS",
-    "APPROVAL_STATUS",
-    "DOCUMENT_STATUS",
-    "PAYMENT_METHOD",
-  ];
+  try {
+    // Dynamic imports to avoid circular dependencies
+    if (concepts || valueSets || values) {
+      const [{ CONCEPT }, { VALUESET, VALUE }] = await Promise.all([
+        import("./concepts.js"),
+        import("./values.js"),
+      ]);
 
-  // Note: Actual validation would require full shape objects
-  // This is a placeholder for future optimization
-  // In a real implementation, we'd validate and cache actual shapes
+      // Warm concept cache with most common concepts
+      if (concepts && CONCEPT) {
+        const conceptCodes = Object.keys(CONCEPT).slice(0, maxConcepts);
+        conceptCodes.forEach((code) => {
+          const conceptId = CONCEPT[code as keyof typeof CONCEPT];
+          // Cache the concept code -> ID mapping
+          // This helps with code-based lookups
+          validationCache.setConcept(conceptId, {
+            code: conceptId,
+            category: "ENTITY", // Default, actual would come from registry
+            domain: "CORE", // Default
+            description: `Cached concept: ${code}`,
+            tags: [],
+          } as ConceptShape);
+        });
+      }
+
+      // Warm value set cache
+      if (valueSets && VALUESET) {
+        const valueSetCodes = Object.keys(VALUESET).slice(0, maxValueSets);
+        valueSetCodes.forEach((code) => {
+          const valueSetId = VALUESET[code as keyof typeof VALUESET];
+          // Cache the value set code -> ID mapping
+          validationCache.setValueSet(valueSetId, {
+            code: valueSetId,
+            domain: "GLOBAL", // Default
+            description: `Cached value set: ${code}`,
+            jurisdiction: "GLOBAL",
+            tags: [],
+          } as ValueSetShape);
+        });
+      }
+
+      // Warm value cache (can be large, so optional)
+      if (values && VALUE) {
+        let valueCount = 0;
+        for (const [valueSetKey, valueSet] of Object.entries(VALUE)) {
+          if (valueCount >= maxValues) break;
+          
+          const valueSetId = VALUESET[valueSetKey as keyof typeof VALUESET] || `VALUESET_${valueSetKey}`;
+          
+          if (typeof valueSet === "object" && valueSet !== null) {
+            for (const [valueKey, valueId] of Object.entries(valueSet)) {
+              if (valueCount >= maxValues) break;
+              
+              const cacheKey = `${valueSetId}:${valueId}`;
+              validationCache.setValue(cacheKey, {
+                code: valueId as string,
+                value_set_code: valueSetId,
+                label: valueKey,
+                description: `Cached value: ${valueKey}`,
+                sort_order: valueCount + 1,
+              } as ValueShape);
+              
+              valueCount++;
+            }
+          }
+        }
+      }
+    }
+  } catch (error) {
+    // If imports fail, skip warming (might be in test environment)
+    console.warn("Cache warming skipped:", error);
+  }
 }

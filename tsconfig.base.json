@@ -2,6 +2,7 @@
   "compilerOptions": {
     // === STRICT NEVER WRONG Configuration ===
     // This configuration catches real bugs while allowing practical development
+    // Inspired by Zod's build configuration: https://github.com/colinhacks/zod
     "target": "ES2022",
     "lib": ["ES2022", "DOM"],
     "module": "ESNext",

@@ -17,8 +17,16 @@ This package is **fully optimized for Next.js** applications:
 - ✅ Subpath exports for granular imports
 - ✅ Lazy loading for large value sets
 - ✅ Optimized bundle size
+- ✅ Dual format builds (ESM + CJS)
+- ✅ Dual type definitions (.d.ts + .d.cts)
+- ✅ Versioned exports (/v1)
 
-**See:** [Next.js Optimization Guide](./docs/performance/nextjs-optimization.md)
+**Features:**
+- Dual format builds (ESM + CJS) for maximum compatibility
+- Tree-shaking optimized with `sideEffects: false`
+- Server Components compatible (zero client-side JavaScript)
+- Subpath exports for granular imports
+- Lazy loading support for large value sets
 
 ---
 
@@ -131,16 +139,34 @@ The `registry.snapshot.json` file is embedded in the package and should be used 
 2. **Drift Detection** - CI fails if DB diverges from snapshot
 3. **Version Verification** - Ensure `kernel_metadata` table matches
 
+## Repository Update
+
+Update the entire repository with a single command:
+
+```bash
+pnpm update
+# or
+pnpm update:repo
+```
+
+This script will:
+- ✅ Update all dependencies
+- ✅ Clean build artifacts
+- ✅ Regenerate kernel data
+- ✅ Build the project
+- ✅ Run all tests
+- ✅ Generate coverage reports
+- ✅ Validate kernel integrity
+- ✅ Analyze bundle size
+
 ## Documentation
 
 Comprehensive documentation is available in the [`docs/`](./docs/) directory:
 
-- **[Getting Started](./docs/guides/getting-started.md)** - Quick start tutorial
-- **[Usage Guide](./docs/guides/usage.md)** - Practical examples and patterns
-- **[Architecture](./docs/architecture/overview.md)** - System design and layer model
-- **[Glossary](./docs/guides/glossary.md)** - Ubiquitous Language with code references
+- **[PRD: NPM Package](./docs/PRD-KERNEL_NPM.md)** - Product requirements
+- **[PRD: ERP Production Ready](./docs/PRD-KERNEL_ERP_PRODUCTION_READY.md)** - Production requirements
+- **[Kernel Doctrine](./docs/NEXUS_CANON_V5_KERNEL_DOCTRINE.md)** - Core principles
 - **[Contributing](./CONTRIBUTING.md)** - How to contribute
-- **[Architecture Decision Records](./docs/adr/README.md)** - Design decisions
 
 ## License
 

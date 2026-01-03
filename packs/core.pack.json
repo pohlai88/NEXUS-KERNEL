@@ -1789,13 +1789,6 @@
       "sort_order": 183
     },
     {
-      "code": "MALI",
-      "value_set_code": "COUNTRIES",
-      "label": "Mali",
-      "description": "Mali (ISO 3166-1: ML)",
-      "sort_order": 184
-    },
-    {
       "code": "DRAFT",
       "value_set_code": "DOCUMENT_STATUS",
       "label": "Draft",

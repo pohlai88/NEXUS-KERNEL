@@ -15,6 +15,7 @@ describe("ValidationCache", () => {
         category: "ENTITY",
         domain: "CORE",
         description: "Test concept",
+        tags: [],
       };
 
       // First call - cache miss
@@ -33,6 +34,7 @@ describe("ValidationCache", () => {
         domain: "CORE",
         description: "Test value set",
         jurisdiction: "GLOBAL",
+        tags: [],
       };
 
       expect(validationCache.getValueSet(valueSet)).toBeUndefined();
@@ -62,6 +64,7 @@ describe("ValidationCache", () => {
         category: "ENTITY",
         domain: "CORE",
         description: "Test concept",
+        tags: [],
       };
 
       expect(validationCache.getConcept("TEST_CONCEPT")).toBeUndefined();
@@ -75,6 +78,7 @@ describe("ValidationCache", () => {
         domain: "CORE",
         description: "Test value set",
         jurisdiction: "GLOBAL",
+        tags: [],
       };
 
       expect(validationCache.getValueSet("TEST_VALUESET")).toBeUndefined();
@@ -106,6 +110,7 @@ describe("ValidationCache", () => {
           category: "ENTITY",
           domain: "CORE",
           description: `Concept ${i}`,
+          tags: [],
         };
         validationCache.setConcept(`CONCEPT_${i}`, concept);
       }
@@ -125,6 +130,7 @@ describe("ValidationCache", () => {
         category: "ENTITY",
         domain: "CORE",
         description: "Test concept",
+        tags: [],
       };
 
       // Miss
@@ -147,6 +153,7 @@ describe("ValidationCache", () => {
         category: "ENTITY",
         domain: "CORE",
         description: "Test concept",
+        tags: [],
       };
 
       validationCache.setConcept(concept, concept);
@@ -169,6 +176,7 @@ describe("ValidationCache", () => {
         category: "ENTITY",
         domain: "CORE",
         description: "Test concept",
+        tags: [],
       };
 
       validationCache.setEnabled(false);
@@ -186,6 +194,7 @@ describe("ValidationCache", () => {
         category: "ENTITY",
         domain: "CORE",
         description: "Test concept",
+        tags: [],
       };
 
       validationCache.setConcept(concept, concept);
@@ -204,6 +213,7 @@ describe("ValidationCache", () => {
         category: "ENTITY",
         domain: "CORE",
         description: "Test concept",
+        tags: [],
       };
 
       // Set by object

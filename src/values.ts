@@ -1,7 +1,7 @@
 // @aibos/kernel - L0 Value Set Constants
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // ⚠️ AUTO-GENERATED: Do not edit manually. Edit data sources instead.
-// Generated: 2026-01-03T03:37:47.263Z
+// Generated: 2026-01-03T06:45:17.518Z
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
@@ -101,7 +101,7 @@ export type ValueSetId = (typeof VALUESET)[keyof typeof VALUESET];
 /**
  * VALUE - The Value Registry
  *
- * 553 canonical values organized by value set.
+ * 624 canonical values organized by value set.
  * Nested structure: VALUE.<ValueSet>.<Value>
  *
  * @example
@@ -242,7 +242,7 @@ export const VALUE = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // COUNTRIES (112 values)
+  // COUNTRIES (183 values)
   // ─────────────────────────────────────────────────────────────────────────
   COUNTRIES: {
     MALAYSIA: "CNT_MALAYSIA",
@@ -357,6 +357,77 @@ export const VALUE = {
     CHAD: "CNT_CHAD",
     CENTRAL_AFRICAN_REPUBLIC: "CNT_CENTRAL_AFRICAN_REPUBLIC",
     DEMOCRATIC_REPUBLIC_OF_CONGO: "CNT_DEMOCRATIC_REPUBLIC_OF_CONGO",
+    REPUBLIC_OF_CONGO: "CNT_REPUBLIC_OF_CONGO",
+    GABON: "CNT_GABON",
+    EQUATORIAL_GUINEA: "CNT_EQUATORIAL_GUINEA",
+    SAO_TOME_AND_PRINCIPE: "CNT_SAO_TOME_AND_PRINCIPE",
+    BENIN: "CNT_BENIN",
+    TOGO: "CNT_TOGO",
+    MAURITANIA: "CNT_MAURITANIA",
+    WESTERN_SAHARA: "CNT_WESTERN_SAHARA",
+    UKRAINE: "CNT_UKRAINE",
+    BELARUS: "CNT_BELARUS",
+    MOLDOVA: "CNT_MOLDOVA",
+    ROMANIA: "CNT_ROMANIA",
+    BULGARIA: "CNT_BULGARIA",
+    SERBIA: "CNT_SERBIA",
+    CROATIA: "CNT_CROATIA",
+    BOSNIA_AND_HERZEGOVINA: "CNT_BOSNIA_AND_HERZEGOVINA",
+    MONTENEGRO: "CNT_MONTENEGRO",
+    ALBANIA: "CNT_ALBANIA",
+    NORTH_MACEDONIA: "CNT_NORTH_MACEDONIA",
+    SLOVENIA: "CNT_SLOVENIA",
+    SLOVAKIA: "CNT_SLOVAKIA",
+    HUNGARY: "CNT_HUNGARY",
+    LITHUANIA: "CNT_LITHUANIA",
+    LATVIA: "CNT_LATVIA",
+    ESTONIA: "CNT_ESTONIA",
+    ICELAND: "CNT_ICELAND",
+    LUXEMBOURG: "CNT_LUXEMBOURG",
+    MALTA: "CNT_MALTA",
+    CYPRUS: "CNT_CYPRUS",
+    URUGUAY: "CNT_URUGUAY",
+    PARAGUAY: "CNT_PARAGUAY",
+    BOLIVIA: "CNT_BOLIVIA",
+    ECUADOR: "CNT_ECUADOR",
+    VENEZUELA: "CNT_VENEZUELA",
+    GUYANA: "CNT_GUYANA",
+    SURINAME: "CNT_SURINAME",
+    FRENCH_GUIANA: "CNT_FRENCH_GUIANA",
+    COSTA_RICA: "CNT_COSTA_RICA",
+    PANAMA: "CNT_PANAMA",
+    NICARAGUA: "CNT_NICARAGUA",
+    HONDURAS: "CNT_HONDURAS",
+    EL_SALVADOR: "CNT_EL_SALVADOR",
+    GUATEMALA: "CNT_GUATEMALA",
+    BELIZE: "CNT_BELIZE",
+    JAMAICA: "CNT_JAMAICA",
+    HAITI: "CNT_HAITI",
+    DOMINICAN_REPUBLIC: "CNT_DOMINICAN_REPUBLIC",
+    CUBA: "CNT_CUBA",
+    TRINIDAD_AND_TOBAGO: "CNT_TRINIDAD_AND_TOBAGO",
+    BARBADOS: "CNT_BARBADOS",
+    BAHAMAS: "CNT_BAHAMAS",
+    FIJI: "CNT_FIJI",
+    PAPUA_NEW_GUINEA: "CNT_PAPUA_NEW_GUINEA",
+    SOLOMON_ISLANDS: "CNT_SOLOMON_ISLANDS",
+    VANUATU: "CNT_VANUATU",
+    NEW_CALEDONIA: "CNT_NEW_CALEDONIA",
+    FRENCH_POLYNESIA: "CNT_FRENCH_POLYNESIA",
+    SAMOA: "CNT_SAMOA",
+    TONGA: "CNT_TONGA",
+    KIRIBATI: "CNT_KIRIBATI",
+    MICRONESIA: "CNT_MICRONESIA",
+    MARSHALL_ISLANDS: "CNT_MARSHALL_ISLANDS",
+    PALAU: "CNT_PALAU",
+    NORTH_KOREA: "CNT_NORTH_KOREA",
+    MALDIVES: "CNT_MALDIVES",
+    BHUTAN: "CNT_BHUTAN",
+    NEPAL: "CNT_NEPAL",
+    GEORGIA: "CNT_GEORGIA",
+    ARMENIA: "CNT_ARMENIA",
+    AZERBAIJAN: "CNT_AZERBAIJAN",
+    TURKMENISTAN: "CNT_TURKMENISTAN",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -1104,4 +1175,4 @@ export const VALUE = {
  * Counts for validation
  */
 export const VALUESET_COUNT = 72 as const;
-export const VALUE_COUNT = 553 as const;
+export const VALUE_COUNT = 624 as const;
