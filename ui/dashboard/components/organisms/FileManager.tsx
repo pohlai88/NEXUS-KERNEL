@@ -11,6 +11,7 @@
 'use client';
 
 import React, { useState, useMemo, useCallback } from 'react';
+import Image from 'next/image';
 
 // ============================================================================
 // Types & Interfaces
@@ -129,7 +130,6 @@ export const FileManager: React.FC<FileManagerProps> = ({
   onFileOpen,
   onFileDelete,
   onFileRename,
-  onFileMove,
   onFilesUpload,
   onFolderCreate,
   allowMultiSelect = true,
@@ -138,7 +138,6 @@ export const FileManager: React.FC<FileManagerProps> = ({
   allowRename = true,
   showBreadcrumb = true,
   showSearch = true,
-  showFilters = true,
   defaultView = 'grid',
   className = '',
 }) => {
@@ -455,7 +454,7 @@ export const FileManager: React.FC<FileManagerProps> = ({
                 {/* Thumbnail/Icon */}
                 <div className="aspect-square mb-2 flex items-center justify-center rounded overflow-hidden bg-surface-700">
                   {file.thumbnail ? (
-                    <img src={file.thumbnail} alt={file.name} className="w-full h-full object-cover" />
+                    <Image src={file.thumbnail} alt={file.name} fill className="object-cover" />
                   ) : (
                     <span className={`text-4xl ${getFileTypeColor(file.type)}`}>
                       {getFileIcon(file.type, file.mimeType)}

@@ -11,6 +11,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 // ============================================================================
 // Types & Interfaces
@@ -162,10 +163,11 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
       {!compact && (
         <div className="relative h-32 bg-gradient-to-r from-primary-500/20 to-accent-500/20">
           {profile.coverImage && (
-            <img
+            <Image
               src={profile.coverImage}
               alt="Cover"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
           )}
           {isEditable && !isEditMode && (
@@ -186,11 +188,14 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
           <div className="relative">
             <div className={`${compact ? 'w-16 h-16' : 'w-24 h-24'} rounded-full border-4 border-surface-900 overflow-hidden bg-surface-800`}>
               {profile.avatar ? (
-                <img
-                  src={profile.avatar}
-                  alt={profile.name}
-                  className="w-full h-full object-cover"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={profile.avatar}
+                    alt={profile.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-gray-500">
                   {profile.name.charAt(0).toUpperCase()}

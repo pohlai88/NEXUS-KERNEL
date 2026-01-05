@@ -11,6 +11,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import Image from 'next/image';
 
 // ============================================================================
 // Types & Interfaces
@@ -376,11 +377,14 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                     {/* Avatar/Icon */}
                     <div className="flex-shrink-0">
                       {notification.avatar ? (
-                        <img
-                          src={notification.avatar}
-                          alt=""
-                          className="w-10 h-10 rounded-full object-cover"
-                        />
+                        <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                          <Image
+                            src={notification.avatar}
+                            alt=""
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
                       ) : (
                         <div
                           className={`w-10 h-10 rounded-full ${getTypeBgColor(

@@ -11,6 +11,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import Image from 'next/image';
 
 // ============================================================================
 // Types & Interfaces
@@ -226,11 +227,14 @@ const CommentItem: React.FC<{
           {/* Avatar */}
           <div className="flex-shrink-0">
             {comment.author.avatar ? (
-              <img
-                src={comment.author.avatar}
-                alt={comment.author.name}
-                className="w-10 h-10 rounded-full object-cover"
-              />
+              <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                <Image
+                  src={comment.author.avatar}
+                  alt={comment.author.name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
             ) : (
               <div className="w-10 h-10 rounded-full bg-surface-700 flex items-center justify-center text-lg font-bold text-gray-400">
                 {comment.author.name.charAt(0).toUpperCase()}
@@ -302,11 +306,15 @@ const CommentItem: React.FC<{
                 {comment.attachments.map((attachment, idx) => (
                   <div key={idx} className="bg-surface-800 rounded-lg p-2 text-sm">
                     {attachment.type === 'image' && attachment.thumbnail ? (
-                      <img
-                        src={attachment.thumbnail}
-                        alt={attachment.name}
-                        className="max-w-xs rounded"
-                      />
+                      <div className="relative max-w-xs">
+                        <Image
+                          src={attachment.thumbnail}
+                          alt={attachment.name || ''}
+                          width={384}
+                          height={216}
+                          className="rounded"
+                        />
+                      </div>
                     ) : (
                       <a
                         href={attachment.url}
