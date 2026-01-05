@@ -62,3 +62,52 @@ export type {
   SortConfig,
   FilterConfig,
 } from './DataGrid';
+
+// Enterprise & Admin - Phase 12
+export { NotificationCenter } from './NotificationCenter';
+export type {
+  NotificationCenterProps,
+  Notification,
+  NotificationType,
+  NotificationPriority,
+  NotificationAction,
+} from './NotificationCenter';
+
+export { UserProfileCard } from './UserProfileCard';
+export type {
+  UserProfileCardProps,
+  UserProfile,
+  UserStat,
+  UserActivity,
+  SocialLink,
+} from './UserProfileCard';
+
+export { FileManager } from './FileManager';
+export type {
+  FileManagerProps,
+  FileItem,
+  FileType,
+  ViewMode,
+  SortBy,
+  SortOrder,
+} from './FileManager';
+
+export { CommentThread } from './CommentThread';
+export type {
+  CommentThreadProps,
+  Comment,
+  CommentAuthor,
+  CommentReaction,
+  ReactionType,
+} from './CommentThread';
+
+export { ActivityLog } from './ActivityLog';
+export type {
+  ActivityLogProps,
+  Activity,
+  ActivityType,
+  ActivityCategory,
+  ActivityActor,
+  ActivityTarget,
+  ActivityMetadata,
+} from './ActivityLog';
