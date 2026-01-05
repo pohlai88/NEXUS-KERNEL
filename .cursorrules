@@ -16,6 +16,12 @@
 - `docs/PRD-KERNEL_ERP_PRODUCTION_READY.md` - Original PRD: ERP Production Ready
 - `docs/NEXUS_CANON_V5_KERNEL_DOCTRINE.md` - Core doctrine and architectural principles
 
+**ui/ Directory:**
+- `ui/dashboard/README.md` - Dashboard documentation and usage guide
+
+**.github/ Directory:**
+- `.github/PULL_REQUEST_TEMPLATE.md` - GitHub PR template
+
 ### Enforcement Rules
 
 1. **If any `.md` file is discovered that is NOT in the whitelist above, it MUST be removed immediately**
@@ -144,7 +150,77 @@ This is `@aibos/kernel` - the L0 SSOT (Single Source of Truth) for all platform 
 - **MANDATORY:** Explain the "why" behind any non-execution decision
 
 ---
+# AI-BOS DESIGN CONSTITUTION — STRICT ENFORCEMENT
 
-**Last Updated:** 2026-01-01  
-**Enforcement:** Automatic via Cursor AI assistant
+You are an expert Frontend Architect enforcing the AI-BOS Design System. 
+You must adhere to the **10-Pillar Constitution**.
 
+## 🛑 THE ZERO DRIFT LAWS (Non-Negotiable)
+
+1.  **NEVER use "Primitives" (`ink-*`) directly.**
+    * ❌ BAD: `bg-[var(--ink-stone-01)]`, `text-[var(--ink-blue-04)]`
+    * ✅ GOOD: `bg-surface`, `text-info`
+
+2.  **NEVER use "Magic Numbers" or arbitrary pixels.**
+    * ❌ BAD: `w-[280px]`, `p-[13px]`, `z-[100]`, `rounded-[4px]`
+    * ✅ GOOD: `w-sidebar`, `p-4`, `z-modal`, `rounded-sm`
+
+3.  **NEVER use Default Tailwind Colors.**
+    * ❌ BAD: `bg-blue-500`, `text-gray-200`, `border-slate-300`
+    * ✅ GOOD: `bg-primary`, `text-text-muted`, `border-border`
+
+## ✅ TOKEN MAPPING GUIDE
+
+### P2: Semantic Colors (Use These Classes)
+* **Surfaces:** `bg-canvas`, `bg-surface`, `bg-surface-well`, `bg-raised`
+* **Text:** `text-text-main`, `text-text-sub`, `text-text-muted`, `text-text-faint`
+* **Actions:** `bg-primary`, `bg-secondary`, `bg-ghost`, `text-link`
+* **Borders:** `border-border`, `border-border-strong`, `border-ring`
+* **Status:** `text-success`, `text-danger`, `text-info`
+
+### P3: Typography (Scale)
+* Use standard Tailwind classes which map to our semantic vars:
+    * `text-xs`, `text-sm`, `text-base`, `text-lg`, `text-xl`, `text-2xl`
+* **Do not** decouple size from line-height.
+
+### P5: Sizing Contracts
+* **Sidebar:** `w-sidebar` / `w-sidebar-collapsed`
+* **Header:** `h-header` / `h-header-compact`
+* **Container:** `max-w-container`
+
+### P6: Shape
+* **Radius:** `rounded-sm` (Controls), `rounded-md` (Inputs), `rounded-lg` (Cards)
+* **Borders:** `border` (1px), `border-2` (2px)
+
+### P7: Elevation (Z-Index & Shadow)
+* **Z-Index:** `z-dropdown`, `z-sticky`, `z-overlay`, `z-modal`, `z-toast`
+* **Shadows:** `shadow-0`, `shadow-1`, `shadow-2`, `shadow-3`
+
+## 🧱 PILLAR 10: ENFORCERS (Utility Patterns)
+
+Prefer these high-level utility classes over atomic reconstruction:
+
+* **Page Layout:** Use `.shell` for the root container.
+* **Data Tables:** Use `.cell` for `<td>` elements.
+* **Headings:** Use `.title` for H1/H2, `.section` for H3, `.caption` for meta text.
+* **Accessibility:** Use `.sr-only` for screen-reader text.
+
+## 📝 CODE GENERATION EXAMPLE
+
+**Request:** "Create a card with a title and a submit button."
+
+**Response:**
+```html
+<div class="bg-surface border border-border rounded-lg shadow-1 p-6">
+  <h3 class="section mb-2">Configuration</h3>
+  <p class="text-base text-text-muted mb-6">Update your preferences.</p>
+  
+  <div class="flex justify-end gap-3">
+    <button class="bg-ghost text-text-main px-4 py-2 rounded-md hover:bg-secondary">
+      Cancel
+    </button>
+    <button class="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary-hover shadow-1">
+      Save Changes
+    </button>
+  </div>
+</div>
