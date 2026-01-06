@@ -88,15 +88,15 @@ export function RatingForm({
   };
 
   const StarRating = ({ value, onChange, label }: { value: number; onChange: (v: number) => void; label: string }) => (
-    <div className="na-mb-4">
-      <label className="na-metadata na-mb-2 na-block">{label}</label>
-      <div className="na-flex na-gap-2">
+    <div className="mb-4">
+      <label className="caption mb-2 block">{label}</label>
+      <div className="flex gap-2">
         {[1, 2, 3, 4, 5].map((star) => (
           <button
             key={star}
             type="button"
             onClick={() => onChange(star)}
-            className={`na-text-2xl ${star <= value ? 'na-text-warn' : 'na-text-neutral-3'}`}
+            className={`text-2xl ${star <= value ? 'text-nx-warning' : 'text-nx-text-muted'}`}
           >
             ⭐
           </button>
@@ -106,8 +106,8 @@ export function RatingForm({
   );
 
   return (
-    <div className="na-card na-p-6">
-      <h3 className="na-h3 na-mb-4">Rate {ratedEntityName}</h3>
+    <div className="card p-6">
+      <h3 className="section mb-4">Rate {ratedEntityName}</h3>
 
       <StarRating value={overallRating} onChange={setOverallRating} label="Overall Rating *" />
       <StarRating value={communicationRating} onChange={setCommunicationRating} label="Communication" />
@@ -115,21 +115,21 @@ export function RatingForm({
       <StarRating value={timelinessRating} onChange={setTimelinessRating} label="Timeliness" />
       <StarRating value={problemResolutionRating} onChange={setProblemResolutionRating} label="Problem Resolution" />
 
-      <div className="na-mb-4">
-        <label className="na-metadata na-mb-2 na-block">Feedback</label>
+      <div className="mb-4">
+        <label className="caption mb-2 block">Feedback</label>
         <textarea
           value={ratingText}
           onChange={(e) => setRatingText(e.target.value)}
-          className="na-input na-w-full"
+          className="input w-full"
           rows={4}
           placeholder="Share your experience..."
         />
       </div>
 
-      <div className="na-mb-4">
-        <label className="na-metadata na-mb-2 na-block">Visibility</label>
-        <div className="na-flex na-gap-4">
-          <label className="na-flex na-items-center na-gap-2">
+      <div className="mb-4">
+        <label className="caption mb-2 block">Visibility</label>
+        <div className="flex gap-4">
+          <label className="flex items-center gap-2">
             <input
               type="radio"
               value="whitebox"
@@ -138,7 +138,7 @@ export function RatingForm({
             />
             <span>Whitebox (Public)</span>
           </label>
-          <label className="na-flex na-items-center na-gap-2">
+          <label className="flex items-center gap-2">
             <input
               type="radio"
               value="blackbox"
@@ -150,8 +150,8 @@ export function RatingForm({
         </div>
       </div>
 
-      <div className="na-mb-4">
-        <label className="na-flex na-items-center na-gap-2">
+      <div className="mb-4">
+        <label className="flex items-center gap-2">
           <input
             type="checkbox"
             checked={isAnonymous}
@@ -162,13 +162,13 @@ export function RatingForm({
       </div>
 
       {error && (
-        <div className="na-card na-p-4 na-bg-danger-subtle na-text-danger na-mb-4">
-          <p className="na-metadata">{error}</p>
+        <div className="card p-4 bg-nx-danger-bg text-nx-danger mb-4">
+          <p className="caption">{error}</p>
         </div>
       )}
 
       <button
-        className="na-btn na-btn-primary na-w-full"
+        className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary w-full"
         onClick={handleSubmit}
         disabled={isPending || overallRating === 0}
       >

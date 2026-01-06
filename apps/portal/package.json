@@ -17,7 +17,6 @@
     "@nexus/ui-actions": "workspace:*",
     "@supabase/supabase-js": "^2.89.0",
     "@vercel/speed-insights": "^1.0.0",
-    "aibos-design-system": "^1.1.0",
     "next": "16.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

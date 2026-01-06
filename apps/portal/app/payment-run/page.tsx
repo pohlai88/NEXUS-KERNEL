@@ -90,32 +90,32 @@ export default async function PaymentRunPage({ searchParams }: PaymentRunPagePro
   );
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Payment Run</h1>
-        <p className="na-metadata">Unified payment for all vendors and employees</p>
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Payment Run</h1>
+        <p className="caption">Unified payment for all vendors and employees</p>
       </div>
 
       {/* Summary Cards */}
-      <div className="na-card na-p-4 na-mb-6">
-        <div className="na-grid na-grid-cols-4 na-gap-4">
+      <div className="card p-4 mb-6">
+        <div className="grid grid-cols-4 gap-4">
           <div>
-            <div className="na-metadata">Total Invoices</div>
-            <div className="na-data-large">{invoices.length}</div>
+            <div className="caption">Total Invoices</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{invoices.length}</div>
           </div>
           <div>
-            <div className="na-metadata">Total Amount</div>
-            <div className="na-data-large">${totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
+            <div className="caption">Total Amount</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">${totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
           </div>
           <div>
-            <div className="na-metadata">External Vendors</div>
-            <div className="na-data-large">
+            <div className="caption">External Vendors</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">
               {summary['SUPPLIER_EXTERNAL']?.count || 0} (${summary['SUPPLIER_EXTERNAL']?.total.toLocaleString() || '0'})
             </div>
           </div>
           <div>
-            <div className="na-metadata">Employee Claims</div>
-            <div className="na-data-large">
+            <div className="caption">Employee Claims</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">
               {summary['EMPLOYEE_CLAIMANT']?.count || 0} (${summary['EMPLOYEE_CLAIMANT']?.total.toLocaleString() || '0'})
             </div>
           </div>
@@ -123,39 +123,39 @@ export default async function PaymentRunPage({ searchParams }: PaymentRunPagePro
       </div>
 
       {/* Filter */}
-      <div className="na-card na-p-4 na-mb-6">
-        <form method="get" className="na-flex na-gap-4 na-items-end">
+      <div className="card p-4 mb-6">
+        <form method="get" className="flex gap-4 items-end">
           <div>
-            <label className="na-metadata na-mb-2 na-block">Vendor Type</label>
-            <select name="vendor_type" className="na-input" defaultValue={searchParams.vendor_type || 'all'}>
+            <label className="caption mb-2 block">Vendor Type</label>
+            <select name="vendor_type" className="input" defaultValue={searchParams.vendor_type || 'all'}>
               <option value="all">All Types</option>
               <option value="SUPPLIER_EXTERNAL">External Vendors</option>
               <option value="SUPPLIER_INTERNAL">Internal Vendors</option>
               <option value="EMPLOYEE_CLAIMANT">Employee Claims</option>
             </select>
           </div>
-          <button type="submit" className="na-btn na-btn-secondary">Filter</button>
+          <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary">Filter</button>
         </form>
       </div>
 
       {/* Invoices Table */}
       {invoices.length === 0 ? (
-        <div className="na-card na-p-6 na-text-center">
-          <h2 className="na-h4">No Invoices to Pay</h2>
-          <p className="na-body na-mt-2">All caught up!</p>
+        <div className="card p-6 text-center">
+          <h2 className="text-base font-semibold text-nx-text-main">No Invoices to Pay</h2>
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mt-2">All caught up!</p>
         </div>
       ) : (
-        <div className="na-card na-overflow-x-auto">
-          <table className="na-table-frozen na-w-full">
+        <div className="card overflow-x-auto">
+          <table className="table-professional w-full w-full">
             <thead>
-              <tr className="na-tr">
-                <th className="na-th">Vendor</th>
-                <th className="na-th">Type</th>
-                <th className="na-th">Invoice #</th>
-                <th className="na-th">Amount</th>
-                <th className="na-th">Due Date</th>
-                <th className="na-th">Company</th>
-                <th className="na-th">Actions</th>
+              <tr className="table-row">
+                <th className="table-header-cell">Vendor</th>
+                <th className="table-header-cell">Type</th>
+                <th className="table-header-cell">Invoice #</th>
+                <th className="table-header-cell">Amount</th>
+                <th className="table-header-cell">Due Date</th>
+                <th className="table-header-cell">Company</th>
+                <th className="table-header-cell">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -174,22 +174,22 @@ export default async function PaymentRunPage({ searchParams }: PaymentRunPagePro
                 const isEmployee = vendorType === 'EMPLOYEE_CLAIMANT';
 
                 return (
-                  <tr key={i.id} className="na-tr na-hover-bg-paper-2">
-                    <td className="na-td">
+                  <tr key={i.id} className="table-row hover:bg-nx-surface-well">
+                    <td className="table-data-cell">
                       {vendorName}
-                      {isEmployee && <span className="na-badge na-badge-info na-ml-2">Employee</span>}
+                      {isEmployee && <span className="badge badge-info ml-2">Employee</span>}
                     </td>
-                    <td className="na-td na-text-sm">{vendorType}</td>
-                    <td className="na-td na-text-sm">{i.invoice_num}</td>
-                    <td className="na-td na-data">
+                    <td className="table-data-cell text-sm">{vendorType}</td>
+                    <td className="table-data-cell text-sm">{i.invoice_num}</td>
+                    <td className="table-data-cell text-[length:var(--nx-body-size)] text-nx-text-main">
                       ${i.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })} {i.currency_code || 'USD'}
                     </td>
-                    <td className="na-td na-text-sm">
+                    <td className="table-data-cell text-sm">
                       {i.due_date ? new Date(i.due_date).toLocaleDateString() : '—'}
                     </td>
-                    <td className="na-td na-text-sm">{i.tenants?.name || 'Unknown'}</td>
-                    <td className="na-td">
-                      <button className="na-btn na-btn-ghost na-btn-sm">View</button>
+                    <td className="table-data-cell text-sm">{i.tenants?.name || 'Unknown'}</td>
+                    <td className="table-data-cell">
+                      <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main px-3 py-1.5 text-sm">View</button>
                     </td>
                   </tr>
                 );
@@ -201,15 +201,15 @@ export default async function PaymentRunPage({ searchParams }: PaymentRunPagePro
 
       {/* Bulk Payment Action */}
       {invoices.length > 0 && (
-        <div className="na-card na-p-4 na-mt-6">
-          <div className="na-flex na-justify-between na-items-center">
+        <div className="card p-4 mt-6">
+          <div className="flex justify-between items-center">
             <div>
-              <div className="na-metadata">Selected: {invoices.length} invoices</div>
-              <div className="na-data-large">
+              <div className="caption">Selected: {invoices.length} invoices</div>
+              <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">
                 Total: ${totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
               </div>
             </div>
-            <button className="na-btn na-btn-primary na-text-lg na-px-8">
+            <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary text-lg px-8">
               Pay All ({invoices.length})
             </button>
           </div>

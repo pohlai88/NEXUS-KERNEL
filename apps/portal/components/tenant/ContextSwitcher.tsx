@@ -54,22 +54,22 @@ export function ContextSwitcher({ currentTenantId, onTenantChange, userId }: Con
 
   if (loading) {
     return (
-      <div className="na-card na-p-4">
-        <div className="na-spinner na-spinner-sm"></div>
+      <div className="card p-4">
+        <div className="animate-spin h-5 w-5 border-2 border-nx-primary border-t-transparent rounded-full animate-spin h-4 w-4 border-2 border-nx-primary border-t-transparent rounded-full"></div>
       </div>
     );
   }
 
   return (
-    <div className="na-card na-p-4 na-flex na-items-center na-gap-4">
-      <label className="na-metadata">View:</label>
+    <div className="card p-4 flex items-center gap-4">
+      <label className="caption">View:</label>
       <select
         value={currentTenantId || 'all'}
         onChange={(e) => {
           const value = e.target.value;
           onTenantChange(value === 'all' ? null : value);
         }}
-        className="na-input"
+        className="input"
       >
         <option value="all">All Companies ({accessibleTenants.length})</option>
         {accessibleTenants.map((access) => (
@@ -78,7 +78,7 @@ export function ContextSwitcher({ currentTenantId, onTenantChange, userId }: Con
           </option>
         ))}
       </select>
-      <span className="na-metadata na-text-sm">
+      <span className="caption text-sm">
         {currentTenantId ? `Viewing: ${getTenantName(currentTenantId)}` : 'Viewing: All Companies'}
       </span>
     </div>

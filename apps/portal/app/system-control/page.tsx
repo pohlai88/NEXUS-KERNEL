@@ -96,39 +96,39 @@ export default async function SystemControlPage() {
         console.error('Failed to fetch live counts:', err);
     }
     return (
-        <div className="na-container na-mx-auto na-p-6">
-            <div className="na-mb-8">
-                <h1 className="na-h1 na-mb-2">System Control Team</h1>
-                <p className="na-body na-text-muted">
+        <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+            <div className="mb-8">
+                <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main mb-2">System Control Team</h1>
+                <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted">
                     The Elite 10% - The "Pilots" for the Ferrari. Machines handle the Happy Path. 
                     You handle the Context.
                 </p>
             </div>
 
-            <div className="na-grid na-grid-cols-1 md:na-grid-cols-3 na-gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Exception Handler */}
-                <Link href="/system-control/exception-handler" className="na-card na-p-6 hover:na-shadow-lg na-transition-shadow">
-                    <div className="na-flex na-items-start na-gap-4">
-                        <div className="na-flex-shrink-0 na-w-12 na-h-12 na-bg-warning-subtle na-rounded-lg na-flex na-items-center na-justify-center">
-                            <svg className="na-w-6 na-h-6 na-text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <Link href="/system-control/exception-handler" className="card p-6 hover:shadow-lg transition-shadow">
+                    <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 w-12 h-12 bg-nx-warning-bg rounded-lg flex items-center justify-center">
+                            <svg className="w-6 h-6 text-nx-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                             </svg>
                         </div>
-                        <div className="na-flex-1">
-                            <div className="na-flex na-items-center na-gap-2 na-mb-2">
-                                <h2 className="na-h3">Exception Handler</h2>
+                        <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                                <h2 className="section">Exception Handler</h2>
                                 {exceptionCount > 0 && (
-                                    <span className="na-badge na-bg-warning-subtle na-text-warning">
+                                    <span className="badge bg-nx-warning-bg text-nx-warning">
                                         {exceptionCount} Active
                                     </span>
                                 )}
                             </div>
-                            <p className="na-body na-text-muted na-mb-4">
+                            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted mb-4">
                                 The Mechanic. Resolves the 5% of invoices that the system blocks.
                                 Price variances, matching failures, missing documents.
                             </p>
-                            <div className="na-flex na-items-center na-gap-2 na-text-sm na-text-muted">
-                                <span className="na-font-medium">Role:</span>
+                            <div className="flex items-center gap-2 text-sm text-nx-text-muted">
+                                <span className="font-medium">Role:</span>
                                 <span>Resolving blocks, not entering invoices</span>
                             </div>
                         </div>
@@ -136,28 +136,28 @@ export default async function SystemControlPage() {
                 </Link>
 
                 {/* Fraud Hunter */}
-                <Link href="/system-control/fraud-hunter" className="na-card na-p-6 hover:na-shadow-lg na-transition-shadow">
-                    <div className="na-flex na-items-start na-gap-4">
-                        <div className="na-flex-shrink-0 na-w-12 na-h-12 na-bg-danger-subtle na-rounded-lg na-flex na-items-center na-justify-center">
-                            <svg className="na-w-6 na-h-6 na-text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <Link href="/system-control/fraud-hunter" className="card p-6 hover:shadow-lg transition-shadow">
+                    <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 w-12 h-12 bg-nx-danger-bg rounded-lg flex items-center justify-center">
+                            <svg className="w-6 h-6 text-nx-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
                         </div>
-                        <div className="na-flex-1">
-                            <div className="na-flex na-items-center na-gap-2 na-mb-2">
-                                <h2 className="na-h3">Fraud Hunter</h2>
+                        <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                                <h2 className="section">Fraud Hunter</h2>
                                 {riskCount > 0 && (
-                                    <span className="na-badge na-bg-danger-subtle na-text-danger">
+                                    <span className="badge bg-nx-danger-bg text-nx-danger">
                                         {riskCount} Items
                                     </span>
                                 )}
                             </div>
-                            <p className="na-body na-text-muted na-mb-4">
+                            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted mb-4">
                                 The Guard. Reviews high-value changes, bank account modifications,
                                 and risk anomalies the AI missed.
                             </p>
-                            <div className="na-flex na-items-center na-gap-2 na-text-sm na-text-muted">
-                                <span className="na-font-medium">Role:</span>
+                            <div className="flex items-center gap-2 text-sm text-nx-text-muted">
+                                <span className="font-medium">Role:</span>
                                 <span>Risk Analyst, anomaly detection</span>
                             </div>
                         </div>
@@ -165,29 +165,29 @@ export default async function SystemControlPage() {
                 </Link>
 
                 {/* Kernel Steward */}
-                <Link href="/system-control/kernel-steward" className="na-card na-p-6 hover:na-shadow-lg na-transition-shadow">
-                    <div className="na-flex na-items-start na-gap-4">
-                        <div className="na-flex-shrink-0 na-w-12 na-h-12 na-bg-primary-subtle na-rounded-lg na-flex na-items-center na-justify-center">
-                            <svg className="na-w-6 na-h-6 na-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <Link href="/system-control/kernel-steward" className="card p-6 hover:shadow-lg transition-shadow">
+                    <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 w-12 h-12 bg-nx-primary-light rounded-lg flex items-center justify-center">
+                            <svg className="w-6 h-6 text-nx-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </div>
-                        <div className="na-flex-1">
-                            <div className="na-flex na-items-center na-gap-2 na-mb-2">
-                                <h2 className="na-h3">Kernel Steward</h2>
+                        <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                                <h2 className="section">Kernel Steward</h2>
                                 {configCount > 0 && (
-                                    <span className="na-badge na-bg-primary-subtle na-text-primary">
+                                    <span className="badge bg-nx-primary-light text-nx-primary">
                                         {configCount} Configs
                                     </span>
                                 )}
                             </div>
-                            <p className="na-body na-text-muted na-mb-4">
+                            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted mb-4">
                                 The Architect. Configures L1 tenants, maps L0 value sets,
                                 sets Group credit limits. Keeps the "Iron Dome" from becoming a "Rust Dome".
                             </p>
-                            <div className="na-flex na-items-center na-gap-2 na-text-sm na-text-muted">
-                                <span className="na-font-medium">Role:</span>
+                            <div className="flex items-center gap-2 text-sm text-nx-text-muted">
+                                <span className="font-medium">Role:</span>
                                 <span>Platform Owner, system configuration</span>
                             </div>
                         </div>
@@ -195,19 +195,19 @@ export default async function SystemControlPage() {
                 </Link>
             </div>
 
-            <div className="na-mt-8 na-card na-p-6 na-bg-muted">
-                <h3 className="na-h4 na-mb-4">The Automation Paradox</h3>
-                <div className="na-space-y-3 na-text-sm">
-                    <p className="na-body">
+            <div className="mt-8 card p-6 bg-nx-surface-well">
+                <h3 className="text-base font-semibold text-nx-text-main mb-4">The Automation Paradox</h3>
+                <div className="space-y-3 text-sm">
+                    <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
                         <strong>What You Are Killing (The 90%):</strong> Data Entry Clerks, Email Chasers, 
                         Reconciliation Staff, Master Data Cleaners. These jobs are dead. 
                         If you keep them, you are paying people to watch a machine work.
                     </p>
-                    <p className="na-body">
+                    <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
                         <strong>What You MUST Keep (The 10% Elite):</strong> Exception Handlers, Fraud Hunters, 
                         Kernel Stewards. Machines are great at the Happy Path. They are terrible at Context.
                     </p>
-                    <p className="na-body na-font-medium na-text-primary">
+                    <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main font-medium text-nx-primary">
                         Recommendation: Cut 90%. Keep the top 10% as "System Controllers."
                     </p>
                 </div>

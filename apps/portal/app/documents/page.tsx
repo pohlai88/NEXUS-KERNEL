@@ -53,20 +53,20 @@ export default async function DocumentsPage({ searchParams }: DocumentsPageProps
   }
 
   return (
-    <div className="na-shell-main na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Document Storage</h1>
-        <button className="na-btn na-btn-primary" type="button">
+    <div className="shell p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Document Storage</h1>
+        <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary" type="button">
           Upload Document
         </button>
       </div>
 
       {/* Filters */}
-      <div className="na-card na-p-4 na-mb-6">
-        <form method="get" className="na-flex na-gap-4 na-items-end">
+      <div className="card p-4 mb-6">
+        <form method="get" className="flex gap-4 items-end">
           <div>
-            <label className="na-metadata na-mb-2 na-block">Category</label>
-            <select name="category" className="na-input" defaultValue={searchParams.category || ''}>
+            <label className="caption mb-2 block">Category</label>
+            <select name="category" className="input" defaultValue={searchParams.category || ''}>
               <option value="">All</option>
               <option value="invoice">Invoice</option>
               <option value="contract">Contract</option>
@@ -74,26 +74,26 @@ export default async function DocumentsPage({ searchParams }: DocumentsPageProps
               <option value="other">Other</option>
             </select>
           </div>
-          <div className="na-flex-1">
-            <label className="na-metadata na-mb-2 na-block">Search</label>
+          <div className="flex-1">
+            <label className="caption mb-2 block">Search</label>
             <input
               type="text"
               name="search"
-              className="na-input na-w-full"
+              className="input w-full"
               placeholder="Search documents..."
               defaultValue={searchParams.search || ''}
             />
           </div>
-          <button type="submit" className="na-btn na-btn-secondary">
+          <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary">
             Filter
           </button>
         </form>
       </div>
 
       {/* Grid + Preview Layout */}
-      <div className="na-grid na-grid-cols-1 lg:na-grid-cols-3 na-gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left: Document Grid */}
-        <div className="lg:na-col-span-1">
+        <div className="lg:col-span-1">
           <DocumentGrid
             documents={documents}
             selectedDocumentId={searchParams.document_id}
@@ -101,11 +101,11 @@ export default async function DocumentsPage({ searchParams }: DocumentsPageProps
         </div>
 
         {/* Right: Document Preview */}
-        <div className="lg:na-col-span-2">
+        <div className="lg:col-span-2">
           <Suspense fallback={
-            <div className="na-card na-p-6">
-              <div className="na-spinner" />
-              <p className="na-metadata na-mt-2">Loading preview...</p>
+            <div className="card p-6">
+              <div className="animate-spin h-5 w-5 border-2 border-nx-primary border-t-transparent rounded-full" />
+              <p className="caption mt-2">Loading preview...</p>
             </div>
           }>
             {selectedDocument ? (
@@ -114,9 +114,9 @@ export default async function DocumentsPage({ searchParams }: DocumentsPageProps
                 versions={documentVersions}
               />
             ) : (
-              <div className="na-card na-p-6">
-                <h2 className="na-h4">No Document Selected</h2>
-                <p className="na-data na-mt-2">
+              <div className="card p-6">
+                <h2 className="text-base font-semibold text-nx-text-main">No Document Selected</h2>
+                <p className="text-[length:var(--nx-body-size)] text-nx-text-main mt-2">
                   Select a document from the grid to view details and preview.
                 </p>
               </div>

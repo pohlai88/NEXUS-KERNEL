@@ -74,8 +74,8 @@ export function DocumentUpload({ documentId, onUploadComplete }: DocumentUploadP
 
   return (
     <div
-      className={`na-card na-p-6 na-border-2 na-border-dashed ${
-        isDragging ? 'na-bg-paper-2' : ''
+      className={`card p-6 border-2 border-dashed ${
+        isDragging ? 'bg-nx-surface-well' : ''
       }`}
       onDragOver={(e) => {
         e.preventDefault();
@@ -84,29 +84,29 @@ export function DocumentUpload({ documentId, onUploadComplete }: DocumentUploadP
       onDragLeave={() => setIsDragging(false)}
       onDrop={handleDrop}
     >
-      <div className="na-text-center">
-        <div className="na-text-4xl na-mb-4">📤</div>
-        <h3 className="na-h4 na-mb-2">
+      <div className="text-center">
+        <div className="text-4xl mb-4">📤</div>
+        <h3 className="text-base font-semibold text-nx-text-main mb-2">
           {documentId ? 'Upload New Version' : 'Upload Document'}
         </h3>
-        <p className="na-metadata na-mb-4">
+        <p className="caption mb-4">
           Drag and drop a file here, or click to browse
         </p>
         <input
           type="file"
           id="file-upload"
-          className="na-hidden"
+          className="hidden"
           onChange={handleFileInput}
           disabled={isPending}
         />
         <label
           htmlFor="file-upload"
-          className="na-btn na-btn-primary na-cursor-pointer"
+          className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary cursor-pointer"
         >
           {isPending ? 'Uploading...' : 'Choose File'}
         </label>
         {error && (
-          <div className="na-text-danger na-mt-4 na-text-sm">{error}</div>
+          <div className="text-nx-danger mt-4 text-sm">{error}</div>
         )}
       </div>
     </div>

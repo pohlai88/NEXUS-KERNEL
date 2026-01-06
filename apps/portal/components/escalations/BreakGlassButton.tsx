@@ -57,7 +57,7 @@ export function BreakGlassButton({ caseId, invoiceId, vendorId, onEscalated }: B
   return (
     <>
       <button
-        className="na-btn na-btn-danger na-flex na-items-center na-gap-2"
+        className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-nx-danger text-white hover:bg-nx-danger-text flex items-center gap-2"
         onClick={() => setIsOpen(true)}
       >
         <span>🚨</span>
@@ -65,20 +65,20 @@ export function BreakGlassButton({ caseId, invoiceId, vendorId, onEscalated }: B
       </button>
 
       {isOpen && (
-        <div className="na-fixed na-inset-0 na-bg-black na-bg-opacity-50 na-flex na-items-center na-justify-center na-z-50">
-          <div className="na-card na-p-6 na-max-w-2xl na-w-full na-mx-4">
-            <h2 className="na-h2 na-mb-4">🚨 Break Glass Escalation (SOS)</h2>
-            <p className="na-metadata na-mb-6">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="card p-6 max-w-2xl w-full mx-4">
+            <h2 className="text-[length:var(--nx-title-size)] leading-[var(--nx-title-line)] font-semibold tracking-tight text-nx-text-main mb-4">🚨 Break Glass Escalation (SOS)</h2>
+            <p className="caption mb-6">
               Escalate directly to Senior Manager when you cannot find anyone or are being ignored.
             </p>
 
-            <div className="na-space-y-4">
+            <div className="space-y-4">
               <div>
-                <label className="na-metadata na-mb-2 na-block">Escalation Type *</label>
+                <label className="caption mb-2 block">Escalation Type *</label>
                 <select
                   value={escalationType}
                   onChange={(e) => setEscalationType(e.target.value as BreakGlassButtonProps['escalationType'])}
-                  className="na-input na-w-full"
+                  className="input w-full"
                 >
                   <option value="no_response">No Response</option>
                   <option value="sla_breach">SLA Breach</option>
@@ -89,23 +89,23 @@ export function BreakGlassButton({ caseId, invoiceId, vendorId, onEscalated }: B
               </div>
 
               <div>
-                <label className="na-metadata na-mb-2 na-block">Reason *</label>
+                <label className="caption mb-2 block">Reason *</label>
                 <input
                   type="text"
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
-                  className="na-input na-w-full"
+                  className="input w-full"
                   placeholder="Brief reason for escalation"
                   required
                 />
               </div>
 
               <div>
-                <label className="na-metadata na-mb-2 na-block">Description *</label>
+                <label className="caption mb-2 block">Description *</label>
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="na-input na-w-full"
+                  className="input w-full"
                   rows={5}
                   placeholder="Detailed description of the issue..."
                   required
@@ -113,14 +113,14 @@ export function BreakGlassButton({ caseId, invoiceId, vendorId, onEscalated }: B
               </div>
 
               {error && (
-                <div className="na-card na-p-4 na-bg-danger-subtle na-text-danger">
-                  <p className="na-metadata">{error}</p>
+                <div className="card p-4 bg-nx-danger-bg text-nx-danger">
+                  <p className="caption">{error}</p>
                 </div>
               )}
 
-              <div className="na-flex na-gap-4">
+              <div className="flex gap-4">
                 <button
-                  className="na-btn na-btn-secondary na-flex-1"
+                  className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary flex-1"
                   onClick={() => {
                     setIsOpen(false);
                     setError(null);
@@ -130,7 +130,7 @@ export function BreakGlassButton({ caseId, invoiceId, vendorId, onEscalated }: B
                   Cancel
                 </button>
                 <button
-                  className="na-btn na-btn-danger na-flex-1"
+                  className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-nx-danger text-white hover:bg-nx-danger-text flex-1"
                   onClick={handleSubmit}
                   disabled={isPending}
                 >

@@ -132,7 +132,7 @@ export function DataTable({
   const handleDelete = (userId: string) => console.log('Delete:', userId);
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
+    <div className="bg-nx-surface rounded-lg border border-nx-border shadow-sm">
       <div className="p-6">
         <TableTabs
           activeTab={filters.tab}
@@ -154,7 +154,7 @@ export function DataTable({
         <>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 border-y border-gray-200">
+              <thead className="bg-nx-canvas border-y border-nx-border">
                 <tr>
                   <th className="py-3 px-4 text-left">
                     <input
@@ -171,16 +171,16 @@ export function DataTable({
                       }}
                     />
                   </th>
-                  <th className="py-3 px-4 text-left text-caption font-semibold text-gray-600 uppercase tracking-wider">
+                  <th className="py-3 px-4 text-left text-caption font-semibold text-nx-text-sub uppercase tracking-wider">
                     Name
                   </th>
-                  <th className="py-3 px-4 text-left text-caption font-semibold text-gray-600 uppercase tracking-wider">
+                  <th className="py-3 px-4 text-left text-caption font-semibold text-nx-text-sub uppercase tracking-wider">
                     User Status
                   </th>
-                  <th className="py-3 px-4 text-left text-caption font-semibold text-gray-600 uppercase tracking-wider">
+                  <th className="py-3 px-4 text-left text-caption font-semibold text-nx-text-sub uppercase tracking-wider">
                     Payment Status
                   </th>
-                  <th className="py-3 px-4 text-left text-caption font-semibold text-gray-600 uppercase tracking-wider">
+                  <th className="py-3 px-4 text-left text-caption font-semibold text-nx-text-sub uppercase tracking-wider">
                     Amount
                   </th>
                   <th className="py-3 px-4"></th>

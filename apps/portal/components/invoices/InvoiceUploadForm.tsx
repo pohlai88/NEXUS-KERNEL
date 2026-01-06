@@ -101,41 +101,41 @@ export function InvoiceUploadForm({ onUploadComplete }: InvoiceUploadFormProps) 
   };
 
   return (
-    <div className="na-card na-p-6">
-      <h2 className="na-h2 na-mb-6">Upload Invoice</h2>
+    <div className="card p-6">
+      <h2 className="text-[length:var(--nx-title-size)] leading-[var(--nx-title-line)] font-semibold tracking-tight text-nx-text-main mb-6">Upload Invoice</h2>
 
       {duplicateDetected && (
-        <div className="na-card na-p-4 na-bg-danger-subtle na-text-danger na-mb-4">
-          <p className="na-body na-font-semibold">Duplicate Invoice Detected</p>
-          <p className="na-metadata na-text-sm na-mt-1">
+        <div className="card p-4 bg-nx-danger-bg text-nx-danger mb-4">
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main font-semibold">Duplicate Invoice Detected</p>
+          <p className="caption text-sm mt-1">
             This invoice number already exists. Invoice ID: {duplicateDetected}
           </p>
         </div>
       )}
 
       {error && (
-        <div className="na-card na-p-4 na-bg-danger-subtle na-text-danger na-mb-4">
-          <p className="na-body">{error}</p>
+        <div className="card p-4 bg-nx-danger-bg text-nx-danger mb-4">
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{error}</p>
         </div>
       )}
 
       {success && (
-        <div className="na-card na-p-4 na-bg-ok-subtle na-text-ok na-mb-4">
-          <p className="na-body">{success}</p>
+        <div className="card p-4 bg-nx-success-bg text-nx-success mb-4">
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{success}</p>
         </div>
       )}
 
       {/* Missing Items */}
       {missingItems.length > 0 && (
-        <div className="na-card na-p-4 na-bg-warn-subtle na-mb-4">
-          <p className="na-body na-font-semibold na-mb-2">Action Required:</p>
-          <div className="na-space-y-2">
+        <div className="card p-4 bg-nx-warning-bg mb-4">
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main font-semibold mb-2">Action Required:</p>
+          <div className="space-y-2">
             {missingItems.map((item, index) => (
-              <div key={index} className="na-card na-p-3 na-bg-paper">
-                <p className="na-metadata na-mb-2">{item.message}</p>
+              <div key={index} className="card p-3 bg-nx-surface">
+                <p className="caption mb-2">{item.message}</p>
                 <a
                   href={item.action_url}
-                  className="na-btn na-btn-primary na-text-sm"
+                  className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary text-sm"
                 >
                   {item.action_label}
                 </a>
@@ -145,19 +145,19 @@ export function InvoiceUploadForm({ onUploadComplete }: InvoiceUploadFormProps) 
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="na-space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {/* File Upload */}
         <div>
-          <label className="na-metadata na-mb-2 na-block">Invoice File *</label>
+          <label className="caption mb-2 block">Invoice File *</label>
           <input
             type="file"
             accept=".pdf,.jpg,.jpeg,.png"
             onChange={handleFileChange}
-            className="na-input na-w-full"
+            className="input w-full"
             required
           />
           {file && (
-            <p className="na-metadata na-text-sm na-mt-1">
+            <p className="caption text-sm mt-1">
               Selected: {file.name} ({(file.size / 1024).toFixed(2)} KB)
             </p>
           )}
@@ -165,21 +165,21 @@ export function InvoiceUploadForm({ onUploadComplete }: InvoiceUploadFormProps) 
 
         {/* Invoice Number */}
         <div>
-          <label className="na-metadata na-mb-2 na-block">Invoice Number *</label>
-          <div className="na-flex na-gap-2">
+          <label className="caption mb-2 block">Invoice Number *</label>
+          <div className="flex gap-2">
             <input
               type="text"
               value={invoiceNumber}
               onChange={(e) => setInvoiceNumber(e.target.value)}
               onBlur={handleCheckDuplicate}
-              className="na-input na-flex-1"
+              className="input flex-1"
               placeholder="INV-001"
               required
             />
             <button
               type="button"
               onClick={handleCheckDuplicate}
-              className="na-btn na-btn-ghost"
+              className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main"
             >
               Check Duplicate
             </button>
@@ -188,50 +188,50 @@ export function InvoiceUploadForm({ onUploadComplete }: InvoiceUploadFormProps) 
 
         {/* Invoice Date */}
         <div>
-          <label className="na-metadata na-mb-2 na-block">Invoice Date *</label>
+          <label className="caption mb-2 block">Invoice Date *</label>
           <input
             type="date"
             value={invoiceDate}
             onChange={(e) => setInvoiceDate(e.target.value)}
-            className="na-input na-w-full"
+            className="input w-full"
             required
           />
         </div>
 
         {/* Vendor Information (for auto-linking) */}
-        <div className="na-card na-p-4 na-bg-info-subtle">
-          <p className="na-metadata na-font-semibold na-mb-3">Vendor Information (Auto-Link)</p>
+        <div className="card p-4 bg-nx-info-bg">
+          <p className="caption font-semibold mb-3">Vendor Information (Auto-Link)</p>
           
-          <div className="na-space-y-3">
+          <div className="space-y-3">
             <div>
-              <label className="na-metadata na-mb-2 na-block">Vendor Name</label>
+              <label className="caption mb-2 block">Vendor Name</label>
               <input
                 type="text"
                 value={vendorName}
                 onChange={(e) => setVendorName(e.target.value)}
-                className="na-input na-w-full"
+                className="input w-full"
                 placeholder="Acme Corp"
               />
             </div>
 
             <div>
-              <label className="na-metadata na-mb-2 na-block">Vendor Email</label>
+              <label className="caption mb-2 block">Vendor Email</label>
               <input
                 type="email"
                 value={vendorEmail}
                 onChange={(e) => setVendorEmail(e.target.value)}
-                className="na-input na-w-full"
+                className="input w-full"
                 placeholder="contact@acme.com"
               />
             </div>
 
             <div>
-              <label className="na-metadata na-mb-2 na-block">Tax ID</label>
+              <label className="caption mb-2 block">Tax ID</label>
               <input
                 type="text"
                 value={vendorTaxId}
                 onChange={(e) => setVendorTaxId(e.target.value)}
-                className="na-input na-w-full"
+                className="input w-full"
                 placeholder="TAX123456"
               />
             </div>
@@ -240,26 +240,26 @@ export function InvoiceUploadForm({ onUploadComplete }: InvoiceUploadFormProps) 
 
         {/* PO Number */}
         <div>
-          <label className="na-metadata na-mb-2 na-block">PO Number</label>
+          <label className="caption mb-2 block">PO Number</label>
           <input
             type="text"
             value={poNumber}
             onChange={(e) => setPoNumber(e.target.value)}
-            className="na-input na-w-full"
+            className="input w-full"
             placeholder="PO-12345"
           />
         </div>
 
         {/* Amount */}
         <div>
-          <label className="na-metadata na-mb-2 na-block">Amount</label>
+          <label className="caption mb-2 block">Amount</label>
           <input
             type="number"
             step="0.01"
             min="0"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="na-input na-w-full"
+            className="input w-full"
             placeholder="0.00"
           />
         </div>
@@ -267,7 +267,7 @@ export function InvoiceUploadForm({ onUploadComplete }: InvoiceUploadFormProps) 
         <button
           type="submit"
           disabled={isPending}
-          className="na-btn na-btn-primary na-w-full"
+          className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary w-full"
         >
           {isPending ? 'Uploading...' : 'Upload Invoice'}
         </button>

@@ -66,13 +66,13 @@ export function VendorInlineEdit({
 
     if (isEditing) {
         return (
-            <td className="na-td">
+            <td className="table-data-cell">
                 {type === 'select' && options ? (
                     <select
                         value={editValue}
                         onChange={(e) => setEditValue(e.target.value)}
                         onBlur={handleSave}
-                        className="na-input"
+                        className="input"
                         autoFocus
                         disabled={isPending}
                     >
@@ -92,23 +92,23 @@ export function VendorInlineEdit({
                             if (e.key === 'Enter') handleSave();
                             if (e.key === 'Escape') handleCancel();
                         }}
-                        className="na-input"
+                        className="input"
                         autoFocus
                         disabled={isPending}
                     />
                 )}
-                {error && <span className="na-text-danger na-text-sm">{error}</span>}
+                {error && <span className="text-nx-danger text-sm">{error}</span>}
             </td>
         );
     }
 
     return (
         <td
-            className="na-td na-cursor-pointer na-hover-bg-paper-2 na-transition-colors"
+            className="table-data-cell cursor-pointer hover:bg-nx-surface-well transition-colors"
             onClick={() => setIsEditing(true)}
             title="Click to edit"
         >
-            {value || <span className="na-metadata">—</span>}
+            {value || <span className="caption">—</span>}
         </td>
     );
 }

@@ -25,7 +25,7 @@ export function TableToolbar({ filters, onFiltersChange, onPayDues }: TableToolb
       
       <div className="flex-1 relative">
         <Search 
-          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" 
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-nx-text-faint" 
           size={18}
         />
         <input

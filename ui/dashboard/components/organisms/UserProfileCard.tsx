@@ -197,7 +197,7 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
                   />
                 </div>
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-gray-500">
+                <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-nx-text-muted">
                   {profile.name.charAt(0).toUpperCase()}
                 </div>
               )}
@@ -311,9 +311,9 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
                 </div>
               )}
             </div>
-            <p className="text-sm text-gray-400 mb-2">@{profile.username}</p>
-            {profile.bio && <p className="text-sm text-gray-300 mb-3">{profile.bio}</p>}
-            <div className="flex flex-wrap gap-3 text-sm text-gray-400">
+            <p className="text-sm text-nx-text-faint mb-2">@{profile.username}</p>
+            {profile.bio && <p className="text-sm text-nx-text-muted mb-3">{profile.bio}</p>}
+            <div className="flex flex-wrap gap-3 text-sm text-nx-text-faint">
               {profile.role && (
                 <span className="flex items-center gap-1">
                   💼 {profile.role}
@@ -351,14 +351,14 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
                   {stat.trend && (
                     <span
                       className={`text-sm ${
-                        stat.trend.direction === 'up' ? 'text-green-400' : 'text-red-400'
+                        stat.trend.direction === 'up' ? 'text-nx-success' : 'text-nx-danger'
                       }`}
                     >
                       {stat.trend.direction === 'up' ? '↑' : '↓'} {stat.trend.value}%
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-gray-400">{stat.label}</p>
+                <p className="text-xs text-nx-text-faint">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -373,7 +373,7 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-3 py-1.5 bg-surface-800 text-gray-300 rounded-lg hover:bg-surface-700 transition-colors text-sm"
+                className="flex items-center gap-2 px-3 py-1.5 bg-surface-800 text-nx-text-muted rounded-lg hover:bg-surface-700 transition-colors text-sm"
               >
                 <span>{getSocialIcon(link.platform)}</span>
                 <span>{link.label || link.platform}</span>
@@ -391,7 +391,7 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
                 className={`pb-3 text-sm font-medium transition-colors relative ${
                   activeTab === 'overview'
                     ? 'text-primary-400'
-                    : 'text-gray-400 hover:text-gray-300'
+                    : 'text-nx-text-faint hover:text-nx-text-muted'
                 }`}
               >
                 Overview
@@ -404,7 +404,7 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
                 className={`pb-3 text-sm font-medium transition-colors relative ${
                   activeTab === 'activity'
                     ? 'text-primary-400'
-                    : 'text-gray-400 hover:text-gray-300'
+                    : 'text-nx-text-faint hover:text-nx-text-muted'
                 }`}
               >
                 Activity
@@ -426,9 +426,9 @@ export const UserProfileCard: React.FC<UserProfileCardProps> = ({
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-white font-medium mb-1">{activity.title}</p>
                     {activity.description && (
-                      <p className="text-sm text-gray-400 mb-1">{activity.description}</p>
+                      <p className="text-sm text-nx-text-faint mb-1">{activity.description}</p>
                     )}
-                    <p className="text-xs text-gray-500">{formatActivityTime(activity.timestamp)}</p>
+                    <p className="text-xs text-nx-text-muted">{formatActivityTime(activity.timestamp)}</p>
                   </div>
                 </div>
               ))}

@@ -4,11 +4,11 @@
 
 export default function VendorsLoading() {
     return (
-        <div className="na-shell-main na-p-6">
-            <div className="na-card na-p-6">
-                <div className="na-flex na-items-center na-gap-4">
-                    <div className="na-spinner" />
-                    <p className="na-metadata">Loading vendors...</p>
+        <div className="shell p-6">
+            <div className="card p-6">
+                <div className="flex items-center gap-4">
+                    <div className="animate-spin h-5 w-5 border-2 border-nx-primary border-t-transparent rounded-full" />
+                    <p className="caption">Loading vendors...</p>
                 </div>
             </div>
         </div>

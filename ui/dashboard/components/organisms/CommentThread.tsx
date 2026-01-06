@@ -213,7 +213,7 @@ const CommentItem: React.FC<{
 
   if (comment.isDeleted) {
     return (
-      <div className="text-sm text-gray-500 italic py-2">
+      <div className="text-sm text-nx-text-muted italic py-2">
         [Comment deleted]
       </div>
     );
@@ -236,7 +236,7 @@ const CommentItem: React.FC<{
                 />
               </div>
             ) : (
-              <div className="w-10 h-10 rounded-full bg-surface-700 flex items-center justify-center text-lg font-bold text-gray-400">
+              <div className="w-10 h-10 rounded-full bg-surface-700 flex items-center justify-center text-lg font-bold text-nx-text-faint">
                 {comment.author.name.charAt(0).toUpperCase()}
               </div>
             )}
@@ -251,15 +251,15 @@ const CommentItem: React.FC<{
                 <span className="text-primary-400" title="Verified">✓</span>
               )}
               {comment.author.role && (
-                <span className="px-2 py-0.5 bg-surface-700 text-xs text-gray-400 rounded">
+                <span className="px-2 py-0.5 bg-surface-700 text-xs text-nx-text-faint rounded">
                   {comment.author.role}
                 </span>
               )}
               {comment.isPinned && (
-                <span className="text-yellow-400" title="Pinned">📌</span>
+                <span className="text-nx-warning" title="Pinned">📌</span>
               )}
               {showTimestamps && (
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-nx-text-muted">
                   {formatTimestamp(comment.timestamp)}
                   {comment.edited && ' (edited)'}
                 </span>
@@ -295,7 +295,7 @@ const CommentItem: React.FC<{
                 </div>
               </div>
             ) : (
-              <p className="text-sm text-gray-300 mb-2">
+              <p className="text-sm text-nx-text-muted mb-2">
                 {parseContent(comment.content)}
               </p>
             )}
@@ -340,7 +340,7 @@ const CommentItem: React.FC<{
                     className={`flex items-center gap-1 px-2 py-1 rounded-full text-sm transition-colors ${
                       reaction.userReacted
                         ? 'bg-primary-500/20 border border-primary-500 text-primary-400'
-                        : 'bg-surface-800 hover:bg-surface-700 text-gray-400'
+                        : 'bg-surface-800 hover:bg-surface-700 text-nx-text-faint'
                     }`}
                     title={reaction.users.join(', ')}
                   >
@@ -352,7 +352,7 @@ const CommentItem: React.FC<{
             )}
 
             {/* Actions */}
-            <div className="flex items-center gap-4 text-sm text-gray-500">
+            <div className="flex items-center gap-4 text-sm text-nx-text-muted">
               {/* React */}
               {allowReactions && (
                 <div className="relative">
@@ -405,7 +405,7 @@ const CommentItem: React.FC<{
               {allowDelete && isAuthor && (
                 <button
                   onClick={() => onDelete?.(comment.id)}
-                  className="hover:text-red-400 transition-colors"
+                  className="hover:text-nx-danger transition-colors"
                 >
                   🗑️ Delete
                 </button>
@@ -415,7 +415,7 @@ const CommentItem: React.FC<{
               {onPin && (
                 <button
                   onClick={() => onPin(comment.id)}
-                  className="hover:text-yellow-400 transition-colors"
+                  className="hover:text-nx-warning transition-colors"
                 >
                   📌 {comment.isPinned ? 'Unpin' : 'Pin'}
                 </button>
@@ -604,7 +604,7 @@ export const CommentThread: React.FC<CommentThreadProps> = ({
               rows={3}
             />
             {allowMentions && (
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-nx-text-muted mt-1">
                 Use @username to mention someone
               </p>
             )}
@@ -624,8 +624,8 @@ export const CommentThread: React.FC<CommentThreadProps> = ({
         {sortedComments.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <div className="text-4xl mb-3">💬</div>
-            <p className="text-gray-400">No comments yet</p>
-            <p className="text-sm text-gray-500 mt-1">Be the first to comment!</p>
+            <p className="text-nx-text-faint">No comments yet</p>
+            <p className="text-sm text-nx-text-muted mt-1">Be the first to comment!</p>
           </div>
         ) : (
           <div className="px-4 divide-y divide-surface-700">

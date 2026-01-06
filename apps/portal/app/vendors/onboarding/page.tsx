@@ -18,8 +18,8 @@ export default function VendorOnboardingPage() {
   };
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-max-w-2xl na-mx-auto">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="max-w-2xl mx-auto">
         <VendorOnboardingForm onSubmit={handleSubmit} />
       </div>
     </div>

@@ -55,26 +55,26 @@ export default async function VendorGRNSubmitPage({ searchParams }: GRNSubmitPag
     .limit(50);
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Submit GRN</h1>
-        <Link href="/vendor-omni-dashboard" className="na-btn na-btn-ghost">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Submit GRN</h1>
+        <Link href="/vendor-omni-dashboard" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
           ← Back to Dashboard
         </Link>
       </div>
 
       {/* GRN Submission Form */}
-      <div className="na-card na-p-6">
-        <h2 className="na-h3 na-mb-4">GRN Details</h2>
-        <form action="/vendor/grns/submit" method="post" className="na-space-y-4">
+      <div className="card p-6">
+        <h2 className="section mb-4">GRN Details</h2>
+        <form action="/vendor/grns/submit" method="post" className="space-y-4">
           <input type="hidden" name="submitted_by" value={ctx.actor.userId} />
 
           {/* PO Selection */}
           <div>
-            <label className="na-metadata na-mb-2 na-block">Purchase Order *</label>
+            <label className="caption mb-2 block">Purchase Order *</label>
             <select
               name="po_id"
-              className="na-input na-w-full"
+              className="input w-full"
               required
               defaultValue={searchParams.po_id || ''}
             >
@@ -87,8 +87,8 @@ export default async function VendorGRNSubmitPage({ searchParams }: GRNSubmitPag
               ))}
             </select>
             {po && (
-              <div className="na-card na-p-3 na-bg-paper-2 na-mt-2">
-                <div className="na-metadata na-text-sm">
+              <div className="card p-3 bg-nx-surface-well mt-2">
+                <div className="caption text-sm">
                   Selected PO: {po.po_number} - Amount: ${po.amount?.toLocaleString() || 'N/A'}
                 </div>
               </div>
@@ -97,11 +97,11 @@ export default async function VendorGRNSubmitPage({ searchParams }: GRNSubmitPag
 
           {/* GRN Number */}
           <div>
-            <label className="na-metadata na-mb-2 na-block">GRN Number *</label>
+            <label className="caption mb-2 block">GRN Number *</label>
             <input
               type="text"
               name="grn_number"
-              className="na-input na-w-full"
+              className="input w-full"
               placeholder="GRN-2025-001"
               required
             />
@@ -109,11 +109,11 @@ export default async function VendorGRNSubmitPage({ searchParams }: GRNSubmitPag
 
           {/* GRN Date */}
           <div>
-            <label className="na-metadata na-mb-2 na-block">GRN Date *</label>
+            <label className="caption mb-2 block">GRN Date *</label>
             <input
               type="date"
               name="grn_date"
-              className="na-input na-w-full"
+              className="input w-full"
               defaultValue={new Date().toISOString().split('T')[0]}
               required
             />
@@ -121,11 +121,11 @@ export default async function VendorGRNSubmitPage({ searchParams }: GRNSubmitPag
 
           {/* Quantity */}
           <div>
-            <label className="na-metadata na-mb-2 na-block">Quantity</label>
+            <label className="caption mb-2 block">Quantity</label>
             <input
               type="number"
               name="quantity"
-              className="na-input na-w-full"
+              className="input w-full"
               placeholder="Enter quantity received"
               min="0"
               step="0.01"
@@ -134,8 +134,8 @@ export default async function VendorGRNSubmitPage({ searchParams }: GRNSubmitPag
 
           {/* Condition */}
           <div>
-            <label className="na-metadata na-mb-2 na-block">Condition</label>
-            <select name="condition" className="na-input na-w-full">
+            <label className="caption mb-2 block">Condition</label>
+            <select name="condition" className="input w-full">
               <option value="">Select Condition</option>
               <option value="good">Good</option>
               <option value="damaged">Damaged</option>
@@ -146,23 +146,23 @@ export default async function VendorGRNSubmitPage({ searchParams }: GRNSubmitPag
 
           {/* GRN Document Upload */}
           <div>
-            <label className="na-metadata na-mb-2 na-block">GRN Document *</label>
+            <label className="caption mb-2 block">GRN Document *</label>
             <DocumentUpload
               onUploadComplete={() => {
                 // Handle upload completion
               }}
             />
             <input type="hidden" name="document_id" id="document_id" />
-            <p className="na-metadata na-text-sm na-mt-2">
+            <p className="caption text-sm mt-2">
               Upload Goods Receipt Note document (PDF, JPG, PNG)
             </p>
           </div>
 
-          <div className="na-flex na-gap-4">
-            <button type="submit" className="na-btn na-btn-primary">
+          <div className="flex gap-4">
+            <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">
               Submit GRN
             </button>
-            <Link href="/vendor-omni-dashboard" className="na-btn na-btn-ghost">
+            <Link href="/vendor-omni-dashboard" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
               Cancel
             </Link>
           </div>

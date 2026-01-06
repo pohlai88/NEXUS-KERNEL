@@ -101,82 +101,82 @@ export default async function ExceptionHandlerPage({ searchParams }: ExceptionHa
     const totalExceptions = blockedInvoices.length + blockedCases.length + escalations.length;
 
     return (
-        <div className="na-container na-mx-auto na-p-6">
-            <div className="na-flex na-items-center na-justify-between na-mb-6">
+        <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+            <div className="flex items-center justify-between mb-6">
                 <div>
-                    <h1 className="na-h1 na-mb-2">Exception Handler</h1>
-                    <p className="na-body na-text-muted">
+                    <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main mb-2">Exception Handler</h1>
+                    <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted">
                         The Mechanic - Resolves the 5% of invoices that the system blocks
                     </p>
                 </div>
-                <div className="na-text-right">
-                    <div className="na-metadata">Total Exceptions</div>
-                    <div className="na-data-large na-text-warning">{totalExceptions}</div>
+                <div className="text-right">
+                    <div className="caption">Total Exceptions</div>
+                    <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main text-nx-warning">{totalExceptions}</div>
                 </div>
             </div>
 
             {/* Stats Overview */}
-            <div className="na-grid na-grid-cols-4 na-gap-4 na-mb-6">
-                <div className="na-card na-p-4">
-                    <div className="na-metadata">Blocked Invoices</div>
-                    <div className="na-data-large">{blockedInvoices.length}</div>
+            <div className="grid grid-cols-4 gap-4 mb-6">
+                <div className="card p-4">
+                    <div className="caption">Blocked Invoices</div>
+                    <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{blockedInvoices.length}</div>
                 </div>
-                <div className="na-card na-p-4">
-                    <div className="na-metadata">Blocked Cases</div>
-                    <div className="na-data-large">{blockedCases.length}</div>
+                <div className="card p-4">
+                    <div className="caption">Blocked Cases</div>
+                    <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{blockedCases.length}</div>
                 </div>
-                <div className="na-card na-p-4">
-                    <div className="na-metadata">Escalations</div>
-                    <div className="na-data-large">{escalations.length}</div>
+                <div className="card p-4">
+                    <div className="caption">Escalations</div>
+                    <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{escalations.length}</div>
                 </div>
-                <div className="na-card na-p-4">
-                    <div className="na-metadata">Accessible Companies</div>
-                    <div className="na-data-large">{accessibleTenants.length}</div>
+                <div className="card p-4">
+                    <div className="caption">Accessible Companies</div>
+                    <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{accessibleTenants.length}</div>
                 </div>
             </div>
 
             {error ? (
-                <div className="na-card na-p-6 na-bg-danger-subtle na-text-danger na-mb-6">
-                    <h2 className="na-h4">Error Loading Exceptions</h2>
-                    <p className="na-body">{error}</p>
+                <div className="card p-6 bg-nx-danger-bg text-nx-danger mb-6">
+                    <h2 className="text-base font-semibold text-nx-text-main">Error Loading Exceptions</h2>
+                    <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{error}</p>
                 </div>
             ) : (
-                <div className="na-space-y-6">
+                <div className="space-y-6">
                     {/* Blocked Invoices */}
                     {blockedInvoices.length > 0 && (
-                        <div className="na-card na-p-6">
-                            <h2 className="na-h4 na-mb-4">Blocked Invoices</h2>
-                            <div className="na-space-y-3">
+                        <div className="card p-6">
+                            <h2 className="text-base font-semibold text-nx-text-main mb-4">Blocked Invoices</h2>
+                            <div className="space-y-3">
                                 {blockedInvoices.map((invoice: any) => (
                                     <div
                                         key={invoice.id}
-                                        className="na-p-4 na-border na-rounded-lg hover:na-bg-muted na-transition-colors"
+                                        className="p-4 border border-nx-border rounded-lg hover:bg-nx-surface-well transition-colors"
                                     >
-                                        <div className="na-flex na-items-start na-justify-between">
-                                            <div className="na-flex-1">
-                                                <div className="na-flex na-items-center na-gap-2 na-mb-2">
-                                                    <span className="na-font-medium">
+                                        <div className="flex items-start justify-between">
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span className="font-medium">
                                                         {invoice.invoice_number || invoice.invoice_num || 'N/A'}
                                                     </span>
-                                                    <span className="na-badge na-bg-warning-subtle na-text-warning">
+                                                    <span className="badge bg-nx-warning-bg text-nx-warning">
                                                         {invoice.status}
                                                     </span>
                                                 </div>
-                                                <div className="na-text-sm na-text-muted na-mb-1">
+                                                <div className="text-sm text-nx-text-muted mb-1">
                                                     Vendor: {invoice.vmp_vendors?.name || invoice.vmp_vendors?.legal_name || 'Unknown'}
                                                 </div>
-                                                <div className="na-text-sm na-text-muted na-mb-1">
+                                                <div className="text-sm text-nx-text-muted mb-1">
                                                     Amount: {invoice.currency_code || 'USD'} {invoice.amount?.toLocaleString() || '0.00'}
                                                 </div>
                                                 {invoice.current_status_reason_text && (
-                                                    <div className="na-text-sm na-text-muted na-mt-2">
+                                                    <div className="text-sm text-nx-text-muted mt-2">
                                                         Reason: {invoice.current_status_reason_text}
                                                     </div>
                                                 )}
                                             </div>
                                             <a
                                                 href={`/cases?invoice_id=${invoice.id}`}
-                                                className="na-btn na-btn-sm na-btn-primary"
+                                                className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer px-3 py-1.5 text-sm btn-primary"
                                             >
                                                 Resolve
                                             </a>
@@ -189,35 +189,35 @@ export default async function ExceptionHandlerPage({ searchParams }: ExceptionHa
 
                     {/* Blocked Cases */}
                     {blockedCases.length > 0 && (
-                        <div className="na-card na-p-6">
-                            <h2 className="na-h4 na-mb-4">Blocked Cases</h2>
-                            <div className="na-space-y-3">
+                        <div className="card p-6">
+                            <h2 className="text-base font-semibold text-nx-text-main mb-4">Blocked Cases</h2>
+                            <div className="space-y-3">
                                 {blockedCases.map((caseItem: any) => (
                                     <div
                                         key={caseItem.id}
-                                        className="na-p-4 na-border na-rounded-lg hover:na-bg-muted na-transition-colors"
+                                        className="p-4 border border-nx-border rounded-lg hover:bg-nx-surface-well transition-colors"
                                     >
-                                        <div className="na-flex na-items-start na-justify-between">
-                                            <div className="na-flex-1">
-                                                <div className="na-flex na-items-center na-gap-2 na-mb-2">
-                                                    <span className="na-font-medium">{caseItem.subject}</span>
-                                                    <span className="na-badge na-bg-warning-subtle na-text-warning">
+                                        <div className="flex items-start justify-between">
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span className="font-medium">{caseItem.subject}</span>
+                                                    <span className="badge bg-nx-warning-bg text-nx-warning">
                                                         {caseItem.status}
                                                     </span>
-                                                    <span className="na-badge na-bg-muted">
+                                                    <span className="badge bg-nx-surface-well">
                                                         {caseItem.case_type}
                                                     </span>
                                                 </div>
-                                                <div className="na-text-sm na-text-muted na-mb-1">
+                                                <div className="text-sm text-nx-text-muted mb-1">
                                                     Vendor: {caseItem.vmp_vendors?.name || caseItem.vmp_vendors?.legal_name || 'Unknown'}
                                                 </div>
-                                                <div className="na-text-sm na-text-muted">
+                                                <div className="text-sm text-nx-text-muted">
                                                     Owner: {caseItem.owner_team}
                                                 </div>
                                             </div>
                                             <a
                                                 href={`/cases/${caseItem.id}`}
-                                                className="na-btn na-btn-sm na-btn-primary"
+                                                className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer px-3 py-1.5 text-sm btn-primary"
                                             >
                                                 Resolve
                                             </a>
@@ -230,36 +230,36 @@ export default async function ExceptionHandlerPage({ searchParams }: ExceptionHa
 
                     {/* Escalations */}
                     {escalations.length > 0 && (
-                        <div className="na-card na-p-6">
-                            <h2 className="na-h4 na-mb-4">Break Glass Escalations</h2>
-                            <div className="na-space-y-3">
+                        <div className="card p-6">
+                            <h2 className="text-base font-semibold text-nx-text-main mb-4">Break Glass Escalations</h2>
+                            <div className="space-y-3">
                                 {escalations.map((escalation: any) => (
                                     <div
                                         key={escalation.id}
-                                        className="na-p-4 na-border na-rounded-lg hover:na-bg-muted na-transition-colors"
+                                        className="p-4 border border-nx-border rounded-lg hover:bg-nx-surface-well transition-colors"
                                     >
-                                        <div className="na-flex na-items-start na-justify-between">
-                                            <div className="na-flex-1">
-                                                <div className="na-flex na-items-center na-gap-2 na-mb-2">
-                                                    <span className="na-font-medium">{escalation.reason}</span>
-                                                    <span className={`na-badge ${
-                                                        escalation.priority === 'emergency' ? 'na-bg-danger-subtle na-text-danger' :
-                                                        escalation.priority === 'critical' ? 'na-bg-warning-subtle na-text-warning' :
-                                                        'na-bg-muted'
+                                        <div className="flex items-start justify-between">
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span className="font-medium">{escalation.reason}</span>
+                                                    <span className={`badge ${
+                                                        escalation.priority === 'emergency' ? 'bg-nx-danger-bg text-nx-danger' :
+                                                        escalation.priority === 'critical' ? 'bg-nx-warning-bg text-nx-warning' :
+                                                        'bg-nx-surface-well'
                                                     }`}>
                                                         {escalation.priority}
                                                     </span>
                                                 </div>
-                                                <div className="na-text-sm na-text-muted na-mb-1">
+                                                <div className="text-sm text-nx-text-muted mb-1">
                                                     {escalation.description}
                                                 </div>
-                                                <div className="na-text-sm na-text-muted">
+                                                <div className="text-sm text-nx-text-muted">
                                                     Type: {escalation.escalation_type}
                                                 </div>
                                             </div>
                                             <a
                                                 href={`/escalations/break-glass/${escalation.id}`}
-                                                className="na-btn na-btn-sm na-btn-primary"
+                                                className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer px-3 py-1.5 text-sm btn-primary"
                                             >
                                                 Review
                                             </a>
@@ -272,14 +272,14 @@ export default async function ExceptionHandlerPage({ searchParams }: ExceptionHa
 
                     {/* Empty State */}
                     {totalExceptions === 0 && (
-                        <div className="na-card na-p-12 na-text-center">
-                            <div className="na-w-16 na-h-16 na-mx-auto na-mb-4 na-bg-success-subtle na-rounded-full na-flex na-items-center na-justify-center">
-                                <svg className="na-w-8 na-h-8 na-text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="card p-12 text-center">
+                            <div className="w-16 h-16 mx-auto mb-4 bg-nx-success-bg rounded-full flex items-center justify-center">
+                                <svg className="w-8 h-8 text-nx-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <h2 className="na-h4 na-mb-2">No Exceptions Found</h2>
-                            <p className="na-body na-text-muted">
+                            <h2 className="text-base font-semibold text-nx-text-main mb-2">No Exceptions Found</h2>
+                            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted">
                                 The system is running smoothly. All invoices are processing normally.
                             </p>
                         </div>

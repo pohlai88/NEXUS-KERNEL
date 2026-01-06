@@ -3,21 +3,21 @@
 import { useRouter } from 'next/navigation';
 
 /**
- * Helper function to get AIBOS status classes
+ * Helper function to get Nexus status classes
  */
 function getStatusClass(variant: 'success' | 'error' | 'warning' | 'pending'): string {
   const map = {
-    success: 'na-status ok',
-    error: 'na-status bad',
-    warning: 'na-status warn',
-    pending: 'na-status pending',
+    success: 'badge badge-success',
+    error: 'badge bad',
+    warning: 'badge badge-warning',
+    pending: 'badge pending',
   };
   return map[variant];
 }
 
 /**
  * Nexus Canon Portal - Beast Mode Dashboard
- * Using AIBOS Beast Mode Patterns:
+ * Using Nexus Beast Mode Patterns:
  * - Radio Button State Machine (0ms latency view switching)
  * - Bi-directional Sticky Grid (Frozen panes)
  * - Omni Shell Layout (Grid-based application shell)
@@ -44,36 +44,36 @@ export default function Home() {
   return (
     <>
       {/* Beast Mode: Radio Button State Machine for View Switching (0ms latency) */}
-      <input type="radio" name="view" id="v-dashboard" className="na-state-radio" defaultChecked suppressHydrationWarning />
-      <input type="radio" name="view" id="v-table" className="na-state-radio" suppressHydrationWarning />
-      <input type="radio" name="view" id="v-cards" className="na-state-radio" suppressHydrationWarning />
+      <input type="radio" name="view" id="v-dashboard" className="hidden" defaultChecked suppressHydrationWarning />
+      <input type="radio" name="view" id="v-table" className="hidden" suppressHydrationWarning />
+      <input type="radio" name="view" id="v-cards" className="hidden" suppressHydrationWarning />
 
       {/* Beast Mode: Omni Shell Layout (Grid-based application shell) */}
-      <div className="na-shell-omni min-h-screen" suppressHydrationWarning>
+      <div className="shell min-h-screen" suppressHydrationWarning>
         {/* Header */}
-        <header className="na-shell-head na-flex na-items-center justify-between na-px-6">
-          <div className="na-flex na-items-center na-gap-4">
-            <div className="na-h4">Nexus Canon</div>
-            <div className="na-metadata">Portal</div>
+        <header className="page-header flex items-center justify-between px-6">
+          <div className="flex items-center gap-4">
+            <div className="text-base font-semibold text-nx-text-main">Nexus Canon</div>
+            <div className="caption">Portal</div>
           </div>
           
           {/* View Switcher - Radio State Machine (Beast Mode) */}
-          <div className="na-flex na-items-center na-gap-2 na-view-controls">
-            <label htmlFor="v-dashboard" id="lbl-dashboard" className="na-state-label">
+          <div className="flex items-center gap-2 flex gap-2 items-center">
+            <label htmlFor="v-dashboard" id="lbl-dashboard" className="cursor-pointer">
               Dashboard
             </label>
-            <label htmlFor="v-table" id="lbl-table" className="na-state-label">
+            <label htmlFor="v-table" id="lbl-table" className="cursor-pointer">
               Table
             </label>
-            <label htmlFor="v-cards" id="lbl-cards" className="na-state-label">
+            <label htmlFor="v-cards" id="lbl-cards" className="cursor-pointer">
               Cards
             </label>
           </div>
 
-          <div className="na-flex na-items-center na-gap-4">
+          <div className="flex items-center gap-4">
             <span className={getStatusClass('success')} role="status">Live</span>
             <button 
-              className="na-btn na-btn-ghost"
+              className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main"
               onClick={() => router.push('/demo')}
             >
               Components
@@ -82,60 +82,60 @@ export default function Home() {
         </header>
 
         {/* Sidebar Rail */}
-        <aside className="na-shell-rail">
-          <div className="na-metadata na-mb-4">Menu</div>
-          <div className="na-flex na-flex-col na-gap-2 w-full">
-            <button className="na-btn na-btn-ghost" style={{ justifyContent: 'flex-start' }}>📊 Dashboard</button>
-            <button className="na-btn na-btn-ghost" style={{ justifyContent: 'flex-start' }}>📦 Vendors</button>
-            <button className="na-btn na-btn-ghost" style={{ justifyContent: 'flex-start' }}>💰 Finance</button>
-            <button className="na-btn na-btn-ghost" style={{ justifyContent: 'flex-start' }}>📈 Reports</button>
+        <aside className="flex flex-col gap-4">
+          <div className="caption mb-4">Menu</div>
+          <div className="flex flex-col gap-2 w-full">
+            <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main" style={{ justifyContent: 'flex-start' }}>📊 Dashboard</button>
+            <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main" style={{ justifyContent: 'flex-start' }}>📦 Vendors</button>
+            <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main" style={{ justifyContent: 'flex-start' }}>💰 Finance</button>
+            <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main" style={{ justifyContent: 'flex-start' }}>📈 Reports</button>
           </div>
         </aside>
 
         {/* Main Content Area */}
-        <main className="na-shell-main">
+        <main className="shell">
           {/* View 1: Dashboard (Default) */}
-          <div id="view-dashboard" className="na-view-pane">
-            <div className="na-container na-mx-auto na-p-8">
+          <div id="view-dashboard" className="flex-1">
+            <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-8">
               {/* Metrics Grid */}
-              <div className="grid gap-6 na-mb-12 na-grid-responsive-4">
+              <div className="grid gap-6 mb-12 grid-responsive">
                 {metrics.map((metric, index) => (
                   <div 
                     key={index} 
-                    className="na-card na-p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer"
+                    className="card p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer"
                   >
-                    <div className="na-metadata na-mb-2">{metric.label}</div>
-                    <div className="na-data-large na-mb-2">{metric.value}</div>
+                    <div className="caption mb-2">{metric.label}</div>
+                    <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main mb-2">{metric.value}</div>
                     <span className={getStatusClass(metric.status)} role="status">{metric.change}</span>
                   </div>
                 ))}
               </div>
 
               {/* Quick Actions */}
-              <div className="grid gap-6 na-mb-12 na-grid-responsive-3">
-                <div className="na-card na-p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                  <h2 className="na-h4 na-mb-4">Quick Actions</h2>
+              <div className="grid gap-6 mb-12 grid-responsive">
+                <div className="card p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+                  <h2 className="text-base font-semibold text-nx-text-main mb-4">Quick Actions</h2>
                   <div className="space-y-3">
-                    <button className="na-btn na-btn-primary w-full">
+                    <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary w-full">
                       Create Vendor
                     </button>
-                    <button className="na-btn na-btn-secondary w-full">
+                    <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary w-full">
                       View Reports
                     </button>
-                    <button className="na-btn na-btn-ghost w-full">
+                    <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main w-full">
                       Settings
                     </button>
                   </div>
                 </div>
 
-                <div className="na-card na-p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                  <h2 className="na-h4 na-mb-4">Recent Activity</h2>
+                <div className="card p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+                  <h2 className="text-base font-semibold text-nx-text-main mb-4">Recent Activity</h2>
                   <div className="space-y-3">
                     {vendors.slice(0, 3).map((vendor) => (
-                      <div key={vendor.id} className="flex items-center justify-between na-p-3 rounded border border-[var(--color-stroke)] hover:bg-[var(--color-paper-2)] transition-colors">
+                      <div key={vendor.id} className="flex items-center justify-between p-3 rounded border border-[var(--color-stroke)] hover:bg-[var(--color-paper-2)] transition-colors">
                         <div>
-                          <div className="na-h4">{vendor.name}</div>
-                          <div className="na-data text-sm">{vendor.amount}</div>
+                          <div className="text-base font-semibold text-nx-text-main">{vendor.name}</div>
+                          <div className="text-[length:var(--nx-body-size)] text-nx-text-main text-sm">{vendor.amount}</div>
                         </div>
                         <span className={getStatusClass(vendor.status === 'approved' ? 'success' : vendor.status === 'warning' ? 'warning' : 'pending')} role="status">
                           {vendor.status}
@@ -145,19 +145,19 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="na-card na-p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                  <h2 className="na-h4 na-mb-4">System Status</h2>
+                <div className="card p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+                  <h2 className="text-base font-semibold text-nx-text-main mb-4">System Status</h2>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <div className="na-data">API</div>
+                      <div className="text-[length:var(--nx-body-size)] text-nx-text-main">API</div>
                       <span className={getStatusClass('success')} role="status">Online</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <div className="na-data">Database</div>
+                      <div className="text-[length:var(--nx-body-size)] text-nx-text-main">Database</div>
                       <span className={getStatusClass('success')} role="status">Synced</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <div className="na-data">Cache</div>
+                      <div className="text-[length:var(--nx-body-size)] text-nx-text-main">Cache</div>
                       <span className={getStatusClass('success')} role="status">Warm</span>
                     </div>
                   </div>
@@ -167,9 +167,9 @@ export default function Home() {
           </div>
 
           {/* View 2: Table View - Beast Mode Bi-directional Sticky Grid */}
-          <div id="view-table" className="na-view-pane">
-            <div className="na-grid-frozen" style={{ height: 'calc(100vh - 200px)' }}>
-              <table className="na-table-frozen">
+          <div id="view-table" className="flex-1">
+            <div className="grid-3-col" style={{ height: 'calc(100vh - 200px)' }}>
+              <table className="table-professional w-full">
                 <thead>
                   <tr>
                     <th>Vendor Name</th>
@@ -183,17 +183,17 @@ export default function Home() {
                 <tbody>
                   {vendors.map((vendor) => (
                     <tr key={vendor.id}>
-                      <td className="na-h4">{vendor.name}</td>
-                      <td className="na-data">{vendor.amount}</td>
+                      <td className="text-base font-semibold text-nx-text-main">{vendor.name}</td>
+                      <td className="text-[length:var(--nx-body-size)] text-nx-text-main">{vendor.amount}</td>
                       <td>
                         <span className={getStatusClass(vendor.status === 'approved' ? 'success' : vendor.status === 'warning' ? 'warning' : 'pending')} role="status">
                           {vendor.status}
                         </span>
                       </td>
-                      <td className="na-metadata">{vendor.date}</td>
-                      <td className="na-metadata">Supply Chain</td>
+                      <td className="caption">{vendor.date}</td>
+                      <td className="caption">Supply Chain</td>
                       <td>
-                        <button className="na-btn na-btn-ghost text-sm">View</button>
+                        <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main text-sm">View</button>
                       </td>
                     </tr>
                   ))}
@@ -204,17 +204,17 @@ export default function Home() {
                     const amount = (25000 + (i * 3247.83)).toFixed(2);
                     return (
                       <tr key={`extra-${i}`}>
-                        <td className="na-h4">Vendor {i + 7}</td>
-                        <td className="na-data">${amount}</td>
+                        <td className="text-base font-semibold text-nx-text-main">Vendor {i + 7}</td>
+                        <td className="text-[length:var(--nx-body-size)] text-nx-text-main">${amount}</td>
                         <td>
                           <span className={getStatusClass(i % 2 === 0 ? 'success' : 'pending')} role="status">
                             {i % 2 === 0 ? 'Approved' : 'Pending'}
                           </span>
                         </td>
-                        <td className="na-metadata">2025-01-{15 - i}</td>
-                        <td className="na-metadata">Category {i % 3}</td>
+                        <td className="caption">2025-01-{15 - i}</td>
+                        <td className="caption">Category {i % 3}</td>
                         <td>
-                          <button className="na-btn na-btn-ghost text-sm">View</button>
+                          <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main text-sm">View</button>
                         </td>
                       </tr>
                     );
@@ -225,20 +225,20 @@ export default function Home() {
           </div>
 
           {/* View 3: Cards View */}
-          <div id="view-cards" className="na-view-pane">
-            <div className="na-container na-mx-auto na-p-8">
-              <div className="grid gap-6 na-grid-responsive-3-cards">
+          <div id="view-cards" className="flex-1">
+            <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-8">
+              <div className="grid gap-6 grid-responsive">
                 {vendors.map((vendor) => (
-                  <div key={vendor.id} className="na-card na-p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                    <h3 className="na-h4 na-mb-4">{vendor.name}</h3>
-                    <div className="na-data-large na-mb-2">{vendor.amount}</div>
-                    <div className="flex items-center justify-between na-mb-4">
+                  <div key={vendor.id} className="card p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+                    <h3 className="text-base font-semibold text-nx-text-main mb-4">{vendor.name}</h3>
+                    <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main mb-2">{vendor.amount}</div>
+                    <div className="flex items-center justify-between mb-4">
                       <span className={getStatusClass(vendor.status === 'approved' ? 'success' : vendor.status === 'warning' ? 'warning' : 'pending')} role="status">
                         {vendor.status}
                       </span>
-                      <div className="na-metadata">{vendor.date}</div>
+                      <div className="caption">{vendor.date}</div>
                     </div>
-                    <button className="na-btn na-btn-primary w-full">
+                    <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary w-full">
                       View Details
                     </button>
                   </div>
@@ -252,31 +252,31 @@ export default function Home() {
       {/* Beast Mode CSS - Radio State Machine Logic (Pure CSS, 0ms latency) */}
       <style jsx global>{`
         /* Radio State Machine - 0ms latency view switching (Pure CSS) */
-        #v-dashboard:checked ~ .na-shell-omni #lbl-dashboard,
-        #v-table:checked ~ .na-shell-omni #lbl-table,
-        #v-cards:checked ~ .na-shell-omni #lbl-cards {
+        #v-dashboard:checked ~ .shell #lbl-dashboard,
+        #v-table:checked ~ .shell #lbl-table,
+        #v-cards:checked ~ .shell #lbl-cards {
           background: var(--color-paper-2);
           color: var(--color-lux);
           border: 1px solid var(--color-stroke-strong);
         }
 
-        #v-dashboard:checked ~ .na-shell-omni #view-dashboard {
+        #v-dashboard:checked ~ .shell #view-dashboard {
           display: block !important;
         }
-        #v-table:checked ~ .na-shell-omni #view-table {
+        #v-table:checked ~ .shell #view-table {
           display: block !important;
         }
-        #v-cards:checked ~ .na-shell-omni #view-cards {
+        #v-cards:checked ~ .shell #view-cards {
           display: block !important;
         }
 
-        .na-view-pane {
+        .flex-1 {
           display: none;
           height: 100%;
           overflow: auto;
         }
 
-        .na-state-label {
+        .cursor-pointer {
           padding: var(--spacing-1_5) var(--spacing-3);
           border-radius: var(--radius-control);
           border: 1px solid var(--color-stroke);
@@ -287,45 +287,45 @@ export default function Home() {
           transition: all var(--default-transition-duration);
         }
 
-        .na-state-label:hover {
+        .cursor-pointer:hover {
           background: var(--color-paper-2);
           color: var(--color-lux);
         }
 
-        /* Responsive Grid Utilities using AIBOS tokens */
-        .na-grid-responsive-4 {
+        /* Responsive Grid Utilities using Nexus tokens */
+        .grid-responsive {
           grid-template-columns: repeat(1, 1fr);
         }
         @media (width >= 768px) {
-          .na-grid-responsive-4 {
+          .grid-responsive {
             grid-template-columns: repeat(2, 1fr);
           }
         }
         @media (width >= 1024px) {
-          .na-grid-responsive-4 {
+          .grid-responsive {
             grid-template-columns: repeat(4, 1fr);
           }
         }
 
-        .na-grid-responsive-3 {
+        .grid-responsive {
           grid-template-columns: repeat(1, 1fr);
         }
         @media (width >= 768px) {
-          .na-grid-responsive-3 {
+          .grid-responsive {
             grid-template-columns: repeat(3, 1fr);
           }
         }
 
-        .na-grid-responsive-3-cards {
+        .grid-responsive {
           grid-template-columns: repeat(1, 1fr);
         }
         @media (width >= 768px) {
-          .na-grid-responsive-3-cards {
+          .grid-responsive {
             grid-template-columns: repeat(2, 1fr);
           }
         }
         @media (width >= 1024px) {
-          .na-grid-responsive-3-cards {
+          .grid-responsive {
             grid-template-columns: repeat(3, 1fr);
           }
         }

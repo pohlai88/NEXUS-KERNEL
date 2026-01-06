@@ -18,10 +18,10 @@ export function TableTabs({ activeTab, onTabChange, totalPayable, currency }: Ta
   return (
     <div className="flex items-center justify-between mb-4">
       <div className="flex items-center gap-6">
-        <h2 className="text-section text-gray-500 font-medium tracking-wide">
+        <h2 className="text-section text-nx-text-muted font-medium tracking-wide">
           TABLE HEADING
         </h2>
-        <div className="flex gap-2 border-b border-gray-200">
+        <div className="flex gap-2 border-b border-nx-border">
           {TABS.map((tab) => (
             <button
               key={tab}
@@ -43,7 +43,7 @@ export function TableTabs({ activeTab, onTabChange, totalPayable, currency }: Ta
         </div>
       </div>
 
-      <div className="text-body text-gray-600">
+      <div className="text-body text-nx-text-sub">
         Total payable amount:{' '}
         <span 
           className="font-semibold text-lg"

@@ -48,7 +48,7 @@ export function BarChart({
     : chartWidth / data.labels.length;
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6">
+    <div className="bg-nx-surface rounded-lg border border-nx-border p-6">
       {(title || subtitle) && (
         <div className="mb-4">
           {title && <h3 className="text-title font-medium">{title}</h3>}

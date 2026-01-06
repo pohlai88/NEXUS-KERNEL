@@ -78,7 +78,7 @@ export function DonutChart({
   }, []);
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6" style={{ height: height ? `${height}px` : 'auto' }}>
+    <div className="bg-nx-surface rounded-lg border border-nx-border p-6" style={{ height: height ? `${height}px` : 'auto' }}>
       {(title || subtitle) && (
         <div className="mb-4">
           {title && <h3 className="text-title font-medium">{title}</h3>}
@@ -186,7 +186,7 @@ export function DonutChart({
             return (
               <div
                 key={i}
-                className="flex items-center gap-2 p-2 rounded hover:bg-gray-50 transition-colors cursor-pointer"
+                className="flex items-center gap-2 p-2 rounded hover:bg-nx-surface-well transition-colors cursor-pointer"
                 onMouseEnter={() => setHoveredSlice(i)}
                 onMouseLeave={() => setHoveredSlice(null)}
               >

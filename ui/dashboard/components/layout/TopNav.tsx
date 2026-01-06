@@ -60,7 +60,7 @@ function HelpIcon() {
 function UserAvatar() {
   return (
     <div 
-      className="w-6 h-6 rounded-full overflow-hidden border border-neutral-300"
+      className="w-6 h-6 rounded-full overflow-hidden border border-nx-border-strong"
       style={{
         backgroundColor: 'var(--color-neutral-100)',
       }}

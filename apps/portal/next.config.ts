@@ -11,12 +11,11 @@ if (process.env.ANALYZE === 'true') {
 }
 
 const nextConfig: NextConfig = {
-  // Transpile monorepo packages and external packages with TypeScript/React components
+  // Transpile monorepo packages
   transpilePackages: [
     "@nexus/kernel", 
     "@nexus/cruds", 
     "@nexus/ui-actions",
-    "aibos-design-system", // Required for React components (TypeScript files)
   ],
 
   // Image optimization (Next.js 16 best practices)
@@ -41,16 +40,6 @@ const nextConfig: NextConfig = {
   // TypeScript configuration
   typescript: {
     ignoreBuildErrors: false, // Enforce type checking in production
-  },
-
-  // Rewrites for serving AIBOS CSS (development fallback)
-  async rewrites() {
-    return [
-      {
-        source: '/node_modules/aibos-design-system/:path*',
-        destination: '/aibos-design-system.css', // Fallback to public folder
-      },
-    ];
   },
 
   // Security headers

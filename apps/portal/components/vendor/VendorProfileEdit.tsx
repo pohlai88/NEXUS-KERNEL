@@ -111,51 +111,51 @@ export function VendorProfileEdit({ vendor }: VendorProfileEditProps) {
   };
 
   return (
-    <div className="na-space-y-6">
+    <div className="space-y-6">
       {/* Success/Error Messages */}
       {success && (
-        <div className="na-card na-p-4 na-bg-ok-subtle na-text-ok">
+        <div className="card p-4 bg-nx-success-bg text-nx-success">
           {success}
         </div>
       )}
       {error && (
-        <div className="na-card na-p-4 na-bg-danger-subtle na-text-danger">
+        <div className="card p-4 bg-nx-danger-bg text-nx-danger">
           {error}
         </div>
       )}
 
       {/* Company Information */}
-      <div className="na-card na-p-6">
-        <div className="na-flex na-items-center na-justify-between na-mb-4">
-          <h2 className="na-h3">Company Information</h2>
+      <div className="card p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="section">Company Information</h2>
         </div>
-        <div className="na-grid na-grid-cols-1 md:na-grid-cols-2 na-gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="na-metadata na-mb-2 na-block">Legal Name</label>
-            <div className="na-data">{vendor.legal_name}</div>
-            <div className="na-metadata na-text-xs na-mt-1">Read-only (cannot be changed)</div>
+            <label className="caption mb-2 block">Legal Name</label>
+            <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{vendor.legal_name}</div>
+            <div className="caption text-xs mt-1">Read-only (cannot be changed)</div>
           </div>
           <div>
-            <label className="na-metadata na-mb-2 na-block">Display Name</label>
+            <label className="caption mb-2 block">Display Name</label>
             {editingSection === 'display_name' ? (
-              <form action={handleDisplayNameUpdate} className="na-space-y-2">
+              <form action={handleDisplayNameUpdate} className="space-y-2">
                 <input
                   type="text"
                   name="display_name"
                   defaultValue={vendor.display_name || ''}
-                  className="na-input na-w-full"
+                  className="input w-full"
                   required
                   minLength={2}
                   maxLength={120}
                 />
-                <div className="na-flex na-gap-2">
-                  <button type="submit" className="na-btn na-btn-primary" disabled={isSubmitting}>
+                <div className="flex gap-2">
+                  <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary" disabled={isSubmitting}>
                     {isSubmitting ? 'Saving...' : 'Save'}
                   </button>
                   <button
                     type="button"
                     onClick={() => setEditingSection(null)}
-                    className="na-btn na-btn-ghost"
+                    className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main"
                     disabled={isSubmitting}
                   >
                     Cancel
@@ -164,10 +164,10 @@ export function VendorProfileEdit({ vendor }: VendorProfileEditProps) {
               </form>
             ) : (
               <>
-                <div className="na-data">{vendor.display_name || vendor.legal_name}</div>
+                <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{vendor.display_name || vendor.legal_name}</div>
                 <button
                   onClick={() => setEditingSection('display_name')}
-                  className="na-btn na-btn-ghost na-btn-sm na-mt-2"
+                  className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main px-3 py-1.5 text-sm mt-2"
                 >
                   Edit
                 </button>
@@ -175,21 +175,21 @@ export function VendorProfileEdit({ vendor }: VendorProfileEditProps) {
             )}
           </div>
           <div>
-            <label className="na-metadata na-mb-2 na-block">Tax ID</label>
-            <div className="na-data">{vendor.tax_id || 'Not provided'}</div>
-            <div className="na-metadata na-text-xs na-mt-1">Read-only (contact support to change)</div>
+            <label className="caption mb-2 block">Tax ID</label>
+            <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{vendor.tax_id || 'Not provided'}</div>
+            <div className="caption text-xs mt-1">Read-only (contact support to change)</div>
           </div>
           <div>
-            <label className="na-metadata na-mb-2 na-block">Country</label>
-            <div className="na-data">{vendor.country_code || 'Not provided'}</div>
-            <div className="na-metadata na-text-xs na-mt-1">Read-only (contact support to change)</div>
+            <label className="caption mb-2 block">Country</label>
+            <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{vendor.country_code || 'Not provided'}</div>
+            <div className="caption text-xs mt-1">Read-only (contact support to change)</div>
           </div>
           <div>
-            <label className="na-metadata na-mb-2 na-block">Status</label>
+            <label className="caption mb-2 block">Status</label>
             <span
-              className={`na-status na-status-${
+              className={`badge badge-${
                 vendor.status === 'active' || vendor.status === 'APPROVED'
-                  ? 'ok'
+                  ? 'badge-success'
                   : vendor.status === 'suspended' || vendor.status === 'REJECTED'
                     ? 'bad'
                     : 'pending'
@@ -202,60 +202,60 @@ export function VendorProfileEdit({ vendor }: VendorProfileEditProps) {
       </div>
 
       {/* Contact Information */}
-      <div className="na-card na-p-6">
-        <div className="na-flex na-items-center na-justify-between na-mb-4">
-          <h2 className="na-h3">Contact Information</h2>
+      <div className="card p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="section">Contact Information</h2>
           {editingSection !== 'contact' && (
             <button
               onClick={() => setEditingSection('contact')}
-              className="na-btn na-btn-secondary"
+              className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary"
             >
               Edit Contact Info
             </button>
           )}
         </div>
         {editingSection === 'contact' ? (
-          <form action={handleContactUpdate} className="na-space-y-4">
-            <div className="na-grid na-grid-cols-1 md:na-grid-cols-2 na-gap-4">
+          <form action={handleContactUpdate} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="na-metadata na-mb-2 na-block">Email</label>
+                <label className="caption mb-2 block">Email</label>
                 <input
                   type="email"
                   name="email"
                   defaultValue={vendor.email || ''}
-                  className="na-input na-w-full"
+                  className="input w-full"
                   placeholder="vendor@example.com"
                 />
               </div>
               <div>
-                <label className="na-metadata na-mb-2 na-block">Phone</label>
+                <label className="caption mb-2 block">Phone</label>
                 <input
                   type="tel"
                   name="phone"
                   defaultValue={vendor.phone || ''}
-                  className="na-input na-w-full"
+                  className="input w-full"
                   placeholder="+1 234 567 8900"
                 />
               </div>
-              <div className="md:na-col-span-2">
-                <label className="na-metadata na-mb-2 na-block">Address</label>
+              <div className="md:col-span-2">
+                <label className="caption mb-2 block">Address</label>
                 <textarea
                   name="address"
                   defaultValue={vendor.address || ''}
-                  className="na-input na-w-full"
+                  className="input w-full"
                   rows={3}
                   placeholder="Street address, City, State, ZIP"
                 />
               </div>
             </div>
-            <div className="na-flex na-gap-2">
-              <button type="submit" className="na-btn na-btn-primary" disabled={isSubmitting}>
+            <div className="flex gap-2">
+              <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary" disabled={isSubmitting}>
                 {isSubmitting ? 'Saving...' : 'Save Changes'}
               </button>
               <button
                 type="button"
                 onClick={() => setEditingSection(null)}
-                className="na-btn na-btn-ghost"
+                className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main"
                 disabled={isSubmitting}
               >
                 Cancel
@@ -263,117 +263,117 @@ export function VendorProfileEdit({ vendor }: VendorProfileEditProps) {
             </div>
           </form>
         ) : (
-          <div className="na-grid na-grid-cols-1 md:na-grid-cols-2 na-gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="na-metadata na-mb-2 na-block">Email</label>
-              <div className="na-data">{vendor.email || 'Not provided'}</div>
+              <label className="caption mb-2 block">Email</label>
+              <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{vendor.email || 'Not provided'}</div>
             </div>
             <div>
-              <label className="na-metadata na-mb-2 na-block">Phone</label>
-              <div className="na-data">{vendor.phone || 'Not provided'}</div>
+              <label className="caption mb-2 block">Phone</label>
+              <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{vendor.phone || 'Not provided'}</div>
             </div>
-            <div className="md:na-col-span-2">
-              <label className="na-metadata na-mb-2 na-block">Address</label>
-              <div className="na-data">{vendor.address || 'Not provided'}</div>
+            <div className="md:col-span-2">
+              <label className="caption mb-2 block">Address</label>
+              <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{vendor.address || 'Not provided'}</div>
             </div>
           </div>
         )}
       </div>
 
       {/* Bank Account Details */}
-      <div className="na-card na-p-6">
-        <div className="na-flex na-items-center na-justify-between na-mb-4">
-          <h2 className="na-h3">Bank Account Details</h2>
+      <div className="card p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="section">Bank Account Details</h2>
           {editingSection !== 'bank' && (
             <button
               onClick={() => setEditingSection('bank')}
-              className="na-btn na-btn-secondary"
+              className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary"
             >
               Request Bank Change
             </button>
           )}
         </div>
         {editingSection === 'bank' ? (
-          <div className="na-card na-p-4 na-bg-paper-2 na-mb-4">
-            <p className="na-body na-mb-2">
+          <div className="card p-4 bg-nx-surface-well mb-4">
+            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mb-2">
               <strong>Security Notice:</strong> Bank account changes require approval for security reasons.
               Your request will be reviewed by the finance team.
             </p>
-            <p className="na-metadata na-text-sm">
+            <p className="caption text-sm">
               A case will be created automatically for your bank change request.
             </p>
           </div>
         ) : (
-          <div className="na-card na-p-4 na-bg-paper-2 na-mb-4">
-            <p className="na-body">
+          <div className="card p-4 bg-nx-surface-well mb-4">
+            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
               Bank account details are managed securely. Changes require approval.
             </p>
           </div>
         )}
         {editingSection === 'bank' ? (
-          <form action={handleBankChangeRequest} className="na-space-y-4">
-            <div className="na-grid na-grid-cols-1 md:na-grid-cols-2 na-gap-4">
+          <form action={handleBankChangeRequest} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="na-metadata na-mb-2 na-block">Bank Name *</label>
+                <label className="caption mb-2 block">Bank Name *</label>
                 <input
                   type="text"
                   name="bank_name"
                   defaultValue={vendor.bank_name || ''}
-                  className="na-input na-w-full"
+                  className="input w-full"
                   required
                   placeholder="Bank Name"
                 />
               </div>
               <div>
-                <label className="na-metadata na-mb-2 na-block">Account Number *</label>
+                <label className="caption mb-2 block">Account Number *</label>
                 <input
                   type="text"
                   name="account_number"
                   defaultValue={vendor.account_number || ''}
-                  className="na-input na-w-full"
+                  className="input w-full"
                   required
                   placeholder="Account Number"
                 />
               </div>
               <div>
-                <label className="na-metadata na-mb-2 na-block">SWIFT Code</label>
+                <label className="caption mb-2 block">SWIFT Code</label>
                 <input
                   type="text"
                   name="swift_code"
                   defaultValue={vendor.swift_code || ''}
-                  className="na-input na-w-full"
+                  className="input w-full"
                   placeholder="SWIFT/BIC Code"
                 />
               </div>
               <div>
-                <label className="na-metadata na-mb-2 na-block">Account Holder Name</label>
+                <label className="caption mb-2 block">Account Holder Name</label>
                 <input
                   type="text"
                   name="account_holder_name"
                   defaultValue={vendor.account_holder_name || ''}
-                  className="na-input na-w-full"
+                  className="input w-full"
                   placeholder="Account Holder Name"
                 />
               </div>
-              <div className="md:na-col-span-2">
-                <label className="na-metadata na-mb-2 na-block">Bank Address</label>
+              <div className="md:col-span-2">
+                <label className="caption mb-2 block">Bank Address</label>
                 <textarea
                   name="bank_address"
                   defaultValue={vendor.bank_address || ''}
-                  className="na-input na-w-full"
+                  className="input w-full"
                   rows={2}
                   placeholder="Bank branch address"
                 />
               </div>
             </div>
-            <div className="na-flex na-gap-2">
-              <button type="submit" className="na-btn na-btn-primary" disabled={isSubmitting}>
+            <div className="flex gap-2">
+              <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary" disabled={isSubmitting}>
                 {isSubmitting ? 'Submitting...' : 'Submit Change Request'}
               </button>
               <button
                 type="button"
                 onClick={() => setEditingSection(null)}
-                className="na-btn na-btn-ghost"
+                className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main"
                 disabled={isSubmitting}
               >
                 Cancel
@@ -381,29 +381,29 @@ export function VendorProfileEdit({ vendor }: VendorProfileEditProps) {
             </div>
           </form>
         ) : (
-          <div className="na-grid na-grid-cols-1 md:na-grid-cols-2 na-gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="na-metadata na-mb-2 na-block">Bank Name</label>
-              <div className="na-data">{vendor.bank_name || 'Not provided'}</div>
+              <label className="caption mb-2 block">Bank Name</label>
+              <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{vendor.bank_name || 'Not provided'}</div>
             </div>
             <div>
-              <label className="na-metadata na-mb-2 na-block">Account Number</label>
-              <div className="na-data na-font-mono">
+              <label className="caption mb-2 block">Account Number</label>
+              <div className="text-[length:var(--nx-body-size)] text-nx-text-main font-mono">
                 {vendor.account_number ? `****${vendor.account_number.slice(-4)}` : 'Not provided'}
               </div>
             </div>
             <div>
-              <label className="na-metadata na-mb-2 na-block">SWIFT Code</label>
-              <div className="na-data">{vendor.swift_code || 'Not provided'}</div>
+              <label className="caption mb-2 block">SWIFT Code</label>
+              <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{vendor.swift_code || 'Not provided'}</div>
             </div>
             <div>
-              <label className="na-metadata na-mb-2 na-block">Account Holder Name</label>
-              <div className="na-data">{vendor.account_holder_name || 'Not provided'}</div>
+              <label className="caption mb-2 block">Account Holder Name</label>
+              <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{vendor.account_holder_name || 'Not provided'}</div>
             </div>
             {vendor.bank_address && (
-              <div className="md:na-col-span-2">
-                <label className="na-metadata na-mb-2 na-block">Bank Address</label>
-                <div className="na-data">{vendor.bank_address}</div>
+              <div className="md:col-span-2">
+                <label className="caption mb-2 block">Bank Address</label>
+                <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{vendor.bank_address}</div>
               </div>
             )}
           </div>

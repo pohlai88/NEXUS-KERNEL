@@ -48,30 +48,30 @@ export default async function ProfileConfigPage({ searchParams }: ProfileConfigP
   }
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-mb-8">
-        <h1 className="na-h1 na-mb-2">My Preferences</h1>
-        <p className="na-body na-text-muted">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="mb-8">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main mb-2">My Preferences</h1>
+        <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted">
           Configure your personal preferences. These override all other configuration levels.
         </p>
       </div>
 
       {resolvedConfig && (
-        <div className="na-space-y-6">
+        <div className="space-y-6">
           {/* Resolved Config (Read-only) */}
-          <div className="na-card na-p-6">
-            <h2 className="na-h3 na-mb-4">Current Configuration</h2>
-            <p className="na-body na-text-muted na-mb-4">
+          <div className="card p-6">
+            <h2 className="section mb-4">Current Configuration</h2>
+            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted mb-4">
               Your resolved configuration (merged from all levels):
             </p>
-            <div className="na-bg-muted na-p-4 na-rounded na-mb-4">
-              <pre className="na-text-sm na-overflow-auto">
+            <div className="bg-nx-surface-well p-4 rounded mb-4">
+              <pre className="text-sm overflow-auto">
                 {JSON.stringify(resolvedConfig.config, null, 2)}
               </pre>
             </div>
-            <div className="na-text-sm na-text-muted">
-              <p className="na-mb-2">Sources:</p>
-              <ul className="na-list-disc na-list-inside na-space-y-1">
+            <div className="text-sm text-nx-text-muted">
+              <p className="mb-2">Sources:</p>
+              <ul className="list-disc list-inside space-y-1">
                 {resolvedConfig.sources.portal_global && <li>Portal Global</li>}
                 {resolvedConfig.sources.tenant && <li>Tenant</li>}
                 {resolvedConfig.sources.tenant_user_admin && <li>Tenant User Admin</li>}
@@ -83,24 +83,24 @@ export default async function ProfileConfigPage({ searchParams }: ProfileConfigP
           </div>
 
           {/* Personal Config (Editable) */}
-          <div className="na-card na-p-6">
-            <h2 className="na-h3 na-mb-4">Personal Preferences</h2>
-            <p className="na-body na-text-muted na-mb-4">
+          <div className="card p-6">
+            <h2 className="section mb-4">Personal Preferences</h2>
+            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted mb-4">
               Your personal configuration that overrides all other levels.
             </p>
-            <div className="na-bg-muted na-p-4 na-rounded na-mb-4">
-              <pre className="na-text-sm na-overflow-auto">
+            <div className="bg-nx-surface-well p-4 rounded mb-4">
+              <pre className="text-sm overflow-auto">
                 {JSON.stringify(personalConfig?.config_data || {}, null, 2)}
               </pre>
             </div>
-            <button className="na-btn na-btn-primary">Edit Personal Preferences</button>
+            <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">Edit Personal Preferences</button>
           </div>
         </div>
       )}
 
       {!resolvedConfig && (
-        <div className="na-card na-p-6">
-          <p className="na-body">Please select a tenant or vendor to view configuration.</p>
+        <div className="card p-6">
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">Please select a tenant or vendor to view configuration.</p>
         </div>
       )}
     </div>

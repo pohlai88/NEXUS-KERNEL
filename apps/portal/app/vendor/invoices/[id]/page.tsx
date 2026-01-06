@@ -78,16 +78,16 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
 
   // Determine current status display (PRD V-01: Canonical statuses)
   const getStatusDisplay = (status: string) => {
-    const statusMap: Record<string, { label: string; variant: 'ok' | 'bad' | 'warn' | 'pending' }> =
+    const statusMap: Record<string, { label: string; variant: 'badge-success' | 'bad' | 'badge-warning' | 'pending' }> =
       {
         received: { label: 'RECEIVED', variant: 'pending' },
         pending: { label: 'UNDER_REVIEW', variant: 'pending' },
         under_review: { label: 'UNDER_REVIEW', variant: 'pending' },
         matched: { label: 'UNDER_REVIEW', variant: 'pending' },
-        approved: { label: 'APPROVED_FOR_PAYMENT', variant: 'ok' },
+        approved: { label: 'APPROVED_FOR_PAYMENT', variant: 'badge-success' },
         rejected: { label: 'REJECTED', variant: 'bad' },
-        paid: { label: 'PAID', variant: 'ok' },
-        disputed: { label: 'DISPUTED', variant: 'warn' },
+        paid: { label: 'PAID', variant: 'badge-success' },
+        disputed: { label: 'DISPUTED', variant: 'badge-warning' },
         cancelled: { label: 'CANCELLED', variant: 'bad' },
       };
 
@@ -97,35 +97,35 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
   const statusDisplay = getStatusDisplay(invoice.status);
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="na-h1">Invoice {invoice.invoice_num}</h1>
-          <p className="na-metadata na-mt-2">
+          <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Invoice {invoice.invoice_num}</h1>
+          <p className="caption mt-2">
             Created: {new Date(invoice.created_at).toLocaleDateString()}
           </p>
         </div>
-        <Link href="/vendor/invoices" className="na-btn na-btn-ghost">
+        <Link href="/vendor/invoices" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
           ← Back to Invoices
         </Link>
       </div>
 
       {/* Status Card (PRD V-01: Payment Status Transparency) */}
-      <div className="na-card na-p-6 na-mb-6">
-        <h2 className="na-h3 na-mb-4">Current Status</h2>
-        <div className="na-flex na-items-center na-gap-4 na-mb-4">
-          <span className={`na-status na-status-${statusDisplay.variant} na-text-lg`}>
+      <div className="card p-6 mb-6">
+        <h2 className="section mb-4">Current Status</h2>
+        <div className="flex items-center gap-4 mb-4">
+          <span className={`badge badge-${statusDisplay.variant} text-lg`}>
             {statusDisplay.label}
           </span>
-          <div className="na-metadata na-text-sm">
+          <div className="caption text-sm">
             Last updated: {new Date(invoice.updated_at).toLocaleString()}
           </div>
         </div>
 
         {/* Expected Next Step (PRD V-01) */}
-        <div className="na-card na-p-4 na-bg-paper-2 na-mt-4">
-          <div className="na-metadata na-mb-2">Expected Next Step</div>
-          <div className="na-body">
+        <div className="card p-4 bg-nx-surface-well mt-4">
+          <div className="caption mb-2">Expected Next Step</div>
+          <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
             {invoice.status === 'approved'
               ? `Payment scheduled for ${expectedPaymentDate?.toLocaleDateString() || 'TBD'}`
               : invoice.status === 'pending' || invoice.status === 'under_review'
@@ -140,10 +140,10 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
 
         {/* Expected Payment Date (PRD V-01) */}
         {expectedPaymentDate && (
-          <div className="na-card na-p-4 na-bg-paper-2 na-mt-4">
-            <div className="na-metadata na-mb-2">Expected Payment Date</div>
-            <div className="na-data-large">{expectedPaymentDate.toLocaleDateString()}</div>
-            <div className="na-metadata na-text-sm na-mt-2">
+          <div className="card p-4 bg-nx-surface-well mt-4">
+            <div className="caption mb-2">Expected Payment Date</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{expectedPaymentDate.toLocaleDateString()}</div>
+            <div className="caption text-sm mt-2">
               Based on invoice date and payment terms
             </div>
           </div>
@@ -151,29 +151,29 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
       </div>
 
       {/* Invoice Details */}
-      <div className="na-card na-p-6 na-mb-6">
-        <h2 className="na-h3 na-mb-4">Invoice Details</h2>
-        <div className="na-grid na-grid-cols-1 md:na-grid-cols-2 na-gap-4">
+      <div className="card p-6 mb-6">
+        <h2 className="section mb-4">Invoice Details</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="na-metadata na-mb-2 na-block">Invoice Number</label>
-            <div className="na-data">{invoice.invoice_num}</div>
+            <label className="caption mb-2 block">Invoice Number</label>
+            <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{invoice.invoice_num}</div>
           </div>
           <div>
-            <label className="na-metadata na-mb-2 na-block">Invoice Date</label>
-            <div className="na-data">
+            <label className="caption mb-2 block">Invoice Date</label>
+            <div className="text-[length:var(--nx-body-size)] text-nx-text-main">
               {invoice.invoice_date ? new Date(invoice.invoice_date).toLocaleDateString() : 'N/A'}
             </div>
           </div>
           <div>
-            <label className="na-metadata na-mb-2 na-block">Amount</label>
-            <div className="na-data-large">
+            <label className="caption mb-2 block">Amount</label>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">
               ${invoice.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}{' '}
               {invoice.currency_code || 'USD'}
             </div>
           </div>
           <div>
-            <label className="na-metadata na-mb-2 na-block">Due Date</label>
-            <div className="na-data">
+            <label className="caption mb-2 block">Due Date</label>
+            <div className="text-[length:var(--nx-body-size)] text-nx-text-main">
               {invoice.due_date ? new Date(invoice.due_date).toLocaleDateString() : 'N/A'}
             </div>
           </div>
@@ -182,24 +182,24 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
 
       {/* Status Timeline (PRD V-01) */}
       {auditTrail && auditTrail.length > 0 && (
-        <div className="na-card na-p-6 na-mb-6">
-          <h2 className="na-h3 na-mb-4">Status Timeline</h2>
-          <div className="na-space-y-4">
+        <div className="card p-6 mb-6">
+          <h2 className="section mb-4">Status Timeline</h2>
+          <div className="space-y-4">
             {auditTrail.map((event, index) => (
-              <div key={event.id} className="na-flex na-gap-4">
-                <div className="na-flex-shrink-0">
-                  <div className="na-w-2 na-h-2 na-rounded-full na-bg-primary na-mt-2"></div>
+              <div key={event.id} className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-2 h-2 rounded-full bg-nx-primary mt-2"></div>
                   {index < auditTrail.length - 1 && (
-                    <div className="na-w-0.5 na-h-8 na-bg-paper-3 na-ml-1"></div>
+                    <div className="w-0.5 h-8 bg-nx-canvas ml-1"></div>
                   )}
                 </div>
-                <div className="na-flex-1">
-                  <div className="na-metadata na-text-sm">
+                <div className="flex-1">
+                  <div className="caption text-sm">
                     {new Date(event.created_at).toLocaleString()}
                   </div>
-                  <div className="na-body na-mt-1">{event.action}</div>
+                  <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mt-1">{event.action}</div>
                   {event.workflow_state && (
-                    <div className="na-metadata na-text-sm na-mt-1">
+                    <div className="caption text-sm mt-1">
                       {JSON.stringify(event.workflow_state)}
                     </div>
                   )}
@@ -212,29 +212,29 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
 
       {/* 3-Way Matching Status */}
       {matching && (
-        <div className="na-card na-p-6 na-mb-6">
-          <h2 className="na-h3 na-mb-4">3-Way Matching Status</h2>
-          <div className="na-grid na-grid-cols-3 na-gap-4">
+        <div className="card p-6 mb-6">
+          <h2 className="section mb-4">3-Way Matching Status</h2>
+          <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="na-metadata na-mb-2 na-block">PO Match</label>
+              <label className="caption mb-2 block">PO Match</label>
               <span
-                className={`na-status na-status-${matching.po_match ? 'ok' : 'bad'}`}
+                className={`badge badge-${matching.po_match ? 'badge-success' : 'bad'}`}
               >
                 {matching.po_match ? 'Matched' : 'Not Matched'}
               </span>
             </div>
             <div>
-              <label className="na-metadata na-mb-2 na-block">GRN Match</label>
+              <label className="caption mb-2 block">GRN Match</label>
               <span
-                className={`na-status na-status-${matching.grn_match ? 'ok' : 'bad'}`}
+                className={`badge badge-${matching.grn_match ? 'badge-success' : 'bad'}`}
               >
                 {matching.grn_match ? 'Matched' : 'Not Matched'}
               </span>
             </div>
             <div>
-              <label className="na-metadata na-mb-2 na-block">Overall Match</label>
+              <label className="caption mb-2 block">Overall Match</label>
               <span
-                className={`na-status na-status-${matching.match_score >= 0.8 ? 'ok' : 'warn'}`}
+                className={`badge badge-${matching.match_score >= 0.8 ? 'badge-success' : 'badge-warning'}`}
               >
                 {matching.match_score >= 0.8 ? 'Complete' : 'Incomplete'}
               </span>
@@ -245,22 +245,22 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
 
       {/* Documents */}
       {documents && documents.length > 0 && (
-        <div className="na-card na-p-6 na-mb-6">
-          <h2 className="na-h3 na-mb-4">Documents</h2>
-          <div className="na-space-y-2">
+        <div className="card p-6 mb-6">
+          <h2 className="section mb-4">Documents</h2>
+          <div className="space-y-2">
             {documents.map((doc: unknown) => {
               const d = doc as { id: string; name: string; file_url: string };
               return (
-                <div key={d.id} className="na-card na-p-4 na-flex na-items-center na-justify-between">
+                <div key={d.id} className="card p-4 flex items-center justify-between">
                   <div>
-                    <div className="na-body">{d.name}</div>
-                    <div className="na-metadata na-text-sm">Document</div>
+                    <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{d.name}</div>
+                    <div className="caption text-sm">Document</div>
                   </div>
                   <a
                     href={d.file_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="na-btn na-btn-ghost na-btn-sm"
+                    className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main px-3 py-1.5 text-sm"
                   >
                     View
                   </a>
@@ -273,9 +273,9 @@ export default async function VendorInvoiceDetailPage({ params }: InvoiceDetailP
 
       {/* Rejection Reason (if rejected) */}
       {invoice.status === 'rejected' && (
-        <div className="na-card na-p-6 na-bg-danger-subtle na-text-danger">
-          <h2 className="na-h4 na-mb-2">Rejection Reason</h2>
-          <p className="na-body">
+        <div className="card p-6 bg-nx-danger-bg text-nx-danger">
+          <h2 className="text-base font-semibold text-nx-text-main mb-2">Rejection Reason</h2>
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
             {invoice.rejection_reason || 'No rejection reason provided.'}
           </p>
         </div>

@@ -58,23 +58,23 @@ export function VendorTable({ initialVendors }: VendorTableProps) {
     }, [supabase]);
 
     return (
-        <div className="na-card na-p-6">
-            <div className="na-table-wrap">
-                <table className="na-table-frozen">
+        <div className="card p-6">
+            <div className="overflow-x-auto">
+                <table className="table-professional w-full">
                     <thead>
                         <tr>
-                            <th className="na-th">Legal Name</th>
-                            <th className="na-th">Display Name</th>
-                            <th className="na-th">Country</th>
-                            <th className="na-th">Email</th>
-                            <th className="na-th">Phone</th>
-                            <th className="na-th">Status</th>
-                            <th className="na-th">Actions</th>
+                            <th className="table-header-cell">Legal Name</th>
+                            <th className="table-header-cell">Display Name</th>
+                            <th className="table-header-cell">Country</th>
+                            <th className="table-header-cell">Email</th>
+                            <th className="table-header-cell">Phone</th>
+                            <th className="table-header-cell">Status</th>
+                            <th className="table-header-cell">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {vendors.map((vendor) => (
-                            <tr key={vendor.id} className="na-tr">
+                            <tr key={vendor.id} className="table-row">
                                 <VendorInlineEdit
                                     vendorId={vendor.id}
                                     field="legal_name"
@@ -102,17 +102,17 @@ export function VendorTable({ initialVendors }: VendorTableProps) {
                                     value={vendor.phone || ''}
                                     type="tel"
                                 />
-                                <td className="na-td">
+                                <td className="table-data-cell">
                                     <span
-                                        className={`na-status na-status-${vendor.status.toLowerCase()}`}
+                                        className={`badge badge-${vendor.status.toLowerCase()}`}
                                     >
                                         {vendor.status}
                                     </span>
                                 </td>
-                                <td className="na-td">
+                                <td className="table-data-cell">
                                     <a
                                         href={`/vendors/${vendor.id}`}
-                                        className="na-btn na-btn-ghost na-text-sm"
+                                        className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main text-sm"
                                     >
                                         View
                                     </a>

@@ -143,33 +143,33 @@ const getActivityIcon = (type: ActivityType): string => {
 
 const getActivityColor = (type: ActivityType): string => {
   const colors: Record<ActivityType, string> = {
-    create: 'text-green-400',
-    update: 'text-blue-400',
-    delete: 'text-red-400',
-    login: 'text-green-400',
-    logout: 'text-gray-400',
-    upload: 'text-purple-400',
+    create: 'text-nx-success',
+    update: 'text-nx-info',
+    delete: 'text-nx-danger',
+    login: 'text-nx-success',
+    logout: 'text-nx-text-faint',
+    upload: 'text-nx-primary',
     download: 'text-cyan-400',
-    share: 'text-yellow-400',
-    comment: 'text-blue-400',
-    approve: 'text-green-400',
-    reject: 'text-red-400',
-    assign: 'text-purple-400',
-    complete: 'text-green-400',
-    error: 'text-red-400',
-    warning: 'text-yellow-400',
-    info: 'text-blue-400',
+    share: 'text-nx-warning',
+    comment: 'text-nx-info',
+    approve: 'text-nx-success',
+    reject: 'text-nx-danger',
+    assign: 'text-nx-primary',
+    complete: 'text-nx-success',
+    error: 'text-nx-danger',
+    warning: 'text-nx-warning',
+    info: 'text-nx-info',
   };
-  return colors[type] || 'text-gray-400';
+  return colors[type] || 'text-nx-text-faint';
 };
 
 const getSeverityColor = (severity?: Activity['severity']): string => {
-  if (!severity) return 'bg-gray-500';
+  if (!severity) return 'bg-nx-secondary';
   const colors: Record<NonNullable<Activity['severity']>, string> = {
-    low: 'bg-green-500',
-    medium: 'bg-yellow-500',
-    high: 'bg-orange-500',
-    critical: 'bg-red-500',
+    low: 'bg-nx-success',
+    medium: 'bg-nx-warning',
+    high: 'bg-nx-warning',
+    critical: 'bg-nx-danger',
   };
   return colors[severity];
 };
@@ -388,7 +388,7 @@ export const ActivityLog: React.FC<ActivityLogProps> = ({
                 className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
                   selectedCategory === category
                     ? 'bg-primary-500 text-white'
-                    : 'bg-surface-700 text-gray-400 hover:bg-surface-600'
+                    : 'bg-surface-700 text-nx-text-faint hover:bg-surface-600'
                 }`}
               >
                 {getCategoryIcon(category)} {category.charAt(0).toUpperCase() + category.slice(1)} (
@@ -426,7 +426,7 @@ export const ActivityLog: React.FC<ActivityLogProps> = ({
                   className={`px-2 py-1 text-xs font-medium rounded transition-all ${
                     isSelected
                       ? `bg-surface-700 ${getActivityColor(type)} border border-current`
-                      : 'bg-surface-800 text-gray-500 hover:bg-surface-700'
+                      : 'bg-surface-800 text-nx-text-muted hover:bg-surface-700'
                   }`}
                 >
                   {getActivityIcon(type)} {type} ({count})
@@ -452,7 +452,7 @@ export const ActivityLog: React.FC<ActivityLogProps> = ({
           </select>
 
           {/* Show Metadata Toggle */}
-          <label className="flex items-center gap-2 text-gray-300 cursor-pointer">
+          <label className="flex items-center gap-2 text-nx-text-muted cursor-pointer">
             <input
               type="checkbox"
               checked={showMetadata}
@@ -469,8 +469,8 @@ export const ActivityLog: React.FC<ActivityLogProps> = ({
         {filteredActivities.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <div className="text-4xl mb-3">📋</div>
-            <p className="text-gray-400">No activities found</p>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-nx-text-faint">No activities found</p>
+            <p className="text-sm text-nx-text-muted mt-1">
               {searchQuery || selectedTypes.size > 0 || selectedCategory !== 'all'
                 ? 'Try adjusting your filters'
                 : 'No recent activity to display'}
@@ -482,7 +482,7 @@ export const ActivityLog: React.FC<ActivityLogProps> = ({
               {/* Group Header */}
               {showGrouping && (
                 <div className="sticky top-0 px-4 py-2 bg-surface-800 border-b border-surface-700">
-                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                  <h3 className="text-xs font-semibold text-nx-text-faint uppercase tracking-wider">
                     {group}
                   </h3>
                 </div>
@@ -524,11 +524,11 @@ export const ActivityLog: React.FC<ActivityLogProps> = ({
                         <div className="flex-1">
                           <p className="text-sm text-white">
                             <span className="font-semibold">{activity.actor.name}</span>{' '}
-                            <span className="text-gray-400">{activity.action}</span>
+                            <span className="text-nx-text-faint">{activity.action}</span>
                             {activity.target && (
                               <>
                                 {' '}
-                                <span className="text-gray-400">on</span>{' '}
+                                <span className="text-nx-text-faint">on</span>{' '}
                                 {activity.target.url ? (
                                   <a
                                     href={activity.target.url}
@@ -544,10 +544,10 @@ export const ActivityLog: React.FC<ActivityLogProps> = ({
                             )}
                           </p>
                           {activity.description && (
-                            <p className="text-sm text-gray-400 mt-0.5">{activity.description}</p>
+                            <p className="text-sm text-nx-text-faint mt-0.5">{activity.description}</p>
                           )}
                         </div>
-                        <span className="text-xs text-gray-500 flex-shrink-0">
+                        <span className="text-xs text-nx-text-muted flex-shrink-0">
                           {formatRelativeTime(activity.timestamp)}
                         </span>
                       </div>
@@ -558,8 +558,8 @@ export const ActivityLog: React.FC<ActivityLogProps> = ({
                           <div className="grid grid-cols-2 gap-2">
                             {Object.entries(activity.metadata).map(([key, value]) => (
                               <div key={key}>
-                                <span className="text-gray-500">{key}:</span>{' '}
-                                <span className="text-gray-300">{String(value)}</span>
+                                <span className="text-nx-text-muted">{key}:</span>{' '}
+                                <span className="text-nx-text-muted">{String(value)}</span>
                               </div>
                             ))}
                           </div>
@@ -572,7 +572,7 @@ export const ActivityLog: React.FC<ActivityLogProps> = ({
                           {activity.tags.map((tag, idx) => (
                             <span
                               key={idx}
-                              className="px-2 py-0.5 bg-surface-800 text-xs text-gray-400 rounded"
+                              className="px-2 py-0.5 bg-surface-800 text-xs text-nx-text-faint rounded"
                             >
                               #{tag}
                             </span>
@@ -589,7 +589,7 @@ export const ActivityLog: React.FC<ActivityLogProps> = ({
       </div>
 
       {/* Footer */}
-      <div className="px-4 py-2 bg-surface-800 border-t border-surface-700 text-sm text-gray-400">
+      <div className="px-4 py-2 bg-surface-800 border-t border-surface-700 text-sm text-nx-text-faint">
         Showing {filteredActivities.length} of {activities.length} activities
       </div>
     </div>

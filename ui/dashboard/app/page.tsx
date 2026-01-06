@@ -1,4 +1,4 @@
-import { getCachedConcepts, getCachedValueSets, getCachedValues } from '@aibos/kernel/nextjs';
+import { getCachedConcepts, getCachedValueSets, getCachedValues } from '@nexus/kernel/nextjs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';

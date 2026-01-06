@@ -61,8 +61,8 @@ export function InvoiceStatusDisplay({ invoiceId, initialStatus }: InvoiceStatus
 
     if (!statusInfo) {
         return (
-            <div className="na-card na-p-4">
-                <p className="na-metadata">Loading status...</p>
+            <div className="card p-4">
+                <p className="caption">Loading status...</p>
             </div>
         );
     }
@@ -70,46 +70,46 @@ export function InvoiceStatusDisplay({ invoiceId, initialStatus }: InvoiceStatus
     const getStatusColor = (status: string) => {
         switch (status) {
             case 'PAID':
-                return 'na-status-ok';
+                return 'badge-success';
             case 'APPROVED_FOR_PAYMENT':
-                return 'na-status-ok';
+                return 'badge-success';
             case 'REJECTED':
-                return 'na-status-bad';
+                return 'badge-danger';
             case 'UNDER_REVIEW':
-                return 'na-status-warn';
+                return 'badge-warning';
             case 'RECEIVED':
-                return 'na-status-pending';
+                return 'badge-info';
             default:
-                return 'na-status-pending';
+                return 'badge-info';
         }
     };
 
     return (
-        <div className="na-card na-p-6">
-            <div className="na-flex na-items-center na-justify-between na-mb-4">
-                <h3 className="na-h3">Invoice Status</h3>
+        <div className="card p-6">
+            <div className="flex items-center justify-between mb-4">
+                <h3 className="section">Invoice Status</h3>
                 <button
                     onClick={handleRefresh}
                     disabled={isLoading}
-                    className="na-btn na-btn-ghost na-text-sm"
+                    className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main text-sm"
                 >
                     {isLoading ? 'Refreshing...' : '🔄 Refresh'}
                 </button>
             </div>
 
             {/* Current Status */}
-            <div className="na-space-y-4">
+            <div className="space-y-4">
                 <div>
-                    <div className="na-flex na-items-center na-gap-3 na-mb-2">
-                        <span className={`na-status ${getStatusColor(statusInfo.current_status)}`}>
+                    <div className="flex items-center gap-3 mb-2">
+                        <span className={`badge ${getStatusColor(statusInfo.current_status)}`}>
                             {statusInfo.current_status}
                         </span>
-                        <span className="na-metadata">
+                        <span className="caption">
                             {statusInfo.current_status_reason_text || statusInfo.current_status_reason_code}
                         </span>
                     </div>
                     {statusInfo.status_changed_at && (
-                        <p className="na-metadata na-text-sm">
+                        <p className="caption text-sm">
                             Last updated: {new Date(statusInfo.status_changed_at).toLocaleString()}
                         </p>
                     )}
@@ -117,17 +117,17 @@ export function InvoiceStatusDisplay({ invoiceId, initialStatus }: InvoiceStatus
 
                 {/* Expected Next Step */}
                 {statusInfo.expected_next_step && (
-                    <div className="na-card na-p-4 na-bg-info-subtle">
-                        <p className="na-metadata na-font-semibold na-mb-1">Expected Next Step:</p>
-                        <p className="na-body">{statusInfo.expected_next_step}</p>
+                    <div className="card p-4 bg-nx-info-bg">
+                        <p className="caption font-semibold mb-1">Expected Next Step:</p>
+                        <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{statusInfo.expected_next_step}</p>
                     </div>
                 )}
 
                 {/* Expected Payment Date */}
                 {statusInfo.expected_payment_date && (
-                    <div className="na-card na-p-4 na-bg-ok-subtle">
-                        <p className="na-metadata na-font-semibold na-mb-1">Expected Payment Date:</p>
-                        <p className="na-body">
+                    <div className="card p-4 bg-nx-success-bg">
+                        <p className="caption font-semibold mb-1">Expected Payment Date:</p>
+                        <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
                             {new Date(statusInfo.expected_payment_date).toLocaleDateString()}
                         </p>
                     </div>
@@ -136,27 +136,27 @@ export function InvoiceStatusDisplay({ invoiceId, initialStatus }: InvoiceStatus
                 {/* Timeline Toggle */}
                 <button
                     onClick={() => setShowTimeline(!showTimeline)}
-                    className="na-btn na-btn-ghost na-w-full na-text-sm"
+                    className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main w-full text-sm"
                 >
                     {showTimeline ? '▼' : '▶'} Status Timeline
                 </button>
 
                 {/* Timeline */}
                 {showTimeline && statusInfo.timeline && statusInfo.timeline.length > 0 && (
-                    <div className="na-space-y-2 na-mt-4">
+                    <div className="space-y-2 mt-4">
                         {statusInfo.timeline.map((entry: InvoiceStatusTimelineEntry) => (
-                            <div key={entry.id} className="na-card na-p-3 na-border-l-4 na-border-l-primary">
-                                <div className="na-flex na-items-center na-justify-between na-mb-1">
-                                    <span className={`na-status ${getStatusColor(entry.status)}`}>
+                            <div key={entry.id} className="card p-3 border-l-4 border-l-nx-primary">
+                                <div className="flex items-center justify-between mb-1">
+                                    <span className={`badge ${getStatusColor(entry.status)}`}>
                                         {entry.status}
                                     </span>
-                                    <span className="na-metadata na-text-sm">
+                                    <span className="caption text-sm">
                                         {new Date(entry.changed_at).toLocaleString()}
                                     </span>
                                 </div>
-                                <p className="na-metadata na-text-sm">{entry.reason_text || entry.reason_code}</p>
+                                <p className="caption text-sm">{entry.reason_text || entry.reason_code}</p>
                                 {entry.expected_next_step && (
-                                    <p className="na-body na-text-sm na-mt-1">{entry.expected_next_step}</p>
+                                    <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-sm mt-1">{entry.expected_next_step}</p>
                                 )}
                             </div>
                         ))}

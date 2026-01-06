@@ -5,7 +5,7 @@
  * Based on: security.pack.json (87 security values)
  */
 
-// import { KERNEL } from '@aibos/kernel'; // Temporarily commented - kernel not yet published
+// import { KERNEL } from '@nexus/kernel'; // Temporarily commented - kernel not yet published
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 🛡️ CSP Configuration Builder

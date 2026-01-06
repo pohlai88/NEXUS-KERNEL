@@ -15,7 +15,7 @@ import {
 
 export default function VisualizationsPage() {
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-nx-canvas p-8">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-display font-semibold mb-2">

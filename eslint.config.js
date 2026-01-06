@@ -12,13 +12,28 @@ export default [
     },
   },
   {
+    // Relax rules for UI layer files and scripts
     files: ["ui/**/*.css", "scripts/**/*.ts"],
     rules: {
       "better-tailwindcss/no-custom-classname": "off",
     },
   },
   {
-    ignores: ["**/*.md"],
+    // Constitutional protection: canonical.ts is pure data, no modifications without review
+    // Run `pnpm nx:validate` after any changes to detect drift
+    files: ["ui/canonical.ts"],
+    rules: {
+      // All changes to canonical.ts trigger regeneration
+      // This is enforced by CI via `pnpm nx:validate`
+    },
+  },
+  {
+    ignores: [
+      "**/*.md",
+      "node_modules/**",
+      "dist/**",
+      ".next/**",
+      "coverage/**",
+    ],
   },
 ];
-

@@ -74,36 +74,36 @@ const formatTimestamp = (date: Date): string => {
 
 const getTypeColor = (type: NotificationType): string => {
   const colors: Record<NotificationType, string> = {
-    info: 'text-blue-400',
-    success: 'text-green-400',
-    warning: 'text-yellow-400',
-    error: 'text-red-400',
-    mention: 'text-purple-400',
+    info: 'text-nx-info',
+    success: 'text-nx-success',
+    warning: 'text-nx-warning',
+    error: 'text-nx-danger',
+    mention: 'text-nx-primary',
     update: 'text-cyan-400',
   };
-  return colors[type] || 'text-gray-400';
+  return colors[type] || 'text-nx-text-faint';
 };
 
 const getTypeBgColor = (type: NotificationType): string => {
   const colors: Record<NotificationType, string> = {
-    info: 'bg-blue-500/10',
-    success: 'bg-green-500/10',
-    warning: 'bg-yellow-500/10',
-    error: 'bg-red-500/10',
-    mention: 'bg-purple-500/10',
-    update: 'bg-cyan-500/10',
+    info: 'bg-nx-info-bg',
+    success: 'bg-nx-success-bg',
+    warning: 'bg-nx-warning-bg',
+    error: 'bg-nx-danger-bg',
+    mention: 'bg-nx-primary-light',
+    update: 'bg-nx-info-bg',
   };
-  return colors[type] || 'bg-gray-500/10';
+  return colors[type] || 'bg-nx-surface-well';
 };
 
 const getPriorityIndicator = (priority: NotificationPriority): string => {
   const indicators: Record<NotificationPriority, string> = {
-    low: 'bg-gray-500',
-    medium: 'bg-yellow-500',
-    high: 'bg-orange-500',
-    urgent: 'bg-red-500 animate-pulse',
+    low: 'bg-nx-secondary',
+    medium: 'bg-nx-warning',
+    high: 'bg-nx-warning',
+    urgent: 'bg-nx-danger animate-pulse',
   };
-  return indicators[priority] || 'bg-gray-500';
+  return indicators[priority] || 'bg-nx-secondary';
 };
 
 const getTypeIcon = (type: NotificationType): string => {
@@ -268,7 +268,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
             {onClearAll && notifications.length > 0 && (
               <button
                 onClick={onClearAll}
-                className="text-xs text-red-400 hover:text-red-300 transition-colors"
+                className="text-xs text-nx-danger hover:text-nx-danger transition-colors"
               >
                 Clear all
               </button>
@@ -306,7 +306,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                     className={`px-3 py-1 text-xs font-medium rounded-full transition-all ${
                       isSelected
                         ? `${getTypeBgColor(type)} ${getTypeColor(type)} border ${getTypeColor(type).replace('text-', 'border-')}`
-                        : 'bg-surface-800 text-gray-400 hover:bg-surface-700'
+                        : 'bg-surface-800 text-nx-text-faint hover:bg-surface-700'
                     }`}
                   >
                     {getTypeIcon(type)} {type} ({count})
@@ -316,7 +316,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
             </div>
 
             {/* Unread Filter */}
-            <label className="flex items-center gap-2 text-sm text-gray-300 cursor-pointer">
+            <label className="flex items-center gap-2 text-sm text-nx-text-muted cursor-pointer">
               <input
                 type="checkbox"
                 checked={showUnreadOnly}
@@ -334,8 +334,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
         {filteredNotifications.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <div className="text-4xl mb-3">🔔</div>
-            <p className="text-gray-400">No notifications</p>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-nx-text-faint">No notifications</p>
+            <p className="text-sm text-nx-text-muted mt-1">
               {searchQuery || selectedTypes.size > 0 || showUnreadOnly
                 ? 'Try adjusting your filters'
                 : "You're all caught up!"}
@@ -347,7 +347,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               {/* Group Header */}
               {groupByDate && (
                 <div className="sticky top-0 px-4 py-2 bg-surface-800 border-b border-surface-700">
-                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                  <h3 className="text-xs font-semibold text-nx-text-faint uppercase tracking-wider">
                     {group}
                   </h3>
                 </div>
@@ -401,16 +401,16 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                       <div className="flex items-start justify-between gap-2 mb-1">
                         <h4
                           className={`text-sm font-medium ${
-                            notification.read ? 'text-gray-300' : 'text-white'
+                            notification.read ? 'text-nx-text-muted' : 'text-white'
                           }`}
                         >
                           {notification.title}
                         </h4>
-                        <span className="text-xs text-gray-500 flex-shrink-0">
+                        <span className="text-xs text-nx-text-muted flex-shrink-0">
                           {formatTimestamp(notification.timestamp)}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-400 mb-2">{notification.message}</p>
+                      <p className="text-sm text-nx-text-faint mb-2">{notification.message}</p>
 
                       {/* Actions */}
                       {notification.actions && notification.actions.length > 0 && (
@@ -426,8 +426,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                                 action.variant === 'primary'
                                   ? 'bg-primary-500 text-white hover:bg-primary-600'
                                   : action.variant === 'danger'
-                                  ? 'bg-red-500 text-white hover:bg-red-600'
-                                  : 'bg-surface-700 text-gray-300 hover:bg-surface-600'
+                                  ? 'bg-nx-danger text-white hover:bg-nx-danger-text'
+                                  : 'bg-surface-700 text-nx-text-muted hover:bg-surface-600'
                               }`}
                             >
                               {action.label}
@@ -444,7 +444,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                           e.stopPropagation();
                           onNotificationDelete(notification.id);
                         }}
-                        className="flex-shrink-0 text-gray-500 hover:text-red-400 transition-colors"
+                        className="flex-shrink-0 text-nx-text-muted hover:text-nx-danger transition-colors"
                         aria-label="Delete notification"
                       >
                         <svg

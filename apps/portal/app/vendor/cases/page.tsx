@@ -102,26 +102,26 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
   }, {} as Record<string, number>);
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">My Cases</h1>
-        <Link href="/vendor/cases/new" className="na-btn na-btn-primary">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">My Cases</h1>
+        <Link href="/vendor/cases/new" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">
           ➕ Create Case
         </Link>
       </div>
 
       {/* Filters */}
-      <div className="na-card na-p-6 na-mb-6">
-        <h2 className="na-h3 na-mb-4">Filters</h2>
-        <form method="get" className="na-space-y-4">
-          <div className="na-grid na-grid-cols-1 md:na-grid-cols-3 na-gap-4">
+      <div className="card p-6 mb-6">
+        <h2 className="section mb-4">Filters</h2>
+        <form method="get" className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Status Filter */}
             <div>
-              <label className="na-metadata na-mb-2 na-block">Status</label>
+              <label className="caption mb-2 block">Status</label>
               <select
                 name="status"
                 defaultValue={searchParams.status || ''}
-                className="na-input na-w-full"
+                className="input w-full"
               >
                 <option value="">All Statuses</option>
                 <option value="open">Open</option>
@@ -134,11 +134,11 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
 
             {/* Case Type Filter */}
             <div>
-              <label className="na-metadata na-mb-2 na-block">Case Type</label>
+              <label className="caption mb-2 block">Case Type</label>
               <select
                 name="case_type"
                 defaultValue={searchParams.case_type || ''}
-                className="na-input na-w-full"
+                className="input w-full"
               >
                 <option value="">All Types</option>
                 <option value="invoice">Invoice</option>
@@ -151,32 +151,32 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
 
             {/* Search */}
             <div>
-              <label className="na-metadata na-mb-2 na-block">Search</label>
+              <label className="caption mb-2 block">Search</label>
               <input
                 type="text"
                 name="search"
                 placeholder="Search by subject..."
                 defaultValue={searchParams.search || ''}
-                className="na-input na-w-full"
+                className="input w-full"
               />
             </div>
           </div>
 
-          <div className="na-flex na-gap-2">
-            <button type="submit" className="na-btn na-btn-primary">
+          <div className="flex gap-2">
+            <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">
               Apply Filters
             </button>
-            <Link href="/vendor/cases" className="na-btn na-btn-ghost">
+            <Link href="/vendor/cases" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
               Clear
             </Link>
           </div>
         </form>
 
         {/* Status Badges */}
-        <div className="na-flex na-flex-wrap na-gap-2 na-mt-4">
+        <div className="flex flex-wrap gap-2 mt-4">
           <Link
             href="/vendor/cases"
-            className={`na-btn na-btn-sm ${!searchParams.status ? 'na-btn-primary' : 'na-btn-ghost'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer px-3 py-1.5 text-sm ${!searchParams.status ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
           >
             All ({caseList.length})
           </Link>
@@ -184,7 +184,7 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
             <Link
               key={status}
               href={`/vendor/cases?status=${status}`}
-              className={`na-btn na-btn-sm ${searchParams.status === status ? 'na-btn-primary' : 'na-btn-ghost'}`}
+              className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer px-3 py-1.5 text-sm ${searchParams.status === status ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
             >
               {status.replace('_', ' ')} ({count})
             </Link>
@@ -193,17 +193,17 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
       </div>
 
       {/* Case List */}
-      <div className="na-card na-p-6">
-        <h2 className="na-h3 na-mb-4">Cases ({caseList.length})</h2>
+      <div className="card p-6">
+        <h2 className="section mb-4">Cases ({caseList.length})</h2>
         {caseList.length === 0 ? (
-          <div className="na-text-center na-p-6">
-            <p className="na-body">No cases found.</p>
-            <Link href="/vendor/cases/new" className="na-btn na-btn-primary na-mt-4">
+          <div className="text-center p-6">
+            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">No cases found.</p>
+            <Link href="/vendor/cases/new" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary mt-4">
               Create Your First Case
             </Link>
           </div>
         ) : (
-          <div className="na-space-y-4">
+          <div className="space-y-4">
             {caseList.map((caseItem: unknown) => {
               const c = caseItem as {
                 id: string;
@@ -222,47 +222,47 @@ export default async function VendorCasesPage({ searchParams }: VendorCasesPageP
                 <Link
                   key={c.id}
                   href={`/vendor/cases/${c.id}`}
-                  className="na-card na-p-4 na-block na-hover-bg-paper-2 na-transition"
+                  className="card p-4 block hover:bg-nx-surface-well transition"
                 >
-                  <div className="na-flex na-items-start na-justify-between na-gap-4">
-                    <div className="na-flex-1">
-                      <div className="na-flex na-items-center na-gap-2 na-mb-2">
-                        <h3 className="na-h4">{c.subject}</h3>
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <h3 className="text-base font-semibold text-nx-text-main">{c.subject}</h3>
                         <span
-                          className={`na-status na-status-${
+                          className={`badge badge-${
                             c.status === 'resolved'
-                              ? 'ok'
+                              ? 'badge-success'
                               : c.status === 'blocked'
                                 ? 'bad'
                                 : c.status === 'waiting_supplier'
-                                  ? 'warn'
+                                  ? 'badge-warning'
                                   : 'pending'
                           }`}
                         >
                           {c.status.replace('_', ' ')}
                         </span>
-                        <span className="na-metadata na-text-xs">{c.case_type}</span>
+                        <span className="caption text-xs">{c.case_type}</span>
                       </div>
-                      <div className="na-metadata na-text-sm na-mb-2">
+                      <div className="caption text-sm mb-2">
                         Assigned to: {c.owner_team} team
                         {c.vmp_companies?.name && ` • ${c.vmp_companies.name}`}
                       </div>
-                      <div className="na-metadata na-text-xs">
+                      <div className="caption text-xs">
                         Created: {new Date(c.created_at).toLocaleDateString()}
                         {c.sla_due_at && (
-                          <span className="na-ml-4">
+                          <span className="ml-4">
                             SLA Due: {new Date(c.sla_due_at).toLocaleDateString()}
                           </span>
                         )}
                         {c.escalation_level > 0 && (
-                          <span className="na-ml-4 na-text-warn">
+                          <span className="ml-4 text-nx-warning">
                             Escalated (Level {c.escalation_level})
                           </span>
                         )}
                       </div>
                     </div>
-                    <div className="na-flex-shrink-0">
-                      <span className="na-btn na-btn-ghost na-btn-sm">View →</span>
+                    <div className="flex-shrink-0">
+                      <span className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main px-3 py-1.5 text-sm">View →</span>
                     </div>
                   </div>
                 </Link>

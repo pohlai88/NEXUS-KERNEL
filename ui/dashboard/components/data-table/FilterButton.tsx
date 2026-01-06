@@ -50,20 +50,20 @@ export function FilterButton({ sortBy, userStatus, onSortByChange, onUserStatusC
 
       {isOpen && (
         <div 
-          className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg
-                     border border-gray-200 p-4 z-50"
+          className="absolute top-full left-0 mt-2 bg-nx-surface rounded-lg shadow-lg
+                     border border-nx-border p-4 z-50"
           style={{ 
             width: '230px',
             boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
           }}
         >
           <div className="mb-4">
-            <div className="text-caption font-medium text-gray-500 mb-2">SORT BY:</div>
+            <div className="text-caption font-medium text-nx-text-muted mb-2">SORT BY:</div>
             {SORT_OPTIONS.map((option) => (
               <label
                 key={option}
                 className="flex items-center justify-between py-2 cursor-pointer
-                           hover:bg-gray-50 rounded px-2 -mx-2"
+                           hover:bg-nx-surface-well rounded px-2 -mx-2"
               >
                 <span className="text-body">{option}</span>
                 <input
@@ -79,12 +79,12 @@ export function FilterButton({ sortBy, userStatus, onSortByChange, onUserStatusC
           </div>
 
           <div>
-            <div className="text-caption font-medium text-gray-500 mb-2">USERS:</div>
+            <div className="text-caption font-medium text-nx-text-muted mb-2">USERS:</div>
             {USER_OPTIONS.map((option) => (
               <label
                 key={option}
                 className="flex items-center justify-between py-2 cursor-pointer
-                           hover:bg-gray-50 rounded px-2 -mx-2"
+                           hover:bg-nx-surface-well rounded px-2 -mx-2"
               >
                 <span className="text-body">{option}</span>
                 <input

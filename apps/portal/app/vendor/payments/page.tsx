@@ -121,103 +121,103 @@ export default async function VendorPaymentsPage({ searchParams }: VendorPayment
   const completedAmount = completedPayments.reduce((sum, p) => sum + parseFloat((p.amount || 0).toString()), 0);
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Payment Schedule</h1>
-        <Link href="/vendor/dashboard" className="na-btn na-btn-ghost">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Payment Schedule</h1>
+        <Link href="/vendor/dashboard" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
           ← Back to Dashboard
         </Link>
       </div>
 
       {/* Summary Cards */}
-      <div className="na-grid na-grid-cols-1 md:na-grid-cols-3 na-gap-4 na-mb-6">
-        <div className="na-card na-p-6">
-          <div className="na-metadata na-mb-2">Outstanding Amount</div>
-          <div className="na-data-large na-text-warn">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="card p-6">
+          <div className="caption mb-2">Outstanding Amount</div>
+          <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main text-nx-warning">
             ${outstandingAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
-          <div className="na-metadata na-text-sm na-mt-2">Unpaid approved invoices</div>
+          <div className="caption text-sm mt-2">Unpaid approved invoices</div>
         </div>
 
-        <div className="na-card na-p-6">
-          <div className="na-metadata na-mb-2">Upcoming Payments (30 days)</div>
-          <div className="na-data-large na-text-primary">
+        <div className="card p-6">
+          <div className="caption mb-2">Upcoming Payments (30 days)</div>
+          <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main text-nx-primary">
             ${upcomingAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
-          <div className="na-metadata na-text-sm na-mt-2">{upcomingPayments.length} payments scheduled</div>
+          <div className="caption text-sm mt-2">{upcomingPayments.length} payments scheduled</div>
         </div>
 
-        <div className="na-card na-p-6">
-          <div className="na-metadata na-mb-2">Total Paid (This Year)</div>
-          <div className="na-data-large na-text-ok">
+        <div className="card p-6">
+          <div className="caption mb-2">Total Paid (This Year)</div>
+          <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main text-nx-success">
             ${completedAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
-          <div className="na-metadata na-text-sm na-mt-2">{completedPayments.length} payments completed</div>
+          <div className="caption text-sm mt-2">{completedPayments.length} payments completed</div>
         </div>
       </div>
 
       {/* View Tabs */}
-      <div className="na-card na-p-6 na-mb-6">
-        <div className="na-flex na-gap-4 na-mb-4">
+      <div className="card p-6 mb-6">
+        <div className="flex gap-4 mb-4">
           <Link
             href="/vendor/payments?view=upcoming"
-            className={`na-btn ${view === 'upcoming' ? 'na-btn-primary' : 'na-btn-ghost'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer ${view === 'upcoming' ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
           >
             Upcoming Payments
           </Link>
           <Link
             href="/vendor/payments?view=history"
-            className={`na-btn ${view === 'history' ? 'na-btn-primary' : 'na-btn-ghost'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer ${view === 'history' ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
           >
             Payment History
           </Link>
           <Link
             href="/vendor/payments?view=all"
-            className={`na-btn ${view === 'all' ? 'na-btn-primary' : 'na-btn-ghost'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer ${view === 'all' ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
           >
             All Payments
           </Link>
         </div>
 
         {/* Date Range Filter */}
-        <form method="get" className="na-flex na-gap-4 na-items-end">
+        <form method="get" className="flex gap-4 items-end">
           <input type="hidden" name="view" value={view} />
           <div>
-            <label className="na-metadata na-mb-2 na-block">Date From</label>
+            <label className="caption mb-2 block">Date From</label>
             <input
               type="date"
               name="date_from"
               defaultValue={searchParams.date_from || ''}
-              className="na-input"
+              className="input"
             />
           </div>
           <div>
-            <label className="na-metadata na-mb-2 na-block">Date To</label>
+            <label className="caption mb-2 block">Date To</label>
             <input
               type="date"
               name="date_to"
               defaultValue={searchParams.date_to || ''}
-              className="na-input"
+              className="input"
             />
           </div>
-          <button type="submit" className="na-btn na-btn-primary">
+          <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">
             Apply Filter
           </button>
-          <Link href={`/vendor/payments?view=${view}`} className="na-btn na-btn-ghost">
+          <Link href={`/vendor/payments?view=${view}`} className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
             Clear
           </Link>
         </form>
       </div>
 
       {/* Payment List */}
-      <div className="na-card na-p-6">
-        <h2 className="na-h3 na-mb-4">
+      <div className="card p-6">
+        <h2 className="section mb-4">
           {view === 'upcoming' ? 'Upcoming Payments' : view === 'history' ? 'Payment History' : 'All Payments'} (
           {paymentList.length})
         </h2>
         {paymentList.length === 0 ? (
-          <div className="na-text-center na-p-6">
-            <p className="na-body">
+          <div className="text-center p-6">
+            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
               {view === 'upcoming'
                 ? 'No upcoming payments scheduled.'
                 : view === 'history'
@@ -226,19 +226,19 @@ export default async function VendorPaymentsPage({ searchParams }: VendorPayment
             </p>
           </div>
         ) : (
-          <div className="na-overflow-x-auto">
-            <table className="na-table-frozen na-w-full">
+          <div className="overflow-x-auto">
+            <table className="table-professional w-full w-full">
               <thead>
-                <tr className="na-tr">
-                  <th className="na-th">Payment Ref</th>
-                  <th className="na-th">Company</th>
-                  <th className="na-th">Invoice #</th>
-                  <th className="na-th">Payment Date</th>
-                  <th className="na-th">Amount</th>
-                  <th className="na-th">Status</th>
-                  <th className="na-th">Method</th>
-                  <th className="na-th">Transaction ID</th>
-                  <th className="na-th">Bank Account</th>
+                <tr className="table-row">
+                  <th className="table-header-cell">Payment Ref</th>
+                  <th className="table-header-cell">Company</th>
+                  <th className="table-header-cell">Invoice #</th>
+                  <th className="table-header-cell">Payment Date</th>
+                  <th className="table-header-cell">Amount</th>
+                  <th className="table-header-cell">Status</th>
+                  <th className="table-header-cell">Method</th>
+                  <th className="table-header-cell">Transaction ID</th>
+                  <th className="table-header-cell">Bank Account</th>
                 </tr>
               </thead>
               <tbody>
@@ -258,38 +258,38 @@ export default async function VendorPaymentsPage({ searchParams }: VendorPayment
                     vmp_companies: { name: string };
                   };
                   return (
-                    <tr key={p.id} className="na-tr na-hover-bg-paper-2">
-                      <td className="na-td na-font-semibold">{p.payment_ref}</td>
-                      <td className="na-td na-text-sm">{p.vmp_companies?.name || 'Unknown'}</td>
-                      <td className="na-td na-text-sm">
+                    <tr key={p.id} className="table-row hover:bg-nx-surface-well">
+                      <td className="table-data-cell font-semibold">{p.payment_ref}</td>
+                      <td className="table-data-cell text-sm">{p.vmp_companies?.name || 'Unknown'}</td>
+                      <td className="table-data-cell text-sm">
                         {p.vmp_invoices?.invoice_num || p.vmp_invoices?.invoice_number || 'N/A'}
                       </td>
-                      <td className="na-td na-text-sm">
+                      <td className="table-data-cell text-sm">
                         {new Date(p.payment_date).toLocaleDateString()}
                       </td>
-                      <td className="na-td na-data">
+                      <td className="table-data-cell text-[length:var(--nx-body-size)] text-nx-text-main">
                         ${p.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })} {p.currency_code || 'USD'}
                       </td>
-                      <td className="na-td">
+                      <td className="table-data-cell">
                         <span
-                          className={`na-status na-status-${
+                          className={`badge badge-${
                             p.status === 'completed'
-                              ? 'ok'
+                              ? 'badge-success'
                               : p.status === 'failed' || p.status === 'cancelled'
                                 ? 'bad'
                                 : p.status === 'processing'
-                                  ? 'warn'
+                                  ? 'badge-warning'
                                   : 'pending'
                           }`}
                         >
                           {p.status}
                         </span>
                       </td>
-                      <td className="na-td na-text-sm">{p.payment_method || 'N/A'}</td>
-                      <td className="na-td na-text-sm na-font-mono na-text-xs">
+                      <td className="table-data-cell text-sm">{p.payment_method || 'N/A'}</td>
+                      <td className="table-data-cell text-sm font-mono text-xs">
                         {p.transaction_id || 'N/A'}
                       </td>
-                      <td className="na-td na-text-sm na-font-mono">
+                      <td className="table-data-cell text-sm font-mono">
                         {p.bank_account_last4 ? `****${p.bank_account_last4}` : 'N/A'}
                       </td>
                     </tr>

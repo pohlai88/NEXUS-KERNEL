@@ -44,13 +44,13 @@ export default async function VendorOffboardingPage() {
 
   if (!vendor) {
     return (
-      <div className="na-container na-mx-auto na-p-6">
-        <div className="na-card na-p-6 na-text-center">
-          <h2 className="na-h4">Vendor Not Found</h2>
-          <p className="na-body na-mt-2">
+      <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+        <div className="card p-6 text-center">
+          <h2 className="text-base font-semibold text-nx-text-main">Vendor Not Found</h2>
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mt-2">
             Your vendor profile could not be loaded. Please contact support.
           </p>
-          <Link href="/vendor/dashboard" className="na-btn na-btn-primary na-mt-4">
+          <Link href="/vendor/dashboard" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary mt-4">
             ← Back to Dashboard
           </Link>
         </div>
@@ -84,22 +84,22 @@ export default async function VendorOffboardingPage() {
   const canRequest = !offboarding || offboarding.status === 'cancelled' || offboarding.status === 'rejected';
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Account Deactivation</h1>
-        <Link href="/vendor/dashboard" className="na-btn na-btn-ghost">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Account Deactivation</h1>
+        <Link href="/vendor/dashboard" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
           ← Back to Dashboard
         </Link>
       </div>
 
       {/* Warning Notice */}
-      <div className="na-card na-p-6 na-mb-6 na-bg-warn-subtle">
-        <h2 className="na-h3 na-mb-4 na-text-warn">⚠️ Important Notice</h2>
-        <div className="na-space-y-2">
-          <p className="na-body">
+      <div className="card p-6 mb-6 bg-nx-warning-bg">
+        <h2 className="section mb-4 text-nx-warning">⚠️ Important Notice</h2>
+        <div className="space-y-2">
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
             <strong>Account deactivation is permanent.</strong> Once your account is deactivated:
           </p>
-          <ul className="na-list-disc na-list-inside na-body na-text-sm na-space-y-1">
+          <ul className="list-disc list-inside text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-sm space-y-1">
             <li>You will lose access to the vendor portal</li>
             <li>All pending invoices will be handled according to company policy</li>
             <li>You will receive a data export of your account information</li>
@@ -110,46 +110,46 @@ export default async function VendorOffboardingPage() {
 
       {!offboarding || canRequest ? (
         /* Request Offboarding Form */
-        <div className="na-card na-p-6">
-          <h2 className="na-h3 na-mb-4">Request Account Deactivation</h2>
-          <form action={createOffboardingAction} className="na-space-y-4">
+        <div className="card p-6">
+          <h2 className="section mb-4">Request Account Deactivation</h2>
+          <form action={createOffboardingAction} className="space-y-4">
             <input type="hidden" name="vendor_id" value={vendorId} />
             <input type="hidden" name="company_id" value={vendor.tenant_id} />
 
             <div>
-              <label className="na-metadata na-mb-2 na-block">
-                Reason for Deactivation <span className="na-text-danger">*</span>
+              <label className="caption mb-2 block">
+                Reason for Deactivation <span className="text-nx-danger">*</span>
               </label>
               <textarea
                 name="reason"
-                className="na-input na-w-full"
+                className="input w-full"
                 rows={5}
                 required
                 placeholder="Please provide a reason for account deactivation..."
               />
-              <div className="na-metadata na-text-sm na-mt-1">
+              <div className="caption text-sm mt-1">
                 This information will be reviewed by the procurement team.
               </div>
             </div>
 
             <div>
-              <label className="na-metadata na-mb-2 na-block">Effective Date (Optional)</label>
+              <label className="caption mb-2 block">Effective Date (Optional)</label>
               <input
                 type="date"
                 name="effective_date"
-                className="na-input na-w-full"
+                className="input w-full"
                 min={new Date().toISOString().split('T')[0]}
               />
-              <div className="na-metadata na-text-sm na-mt-1">
+              <div className="caption text-sm mt-1">
                 When should the deactivation take effect? Leave blank for immediate processing.
               </div>
             </div>
 
-            <div className="na-card na-p-4 na-bg-paper-2">
-              <p className="na-body na-text-sm">
+            <div className="card p-4 bg-nx-surface-well">
+              <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-sm">
                 <strong>By submitting this request, you acknowledge that:</strong>
               </p>
-              <ul className="na-list-disc na-list-inside na-body na-text-sm na-mt-2 na-space-y-1">
+              <ul className="list-disc list-inside text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-sm mt-2 space-y-1">
                 <li>Your account will be deactivated after approval</li>
                 <li>All pending transactions will be handled according to company policy</li>
                 <li>You will receive a data export of your account information</li>
@@ -157,11 +157,11 @@ export default async function VendorOffboardingPage() {
               </ul>
             </div>
 
-            <div className="na-flex na-gap-2">
-              <button type="submit" className="na-btn na-btn-danger">
+            <div className="flex gap-2">
+              <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-nx-danger text-white hover:bg-nx-danger-text">
                 Submit Deactivation Request
               </button>
-              <Link href="/vendor/dashboard" className="na-btn na-btn-ghost">
+              <Link href="/vendor/dashboard" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
                 Cancel
               </Link>
             </div>
@@ -171,35 +171,35 @@ export default async function VendorOffboardingPage() {
         /* Offboarding Status */
         <>
           {/* Status Overview */}
-          <div className="na-card na-p-6 na-mb-6">
-            <h2 className="na-h3 na-mb-4">Offboarding Status</h2>
+          <div className="card p-6 mb-6">
+            <h2 className="section mb-4">Offboarding Status</h2>
             
             {/* Progress Bar */}
-            <div className="na-mb-6">
-              <div className="na-flex na-items-center na-justify-between na-mb-2">
-                <span className="na-body na-font-semibold">
+            <div className="mb-6">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main font-semibold">
                   Current Stage: {offboarding.stage.replace('_', ' ').toUpperCase()}
                 </span>
-                <span className="na-metadata">{currentProgress}%</span>
+                <span className="caption">{currentProgress}%</span>
               </div>
-              <div className="na-w-full na-bg-paper-2 na-rounded-full na-h-2">
+              <div className="w-full bg-nx-surface-well rounded-full h-2">
                 <div
-                  className="na-bg-primary na-h-2 na-rounded-full na-transition-all"
+                  className="bg-nx-primary h-2 rounded-full transition-all"
                   style={{ width: `${currentProgress}%` }}
                 />
               </div>
             </div>
 
             {/* Status Badge */}
-            <div className="na-mb-4">
+            <div className="mb-4">
               <span
-                className={`na-status na-status-${
+                className={`badge badge-${
                   offboarding.status === 'completed'
-                    ? 'ok'
+                    ? 'badge-success'
                     : offboarding.status === 'rejected'
                       ? 'bad'
                       : offboarding.status === 'in_progress'
-                        ? 'warn'
+                        ? 'badge-warning'
                       : offboarding.status === 'cancelled'
                         ? 'pending'
                         : 'pending'
@@ -210,26 +210,26 @@ export default async function VendorOffboardingPage() {
             </div>
 
             {/* Request Details */}
-            <div className="na-card na-p-4 na-bg-paper-2 na-mt-4">
-              <div className="na-grid na-grid-cols-1 md:na-grid-cols-2 na-gap-4">
+            <div className="card p-4 bg-nx-surface-well mt-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="na-metadata na-mb-2 na-block">Requested Date</label>
-                  <div className="na-body">
+                  <label className="caption mb-2 block">Requested Date</label>
+                  <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
                     {new Date(offboarding.requested_at).toLocaleString()}
                   </div>
                 </div>
                 {offboarding.approved_at && (
                   <div>
-                    <label className="na-metadata na-mb-2 na-block">Approved Date</label>
-                    <div className="na-body">
+                    <label className="caption mb-2 block">Approved Date</label>
+                    <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
                       {new Date(offboarding.approved_at).toLocaleString()}
                     </div>
                   </div>
                 )}
                 {offboarding.completed_at && (
                   <div>
-                    <label className="na-metadata na-mb-2 na-block">Completed Date</label>
-                    <div className="na-body">
+                    <label className="caption mb-2 block">Completed Date</label>
+                    <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
                       {new Date(offboarding.completed_at).toLocaleString()}
                     </div>
                   </div>
@@ -238,20 +238,20 @@ export default async function VendorOffboardingPage() {
             </div>
 
             {/* Reason */}
-            <div className="na-card na-p-4 na-bg-paper-2 na-mt-4">
-              <label className="na-metadata na-mb-2 na-block">Reason</label>
-              <p className="na-body">{offboarding.reason}</p>
+            <div className="card p-4 bg-nx-surface-well mt-4">
+              <label className="caption mb-2 block">Reason</label>
+              <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{offboarding.reason}</p>
             </div>
           </div>
 
           {/* Rejection Reason */}
           {offboarding.rejected_reason && (
-            <div className="na-card na-p-6 na-mb-6 na-bg-danger-subtle">
-              <h2 className="na-h3 na-mb-4 na-text-danger">Rejection Reason</h2>
-              <div className="na-card na-p-4 na-bg-paper-2">
-                <p className="na-body">{offboarding.rejected_reason}</p>
+            <div className="card p-6 mb-6 bg-nx-danger-bg">
+              <h2 className="section mb-4 text-nx-danger">Rejection Reason</h2>
+              <div className="card p-4 bg-nx-surface-well">
+                <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{offboarding.rejected_reason}</p>
               </div>
-              <Link href="/vendor/cases" className="na-btn na-btn-primary na-mt-4">
+              <Link href="/vendor/cases" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary mt-4">
                 View Case Details
               </Link>
             </div>
@@ -259,27 +259,27 @@ export default async function VendorOffboardingPage() {
 
           {/* Cancellation Reason */}
           {offboarding.cancellation_reason && (
-            <div className="na-card na-p-6 na-mb-6 na-bg-paper-2">
-              <h2 className="na-h3 na-mb-4">Cancellation Reason</h2>
-              <div className="na-card na-p-4 na-bg-paper-2">
-                <p className="na-body">{offboarding.cancellation_reason}</p>
+            <div className="card p-6 mb-6 bg-nx-surface-well">
+              <h2 className="section mb-4">Cancellation Reason</h2>
+              <div className="card p-4 bg-nx-surface-well">
+                <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{offboarding.cancellation_reason}</p>
               </div>
             </div>
           )}
 
           {/* Data Export */}
           {offboarding.data_export_url && (
-            <div className="na-card na-p-6 na-mb-6">
-              <h2 className="na-h3 na-mb-4">Data Export</h2>
-              <div className="na-card na-p-4 na-bg-paper-2">
-                <p className="na-body na-mb-4">
+            <div className="card p-6 mb-6">
+              <h2 className="section mb-4">Data Export</h2>
+              <div className="card p-4 bg-nx-surface-well">
+                <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mb-4">
                   Your account data export is ready for download.
                 </p>
                 <a
                   href={offboarding.data_export_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="na-btn na-btn-primary"
+                  className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary"
                 >
                   Download Data Export
                 </a>
@@ -289,22 +289,22 @@ export default async function VendorOffboardingPage() {
 
           {/* Cancel Request (if pending) */}
           {offboarding.status === 'pending' && (
-            <div className="na-card na-p-6">
-              <h2 className="na-h3 na-mb-4">Cancel Request</h2>
-              <form action={cancelOffboardingAction.bind(null, offboarding.id)} className="na-space-y-4">
+            <div className="card p-6">
+              <h2 className="section mb-4">Cancel Request</h2>
+              <form action={cancelOffboardingAction.bind(null, offboarding.id)} className="space-y-4">
                 <div>
-                  <label className="na-metadata na-mb-2 na-block">
-                    Cancellation Reason <span className="na-text-danger">*</span>
+                  <label className="caption mb-2 block">
+                    Cancellation Reason <span className="text-nx-danger">*</span>
                   </label>
                   <textarea
                     name="cancellation_reason"
-                    className="na-input na-w-full"
+                    className="input w-full"
                     rows={3}
                     required
                     placeholder="Why are you cancelling this request?"
                   />
                 </div>
-                <button type="submit" className="na-btn na-btn-secondary">
+                <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary">
                   Cancel Deactivation Request
                 </button>
               </form>
@@ -313,15 +313,15 @@ export default async function VendorOffboardingPage() {
 
           {/* Case Link */}
           {caseData && (
-            <div className="na-card na-p-6">
-              <h2 className="na-h3 na-mb-4">Related Case</h2>
-              <div className="na-card na-p-4 na-bg-paper-2">
-                <div className="na-flex na-items-center na-justify-between">
+            <div className="card p-6">
+              <h2 className="section mb-4">Related Case</h2>
+              <div className="card p-4 bg-nx-surface-well">
+                <div className="flex items-center justify-between">
                   <div>
-                    <div className="na-body na-font-semibold">{caseData.subject}</div>
-                    <div className="na-metadata na-text-sm">Case ID: {caseData.id}</div>
+                    <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main font-semibold">{caseData.subject}</div>
+                    <div className="caption text-sm">Case ID: {caseData.id}</div>
                   </div>
-                  <Link href={`/vendor/cases?case_id=${caseData.id}`} className="na-btn na-btn-secondary">
+                  <Link href={`/vendor/cases?case_id=${caseData.id}`} className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary">
                     View Case
                   </Link>
                 </div>

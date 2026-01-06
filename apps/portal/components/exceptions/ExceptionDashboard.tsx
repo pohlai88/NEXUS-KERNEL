@@ -95,79 +95,79 @@ export function ExceptionDashboard() {
 
   if (isLoading) {
     return (
-      <div className="na-card na-p-6">
-        <p className="na-metadata">Loading exceptions...</p>
+      <div className="card p-6">
+        <p className="caption">Loading exceptions...</p>
       </div>
     );
   }
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Exception Dashboard</h1>
-        <button onClick={loadData} className="na-btn na-btn-ghost">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Exception Dashboard</h1>
+        <button onClick={loadData} className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
           🔄 Refresh
         </button>
       </div>
 
       {/* Summary Cards */}
       {summary && (
-        <div className="na-grid na-grid-cols-4 na-gap-4 na-mb-6">
-          <div className="na-card na-p-4">
-            <div className="na-metadata">Total Exceptions</div>
-            <div className="na-data-large">{summary.total}</div>
+        <div className="grid grid-cols-4 gap-4 mb-6">
+          <div className="card p-4">
+            <div className="caption">Total Exceptions</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{summary.total}</div>
           </div>
-          <div className="na-card na-p-4 na-bg-danger-subtle">
-            <div className="na-metadata">🔴 Blocking</div>
-            <div className="na-data-large">{summary.blocking}</div>
+          <div className="card p-4 bg-nx-danger-bg">
+            <div className="caption">🔴 Blocking</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{summary.blocking}</div>
           </div>
-          <div className="na-card na-p-4 na-bg-warn-subtle">
-            <div className="na-metadata">🟠 Needs Action</div>
-            <div className="na-data-large">{summary.needs_action}</div>
+          <div className="card p-4 bg-nx-warning-bg">
+            <div className="caption">🟠 Needs Action</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{summary.needs_action}</div>
           </div>
-          <div className="na-card na-p-4 na-bg-ok-subtle">
-            <div className="na-metadata">🟢 Safe</div>
-            <div className="na-data-large">{summary.safe}</div>
+          <div className="card p-4 bg-nx-success-bg">
+            <div className="caption">🟢 Safe</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{summary.safe}</div>
           </div>
         </div>
       )}
 
       {/* Filters */}
-      <div className="na-card na-p-4 na-mb-6">
-        <div className="na-flex na-gap-2 na-flex-wrap">
+      <div className="card p-4 mb-6">
+        <div className="flex gap-2 flex-wrap">
           <button
             onClick={() => setFilter('all')}
-            className={`na-btn ${filter === 'all' ? 'na-btn-primary' : 'na-btn-ghost'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer ${filter === 'all' ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
           >
             All
           </button>
           <button
             onClick={() => setFilter('open')}
-            className={`na-btn ${filter === 'open' ? 'na-btn-primary' : 'na-btn-ghost'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer ${filter === 'open' ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
           >
             Open Only
           </button>
           <button
             onClick={() => setFilter('critical')}
-            className={`na-btn ${filter === 'critical' ? 'na-btn-primary' : 'na-btn-ghost'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer ${filter === 'critical' ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
           >
             🔴 Critical
           </button>
           <button
             onClick={() => setFilter('high')}
-            className={`na-btn ${filter === 'high' ? 'na-btn-primary' : 'na-btn-ghost'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer ${filter === 'high' ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
           >
             🔴 High
           </button>
           <button
             onClick={() => setFilter('medium')}
-            className={`na-btn ${filter === 'medium' ? 'na-btn-primary' : 'na-btn-ghost'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer ${filter === 'medium' ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
           >
             🟠 Medium
           </button>
           <button
             onClick={() => setFilter('low')}
-            className={`na-btn ${filter === 'low' ? 'na-btn-primary' : 'na-btn-ghost'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer ${filter === 'low' ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
           >
             🟢 Low
           </button>
@@ -175,17 +175,17 @@ export function ExceptionDashboard() {
       </div>
 
       {/* Exceptions List */}
-      <div className="na-space-y-4">
+      <div className="space-y-4">
         {exceptions.length === 0 ? (
-          <div className="na-card na-p-6 na-text-center">
-            <p className="na-h4">No Exceptions Found</p>
-            <p className="na-body na-mt-2">All invoices are in good standing!</p>
+          <div className="card p-6 text-center">
+            <p className="text-base font-semibold text-nx-text-main">No Exceptions Found</p>
+            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mt-2">All invoices are in good standing!</p>
           </div>
         ) : (
           exceptions.map((exception) => (
             <div
               key={exception.id}
-              className="na-card na-p-4 na-border-l-4"
+              className="card p-4 border-l-4"
               style={{
                 borderLeftColor: exception.severity === 'critical' || exception.severity === 'high' 
                   ? 'var(--color-danger)' 
@@ -194,28 +194,28 @@ export function ExceptionDashboard() {
                     : 'var(--color-ok)',
               }}
             >
-              <div className="na-flex na-items-start na-justify-between na-mb-2">
-                <div className="na-flex na-items-center na-gap-2">
-                  <span className="na-text-2xl">{getSeverityIcon(exception.severity)}</span>
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">{getSeverityIcon(exception.severity)}</span>
                   <div>
-                    <h3 className="na-h5">{exception.title}</h3>
-                    <p className="na-metadata na-text-sm">
+                    <h3 className="text-sm font-semibold text-nx-text-main">{exception.title}</h3>
+                    <p className="caption text-sm">
                       {getSeverityLabel(exception.severity)} • {exception.exception_type}
                     </p>
                   </div>
                 </div>
-                <span className={`na-status na-status-${exception.status === 'open' ? 'pending' : exception.status === 'resolved' ? 'ok' : 'warn'}`}>
+                <span className={`badge badge-${'open' === status ? 'info' : exception.status === 'resolved' ? 'badge-success' : 'badge-warning'}`}>
                   {exception.status}
                 </span>
               </div>
-              <p className="na-body na-mb-2">{exception.description}</p>
-              <div className="na-flex na-items-center na-justify-between">
-                <p className="na-metadata na-text-sm">
+              <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mb-2">{exception.description}</p>
+              <div className="flex items-center justify-between">
+                <p className="caption text-sm">
                   Detected: {new Date(exception.detected_at).toLocaleString()}
                 </p>
                 <a
                   href={`/invoices/${exception.invoice_id}`}
-                  className="na-btn na-btn-ghost na-text-sm"
+                  className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main text-sm"
                 >
                   View Invoice →
                 </a>

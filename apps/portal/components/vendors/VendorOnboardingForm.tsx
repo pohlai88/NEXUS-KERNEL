@@ -124,18 +124,18 @@ export function VendorOnboardingForm({ onSubmit }: VendorOnboardingFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="na-card na-p-6">
-      <h2 className="na-h2 na-mb-6">Vendor Onboarding</h2>
+    <form onSubmit={handleSubmit} className="card p-6">
+      <h2 className="text-[length:var(--nx-title-size)] leading-[var(--nx-title-line)] font-semibold tracking-tight text-nx-text-main mb-6">Vendor Onboarding</h2>
 
       {duplicateWarning && (
-        <div className="na-card na-p-4 na-bg-warn-subtle na-text-warn na-mb-4">
-          <p className="na-metadata">{duplicateWarning}</p>
+        <div className="card p-4 bg-nx-warning-bg text-nx-warning mb-4">
+          <p className="caption">{duplicateWarning}</p>
         </div>
       )}
 
-      <div className="na-space-y-4">
+      <div className="space-y-4">
         <div>
-          <label className="na-metadata na-mb-2 na-block">Legal Name *</label>
+          <label className="caption mb-2 block">Legal Name *</label>
           <input
             type="text"
             value={legalName}
@@ -143,16 +143,16 @@ export function VendorOnboardingForm({ onSubmit }: VendorOnboardingFormProps) {
               setLegalName(e.target.value);
               validateLegalName(e.target.value);
             }}
-            className={`na-input na-w-full ${validationErrors.legalName ? 'na-border-danger' : ''}`}
+            className={`input w-full ${validationErrors.legalName ? 'border-nx-danger' : ''}`}
             required
           />
           {validationErrors.legalName && (
-            <p className="na-text-danger na-text-sm na-mt-1">{validationErrors.legalName}</p>
+            <p className="text-nx-danger text-sm mt-1">{validationErrors.legalName}</p>
           )}
         </div>
 
         <div>
-          <label className="na-metadata na-mb-2 na-block">Display Name</label>
+          <label className="caption mb-2 block">Display Name</label>
           <input
             type="text"
             value={displayName}
@@ -160,19 +160,19 @@ export function VendorOnboardingForm({ onSubmit }: VendorOnboardingFormProps) {
               setDisplayName(e.target.value);
               if (legalName) validateLegalName(legalName);
             }}
-            className="na-input na-w-full"
+            className="input w-full"
           />
         </div>
 
         <div>
-          <label className="na-metadata na-mb-2 na-block">Country Code *</label>
+          <label className="caption mb-2 block">Country Code *</label>
           <select
             value={countryCode}
             onChange={(e) => {
               setCountryCode(e.target.value);
               if (taxId) validateTaxId(taxId);
             }}
-            className="na-input na-w-full"
+            className="input w-full"
             required
           >
             <option value="">Select Country</option>
@@ -184,7 +184,7 @@ export function VendorOnboardingForm({ onSubmit }: VendorOnboardingFormProps) {
         </div>
 
         <div>
-          <label className="na-metadata na-mb-2 na-block">Tax ID *</label>
+          <label className="caption mb-2 block">Tax ID *</label>
           <input
             type="text"
             value={taxId}
@@ -192,16 +192,16 @@ export function VendorOnboardingForm({ onSubmit }: VendorOnboardingFormProps) {
               setTaxId(e.target.value);
               validateTaxId(e.target.value);
             }}
-            className={`na-input na-w-full ${validationErrors.taxId ? 'na-border-danger' : ''}`}
+            className={`input w-full ${validationErrors.taxId ? 'border-nx-danger' : ''}`}
             required
           />
           {validationErrors.taxId && (
-            <p className="na-text-danger na-text-sm na-mt-1">{validationErrors.taxId}</p>
+            <p className="text-nx-danger text-sm mt-1">{validationErrors.taxId}</p>
           )}
         </div>
 
         <div>
-          <label className="na-metadata na-mb-2 na-block">Email *</label>
+          <label className="caption mb-2 block">Email *</label>
           <input
             type="email"
             value={email}
@@ -209,34 +209,34 @@ export function VendorOnboardingForm({ onSubmit }: VendorOnboardingFormProps) {
               setEmail(e.target.value);
               validateEmail(e.target.value);
             }}
-            className={`na-input na-w-full ${validationErrors.email ? 'na-border-danger' : ''}`}
+            className={`input w-full ${validationErrors.email ? 'border-nx-danger' : ''}`}
             required
           />
           {validationErrors.email && (
-            <p className="na-text-danger na-text-sm na-mt-1">{validationErrors.email}</p>
+            <p className="text-nx-danger text-sm mt-1">{validationErrors.email}</p>
           )}
         </div>
 
         <div>
-          <label className="na-metadata na-mb-2 na-block">Phone *</label>
+          <label className="caption mb-2 block">Phone *</label>
           <input
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="na-input na-w-full"
+            className="input w-full"
             required
           />
         </div>
 
         {validationErrors.submit && (
-          <div className="na-card na-p-4 na-bg-danger-subtle na-text-danger">
-            <p className="na-metadata">{validationErrors.submit}</p>
+          <div className="card p-4 bg-nx-danger-bg text-nx-danger">
+            <p className="caption">{validationErrors.submit}</p>
           </div>
         )}
 
         <button
           type="submit"
-          className="na-btn na-btn-primary na-w-full"
+          className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary w-full"
           disabled={isPending || Object.keys(validationErrors).length > 0}
         >
           {isPending ? 'Submitting...' : 'Submit Application'}

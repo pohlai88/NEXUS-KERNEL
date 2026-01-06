@@ -51,48 +51,48 @@ export default async function GroupAnalyticsPage({ searchParams }: GroupAnalytic
   });
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Group Analytics</h1>
-        <p className="na-metadata">Consolidated spend across all subsidiaries</p>
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Group Analytics</h1>
+        <p className="caption">Consolidated spend across all subsidiaries</p>
       </div>
 
       {/* Total Spend Card */}
-      <div className="na-card na-p-6 na-mb-6">
-        <div className="na-text-center">
-          <div className="na-metadata na-mb-2">Total Group Spend</div>
-          <div className="na-data-large na-text-primary">
+      <div className="card p-6 mb-6">
+        <div className="text-center">
+          <div className="caption mb-2">Total Group Spend</div>
+          <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main text-nx-primary">
             ${totalSpend.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
         </div>
       </div>
 
       {/* Spend by Category */}
-      <div className="na-card na-p-6 na-mb-6">
-        <h2 className="na-h3 na-mb-4">Spend by Category</h2>
-        <div className="na-card na-overflow-x-auto">
-          <table className="na-table-frozen na-w-full">
+      <div className="card p-6 mb-6">
+        <h2 className="section mb-4">Spend by Category</h2>
+        <div className="card overflow-x-auto">
+          <table className="table-professional w-full w-full">
             <thead>
-              <tr className="na-tr">
-                <th className="na-th">Category</th>
-                <th className="na-th">Total Amount</th>
-                <th className="na-th">Transactions</th>
-                <th className="na-th">Average</th>
-                <th className="na-th">Subsidiaries</th>
+              <tr className="table-row">
+                <th className="table-header-cell">Category</th>
+                <th className="table-header-cell">Total Amount</th>
+                <th className="table-header-cell">Transactions</th>
+                <th className="table-header-cell">Average</th>
+                <th className="table-header-cell">Subsidiaries</th>
               </tr>
             </thead>
             <tbody>
               {spendByCategory.map((category) => (
-                <tr key={category.category} className="na-tr na-hover-bg-paper-2">
-                  <td className="na-td na-font-semibold">{category.category}</td>
-                  <td className="na-td na-data">
+                <tr key={category.category} className="table-row hover:bg-nx-surface-well">
+                  <td className="table-data-cell font-semibold">{category.category}</td>
+                  <td className="table-data-cell text-[length:var(--nx-body-size)] text-nx-text-main">
                     ${category.total_amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </td>
-                  <td className="na-td">{category.transaction_count}</td>
-                  <td className="na-td">
+                  <td className="table-data-cell">{category.transaction_count}</td>
+                  <td className="table-data-cell">
                     ${category.average_amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </td>
-                  <td className="na-td na-text-sm">
+                  <td className="table-data-cell text-sm">
                     {category.subsidiaries.map((s) => s.tenant_name).join(', ')}
                   </td>
                 </tr>
@@ -103,25 +103,25 @@ export default async function GroupAnalyticsPage({ searchParams }: GroupAnalytic
       </div>
 
       {/* Top Vendors */}
-      <div className="na-card na-p-6">
-        <h2 className="na-h3 na-mb-4">Top Vendors</h2>
-        <div className="na-card na-overflow-x-auto">
-          <table className="na-table-frozen na-w-full">
+      <div className="card p-6">
+        <h2 className="section mb-4">Top Vendors</h2>
+        <div className="card overflow-x-auto">
+          <table className="table-professional w-full w-full">
             <thead>
-              <tr className="na-tr">
-                <th className="na-th">Vendor</th>
-                <th className="na-th">Total Amount</th>
-                <th className="na-th">Transactions</th>
+              <tr className="table-row">
+                <th className="table-header-cell">Vendor</th>
+                <th className="table-header-cell">Total Amount</th>
+                <th className="table-header-cell">Transactions</th>
               </tr>
             </thead>
             <tbody>
               {spendByVendor.slice(0, 10).map((vendor) => (
-                <tr key={vendor.vendor_id} className="na-tr na-hover-bg-paper-2">
-                  <td className="na-td na-font-semibold">{vendor.vendor_name}</td>
-                  <td className="na-td na-data">
+                <tr key={vendor.vendor_id} className="table-row hover:bg-nx-surface-well">
+                  <td className="table-data-cell font-semibold">{vendor.vendor_name}</td>
+                  <td className="table-data-cell text-[length:var(--nx-body-size)] text-nx-text-main">
                     ${vendor.total_amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </td>
-                  <td className="na-td">{vendor.transaction_count}</td>
+                  <td className="table-data-cell">{vendor.transaction_count}</td>
                 </tr>
               ))}
             </tbody>

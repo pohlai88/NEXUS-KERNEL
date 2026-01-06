@@ -92,11 +92,11 @@ export function StalenessDashboard() {
   const getStalenessColor = (level: string) => {
     switch (level) {
       case 'severe':
-        return 'na-bg-danger-subtle na-text-danger';
+        return 'bg-nx-danger-bg text-nx-danger';
       case 'critical':
-        return 'na-bg-warn-subtle na-text-warn';
+        return 'bg-nx-warning-bg text-nx-warning';
       case 'warning':
-        return 'na-bg-info-subtle na-text-info';
+        return 'bg-nx-info-bg text-nx-info';
       default:
         return '';
     }
@@ -104,25 +104,25 @@ export function StalenessDashboard() {
 
   if (isLoading) {
     return (
-      <div className="na-card na-p-6">
-        <p className="na-metadata">Loading staleness data...</p>
+      <div className="card p-6">
+        <p className="caption">Loading staleness data...</p>
       </div>
     );
   }
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Staleness Dashboard</h1>
-        <div className="na-flex na-gap-2">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Staleness Dashboard</h1>
+        <div className="flex gap-2">
           <button
             onClick={handleDetect}
             disabled={isDetecting}
-            className="na-btn na-btn-primary"
+            className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary"
           >
             {isDetecting ? 'Detecting...' : '🔍 Detect Staleness'}
           </button>
-          <button onClick={loadData} className="na-btn na-btn-ghost">
+          <button onClick={loadData} className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
             🔄 Refresh
           </button>
         </div>
@@ -130,71 +130,71 @@ export function StalenessDashboard() {
 
       {/* Summary Cards */}
       {summary && (
-        <div className="na-grid na-grid-cols-4 na-gap-4 na-mb-6">
-          <div className="na-card na-p-4">
-            <div className="na-metadata">Total Stale</div>
-            <div className="na-data-large">{summary.total}</div>
+        <div className="grid grid-cols-4 gap-4 mb-6">
+          <div className="card p-4">
+            <div className="caption">Total Stale</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{summary.total}</div>
           </div>
-          <div className="na-card na-p-4 na-bg-danger-subtle">
-            <div className="na-metadata">🔴 Severe</div>
-            <div className="na-data-large">{summary.severe}</div>
+          <div className="card p-4 bg-nx-danger-bg">
+            <div className="caption">🔴 Severe</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{summary.severe}</div>
           </div>
-          <div className="na-card na-p-4 na-bg-warn-subtle">
-            <div className="na-metadata">🟠 Critical</div>
-            <div className="na-data-large">{summary.critical}</div>
+          <div className="card p-4 bg-nx-warning-bg">
+            <div className="caption">🟠 Critical</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{summary.critical}</div>
           </div>
-          <div className="na-card na-p-4 na-bg-info-subtle">
-            <div className="na-metadata">🟡 Warning</div>
-            <div className="na-data-large">{summary.warning}</div>
+          <div className="card p-4 bg-nx-info-bg">
+            <div className="caption">🟡 Warning</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{summary.warning}</div>
           </div>
         </div>
       )}
 
       {/* Staleness List */}
-      <div className="na-space-y-4">
+      <div className="space-y-4">
         {staleness.length === 0 ? (
-          <div className="na-card na-p-6 na-text-center">
-            <p className="na-h4">No Stale Invoices</p>
-            <p className="na-body na-mt-2">All invoices have recent activity!</p>
+          <div className="card p-6 text-center">
+            <p className="text-base font-semibold text-nx-text-main">No Stale Invoices</p>
+            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mt-2">All invoices have recent activity!</p>
           </div>
         ) : (
           staleness.map((item) => (
             <div
               key={item.id}
-              className={`na-card na-p-4 na-border-l-4 ${getStalenessColor(item.staleness_level)}`}
+              className={`card p-4 border-l-4 ${getStalenessColor(item.staleness_level)}`}
             >
-              <div className="na-flex na-items-start na-justify-between na-mb-2">
-                <div className="na-flex na-items-center na-gap-2">
-                  <span className="na-text-2xl">{getStalenessIcon(item.staleness_level)}</span>
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">{getStalenessIcon(item.staleness_level)}</span>
                   <div>
-                    <h3 className="na-h5">
+                    <h3 className="text-sm font-semibold text-nx-text-main">
                       Invoice Stale - {item.staleness_level.toUpperCase()}
                     </h3>
-                    <p className="na-metadata na-text-sm">
+                    <p className="caption text-sm">
                       {item.days_since_last_update} days without update
                     </p>
                   </div>
                 </div>
-                <span className={`na-status na-status-${item.status === 'PAID' ? 'ok' : 'pending'}`}>
+                <span className={`badge badge-${item.status === 'PAID' ? 'badge-success' : 'pending'}`}>
                   {item.status}
                 </span>
               </div>
               
               {item.expected_action && (
-                <div className="na-card na-p-3 na-bg-paper na-mt-2">
-                  <p className="na-metadata na-font-semibold na-mb-1">Expected Action:</p>
-                  <p className="na-body na-text-sm">{item.expected_action}</p>
+                <div className="card p-3 bg-nx-surface mt-2">
+                  <p className="caption font-semibold mb-1">Expected Action:</p>
+                  <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-sm">{item.expected_action}</p>
                 </div>
               )}
 
-              <div className="na-flex na-items-center na-justify-between na-mt-3">
-                <p className="na-metadata na-text-sm">
+              <div className="flex items-center justify-between mt-3">
+                <p className="caption text-sm">
                   Detected: {new Date(item.detected_at).toLocaleString()}
                   {item.notification_sent && ' • Notification sent'}
                 </p>
                 <a
                   href={`/invoices/${item.invoice_id}`}
-                  className="na-btn na-btn-ghost na-text-sm"
+                  className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main text-sm"
                 >
                   View Invoice →
                 </a>

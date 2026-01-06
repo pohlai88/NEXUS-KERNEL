@@ -40,13 +40,13 @@ export default async function VendorProfilePage() {
 
   if (vendorError || !vendorData) {
     return (
-      <div className="na-container na-mx-auto na-p-6">
-        <div className="na-card na-p-6 na-text-center">
-          <h2 className="na-h4">Vendor Profile Not Found</h2>
-          <p className="na-body na-mt-2">
+      <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+        <div className="card p-6 text-center">
+          <h2 className="text-base font-semibold text-nx-text-main">Vendor Profile Not Found</h2>
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mt-2">
             Your vendor profile could not be loaded. Please contact support.
           </p>
-          <Link href="/vendor/dashboard" className="na-btn na-btn-primary na-mt-4">
+          <Link href="/vendor/dashboard" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary mt-4">
             ← Back to Dashboard
           </Link>
         </div>
@@ -57,10 +57,10 @@ export default async function VendorProfilePage() {
   const vendor = vendorData;
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Vendor Profile</h1>
-        <Link href="/vendor/dashboard" className="na-btn na-btn-ghost">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Vendor Profile</h1>
+        <Link href="/vendor/dashboard" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
           ← Back to Dashboard
         </Link>
       </div>
@@ -86,13 +86,13 @@ export default async function VendorProfilePage() {
       />
 
       {/* Compliance Documents */}
-      <div className="na-card na-p-6">
-        <h2 className="na-h3 na-mb-4">Compliance Documents</h2>
-        <div className="na-card na-p-4 na-bg-paper-2">
-          <p className="na-body na-mb-4">
+      <div className="card p-6">
+        <h2 className="section mb-4">Compliance Documents</h2>
+        <div className="card p-4 bg-nx-surface-well">
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mb-4">
             Upload and manage your compliance documents (certificates, licenses, contracts).
           </p>
-          <Link href="/vendor/documents" className="na-btn na-btn-secondary">
+          <Link href="/vendor/documents" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary">
             View Document Library
           </Link>
         </div>

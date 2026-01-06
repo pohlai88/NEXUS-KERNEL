@@ -51,38 +51,38 @@ export function DocumentPreview({ document, versions }: DocumentPreviewProps) {
   };
 
   return (
-    <div className="na-card na-p-6">
+    <div className="card p-6">
       {/* Document Header */}
-      <div className="na-mb-6">
-        <div className="na-flex na-items-start na-justify-between na-mb-4">
+      <div className="mb-6">
+        <div className="flex items-start justify-between mb-4">
           <div>
-            <h2 className="na-h2">{document.name}</h2>
-            <p className="na-metadata na-mt-1">
+            <h2 className="text-[length:var(--nx-title-size)] leading-[var(--nx-title-line)] font-semibold tracking-tight text-nx-text-main">{document.name}</h2>
+            <p className="caption mt-1">
               {getFileIcon(document.mime_type)} {document.mime_type}
             </p>
           </div>
-          <span className="na-status na-status-ok">v{document.version}</span>
+          <span className="badge badge-success">v{document.version}</span>
         </div>
 
         {/* Document Metadata */}
-        <div className="na-grid na-grid-cols-2 na-gap-4 na-mt-4">
+        <div className="grid grid-cols-2 gap-4 mt-4">
           <div>
-            <span className="na-metadata">Category:</span>
-            <span className="na-data na-ml-2">{document.category}</span>
+            <span className="caption">Category:</span>
+            <span className="text-[length:var(--nx-body-size)] text-nx-text-main ml-2">{document.category}</span>
           </div>
           <div>
-            <span className="na-metadata">Size:</span>
-            <span className="na-data na-ml-2">{formatFileSize(document.file_size)}</span>
+            <span className="caption">Size:</span>
+            <span className="text-[length:var(--nx-body-size)] text-nx-text-main ml-2">{formatFileSize(document.file_size)}</span>
           </div>
           <div>
-            <span className="na-metadata">Created:</span>
-            <span className="na-data na-ml-2">
+            <span className="caption">Created:</span>
+            <span className="text-[length:var(--nx-body-size)] text-nx-text-main ml-2">
               {new Date(document.created_at).toLocaleString()}
             </span>
           </div>
           <div>
-            <span className="na-metadata">Updated:</span>
-            <span className="na-data na-ml-2">
+            <span className="caption">Updated:</span>
+            <span className="text-[length:var(--nx-body-size)] text-nx-text-main ml-2">
               {new Date(document.updated_at).toLocaleString()}
             </span>
           </div>
@@ -90,35 +90,35 @@ export function DocumentPreview({ document, versions }: DocumentPreviewProps) {
       </div>
 
       {/* Version History */}
-      <div className="na-mb-6">
-        <h3 className="na-h4 na-mb-4">Version History</h3>
-        <div className="na-space-y-2">
+      <div className="mb-6">
+        <h3 className="text-base font-semibold text-nx-text-main mb-4">Version History</h3>
+        <div className="space-y-2">
           {versions.map((version) => (
             <div
               key={version.id}
               onClick={() => setSelectedVersion(version)}
-              className={`na-card na-p-3 na-cursor-pointer na-transition-colors ${
+              className={`card p-3 cursor-pointer transition-colors ${
                 selectedVersion?.id === version.id
-                  ? 'na-bg-paper-2 na-border-2'
-                  : 'na-hover-bg-paper-2'
+                  ? 'bg-nx-surface-well border-2'
+                  : 'hover:bg-nx-surface-well'
               }`}
             >
-              <div className="na-flex na-items-center na-justify-between">
+              <div className="flex items-center justify-between">
                 <div>
-                  <span className="na-data">v{version.version_number}</span>
+                  <span className="text-[length:var(--nx-body-size)] text-nx-text-main">v{version.version_number}</span>
                   {version.is_current && (
-                    <span className="na-status na-status-ok na-ml-2">Current</span>
+                    <span className="badge badge-success ml-2">Current</span>
                   )}
                 </div>
-                <div className="na-metadata">
+                <div className="caption">
                   {new Date(version.uploaded_at).toLocaleDateString()}
                 </div>
               </div>
-              <div className="na-metadata na-mt-1">
+              <div className="caption mt-1">
                 Uploaded by: {version.uploaded_by} • {formatFileSize(version.file_size)}
               </div>
               {version.description && (
-                <div className="na-data na-mt-1 na-text-sm">{version.description}</div>
+                <div className="text-[length:var(--nx-body-size)] text-nx-text-main mt-1 text-sm">{version.description}</div>
               )}
             </div>
           ))}
@@ -127,35 +127,35 @@ export function DocumentPreview({ document, versions }: DocumentPreviewProps) {
 
       {/* Document Preview */}
       <div>
-        <h3 className="na-h4 na-mb-4">Preview</h3>
+        <h3 className="text-base font-semibold text-nx-text-main mb-4">Preview</h3>
         {previewUrl ? (
-          <div className="na-card na-p-4">
+          <div className="card p-4">
             {document.mime_type.startsWith('image/') ? (
               <img
                 src={previewUrl}
                 alt={document.name}
-                className="na-w-full na-rounded"
+                className="w-full rounded"
                 style={{ maxHeight: '600px', objectFit: 'contain' }}
               />
             ) : document.mime_type === 'application/pdf' ? (
               <iframe
                 src={previewUrl}
-                className="na-w-full"
+                className="w-full"
                 style={{ height: '600px', border: 'none' }}
                 title={document.name}
               />
             ) : (
-              <div className="na-card na-p-6 na-text-center">
-                <div className="na-text-4xl na-mb-4">{getFileIcon(document.mime_type)}</div>
-                <p className="na-data">{document.name}</p>
-                <p className="na-metadata na-mt-2">
+              <div className="card p-6 text-center">
+                <div className="text-4xl mb-4">{getFileIcon(document.mime_type)}</div>
+                <p className="text-[length:var(--nx-body-size)] text-nx-text-main">{document.name}</p>
+                <p className="caption mt-2">
                   Preview not available for this file type
                 </p>
                 <a
                   href={previewUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="na-btn na-btn-primary na-mt-4"
+                  className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary mt-4"
                 >
                   Download
                 </a>
@@ -163,9 +163,9 @@ export function DocumentPreview({ document, versions }: DocumentPreviewProps) {
             )}
           </div>
         ) : (
-          <div className="na-card na-p-6 na-text-center">
-            <div className="na-spinner" />
-            <p className="na-metadata na-mt-2">Loading preview...</p>
+          <div className="card p-6 text-center">
+            <div className="animate-spin h-5 w-5 border-2 border-nx-primary border-t-transparent rounded-full" />
+            <p className="caption mt-2">Loading preview...</p>
           </div>
         )}
       </div>

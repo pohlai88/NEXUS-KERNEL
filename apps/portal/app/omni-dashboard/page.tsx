@@ -71,15 +71,15 @@ export default async function OmniDashboardPage({ searchParams }: OmniDashboardP
     }
 
     return (
-        <div className="na-container na-mx-auto na-p-6">
-            <div className="na-flex na-items-center na-justify-between na-mb-6">
-                <h1 className="na-h1">Omni-Dashboard</h1>
-                <p className="na-metadata">
+        <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+            <div className="flex items-center justify-between mb-6">
+                <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Omni-Dashboard</h1>
+                <p className="caption">
                     Viewing: {selectedTenantId ? 'Single Company' : `All Companies (${accessibleTenants.length})`}
                 </p>
             </div>
 
-            <Suspense fallback={<div className="na-card na-p-6">Loading context...</div>}>
+            <Suspense fallback={<div className="card p-6">Loading context...</div>}>
                 <ContextSwitcher
                     currentTenantId={selectedTenantId}
                     onTenantChange={(tenantId) => {
@@ -96,25 +96,25 @@ export default async function OmniDashboardPage({ searchParams }: OmniDashboardP
                 />
             </Suspense>
 
-            <div className="na-card na-p-4 na-mb-6">
-                <div className="na-grid na-grid-cols-4 na-gap-4">
+            <div className="card p-4 mb-6">
+                <div className="grid grid-cols-4 gap-4">
                     <div>
-                        <div className="na-metadata">Total Vendors</div>
-                        <div className="na-data-large">{vendors.length}</div>
+                        <div className="caption">Total Vendors</div>
+                        <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{vendors.length}</div>
                     </div>
                     <div>
-                        <div className="na-metadata">Accessible Companies</div>
-                        <div className="na-data-large">{accessibleTenants.length}</div>
+                        <div className="caption">Accessible Companies</div>
+                        <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{accessibleTenants.length}</div>
                     </div>
                     <div>
-                        <div className="na-metadata">Active Vendors</div>
-                        <div className="na-data-large">
+                        <div className="caption">Active Vendors</div>
+                        <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">
                             {vendors.filter((v: unknown) => (v as { status: string }).status === 'APPROVED').length}
                         </div>
                     </div>
                     <div>
-                        <div className="na-metadata">Pending</div>
-                        <div className="na-data-large">
+                        <div className="caption">Pending</div>
+                        <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">
                             {vendors.filter((v: unknown) => (v as { status: string }).status === 'PENDING').length}
                         </div>
                     </div>
@@ -122,16 +122,16 @@ export default async function OmniDashboardPage({ searchParams }: OmniDashboardP
             </div>
 
             {error ? (
-                <div className="na-card na-p-6 na-bg-danger-subtle na-text-danger na-mb-6">
-                    <h2 className="na-h4">Error Loading Vendors</h2>
-                    <p className="na-body">{error}</p>
+                <div className="card p-6 bg-nx-danger-bg text-nx-danger mb-6">
+                    <h2 className="text-base font-semibold text-nx-text-main">Error Loading Vendors</h2>
+                    <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{error}</p>
                 </div>
             ) : (
-                <Suspense fallback={<div className="na-card na-p-6">Loading vendors...</div>}>
+                <Suspense fallback={<div className="card p-6">Loading vendors...</div>}>
                     {vendors.length === 0 ? (
-                        <div className="na-card na-p-6 na-text-center">
-                            <h2 className="na-h4">No Vendors Found</h2>
-                            <p className="na-body na-mb-4">
+                        <div className="card p-6 text-center">
+                            <h2 className="text-base font-semibold text-nx-text-main">No Vendors Found</h2>
+                            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mb-4">
                                 {selectedTenantId
                                     ? 'No vendors found for this company.'
                                     : 'No vendors found across accessible companies.'}

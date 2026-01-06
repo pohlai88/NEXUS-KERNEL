@@ -99,30 +99,30 @@ export function InvoiceRejectionForm({ invoiceId, onRejected, onCancel }: Invoic
 
   if (isLoading) {
     return (
-      <div className="na-card na-p-6">
-        <p className="na-metadata">Loading rejection reasons...</p>
+      <div className="card p-6">
+        <p className="caption">Loading rejection reasons...</p>
       </div>
     );
   }
 
   return (
-    <div className="na-card na-p-6">
-      <h2 className="na-h2 na-mb-4">Reject Invoice</h2>
+    <div className="card p-6">
+      <h2 className="text-[length:var(--nx-title-size)] leading-[var(--nx-title-line)] font-semibold tracking-tight text-nx-text-main mb-4">Reject Invoice</h2>
 
       {error && (
-        <div className="na-card na-p-4 na-bg-danger-subtle na-text-danger na-mb-4">
-          <p className="na-body">{error}</p>
+        <div className="card p-4 bg-nx-danger-bg text-nx-danger mb-4">
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{error}</p>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="na-space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {/* Rejection Reason Code Selection */}
         <div>
-          <label className="na-metadata na-mb-2 na-block">Rejection Reason *</label>
+          <label className="caption mb-2 block">Rejection Reason *</label>
           <select
             value={selectedReasonCode}
             onChange={(e) => setSelectedReasonCode(e.target.value)}
-            className="na-input na-w-full"
+            className="input w-full"
             required
           >
             <option value="">Select a reason...</option>
@@ -137,7 +137,7 @@ export function InvoiceRejectionForm({ invoiceId, onRejected, onCancel }: Invoic
             ))}
           </select>
           {selectedReason && selectedReason.reason_description && (
-            <p className="na-metadata na-text-sm na-mt-1">
+            <p className="caption text-sm mt-1">
               {selectedReason.reason_description}
             </p>
           )}
@@ -146,13 +146,13 @@ export function InvoiceRejectionForm({ invoiceId, onRejected, onCancel }: Invoic
         {/* Explanation (if required) */}
         {selectedReason?.requires_explanation && (
           <div>
-            <label className="na-metadata na-mb-2 na-block">
+            <label className="caption mb-2 block">
               Explanation * (Required for this reason)
             </label>
             <textarea
               value={explanation}
               onChange={(e) => setExplanation(e.target.value)}
-              className="na-input na-w-full"
+              className="input w-full"
               rows={4}
               placeholder="Please provide an explanation for this rejection..."
               required
@@ -162,31 +162,31 @@ export function InvoiceRejectionForm({ invoiceId, onRejected, onCancel }: Invoic
 
         {/* Optional Notes */}
         <div>
-          <label className="na-metadata na-mb-2 na-block">Additional Notes (Optional)</label>
+          <label className="caption mb-2 block">Additional Notes (Optional)</label>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="na-input na-w-full"
+            className="input w-full"
             rows={3}
             placeholder="Any additional notes..."
           />
         </div>
 
         {/* Warning */}
-        <div className="na-card na-p-4 na-bg-warn-subtle">
-          <p className="na-body na-font-semibold">⚠️ Important</p>
-          <p className="na-metadata na-text-sm na-mt-1">
+        <div className="card p-4 bg-nx-warning-bg">
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main font-semibold">⚠️ Important</p>
+          <p className="caption text-sm mt-1">
             The vendor will see the exact same rejection reason you select. 
             This rejection will be recorded in the audit trail.
           </p>
         </div>
 
         {/* Actions */}
-        <div className="na-flex na-gap-3">
+        <div className="flex gap-3">
           <button
             type="submit"
             disabled={isPending}
-            className="na-btn na-btn-danger na-flex-1"
+            className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-nx-danger text-white hover:bg-nx-danger-text flex-1"
           >
             {isPending ? 'Rejecting...' : 'Reject Invoice'}
           </button>
@@ -194,7 +194,7 @@ export function InvoiceRejectionForm({ invoiceId, onRejected, onCancel }: Invoic
             <button
               type="button"
               onClick={onCancel}
-              className="na-btn na-btn-ghost"
+              className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main"
             >
               Cancel
             </button>

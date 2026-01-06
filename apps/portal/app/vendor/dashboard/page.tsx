@@ -97,90 +97,90 @@ export default async function VendorDashboardPage() {
   }
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Vendor Dashboard</h1>
-        <p className="na-metadata">Welcome back! Here's your overview.</p>
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Vendor Dashboard</h1>
+        <p className="caption">Welcome back! Here's your overview.</p>
       </div>
 
       {/* Summary Cards */}
-      <div className="na-grid na-grid-cols-1 md:na-grid-cols-2 lg:na-grid-cols-4 na-gap-4 na-mb-6">
-        <div className="na-card na-p-6">
-          <div className="na-metadata na-mb-2">Pending Invoices</div>
-          <div className="na-data-large na-text-warn">{pendingInvoices}</div>
-          <div className="na-metadata na-text-sm na-mt-2">Awaiting approval</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="card p-6">
+          <div className="caption mb-2">Pending Invoices</div>
+          <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main text-nx-warning">{pendingInvoices}</div>
+          <div className="caption text-sm mt-2">Awaiting approval</div>
         </div>
 
-        <div className="na-card na-p-6">
-          <div className="na-metadata na-mb-2">Approved Invoices</div>
-          <div className="na-data-large na-text-ok">{approvedInvoices}</div>
-          <div className="na-metadata na-text-sm na-mt-2">Ready for payment</div>
+        <div className="card p-6">
+          <div className="caption mb-2">Approved Invoices</div>
+          <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main text-nx-success">{approvedInvoices}</div>
+          <div className="caption text-sm mt-2">Ready for payment</div>
         </div>
 
-        <div className="na-card na-p-6">
-          <div className="na-metadata na-mb-2">Total Outstanding</div>
-          <div className="na-data-large na-text-primary">
+        <div className="card p-6">
+          <div className="caption mb-2">Total Outstanding</div>
+          <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main text-nx-primary">
             ${totalOutstanding.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
-          <div className="na-metadata na-text-sm na-mt-2">Unpaid invoices</div>
+          <div className="caption text-sm mt-2">Unpaid invoices</div>
         </div>
 
-        <div className="na-card na-p-6">
-          <div className="na-metadata na-mb-2">Next Payment</div>
-          <div className="na-data-large">
+        <div className="card p-6">
+          <div className="caption mb-2">Next Payment</div>
+          <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">
             {nextPaymentDate
               ? new Date(nextPaymentDate).toLocaleDateString()
               : 'No scheduled payments'}
           </div>
-          <div className="na-metadata na-text-sm na-mt-2">
+          <div className="caption text-sm mt-2">
             {nextPaymentDate ? 'Earliest due date' : 'No approved invoices'}
           </div>
         </div>
       </div>
 
       {/* Quick Actions */}
-      <div className="na-card na-p-6 na-mb-6">
-        <h2 className="na-h3 na-mb-4">Quick Actions</h2>
-        <div className="na-flex na-flex-wrap na-gap-4">
-          <Link href="/invoices/upload" className="na-btn na-btn-primary">
+      <div className="card p-6 mb-6">
+        <h2 className="section mb-4">Quick Actions</h2>
+        <div className="flex flex-wrap gap-4">
+          <Link href="/invoices/upload" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">
             📤 Upload Invoice
           </Link>
-          <Link href="/vendor/invoices" className="na-btn na-btn-secondary">
+          <Link href="/vendor/invoices" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary">
             📋 View All Invoices
           </Link>
-          <Link href="/vendor/payments" className="na-btn na-btn-secondary">
+          <Link href="/vendor/payments" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary">
             💰 Payment Schedule
           </Link>
-          <Link href="/vendor/cases" className="na-btn na-btn-secondary">
+          <Link href="/vendor/cases" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary">
             📞 Create Case
           </Link>
-          <Link href="/vendor/profile" className="na-btn na-btn-ghost">
+          <Link href="/vendor/profile" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
             ⚙️ Profile Settings
           </Link>
         </div>
       </div>
 
       {/* Recent Activity */}
-      <div className="na-card na-p-6">
-        <h2 className="na-h3 na-mb-4">Recent Invoices</h2>
+      <div className="card p-6">
+        <h2 className="section mb-4">Recent Invoices</h2>
         {recentInvoices.length === 0 ? (
-          <div className="na-text-center na-p-6">
-            <p className="na-body">No recent invoices.</p>
-            <Link href="/invoices/upload" className="na-btn na-btn-primary na-mt-4">
+          <div className="text-center p-6">
+            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">No recent invoices.</p>
+            <Link href="/invoices/upload" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary mt-4">
               Upload Your First Invoice
             </Link>
           </div>
         ) : (
-          <div className="na-card na-overflow-x-auto">
-            <table className="na-table-frozen na-w-full">
+          <div className="card overflow-x-auto">
+            <table className="table-professional w-full w-full">
               <thead>
-                <tr className="na-tr">
-                  <th className="na-th">Invoice #</th>
-                  <th className="na-th">Company</th>
-                  <th className="na-th">Amount</th>
-                  <th className="na-th">Date</th>
-                  <th className="na-th">Status</th>
-                  <th className="na-th">Actions</th>
+                <tr className="table-row">
+                  <th className="table-header-cell">Invoice #</th>
+                  <th className="table-header-cell">Company</th>
+                  <th className="table-header-cell">Amount</th>
+                  <th className="table-header-cell">Date</th>
+                  <th className="table-header-cell">Status</th>
+                  <th className="table-header-cell">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -194,20 +194,20 @@ export default async function VendorDashboardPage() {
                     tenants: { name: string };
                   };
                   return (
-                    <tr key={i.id} className="na-tr na-hover-bg-paper-2">
-                      <td className="na-td na-font-semibold">{i.invoice_num}</td>
-                      <td className="na-td na-text-sm">{i.tenants?.name || 'Unknown'}</td>
-                      <td className="na-td na-data">
+                    <tr key={i.id} className="table-row hover:bg-nx-surface-well">
+                      <td className="table-data-cell font-semibold">{i.invoice_num}</td>
+                      <td className="table-data-cell text-sm">{i.tenants?.name || 'Unknown'}</td>
+                      <td className="table-data-cell text-[length:var(--nx-body-size)] text-nx-text-main">
                         ${i.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                       </td>
-                      <td className="na-td na-text-sm">
+                      <td className="table-data-cell text-sm">
                         {new Date(i.invoice_date).toLocaleDateString()}
                       </td>
-                      <td className="na-td">
+                      <td className="table-data-cell">
                         <span
-                          className={`na-status na-status-${
+                          className={`badge badge-${
                             i.status === 'approved'
-                              ? 'ok'
+                              ? 'badge-success'
                               : i.status === 'rejected'
                                 ? 'bad'
                                 : 'pending'
@@ -216,10 +216,10 @@ export default async function VendorDashboardPage() {
                           {i.status}
                         </span>
                       </td>
-                      <td className="na-td">
+                      <td className="table-data-cell">
                         <Link
                           href={`/vendor/invoices/${i.id}`}
-                          className="na-btn na-btn-ghost na-btn-sm"
+                          className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main px-3 py-1.5 text-sm"
                         >
                           View
                         </Link>

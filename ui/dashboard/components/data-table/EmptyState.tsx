@@ -6,10 +6,10 @@
 export function EmptyState() {
   return (
     <div className="py-16 text-center">
-      <div className="text-title font-medium text-gray-400 mb-2">
+      <div className="text-title font-medium text-nx-text-faint mb-2">
         NO RECORDS FOUND
       </div>
-      <div className="text-body text-gray-500">
+      <div className="text-body text-nx-text-muted">
         Try adjusting your filters or search query
       </div>
     </div>

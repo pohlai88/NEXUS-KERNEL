@@ -40,22 +40,22 @@ export default async function VendorsPage({ searchParams }: VendorsPageProps) {
   });
 
   return (
-    <div className="na-shell-main na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Vendors</h1>
-        <a href="/vendors/new" className="na-btn na-btn-primary">
+    <div className="shell p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Vendors</h1>
+        <a href="/vendors/new" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">
           Create Vendor
         </a>
       </div>
 
       {/* Filters */}
-      <div className="na-card na-p-4 na-mb-6">
-        <form method="get" className="na-flex na-gap-4 na-items-end">
+      <div className="card p-4 mb-6">
+        <form method="get" className="flex gap-4 items-end">
           <div>
-            <label className="na-metadata na-mb-2 na-block">Status</label>
+            <label className="caption mb-2 block">Status</label>
             <select
               name="status"
-              className="na-input"
+              className="input"
               defaultValue={searchParams.status || ''}
             >
               <option value="">All</option>
@@ -66,17 +66,17 @@ export default async function VendorsPage({ searchParams }: VendorsPageProps) {
               <option value="SUSPENDED">Suspended</option>
             </select>
           </div>
-          <div className="na-flex-1">
-            <label className="na-metadata na-mb-2 na-block">Search</label>
+          <div className="flex-1">
+            <label className="caption mb-2 block">Search</label>
             <input
               type="text"
               name="search"
-              className="na-input na-w-full"
+              className="input w-full"
               placeholder="Search by name..."
               defaultValue={searchParams.search || ''}
             />
           </div>
-          <button type="submit" className="na-btn na-btn-secondary">
+          <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary">
             Filter
           </button>
         </form>
@@ -84,12 +84,12 @@ export default async function VendorsPage({ searchParams }: VendorsPageProps) {
 
       {/* Vendor Table */}
       {vendors.length === 0 ? (
-        <div className="na-card na-p-6">
-          <h2 className="na-h4">No Vendors Found</h2>
-          <p className="na-data na-mb-4">
+        <div className="card p-6">
+          <h2 className="text-base font-semibold text-nx-text-main">No Vendors Found</h2>
+          <p className="text-[length:var(--nx-body-size)] text-nx-text-main mb-4">
             No vendors have been created yet. Create your first vendor to get started.
           </p>
-          <a href="/vendors/new" className="na-btn na-btn-primary">
+          <a href="/vendors/new" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">
             Create First Vendor
           </a>
         </div>

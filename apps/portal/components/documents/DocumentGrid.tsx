@@ -27,19 +27,19 @@ export function DocumentGrid({ documents, selectedDocumentId }: DocumentGridProp
 
   const getCategoryClass = (category: string) => {
     const map: Record<string, string> = {
-      invoice: 'na-status ok',
-      contract: 'na-status warn',
-      statement: 'na-status pending',
-      other: 'na-metadata',
+      invoice: 'badge badge-success',
+      contract: 'badge badge-warning',
+      statement: 'badge pending',
+      other: 'caption',
     };
-    return map[category] || 'na-metadata';
+    return map[category] || 'caption';
   };
 
   if (documents.length === 0) {
     return (
-      <div className="na-card na-p-6">
-        <h2 className="na-h4">No Documents</h2>
-        <p className="na-data na-mt-2">
+      <div className="card p-6">
+        <h2 className="text-base font-semibold text-nx-text-main">No Documents</h2>
+        <p className="text-[length:var(--nx-body-size)] text-nx-text-main mt-2">
           No documents have been uploaded yet. Upload your first document to get started.
         </p>
       </div>
@@ -47,30 +47,30 @@ export function DocumentGrid({ documents, selectedDocumentId }: DocumentGridProp
   }
 
   return (
-    <div className="na-card na-p-4">
-      <h2 className="na-h4 na-mb-4">Documents ({documents.length})</h2>
-      <div className="na-grid na-grid-cols-1 na-gap-3">
+    <div className="card p-4">
+      <h2 className="text-base font-semibold text-nx-text-main mb-4">Documents ({documents.length})</h2>
+      <div className="grid grid-cols-1 gap-3">
         {documents.map((doc) => (
           <div
             key={doc.id}
             onClick={() => handleSelect(doc.id)}
-            className={`na-card na-p-4 na-cursor-pointer na-transition-colors ${
+            className={`card p-4 cursor-pointer transition-colors ${
               selectedDocumentId === doc.id
-                ? 'na-bg-paper-2 na-border-2'
-                : 'na-hover-bg-paper-2'
+                ? 'bg-nx-surface-well border-2'
+                : 'hover:bg-nx-surface-well'
             }`}
           >
-            <div className="na-flex na-items-start na-justify-between na-mb-2">
-              <h3 className="na-h4 na-truncate">{doc.name}</h3>
+            <div className="flex items-start justify-between mb-2">
+              <h3 className="text-base font-semibold text-nx-text-main truncate">{doc.name}</h3>
               <span className={getCategoryClass(doc.category)}>{doc.category}</span>
             </div>
-            <div className="na-flex na-items-center na-gap-4 na-mt-2">
-              <span className="na-metadata">v{doc.version}</span>
-              <span className="na-metadata">
+            <div className="flex items-center gap-4 mt-2">
+              <span className="caption">v{doc.version}</span>
+              <span className="caption">
                 {new Date(doc.created_at).toLocaleDateString()}
               </span>
             </div>
-            <div className="na-metadata na-mt-2">
+            <div className="caption mt-2">
               {formatFileSize(doc.file_size)} • {doc.mime_type}
             </div>
           </div>

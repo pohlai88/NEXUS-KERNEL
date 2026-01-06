@@ -36,9 +36,9 @@ export default async function TenantConfigPage({ searchParams }: TenantConfigPag
 
   if (!selectedTenantId) {
     return (
-      <div className="na-container na-mx-auto na-p-6">
-        <div className="na-card na-p-6">
-          <p className="na-body">No tenants accessible.</p>
+      <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+        <div className="card p-6">
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">No tenants accessible.</p>
         </div>
       </div>
     );
@@ -49,18 +49,18 @@ export default async function TenantConfigPage({ searchParams }: TenantConfigPag
   const tenantUserAdminConfig = await configRepo.getTenantUserAdminConfig(selectedTenantId);
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-mb-8">
-        <h1 className="na-h1 na-mb-2">Tenant Configuration</h1>
-        <p className="na-body na-text-muted">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="mb-8">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main mb-2">Tenant Configuration</h1>
+        <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted">
           Configure tenant-level settings. These override portal global defaults and apply to all users in this tenant.
         </p>
       </div>
 
       {/* Tenant Selector */}
-      <div className="na-card na-p-4 na-mb-6">
-        <label className="na-label na-mb-2">Select Tenant</label>
-        <select className="na-input" defaultValue={selectedTenantId}>
+      <div className="card p-4 mb-6">
+        <label className="caption font-semibold mb-2">Select Tenant</label>
+        <select className="input" defaultValue={selectedTenantId}>
           {accessibleTenants.map((tenant) => (
             <option key={tenant.tenant_id} value={tenant.tenant_id}>
               {tenant.tenant_id}
@@ -69,33 +69,33 @@ export default async function TenantConfigPage({ searchParams }: TenantConfigPag
         </select>
       </div>
 
-      <div className="na-space-y-6">
+      <div className="space-y-6">
         {/* Tenant Config */}
-        <div className="na-card na-p-6">
-          <h2 className="na-h3 na-mb-4">Tenant Settings</h2>
-          <p className="na-body na-text-muted na-mb-4">
+        <div className="card p-6">
+          <h2 className="section mb-4">Tenant Settings</h2>
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted mb-4">
             Configuration that applies to all users in this tenant.
           </p>
-          <div className="na-bg-muted na-p-4 na-rounded na-mb-4">
-            <pre className="na-text-sm na-overflow-auto">
+          <div className="bg-nx-surface-well p-4 rounded mb-4">
+            <pre className="text-sm overflow-auto">
               {JSON.stringify(tenantConfig?.config_data || {}, null, 2)}
             </pre>
           </div>
-          <button className="na-btn na-btn-primary">Edit Tenant Settings</button>
+          <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">Edit Tenant Settings</button>
         </div>
 
         {/* Tenant User Admin Config */}
-        <div className="na-card na-p-6">
-          <h2 className="na-h3 na-mb-4">Tenant User Admin Defaults</h2>
-          <p className="na-body na-text-muted na-mb-4">
+        <div className="card p-6">
+          <h2 className="section mb-4">Tenant User Admin Defaults</h2>
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted mb-4">
             Admin-set defaults for all tenant users. Users can override these with personal preferences.
           </p>
-          <div className="na-bg-muted na-p-4 na-rounded na-mb-4">
-            <pre className="na-text-sm na-overflow-auto">
+          <div className="bg-nx-surface-well p-4 rounded mb-4">
+            <pre className="text-sm overflow-auto">
               {JSON.stringify(tenantUserAdminConfig?.config_data || {}, null, 2)}
             </pre>
           </div>
-          <button className="na-btn na-btn-primary">Edit User Admin Defaults</button>
+          <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">Edit User Admin Defaults</button>
         </div>
       </div>
     </div>

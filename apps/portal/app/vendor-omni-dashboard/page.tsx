@@ -97,15 +97,15 @@ export default async function VendorOmniDashboardPage({ searchParams }: VendorOm
   }
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Vendor Omni-Dashboard</h1>
-        <p className="na-metadata">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Vendor Omni-Dashboard</h1>
+        <p className="caption">
           Viewing: {selectedTenantId ? 'Single Subsidiary' : `All Subsidiaries (${accessibleSubsidiaries.length})`}
         </p>
       </div>
 
-      <Suspense fallback={<div className="na-card na-p-6">Loading context...</div>}>
+      <Suspense fallback={<div className="card p-6">Loading context...</div>}>
         <VendorContextSwitcher
           currentTenantId={selectedTenantId}
           onTenantChange={(tenantId) => {
@@ -123,10 +123,10 @@ export default async function VendorOmniDashboardPage({ searchParams }: VendorOm
       </Suspense>
 
       {/* View Type Selector */}
-      <div className="na-card na-p-4 na-mb-6">
-        <div className="na-flex na-gap-4">
+      <div className="card p-4 mb-6">
+        <div className="flex gap-4">
           <button
-            className={`na-btn ${viewType === 'invoices' ? 'na-btn-primary' : 'na-btn-secondary'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer ${viewType === 'invoices' ? 'btn-primary' : 'btn-secondary'}`}
             onClick={() => {
               const params = new URLSearchParams(searchParams as Record<string, string>);
               params.set('type', 'invoices');
@@ -136,7 +136,7 @@ export default async function VendorOmniDashboardPage({ searchParams }: VendorOm
             Invoices
           </button>
           <button
-            className={`na-btn ${viewType === 'pos' ? 'na-btn-primary' : 'na-btn-secondary'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer ${viewType === 'pos' ? 'btn-primary' : 'btn-secondary'}`}
             onClick={() => {
               const params = new URLSearchParams(searchParams as Record<string, string>);
               params.set('type', 'pos');
@@ -146,7 +146,7 @@ export default async function VendorOmniDashboardPage({ searchParams }: VendorOm
             Purchase Orders
           </button>
           <button
-            className={`na-btn ${viewType === 'cases' ? 'na-btn-primary' : 'na-btn-secondary'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer ${viewType === 'cases' ? 'btn-primary' : 'btn-secondary'}`}
             onClick={() => {
               const params = new URLSearchParams(searchParams as Record<string, string>);
               params.set('type', 'cases');
@@ -159,25 +159,25 @@ export default async function VendorOmniDashboardPage({ searchParams }: VendorOm
       </div>
 
       {/* Summary Cards */}
-      <div className="na-card na-p-4 na-mb-6">
-        <div className="na-grid na-grid-cols-4 na-gap-4">
+      <div className="card p-4 mb-6">
+        <div className="grid grid-cols-4 gap-4">
           <div>
-            <div className="na-metadata">Total {viewType}</div>
-            <div className="na-data-large">{items.length}</div>
+            <div className="caption">Total {viewType}</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{items.length}</div>
           </div>
           <div>
-            <div className="na-metadata">Accessible Subsidiaries</div>
-            <div className="na-data-large">{accessibleSubsidiaries.length}</div>
+            <div className="caption">Accessible Subsidiaries</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{accessibleSubsidiaries.length}</div>
           </div>
           <div>
-            <div className="na-metadata">Pending</div>
-            <div className="na-data-large">
+            <div className="caption">Pending</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">
               {items.filter((item: unknown) => (item as { status: string }).status === 'pending').length}
             </div>
           </div>
           <div>
-            <div className="na-metadata">Completed</div>
-            <div className="na-data-large">
+            <div className="caption">Completed</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">
               {items.filter((item: unknown) => (item as { status: string }).status === 'completed' || (item as { status: string }).status === 'approved').length}
             </div>
           </div>
@@ -186,31 +186,31 @@ export default async function VendorOmniDashboardPage({ searchParams }: VendorOm
 
       {/* Data Table */}
       {error ? (
-        <div className="na-card na-p-6 na-bg-danger-subtle na-text-danger na-mb-6">
-          <h2 className="na-h4">Error Loading Data</h2>
-          <p className="na-body">{error}</p>
+        <div className="card p-6 bg-nx-danger-bg text-nx-danger mb-6">
+          <h2 className="text-base font-semibold text-nx-text-main">Error Loading Data</h2>
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{error}</p>
         </div>
       ) : (
-        <Suspense fallback={<div className="na-card na-p-6">Loading data...</div>}>
+        <Suspense fallback={<div className="card p-6">Loading data...</div>}>
           {items.length === 0 ? (
-            <div className="na-card na-p-6 na-text-center">
-              <h2 className="na-h4">No {viewType} Found</h2>
-              <p className="na-body na-mb-4">
+            <div className="card p-6 text-center">
+              <h2 className="text-base font-semibold text-nx-text-main">No {viewType} Found</h2>
+              <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mb-4">
                 {selectedTenantId
                   ? `No ${viewType} found for this subsidiary.`
                   : `No ${viewType} found across accessible subsidiaries.`}
               </p>
             </div>
           ) : (
-            <div className="na-card na-overflow-x-auto">
-              <table className="na-table-frozen na-w-full">
+            <div className="card overflow-x-auto">
+              <table className="table-professional w-full w-full">
                 <thead>
-                  <tr className="na-tr">
-                    <th className="na-th">ID</th>
-                    <th className="na-th">Subsidiary</th>
-                    <th className="na-th">Status</th>
-                    <th className="na-th">Created</th>
-                    <th className="na-th">Actions</th>
+                  <tr className="table-row">
+                    <th className="table-header-cell">ID</th>
+                    <th className="table-header-cell">Subsidiary</th>
+                    <th className="table-header-cell">Status</th>
+                    <th className="table-header-cell">Created</th>
+                    <th className="table-header-cell">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -218,17 +218,17 @@ export default async function VendorOmniDashboardPage({ searchParams }: VendorOm
                     const i = item as { id: string; tenant_id: string; status: string; created_at: string };
                     const subsidiary = accessibleSubsidiaries.find((s) => s.tenant_id === i.tenant_id);
                     return (
-                      <tr key={i.id} className="na-tr na-hover-bg-paper-2">
-                        <td className="na-td na-text-sm">{i.id.slice(0, 8)}...</td>
-                        <td className="na-td na-text-sm">{subsidiary?.tenant_id.slice(0, 8) || 'Unknown'}</td>
-                        <td className="na-td">
-                          <span className="na-status na-status-pending">{i.status}</span>
+                      <tr key={i.id} className="table-row hover:bg-nx-surface-well">
+                        <td className="table-data-cell text-sm">{i.id.slice(0, 8)}...</td>
+                        <td className="table-data-cell text-sm">{subsidiary?.tenant_id.slice(0, 8) || 'Unknown'}</td>
+                        <td className="table-data-cell">
+                          <span className="badge badge-info">{i.status}</span>
                         </td>
-                        <td className="na-td na-text-sm">
+                        <td className="table-data-cell text-sm">
                           {new Date(i.created_at).toLocaleDateString()}
                         </td>
-                        <td className="na-td">
-                          <button className="na-btn na-btn-ghost na-btn-sm">View</button>
+                        <td className="table-data-cell">
+                          <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main px-3 py-1.5 text-sm">View</button>
                         </td>
                       </tr>
                     );

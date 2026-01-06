@@ -76,27 +76,27 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
     .order('created_at', { ascending: true });
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="na-h1">Purchase Order {po.po_number}</h1>
-          <p className="na-metadata na-mt-2">
+          <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Purchase Order {po.po_number}</h1>
+          <p className="caption mt-2">
             Created: {new Date(po.created_at).toLocaleDateString()}
           </p>
         </div>
-        <Link href="/vendor-omni-dashboard?type=pos" className="na-btn na-btn-ghost">
+        <Link href="/vendor-omni-dashboard?type=pos" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
           ← Back to POs
         </Link>
       </div>
 
       {/* Status Card */}
-      <div className="na-card na-p-6 na-mb-6">
-        <h2 className="na-h3 na-mb-4">Current Status</h2>
-        <div className="na-flex na-items-center na-gap-4 na-mb-4">
+      <div className="card p-6 mb-6">
+        <h2 className="section mb-4">Current Status</h2>
+        <div className="flex items-center gap-4 mb-4">
           <span
-            className={`na-status na-status-${
+            className={`badge badge-${
               po.status === 'acknowledged'
-                ? 'ok'
+                ? 'badge-success'
                 : po.status === 'rejected'
                   ? 'bad'
                   : 'pending'
@@ -104,52 +104,52 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
           >
             {po.status.toUpperCase()}
           </span>
-          <div className="na-metadata na-text-sm">
+          <div className="caption text-sm">
             Last updated: {new Date(po.updated_at).toLocaleString()}
           </div>
         </div>
 
         {po.acknowledged_at && (
-          <div className="na-card na-p-4 na-bg-paper-2 na-mt-4">
-            <div className="na-metadata na-mb-2">Acknowledged</div>
-            <div className="na-body">
+          <div className="card p-4 bg-nx-surface-well mt-4">
+            <div className="caption mb-2">Acknowledged</div>
+            <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
               {po.status === 'acknowledged' ? 'Accepted' : 'Rejected'} on{' '}
               {new Date(po.acknowledged_at).toLocaleString()}
             </div>
             {po.acknowledgment_notes && (
-              <div className="na-metadata na-text-sm na-mt-2">Notes: {po.acknowledgment_notes}</div>
+              <div className="caption text-sm mt-2">Notes: {po.acknowledgment_notes}</div>
             )}
           </div>
         )}
       </div>
 
       {/* PO Details */}
-      <div className="na-card na-p-6 na-mb-6">
-        <h2 className="na-h3 na-mb-4">PO Details</h2>
-        <div className="na-grid na-grid-cols-1 md:na-grid-cols-2 na-gap-4">
+      <div className="card p-6 mb-6">
+        <h2 className="section mb-4">PO Details</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="na-metadata na-mb-2 na-block">PO Number</label>
-            <div className="na-data">{po.po_number}</div>
+            <label className="caption mb-2 block">PO Number</label>
+            <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{po.po_number}</div>
           </div>
           <div>
-            <label className="na-metadata na-mb-2 na-block">Created Date</label>
-            <div className="na-data">{new Date(po.created_at).toLocaleDateString()}</div>
+            <label className="caption mb-2 block">Created Date</label>
+            <div className="text-[length:var(--nx-body-size)] text-nx-text-main">{new Date(po.created_at).toLocaleDateString()}</div>
           </div>
           <div>
-            <label className="na-metadata na-mb-2 na-block">Amount</label>
-            <div className="na-data-large">
+            <label className="caption mb-2 block">Amount</label>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">
               {po.total_amount
                 ? `$${po.total_amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
                 : 'N/A'}
             </div>
           </div>
           <div>
-            <label className="na-metadata na-mb-2 na-block">Status</label>
+            <label className="caption mb-2 block">Status</label>
             <div>
               <span
-                className={`na-status na-status-${
+                className={`badge badge-${
                   po.status === 'acknowledged'
-                    ? 'ok'
+                    ? 'badge-success'
                     : po.status === 'rejected'
                       ? 'bad'
                       : 'pending'
@@ -164,15 +164,15 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
 
       {/* Acknowledgment Section (if not acknowledged) */}
       {!po.acknowledged_at && (
-        <div className="na-card na-p-6 na-mb-6">
-          <h2 className="na-h3 na-mb-4">Acknowledge PO</h2>
-          <form action="/vendor/purchase-orders/acknowledge" method="post" className="na-space-y-4">
+        <div className="card p-6 mb-6">
+          <h2 className="section mb-4">Acknowledge PO</h2>
+          <form action="/vendor/purchase-orders/acknowledge" method="post" className="space-y-4">
             <input type="hidden" name="po_id" value={po.id} />
             <input type="hidden" name="acknowledged_by" value={ctx.actor.userId} />
 
             <div>
-              <label className="na-metadata na-mb-2 na-block">Action</label>
-              <select name="action" className="na-input na-w-full" required>
+              <label className="caption mb-2 block">Action</label>
+              <select name="action" className="input w-full" required>
                 <option value="">Select Action</option>
                 <option value="accept">Accept PO</option>
                 <option value="reject">Reject PO</option>
@@ -180,28 +180,28 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
             </div>
 
             <div>
-              <label className="na-metadata na-mb-2 na-block">Notes/Comments</label>
+              <label className="caption mb-2 block">Notes/Comments</label>
               <textarea
                 name="notes"
-                className="na-input na-w-full"
+                className="input w-full"
                 rows={4}
                 placeholder="Add any comments or notes..."
               />
             </div>
 
             <div>
-              <label className="na-metadata na-mb-2 na-block">Upload Acknowledgment Document (Optional)</label>
-              <input type="file" name="document" className="na-input na-w-full" accept=".pdf,.jpg,.png" />
-              <p className="na-metadata na-text-sm na-mt-2">
+              <label className="caption mb-2 block">Upload Acknowledgment Document (Optional)</label>
+              <input type="file" name="document" className="input w-full" accept=".pdf,.jpg,.png" />
+              <p className="caption text-sm mt-2">
                 Upload signed PO or acknowledgment document
               </p>
             </div>
 
-            <div className="na-flex na-gap-4">
-              <button type="submit" className="na-btn na-btn-primary">
+            <div className="flex gap-4">
+              <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">
                 Submit Acknowledgment
               </button>
-              <Link href="/vendor-omni-dashboard?type=pos" className="na-btn na-btn-ghost">
+              <Link href="/vendor-omni-dashboard?type=pos" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
                 Cancel
               </Link>
             </div>
@@ -211,21 +211,21 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
 
       {/* Status Timeline */}
       {auditTrail && auditTrail.length > 0 && (
-        <div className="na-card na-p-6 na-mb-6">
-          <h2 className="na-h3 na-mb-4">Status Timeline</h2>
-          <div className="na-space-y-4">
+        <div className="card p-6 mb-6">
+          <h2 className="section mb-4">Status Timeline</h2>
+          <div className="space-y-4">
             {auditTrail.map((event) => (
-              <div key={event.id} className="na-flex na-gap-4">
-                <div className="na-flex-shrink-0">
-                  <div className="na-w-2 na-h-2 na-rounded-full na-bg-primary na-mt-2"></div>
+              <div key={event.id} className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-2 h-2 rounded-full bg-nx-primary mt-2"></div>
                 </div>
-                <div className="na-flex-1">
-                  <div className="na-metadata na-text-sm">
+                <div className="flex-1">
+                  <div className="caption text-sm">
                     {new Date(event.created_at).toLocaleString()}
                   </div>
-                  <div className="na-body na-mt-1">{event.action}</div>
+                  <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mt-1">{event.action}</div>
                   {event.workflow_state && (
-                    <div className="na-metadata na-text-sm na-mt-1">
+                    <div className="caption text-sm mt-1">
                       {JSON.stringify(event.workflow_state)}
                     </div>
                   )}
@@ -238,22 +238,22 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
 
       {/* Documents */}
       {documents && documents.length > 0 && (
-        <div className="na-card na-p-6">
-          <h2 className="na-h3 na-mb-4">Documents</h2>
-          <div className="na-space-y-2">
+        <div className="card p-6">
+          <h2 className="section mb-4">Documents</h2>
+          <div className="space-y-2">
             {documents.map((doc: unknown) => {
               const d = doc as { id: string; name: string; file_url: string };
               return (
-                <div key={d.id} className="na-card na-p-4 na-flex na-items-center na-justify-between">
+                <div key={d.id} className="card p-4 flex items-center justify-between">
                   <div>
-                    <div className="na-body">{d.name}</div>
-                    <div className="na-metadata na-text-sm">Document</div>
+                    <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{d.name}</div>
+                    <div className="caption text-sm">Document</div>
                   </div>
                   <a
                     href={d.file_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="na-btn na-btn-ghost na-btn-sm"
+                    className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main px-3 py-1.5 text-sm"
                   >
                     View
                   </a>
@@ -266,18 +266,18 @@ export default async function VendorPODetailPage({ params }: PODetailPageProps) 
 
       {/* Acknowledgment Document */}
       {acknowledgmentDoc && (
-        <div className="na-card na-p-6">
-          <h2 className="na-h3 na-mb-4">Acknowledgment Document</h2>
-          <div className="na-card na-p-4 na-flex na-items-center na-justify-between">
+        <div className="card p-6">
+          <h2 className="section mb-4">Acknowledgment Document</h2>
+          <div className="card p-4 flex items-center justify-between">
             <div>
-              <div className="na-body">{acknowledgmentDoc.name}</div>
-              <div className="na-metadata na-text-sm">Uploaded on acknowledgment</div>
+              <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{acknowledgmentDoc.name}</div>
+              <div className="caption text-sm">Uploaded on acknowledgment</div>
             </div>
             <a
               href={acknowledgmentDoc.file_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="na-btn na-btn-ghost na-btn-sm"
+              className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main px-3 py-1.5 text-sm"
             >
               View
             </a>

@@ -97,91 +97,91 @@ export default async function FraudHunterPage({ searchParams }: FraudHunterPageP
     const totalRisks = highValuePayments.length + riskWatchlist.length + bankAccountChanges.length;
 
     return (
-        <div className="na-container na-mx-auto na-p-6">
-            <div className="na-flex na-items-center na-justify-between na-mb-6">
+        <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+            <div className="flex items-center justify-between mb-6">
                 <div>
-                    <h1 className="na-h1 na-mb-2">Fraud Hunter</h1>
-                    <p className="na-body na-text-muted">
+                    <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main mb-2">Fraud Hunter</h1>
+                    <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted">
                         The Guard - Reviews high-value changes, bank account modifications, and risk anomalies
                     </p>
                 </div>
-                <div className="na-text-right">
-                    <div className="na-metadata">Total Risk Items</div>
-                    <div className="na-data-large na-text-danger">{totalRisks}</div>
+                <div className="text-right">
+                    <div className="caption">Total Risk Items</div>
+                    <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main text-nx-danger">{totalRisks}</div>
                 </div>
             </div>
 
             {/* Stats Overview */}
-            <div className="na-grid na-grid-cols-4 na-gap-4 na-mb-6">
-                <div className="na-card na-p-4">
-                    <div className="na-metadata">High-Value Payments</div>
-                    <div className="na-data-large">{highValuePayments.length}</div>
-                    <div className="na-text-xs na-text-muted na-mt-1">≥ $10,000</div>
+            <div className="grid grid-cols-4 gap-4 mb-6">
+                <div className="card p-4">
+                    <div className="caption">High-Value Payments</div>
+                    <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{highValuePayments.length}</div>
+                    <div className="text-xs text-nx-text-muted mt-1">≥ $10,000</div>
                 </div>
-                <div className="na-card na-p-4">
-                    <div className="na-metadata">Risk Watchlist</div>
-                    <div className="na-data-large">{riskWatchlist.length}</div>
-                    <div className="na-text-xs na-text-muted na-mt-1">Active flags</div>
+                <div className="card p-4">
+                    <div className="caption">Risk Watchlist</div>
+                    <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{riskWatchlist.length}</div>
+                    <div className="text-xs text-nx-text-muted mt-1">Active flags</div>
                 </div>
-                <div className="na-card na-p-4">
-                    <div className="na-metadata">Bank Changes</div>
-                    <div className="na-data-large">{bankAccountChanges.length}</div>
-                    <div className="na-text-xs na-text-muted na-mt-1">Requires verification</div>
+                <div className="card p-4">
+                    <div className="caption">Bank Changes</div>
+                    <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{bankAccountChanges.length}</div>
+                    <div className="text-xs text-nx-text-muted mt-1">Requires verification</div>
                 </div>
-                <div className="na-card na-p-4">
-                    <div className="na-metadata">Accessible Companies</div>
-                    <div className="na-data-large">{accessibleTenants.length}</div>
+                <div className="card p-4">
+                    <div className="caption">Accessible Companies</div>
+                    <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{accessibleTenants.length}</div>
                 </div>
             </div>
 
             {error ? (
-                <div className="na-card na-p-6 na-bg-danger-subtle na-text-danger na-mb-6">
-                    <h2 className="na-h4">Error Loading Risk Data</h2>
-                    <p className="na-body">{error}</p>
+                <div className="card p-6 bg-nx-danger-bg text-nx-danger mb-6">
+                    <h2 className="text-base font-semibold text-nx-text-main">Error Loading Risk Data</h2>
+                    <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{error}</p>
                 </div>
             ) : (
-                <div className="na-space-y-6">
+                <div className="space-y-6">
                     {/* High-Value Payments */}
                     {highValuePayments.length > 0 && (
-                        <div className="na-card na-p-6">
-                            <h2 className="na-h4 na-mb-4">High-Value Payments Requiring Review</h2>
-                            <div className="na-space-y-3">
+                        <div className="card p-6">
+                            <h2 className="text-base font-semibold text-nx-text-main mb-4">High-Value Payments Requiring Review</h2>
+                            <div className="space-y-3">
                                 {highValuePayments.map((payment: any) => (
                                     <div
                                         key={payment.id}
-                                        className="na-p-4 na-border na-rounded-lg hover:na-bg-muted na-transition-colors"
+                                        className="p-4 border border-nx-border rounded-lg hover:bg-nx-surface-well transition-colors"
                                     >
-                                        <div className="na-flex na-items-start na-justify-between">
-                                            <div className="na-flex-1">
-                                                <div className="na-flex na-items-center na-gap-2 na-mb-2">
-                                                    <span className="na-font-medium">
+                                        <div className="flex items-start justify-between">
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span className="font-medium">
                                                         {payment.payment_ref || payment.id}
                                                     </span>
-                                                    <span className="na-badge na-bg-danger-subtle na-text-danger">
+                                                    <span className="badge bg-nx-danger-bg text-nx-danger">
                                                         ${payment.amount?.toLocaleString() || '0.00'}
                                                     </span>
                                                 </div>
-                                                <div className="na-text-sm na-text-muted na-mb-1">
+                                                <div className="text-sm text-nx-text-muted mb-1">
                                                     Vendor: {payment.vmp_vendors?.name || payment.vmp_vendors?.legal_name || 'Unknown'}
                                                 </div>
-                                                <div className="na-text-sm na-text-muted na-mb-1">
+                                                <div className="text-sm text-nx-text-muted mb-1">
                                                     Bank: {payment.vmp_vendors?.bank_name || 'N/A'} 
                                                     {payment.vmp_vendors?.account_number && (
-                                                        <span className="na-ml-2">***{payment.vmp_vendors.account_number.slice(-4)}</span>
+                                                        <span className="ml-2">***{payment.vmp_vendors.account_number.slice(-4)}</span>
                                                     )}
                                                 </div>
-                                                <div className="na-text-sm na-text-muted">
+                                                <div className="text-sm text-nx-text-muted">
                                                     Date: {new Date(payment.payment_date || payment.created_at).toLocaleDateString()}
                                                 </div>
                                             </div>
-                                            <div className="na-flex na-gap-2">
+                                            <div className="flex gap-2">
                                                 <a
                                                     href={`/payments/${payment.id}`}
-                                                    className="na-btn na-btn-sm na-btn-primary"
+                                                    className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer px-3 py-1.5 text-sm btn-primary"
                                                 >
                                                     Review
                                                 </a>
-                                                <button className="na-btn na-btn-sm na-btn-outline">
+                                                <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer px-3 py-1.5 text-sm border border-nx-border bg-transparent hover:bg-nx-surface-well">
                                                     Verify Bank
                                                 </button>
                                             </div>
@@ -194,50 +194,50 @@ export default async function FraudHunterPage({ searchParams }: FraudHunterPageP
 
                     {/* Risk Watchlist */}
                     {riskWatchlist.length > 0 && (
-                        <div className="na-card na-p-6">
-                            <h2 className="na-h4 na-mb-4">Risk Watchlist</h2>
-                            <div className="na-space-y-3">
+                        <div className="card p-6">
+                            <h2 className="text-base font-semibold text-nx-text-main mb-4">Risk Watchlist</h2>
+                            <div className="space-y-3">
                                 {riskWatchlist.map((item: any) => (
                                     <div
                                         key={item.id}
-                                        className="na-p-4 na-border na-rounded-lg hover:na-bg-muted na-transition-colors"
+                                        className="p-4 border border-nx-border rounded-lg hover:bg-nx-surface-well transition-colors"
                                     >
-                                        <div className="na-flex na-items-start na-justify-between">
-                                            <div className="na-flex-1">
-                                                <div className="na-flex na-items-center na-gap-2 na-mb-2">
-                                                    <span className="na-font-medium">
+                                        <div className="flex items-start justify-between">
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span className="font-medium">
                                                         {item.global_vendors?.legal_name || 'Unknown Vendor'}
                                                     </span>
-                                                    <span className={`na-badge ${
-                                                        item.risk_level === 'critical' ? 'na-bg-danger-subtle na-text-danger' :
-                                                        item.risk_level === 'high' ? 'na-bg-warning-subtle na-text-warning' :
-                                                        'na-bg-muted'
+                                                    <span className={`badge ${
+                                                        item.risk_level === 'critical' ? 'bg-nx-danger-bg text-nx-danger' :
+                                                        item.risk_level === 'high' ? 'bg-nx-warning-bg text-nx-warning' :
+                                                        'bg-nx-surface-well'
                                                     }`}>
                                                         {item.risk_level}
                                                     </span>
                                                 </div>
-                                                <div className="na-text-sm na-text-muted na-mb-1">
+                                                <div className="text-sm text-nx-text-muted mb-1">
                                                     Reason: {item.risk_reason}
                                                 </div>
-                                                <div className="na-text-sm na-text-muted na-mb-1">
+                                                <div className="text-sm text-nx-text-muted mb-1">
                                                     Tax ID: {item.global_vendors?.tax_id || 'N/A'}
                                                 </div>
                                                 {item.requires_group_cfo_approval && (
-                                                    <div className="na-text-xs na-text-warning na-mt-2">
+                                                    <div className="text-xs text-nx-warning mt-2">
                                                         ⚠️ Requires Group CFO Approval
                                                     </div>
                                                 )}
                                                 {item.requires_group_ceo_approval && (
-                                                    <div className="na-text-xs na-text-danger na-mt-2">
+                                                    <div className="text-xs text-nx-danger mt-2">
                                                         ⚠️ Requires Group CEO Approval
                                                     </div>
                                                 )}
                                             </div>
-                                            <div className="na-flex na-gap-2">
-                                                <button className="na-btn na-btn-sm na-btn-primary">
+                                            <div className="flex gap-2">
+                                                <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer px-3 py-1.5 text-sm btn-primary">
                                                     Review
                                                 </button>
-                                                <button className="na-btn na-btn-sm na-btn-outline">
+                                                <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer px-3 py-1.5 text-sm border border-nx-border bg-transparent hover:bg-nx-surface-well">
                                                     Call Vendor
                                                 </button>
                                             </div>
@@ -250,25 +250,25 @@ export default async function FraudHunterPage({ searchParams }: FraudHunterPageP
 
                     {/* Bank Account Changes */}
                     {bankAccountChanges.length > 0 && (
-                        <div className="na-card na-p-6">
-                            <h2 className="na-h4 na-mb-4">Bank Account Changes Requiring Verification</h2>
-                            <div className="na-space-y-3">
+                        <div className="card p-6">
+                            <h2 className="text-base font-semibold text-nx-text-main mb-4">Bank Account Changes Requiring Verification</h2>
+                            <div className="space-y-3">
                                 {bankAccountChanges.map((change: any) => (
                                     <div
                                         key={change.id}
-                                        className="na-p-4 na-border na-rounded-lg hover:na-bg-muted na-transition-colors"
+                                        className="p-4 border border-nx-border rounded-lg hover:bg-nx-surface-well transition-colors"
                                     >
-                                        <div className="na-flex na-items-start na-justify-between">
-                                            <div className="na-flex-1">
-                                                <div className="na-font-medium na-mb-2">{change.vendor_name}</div>
-                                                <div className="na-text-sm na-text-muted">
+                                        <div className="flex items-start justify-between">
+                                            <div className="flex-1">
+                                                <div className="font-medium mb-2">{change.vendor_name}</div>
+                                                <div className="text-sm text-nx-text-muted">
                                                     Old: {change.old_bank_account}
                                                 </div>
-                                                <div className="na-text-sm na-text-muted">
+                                                <div className="text-sm text-nx-text-muted">
                                                     New: {change.new_bank_account}
                                                 </div>
                                             </div>
-                                            <button className="na-btn na-btn-sm na-btn-primary">
+                                            <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer px-3 py-1.5 text-sm btn-primary">
                                                 Verify
                                             </button>
                                         </div>
@@ -280,14 +280,14 @@ export default async function FraudHunterPage({ searchParams }: FraudHunterPageP
 
                     {/* Empty State */}
                     {totalRisks === 0 && (
-                        <div className="na-card na-p-12 na-text-center">
-                            <div className="na-w-16 na-h-16 na-mx-auto na-mb-4 na-bg-success-subtle na-rounded-full na-flex na-items-center na-justify-center">
-                                <svg className="na-w-8 na-h-8 na-text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="card p-12 text-center">
+                            <div className="w-16 h-16 mx-auto mb-4 bg-nx-success-bg rounded-full flex items-center justify-center">
+                                <svg className="w-8 h-8 text-nx-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                 </svg>
                             </div>
-                            <h2 className="na-h4 na-mb-2">No Risk Items Found</h2>
-                            <p className="na-body na-text-muted">
+                            <h2 className="text-base font-semibold text-nx-text-main mb-2">No Risk Items Found</h2>
+                            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main text-nx-text-muted">
                                 All transactions are within normal parameters. No anomalies detected.
                             </p>
                         </div>

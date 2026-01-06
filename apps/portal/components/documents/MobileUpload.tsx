@@ -68,48 +68,48 @@ export function MobileUpload({ caseId, documentType, onUploadComplete }: MobileU
   };
 
   return (
-    <div className="na-card na-p-6">
-      <h3 className="na-h4 na-mb-4">Snap & Submit</h3>
+    <div className="card p-6">
+      <h3 className="text-base font-semibold text-nx-text-main mb-4">Snap & Submit</h3>
 
       <input
         type="file"
         ref={fileInputRef}
         onChange={handleFileSelect}
         accept="image/*,application/pdf"
-        className="na-hidden"
+        className="hidden"
         capture="environment" // Use camera on mobile
       />
 
       {!selectedFile ? (
         <div
-          className="na-card na-p-8 na-border-2 na-border-dashed na-text-center na-cursor-pointer"
+          className="card p-8 border-2 border-dashed text-center cursor-pointer"
           onClick={() => fileInputRef.current?.click()}
         >
-          <div className="na-text-6xl na-mb-4">📷</div>
-          <p className="na-data na-mb-2">Tap to take photo or select file</p>
-          <p className="na-metadata">Delivery Order, Invoice, Receipt, etc.</p>
+          <div className="text-6xl mb-4">📷</div>
+          <p className="text-[length:var(--nx-body-size)] text-nx-text-main mb-2">Tap to take photo or select file</p>
+          <p className="caption">Delivery Order, Invoice, Receipt, etc.</p>
         </div>
       ) : (
-        <div className="na-space-y-4">
+        <div className="space-y-4">
           {preview && (
-            <div className="na-card na-p-4">
+            <div className="card p-4">
               <img
                 src={preview}
                 alt="Preview"
-                className="na-w-full na-rounded"
+                className="w-full rounded"
                 style={{ maxHeight: '400px', objectFit: 'contain' }}
               />
             </div>
           )}
 
-          <div className="na-card na-p-4">
-            <p className="na-metadata">File: {selectedFile.name}</p>
-            <p className="na-metadata">Size: {(selectedFile.size / 1024).toFixed(2)} KB</p>
+          <div className="card p-4">
+            <p className="caption">File: {selectedFile.name}</p>
+            <p className="caption">Size: {(selectedFile.size / 1024).toFixed(2)} KB</p>
           </div>
 
-          <div className="na-flex na-gap-4">
+          <div className="flex gap-4">
             <button
-              className="na-btn na-btn-secondary na-flex-1"
+              className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary flex-1"
               onClick={() => {
                 setSelectedFile(null);
                 setPreview(null);
@@ -119,7 +119,7 @@ export function MobileUpload({ caseId, documentType, onUploadComplete }: MobileU
               Cancel
             </button>
             <button
-              className="na-btn na-btn-primary na-flex-1"
+              className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary flex-1"
               onClick={handleSubmit}
               disabled={isUploading}
             >

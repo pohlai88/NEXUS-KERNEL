@@ -4,40 +4,46 @@ export default {
     "./scripts/**/*.ts",
     "./ui/**/*.html",
     "./ui/**/*.css",
+    "./apps/portal/**/*.tsx",
+    "./apps/portal/**/*.ts",
   ],
 
+  /**
+   * NEXUS DESIGN CONSTITUTION v1.0.0
+   * 
+   * Theme extensions reference Nexus tokens from canonical.ts
+   * All tokens use --nx-* prefix for namespace isolation
+   */
   theme: {
     extend: {
-      // Spacing uses P4 tokens from input.css
+      // Spacing uses NX tokens from input.css via canonical.ts
       spacing: {
-        // Tailwind utilities like p-4, m-4, gap-4 will use these values
-        // These reference your --space-* tokens defined in @theme
-        0: 'var(--space-0)',
-        1: 'var(--space-1)',
-        2: 'var(--space-2)',
-        3: 'var(--space-3)',
-        4: 'var(--space-4)',
-        5: 'var(--space-5)',
-        6: 'var(--space-6)',
-        8: 'var(--space-8)',
-        10: 'var(--space-10)',
-        12: 'var(--space-12)',
-        16: 'var(--space-16)',
+        0: 'var(--nx-space-0)',
+        1: 'var(--nx-space-1)',
+        2: 'var(--nx-space-2)',
+        3: 'var(--nx-space-3)',
+        4: 'var(--nx-space-4)',
+        5: 'var(--nx-space-5)',
+        6: 'var(--nx-space-6)',
+        8: 'var(--nx-space-8)',
+        10: 'var(--nx-space-10)',
+        12: 'var(--nx-space-12)',
+        16: 'var(--nx-space-16)',
       },
-      // Width/height reference P5 tokens
+      // Sizing tokens from canonical.ts
       width: {
-        'shell': 'var(--width-shell)',
-        'nav': 'var(--width-nav)',
-        'content': 'var(--width-content)',
+        'shell': 'var(--nx-width-shell)',
+        'nav': 'var(--nx-width-nav)',
+        'content': 'var(--nx-width-content)',
       },
       height: {
-        'header': 'var(--height-header)',
-        'row': 'var(--height-row)',
+        'header': 'var(--nx-height-header)',
+        'row': 'var(--nx-height-row)',
       },
       maxWidth: {
-        'shell': 'var(--width-shell)',
-        'content': 'var(--width-content)',
-        'prose': 'var(--width-prose)',
+        'shell': 'var(--nx-width-shell)',
+        'content': 'var(--nx-width-content)',
+        'prose': 'var(--nx-width-prose)',
       },
     },
   },

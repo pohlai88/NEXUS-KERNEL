@@ -1,6 +1,6 @@
 'use client';
 
-import { getCachedConcepts, getCachedValueSets, getCachedValues } from '@aibos/kernel/nextjs';
+import { getCachedConcepts, getCachedValueSets, getCachedValues } from '@nexus/kernel/nextjs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';

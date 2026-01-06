@@ -105,26 +105,26 @@ export default async function VendorInvoicesPage({ searchParams }: VendorInvoice
   }, {} as Record<string, number>);
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">My Invoices</h1>
-        <Link href="/invoices/upload" className="na-btn na-btn-primary">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">My Invoices</h1>
+        <Link href="/invoices/upload" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">
           📤 Upload Invoice
         </Link>
       </div>
 
       {/* Filters */}
-      <div className="na-card na-p-6 na-mb-6">
-        <h2 className="na-h3 na-mb-4">Filters</h2>
-        <form method="get" className="na-space-y-4">
-          <div className="na-grid na-grid-cols-1 md:na-grid-cols-4 na-gap-4">
+      <div className="card p-6 mb-6">
+        <h2 className="section mb-4">Filters</h2>
+        <form method="get" className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Status Filter */}
             <div>
-              <label className="na-metadata na-mb-2 na-block">Status</label>
+              <label className="caption mb-2 block">Status</label>
               <select
                 name="status"
                 defaultValue={searchParams.status || ''}
-                className="na-input na-w-full"
+                className="input w-full"
               >
                 <option value="">All Statuses</option>
                 <option value="pending">Pending</option>
@@ -137,47 +137,47 @@ export default async function VendorInvoicesPage({ searchParams }: VendorInvoice
 
             {/* Date From */}
             <div>
-              <label className="na-metadata na-mb-2 na-block">Date From</label>
+              <label className="caption mb-2 block">Date From</label>
               <input
                 type="date"
                 name="date_from"
                 defaultValue={searchParams.date_from || ''}
-                className="na-input na-w-full"
+                className="input w-full"
               />
             </div>
 
             {/* Date To */}
             <div>
-              <label className="na-metadata na-mb-2 na-block">Date To</label>
+              <label className="caption mb-2 block">Date To</label>
               <input
                 type="date"
                 name="date_to"
                 defaultValue={searchParams.date_to || ''}
-                className="na-input na-w-full"
+                className="input w-full"
               />
             </div>
 
             {/* Search */}
             <div>
-              <label className="na-metadata na-mb-2 na-block">Search</label>
+              <label className="caption mb-2 block">Search</label>
               <input
                 type="text"
                 name="search"
                 placeholder="Invoice #, PO #"
                 defaultValue={searchParams.search || ''}
-                className="na-input na-w-full"
+                className="input w-full"
               />
             </div>
           </div>
 
           {/* Sort Options */}
-          <div className="na-flex na-items-center na-gap-4">
+          <div className="flex items-center gap-4">
             <div>
-              <label className="na-metadata na-mb-2 na-block">Sort By</label>
+              <label className="caption mb-2 block">Sort By</label>
               <select
                 name="sort"
                 defaultValue={searchParams.sort || 'date'}
-                className="na-input"
+                className="input"
               >
                 <option value="date">Date</option>
                 <option value="amount">Amount</option>
@@ -185,21 +185,21 @@ export default async function VendorInvoicesPage({ searchParams }: VendorInvoice
               </select>
             </div>
             <div>
-              <label className="na-metadata na-mb-2 na-block">Order</label>
+              <label className="caption mb-2 block">Order</label>
               <select
                 name="order"
                 defaultValue={searchParams.order || 'desc'}
-                className="na-input"
+                className="input"
               >
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
               </select>
             </div>
-            <div className="na-flex na-items-end na-gap-2 na-mt-6">
-              <button type="submit" className="na-btn na-btn-primary">
+            <div className="flex items-end gap-2 mt-6">
+              <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">
                 Apply Filters
               </button>
-              <Link href="/vendor/invoices" className="na-btn na-btn-ghost">
+              <Link href="/vendor/invoices" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
                 Clear
               </Link>
             </div>
@@ -207,10 +207,10 @@ export default async function VendorInvoicesPage({ searchParams }: VendorInvoice
         </form>
 
         {/* Status Badges */}
-        <div className="na-flex na-flex-wrap na-gap-2 na-mt-4">
+        <div className="flex flex-wrap gap-2 mt-4">
           <Link
             href="/vendor/invoices"
-            className={`na-btn na-btn-sm ${!searchParams.status ? 'na-btn-primary' : 'na-btn-ghost'}`}
+            className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer px-3 py-1.5 text-sm ${!searchParams.status ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
           >
             All ({invoiceList.length})
           </Link>
@@ -218,7 +218,7 @@ export default async function VendorInvoicesPage({ searchParams }: VendorInvoice
             <Link
               key={status}
               href={`/vendor/invoices?status=${status}`}
-              className={`na-btn na-btn-sm ${searchParams.status === status ? 'na-btn-primary' : 'na-btn-ghost'}`}
+              className={`inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer px-3 py-1.5 text-sm ${searchParams.status === status ? 'btn-primary' : 'bg-transparent hover:bg-nx-ghost-hover text-nx-text-main'}`}
             >
               {status} ({count})
             </Link>
@@ -227,27 +227,27 @@ export default async function VendorInvoicesPage({ searchParams }: VendorInvoice
       </div>
 
       {/* Invoice List */}
-      <div className="na-card na-p-6">
-        <h2 className="na-h3 na-mb-4">Invoices ({invoiceList.length})</h2>
+      <div className="card p-6">
+        <h2 className="section mb-4">Invoices ({invoiceList.length})</h2>
         {invoiceList.length === 0 ? (
-          <div className="na-text-center na-p-6">
-            <p className="na-body">No invoices found.</p>
-            <Link href="/invoices/upload" className="na-btn na-btn-primary na-mt-4">
+          <div className="text-center p-6">
+            <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">No invoices found.</p>
+            <Link href="/invoices/upload" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary mt-4">
               Upload Your First Invoice
             </Link>
           </div>
         ) : (
-          <div className="na-overflow-x-auto">
-            <table className="na-table-frozen na-w-full">
+          <div className="overflow-x-auto">
+            <table className="table-professional w-full w-full">
               <thead>
-                <tr className="na-tr">
-                  <th className="na-th">Invoice #</th>
-                  <th className="na-th">Company</th>
-                  <th className="na-th">Date</th>
-                  <th className="na-th">Amount</th>
-                  <th className="na-th">Status</th>
-                  <th className="na-th">Due Date</th>
-                  <th className="na-th">Actions</th>
+                <tr className="table-row">
+                  <th className="table-header-cell">Invoice #</th>
+                  <th className="table-header-cell">Company</th>
+                  <th className="table-header-cell">Date</th>
+                  <th className="table-header-cell">Amount</th>
+                  <th className="table-header-cell">Status</th>
+                  <th className="table-header-cell">Due Date</th>
+                  <th className="table-header-cell">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -265,31 +265,31 @@ export default async function VendorInvoicesPage({ searchParams }: VendorInvoice
                     vmp_companies: { name: string };
                   };
                   return (
-                    <tr key={i.id} className="na-tr na-hover-bg-paper-2">
-                      <td className="na-td na-font-semibold">
+                    <tr key={i.id} className="table-row hover:bg-nx-surface-well">
+                      <td className="table-data-cell font-semibold">
                         {i.invoice_num || i.invoice_number || 'N/A'}
                       </td>
-                      <td className="na-td na-text-sm">{i.vmp_companies?.name || 'Unknown'}</td>
-                      <td className="na-td na-text-sm">
+                      <td className="table-data-cell text-sm">{i.vmp_companies?.name || 'Unknown'}</td>
+                      <td className="table-data-cell text-sm">
                         {i.invoice_date ? new Date(i.invoice_date).toLocaleDateString() : 'N/A'}
                       </td>
-                      <td className="na-td na-data">
+                      <td className="table-data-cell text-[length:var(--nx-body-size)] text-nx-text-main">
                         {i.amount
                           ? `$${i.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })} ${i.currency_code || 'USD'}`
                           : 'N/A'}
                       </td>
-                      <td className="na-td">
-                        <Suspense fallback={<span className="na-status na-status-pending">Loading...</span>}>
+                      <td className="table-data-cell">
+                        <Suspense fallback={<span className="badge badge-info">Loading...</span>}>
                           <InvoiceStatusDisplay invoiceId={i.id} />
                         </Suspense>
                       </td>
-                      <td className="na-td na-text-sm">
+                      <td className="table-data-cell text-sm">
                         {i.due_date ? new Date(i.due_date).toLocaleDateString() : 'N/A'}
                       </td>
-                      <td className="na-td">
+                      <td className="table-data-cell">
                         <Link
                           href={`/vendor/invoices/${i.id}`}
-                          className="na-btn na-btn-ghost na-btn-sm"
+                          className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main px-3 py-1.5 text-sm"
                         >
                           View
                         </Link>

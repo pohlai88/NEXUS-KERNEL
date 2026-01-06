@@ -59,15 +59,15 @@ export default async function SSCWorkQueuePage({ searchParams }: SSCWorkQueuePag
   }, {} as Record<string, { tenant_name: string; count: number; total_amount: number }>);
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">SSC Work Queue</h1>
-        <p className="na-metadata">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">SSC Work Queue</h1>
+        <p className="caption">
           Unified work queue across all subsidiaries
         </p>
       </div>
 
-      <Suspense fallback={<div className="na-card na-p-6">Loading context...</div>}>
+      <Suspense fallback={<div className="card p-6">Loading context...</div>}>
         <ContextSwitcher
           currentTenantId={searchParams.tenant_id || null}
           onTenantChange={(tenantId) => {
@@ -84,25 +84,25 @@ export default async function SSCWorkQueuePage({ searchParams }: SSCWorkQueuePag
       </Suspense>
 
       {/* Summary Cards */}
-      <div className="na-card na-p-4 na-mb-6">
-        <div className="na-grid na-grid-cols-4 na-gap-4">
+      <div className="card p-4 mb-6">
+        <div className="grid grid-cols-4 gap-4">
           <div>
-            <div className="na-metadata">Total Items</div>
-            <div className="na-data-large">{workItems.length}</div>
+            <div className="caption">Total Items</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{workItems.length}</div>
           </div>
           <div>
-            <div className="na-metadata">Subsidiaries</div>
-            <div className="na-data-large">{Object.keys(tenantSummary).length}</div>
+            <div className="caption">Subsidiaries</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">{Object.keys(tenantSummary).length}</div>
           </div>
           <div>
-            <div className="na-metadata">Urgent</div>
-            <div className="na-data-large">
+            <div className="caption">Urgent</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">
               {workItems.filter((item) => item.priority === 'urgent').length}
             </div>
           </div>
           <div>
-            <div className="na-metadata">Total Amount</div>
-            <div className="na-data-large">
+            <div className="caption">Total Amount</div>
+            <div className="text-[length:var(--nx-display-size)] font-bold text-nx-text-main">
               ${workItems.reduce((sum, item) => sum + (item.amount || 0), 0).toLocaleString()}
             </div>
           </div>
@@ -111,43 +111,43 @@ export default async function SSCWorkQueuePage({ searchParams }: SSCWorkQueuePag
 
       {/* Work Queue Table */}
       {workItems.length === 0 ? (
-        <div className="na-card na-p-6 na-text-center">
-          <h2 className="na-h4">No Work Items</h2>
-          <p className="na-body na-mt-2">All caught up! No pending items.</p>
+        <div className="card p-6 text-center">
+          <h2 className="text-base font-semibold text-nx-text-main">No Work Items</h2>
+          <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mt-2">All caught up! No pending items.</p>
         </div>
       ) : (
-        <div className="na-card na-overflow-x-auto">
-          <table className="na-table-frozen na-w-full">
+        <div className="card overflow-x-auto">
+          <table className="table-professional w-full w-full">
             <thead>
-              <tr className="na-tr">
-                <th className="na-th">Company</th>
-                <th className="na-th">Type</th>
-                <th className="na-th">Amount</th>
-                <th className="na-th">Due Date</th>
-                <th className="na-th">Priority</th>
-                <th className="na-th">Status</th>
-                <th className="na-th">Actions</th>
+              <tr className="table-row">
+                <th className="table-header-cell">Company</th>
+                <th className="table-header-cell">Type</th>
+                <th className="table-header-cell">Amount</th>
+                <th className="table-header-cell">Due Date</th>
+                <th className="table-header-cell">Priority</th>
+                <th className="table-header-cell">Status</th>
+                <th className="table-header-cell">Actions</th>
               </tr>
             </thead>
             <tbody>
               {workItems.map((item) => (
-                <tr key={item.id} className="na-tr na-hover-bg-paper-2">
-                  <td className="na-td">{item.tenant_name}</td>
-                  <td className="na-td na-text-sm">{item.document_type}</td>
-                  <td className="na-td">
+                <tr key={item.id} className="table-row hover:bg-nx-surface-well">
+                  <td className="table-data-cell">{item.tenant_name}</td>
+                  <td className="table-data-cell text-sm">{item.document_type}</td>
+                  <td className="table-data-cell">
                     {item.amount ? `$${item.amount.toLocaleString()} ${item.currency_code || ''}` : '—'}
                   </td>
-                  <td className="na-td na-text-sm">
+                  <td className="table-data-cell text-sm">
                     {item.due_date ? new Date(item.due_date).toLocaleDateString() : '—'}
                   </td>
-                  <td className="na-td">
-                    <span className={`na-status na-status-${item.priority === 'urgent' ? 'bad' : item.priority === 'high' ? 'warn' : 'ok'}`}>
+                  <td className="table-data-cell">
+                    <span className={`badge badge-${item.priority === 'urgent' ? 'bad' : item.priority === 'high' ? 'badge-warning' : 'badge-success'}`}>
                       {item.priority}
                     </span>
                   </td>
-                  <td className="na-td na-text-sm">{item.status}</td>
-                  <td className="na-td">
-                    <button className="na-btn na-btn-ghost na-btn-sm">View</button>
+                  <td className="table-data-cell text-sm">{item.status}</td>
+                  <td className="table-data-cell">
+                    <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main px-3 py-1.5 text-sm">View</button>
                   </td>
                 </tr>
               ))}
@@ -158,13 +158,13 @@ export default async function SSCWorkQueuePage({ searchParams }: SSCWorkQueuePag
 
       {/* Bulk Actions */}
       {workItems.length > 0 && (
-        <div className="na-card na-p-4 na-mt-6">
-          <h3 className="na-h4 na-mb-4">Bulk Actions</h3>
-          <div className="na-flex na-gap-4">
-            <button className="na-btn na-btn-primary">
+        <div className="card p-4 mt-6">
+          <h3 className="text-base font-semibold text-nx-text-main mb-4">Bulk Actions</h3>
+          <div className="flex gap-4">
+            <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary">
               Approve Selected (5)
             </button>
-            <button className="na-btn na-btn-secondary">
+            <button className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary">
               Reject Selected
             </button>
           </div>

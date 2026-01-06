@@ -108,14 +108,14 @@ const getFileIcon = (type: FileType, mimeType?: string): string => {
 
 const getFileTypeColor = (type: FileType): string => {
   const colors: Record<FileType, string> = {
-    folder: 'text-yellow-400',
-    image: 'text-purple-400',
-    video: 'text-red-400',
-    audio: 'text-green-400',
-    document: 'text-blue-400',
+    folder: 'text-nx-warning',
+    image: 'text-nx-primary',
+    video: 'text-nx-danger',
+    audio: 'text-nx-success',
+    document: 'text-nx-info',
     code: 'text-cyan-400',
-    archive: 'text-orange-400',
-    other: 'text-gray-400',
+    archive: 'text-nx-warning',
+    other: 'text-nx-text-faint',
   };
   return colors[type];
 };
@@ -307,16 +307,16 @@ export const FileManager: React.FC<FileManagerProps> = ({
             <div className="flex items-center gap-2 text-sm flex-1 min-w-0">
               <button
                 onClick={() => setCurrentFolderId(null)}
-                className="text-gray-400 hover:text-white transition-colors flex-shrink-0"
+                className="text-nx-text-faint hover:text-white transition-colors flex-shrink-0"
               >
                 🏠 Root
               </button>
               {breadcrumbPath.map((folder) => (
                 <React.Fragment key={folder.id}>
-                  <span className="text-gray-600">/</span>
+                  <span className="text-nx-text-sub">/</span>
                   <button
                     onClick={() => setCurrentFolderId(folder.id)}
-                    className="text-gray-400 hover:text-white transition-colors truncate"
+                    className="text-nx-text-faint hover:text-white transition-colors truncate"
                   >
                     {folder.name}
                   </button>
@@ -332,7 +332,7 @@ export const FileManager: React.FC<FileManagerProps> = ({
               <button
                 onClick={() => setViewMode('grid')}
                 className={`p-1.5 rounded transition-colors ${
-                  viewMode === 'grid' ? 'bg-primary-500 text-white' : 'text-gray-400 hover:text-white'
+                  viewMode === 'grid' ? 'bg-primary-500 text-white' : 'text-nx-text-faint hover:text-white'
                 }`}
                 title="Grid view"
               >
@@ -343,7 +343,7 @@ export const FileManager: React.FC<FileManagerProps> = ({
               <button
                 onClick={() => setViewMode('list')}
                 className={`p-1.5 rounded transition-colors ${
-                  viewMode === 'list' ? 'bg-primary-500 text-white' : 'text-gray-400 hover:text-white'
+                  viewMode === 'list' ? 'bg-primary-500 text-white' : 'text-nx-text-faint hover:text-white'
                 }`}
                 title="List view"
               >
@@ -390,7 +390,7 @@ export const FileManager: React.FC<FileManagerProps> = ({
             {allowDelete && selectedFiles.size > 0 && (
               <button
                 onClick={handleDelete}
-                className="px-3 py-1.5 bg-red-500 text-white rounded hover:bg-red-600 transition-colors text-sm"
+                className="px-3 py-1.5 bg-nx-danger text-white rounded hover:bg-nx-danger-text transition-colors text-sm"
               >
                 🗑️ Delete ({selectedFiles.size})
               </button>
@@ -428,11 +428,11 @@ export const FileManager: React.FC<FileManagerProps> = ({
         {displayedFiles.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <div className="text-6xl mb-3">📁</div>
-            <p className="text-gray-400">
+            <p className="text-nx-text-faint">
               {searchQuery ? 'No files found' : 'This folder is empty'}
             </p>
             {allowUpload && !searchQuery && (
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-nx-text-muted mt-1">
                 Drag and drop files here or click Upload
               </p>
             )}
@@ -483,14 +483,14 @@ export const FileManager: React.FC<FileManagerProps> = ({
                       {file.name}
                     </p>
                     {file.type !== 'folder' && (
-                      <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
+                      <p className="text-xs text-nx-text-muted">{formatFileSize(file.size)}</p>
                     )}
                   </>
                 )}
 
                 {/* Actions */}
                 <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
-                  {file.starred && <span className="text-yellow-400">⭐</span>}
+                  {file.starred && <span className="text-nx-warning">⭐</span>}
                   {allowRename && (
                     <button
                       onClick={(e) => {
@@ -511,7 +511,7 @@ export const FileManager: React.FC<FileManagerProps> = ({
           /* List View */
           <div className="space-y-1">
             {/* Table Header */}
-            <div className="grid grid-cols-12 gap-4 px-4 py-2 text-xs font-medium text-gray-400 uppercase tracking-wider border-b border-surface-700">
+            <div className="grid grid-cols-12 gap-4 px-4 py-2 text-xs font-medium text-nx-text-faint uppercase tracking-wider border-b border-surface-700">
               <div className="col-span-6 flex items-center gap-2 cursor-pointer" onClick={() => handleSort('name')}>
                 Name
                 {sortBy === 'name' && <span>{sortOrder === 'asc' ? '↑' : '↓'}</span>}
@@ -565,15 +565,15 @@ export const FileManager: React.FC<FileManagerProps> = ({
                       {file.name}
                     </span>
                   )}
-                  {file.starred && <span className="text-yellow-400 flex-shrink-0">⭐</span>}
+                  {file.starred && <span className="text-nx-warning flex-shrink-0">⭐</span>}
                 </div>
-                <div className="col-span-2 flex items-center text-sm text-gray-400">
+                <div className="col-span-2 flex items-center text-sm text-nx-text-faint">
                   {formatFileSize(file.size)}
                 </div>
-                <div className="col-span-2 flex items-center text-sm text-gray-400 capitalize">
+                <div className="col-span-2 flex items-center text-sm text-nx-text-faint capitalize">
                   {file.type}
                 </div>
-                <div className="col-span-2 flex items-center justify-between text-sm text-gray-400">
+                <div className="col-span-2 flex items-center justify-between text-sm text-nx-text-faint">
                   <span>{formatDate(file.modifiedAt)}</span>
                   {allowRename && (
                     <button
@@ -595,7 +595,7 @@ export const FileManager: React.FC<FileManagerProps> = ({
       </div>
 
       {/* Footer */}
-      <div className="px-4 py-2 bg-surface-800 border-t border-surface-700 text-sm text-gray-400">
+      <div className="px-4 py-2 bg-surface-800 border-t border-surface-700 text-sm text-nx-text-faint">
         {selectedFiles.size > 0 ? (
           <span>{selectedFiles.size} item{selectedFiles.size > 1 ? 's' : ''} selected</span>
         ) : (

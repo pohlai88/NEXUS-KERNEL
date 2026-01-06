@@ -83,17 +83,17 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
   );
 
   return (
-    <div className="na-container na-mx-auto na-p-6">
-      <div className="na-flex na-items-center na-justify-between na-mb-6">
-        <h1 className="na-h1">Document Library</h1>
-        <Link href="/vendor/dashboard" className="na-btn na-btn-ghost">
+    <div className="max-w-[var(--nx-container-max)] mx-auto mx-auto p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[length:var(--nx-display-size)] leading-[var(--nx-display-line)] font-bold tracking-tight text-nx-text-main">Document Library</h1>
+        <Link href="/vendor/dashboard" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
           ← Back to Dashboard
         </Link>
       </div>
 
       {/* Upload Section */}
-      <div className="na-card na-p-6 na-mb-6">
-        <h2 className="na-h3 na-mb-4">Upload New Document</h2>
+      <div className="card p-6 mb-6">
+        <h2 className="section mb-4">Upload New Document</h2>
         <DocumentUpload
           onUploadComplete={() => {
             // Handle upload completion
@@ -102,11 +102,11 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
       </div>
 
       {/* Filters */}
-      <div className="na-card na-p-4 na-mb-6">
-        <form method="get" className="na-flex na-gap-4 na-items-end">
+      <div className="card p-4 mb-6">
+        <form method="get" className="flex gap-4 items-end">
           <div>
-            <label className="na-metadata na-mb-2 na-block">Category</label>
-            <select name="category" className="na-input" defaultValue={searchParams.category || ''}>
+            <label className="caption mb-2 block">Category</label>
+            <select name="category" className="input" defaultValue={searchParams.category || ''}>
               <option value="">All Categories</option>
               <option value="compliance">Compliance</option>
               <option value="certificate">Certificate</option>
@@ -117,53 +117,53 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
               <option value="other">Other</option>
             </select>
           </div>
-          <div className="na-flex-1">
-            <label className="na-metadata na-mb-2 na-block">Search</label>
+          <div className="flex-1">
+            <label className="caption mb-2 block">Search</label>
             <input
               type="text"
               name="search"
-              className="na-input na-w-full"
+              className="input w-full"
               placeholder="Search documents..."
               defaultValue={searchParams.search || ''}
             />
           </div>
-          <button type="submit" className="na-btn na-btn-secondary">
+          <button type="submit" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-secondary">
             Filter
           </button>
-          <Link href="/vendor/documents" className="na-btn na-btn-ghost">
+          <Link href="/vendor/documents" className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer bg-transparent hover:bg-nx-ghost-hover text-nx-text-main">
             Clear
           </Link>
         </form>
       </div>
 
       {/* Documents Grid + Preview Layout */}
-      <div className="na-grid na-grid-cols-1 lg:na-grid-cols-3 na-gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Documents List */}
-        <div className="lg:na-col-span-2">
+        <div className="lg:col-span-2">
           {Object.keys(documentsByCategory).length === 0 ? (
-            <div className="na-card na-p-6 na-text-center">
-              <h2 className="na-h4">No Documents Found</h2>
-              <p className="na-body na-mt-2">Upload your first document to get started.</p>
+            <div className="card p-6 text-center">
+              <h2 className="text-base font-semibold text-nx-text-main">No Documents Found</h2>
+              <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main mt-2">Upload your first document to get started.</p>
             </div>
           ) : (
-            <div className="na-space-y-6">
+            <div className="space-y-6">
               {Object.entries(documentsByCategory).map(([category, docs]) => (
-                <div key={category} className="na-card na-p-6">
-                  <h3 className="na-h4 na-mb-4">{category.toUpperCase()}</h3>
-                  <div className="na-space-y-2">
+                <div key={category} className="card p-6">
+                  <h3 className="text-base font-semibold text-nx-text-main mb-4">{category.toUpperCase()}</h3>
+                  <div className="space-y-2">
                     {docs.map((doc) => (
                       <Link
                         key={doc.id}
                         href={`/vendor/documents?document_id=${doc.id}`}
-                        className="na-card na-p-4 na-flex na-items-center na-justify-between na-hover-bg-paper-2"
+                        className="card p-4 flex items-center justify-between hover:bg-nx-surface-well"
                       >
                         <div>
-                          <div className="na-body">{doc.name}</div>
-                          <div className="na-metadata na-text-sm">
+                          <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{doc.name}</div>
+                          <div className="caption text-sm">
                             {new Date(doc.created_at).toLocaleDateString()}
                           </div>
                         </div>
-                        <div className="na-metadata na-text-sm">{doc.file_type}</div>
+                        <div className="caption text-sm">{doc.file_type}</div>
                       </Link>
                     ))}
                   </div>
@@ -174,34 +174,34 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
         </div>
 
         {/* Document Preview */}
-        <div className="lg:na-col-span-1">
+        <div className="lg:col-span-1">
           {selectedDocument ? (
-            <div className="na-card na-p-6">
-              <h3 className="na-h4 na-mb-4">Document Details</h3>
-              <div className="na-space-y-4">
+            <div className="card p-6">
+              <h3 className="text-base font-semibold text-nx-text-main mb-4">Document Details</h3>
+              <div className="space-y-4">
                 <div>
-                  <label className="na-metadata na-mb-2 na-block">Name</label>
-                  <div className="na-body">{selectedDocument.name}</div>
+                  <label className="caption mb-2 block">Name</label>
+                  <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{selectedDocument.name}</div>
                 </div>
                 <div>
-                  <label className="na-metadata na-mb-2 na-block">Category</label>
-                  <div className="na-body">{selectedDocument.category}</div>
+                  <label className="caption mb-2 block">Category</label>
+                  <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{selectedDocument.category}</div>
                 </div>
                 <div>
-                  <label className="na-metadata na-mb-2 na-block">Created</label>
-                  <div className="na-body">
+                  <label className="caption mb-2 block">Created</label>
+                  <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">
                     {new Date(selectedDocument.created_at).toLocaleString()}
                   </div>
                 </div>
                 <div>
-                  <label className="na-metadata na-mb-2 na-block">File Type</label>
-                  <div className="na-body">{selectedDocument.file_type}</div>
+                  <label className="caption mb-2 block">File Type</label>
+                  <div className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">{selectedDocument.file_type}</div>
                 </div>
                 <a
                   href={selectedDocument.file_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="na-btn na-btn-primary na-w-full"
+                  className="inline-flex items-center justify-center rounded-[var(--nx-radius-control)] px-4 py-2 font-medium transition-colors cursor-pointer btn-primary w-full"
                 >
                   View Document
                 </a>
@@ -209,14 +209,14 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
 
               {/* Version History */}
               {documentVersions.length > 0 && (
-                <div className="na-mt-6">
-                  <h4 className="na-h5 na-mb-4">Version History</h4>
-                  <div className="na-space-y-2">
+                <div className="mt-6">
+                  <h4 className="text-sm font-semibold text-nx-text-main mb-4">Version History</h4>
+                  <div className="space-y-2">
                     {documentVersions.map((version: unknown) => {
                       const v = version as { id: string; version_number: number; created_at: string };
                       return (
-                        <div key={v.id} className="na-card na-p-3">
-                          <div className="na-metadata na-text-sm">
+                        <div key={v.id} className="card p-3">
+                          <div className="caption text-sm">
                             Version {v.version_number} - {new Date(v.created_at).toLocaleDateString()}
                           </div>
                         </div>
@@ -227,8 +227,8 @@ export default async function VendorDocumentsPage({ searchParams }: VendorDocume
               )}
             </div>
           ) : (
-            <div className="na-card na-p-6 na-text-center">
-              <p className="na-body">Select a document to view details</p>
+            <div className="card p-6 text-center">
+              <p className="text-[length:var(--nx-body-size)] leading-[var(--nx-body-line)] text-nx-text-main">Select a document to view details</p>
             </div>
           )}
         </div>
