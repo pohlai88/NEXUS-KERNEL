@@ -1,0 +1,162 @@
+{
+  "MY": [
+    {
+      "account_name": "Cash",
+      "account_type": "Asset",
+      "root_type": "Asset",
+      "is_group": false,
+      "parent_account": "Current Assets"
+    },
+    {
+      "account_name": "Bank",
+      "account_type": "Asset",
+      "root_type": "Asset",
+      "is_group": false,
+      "parent_account": "Current Assets"
+    },
+    {
+      "account_name": "Accounts Receivable",
+      "account_type": "Asset",
+      "root_type": "Asset",
+      "is_group": false,
+      "parent_account": "Current Assets"
+    },
+    {
+      "account_name": "Inventory",
+      "account_type": "Asset",
+      "root_type": "Asset",
+      "is_group": false,
+      "parent_account": "Current Assets"
+    },
+    {
+      "account_name": "Fixed Assets",
+      "account_type": "Asset",
+      "root_type": "Asset",
+      "is_group": true,
+      "parent_account": "Assets"
+    },
+    {
+      "account_name": "Accounts Payable",
+      "account_type": "Liability",
+      "root_type": "Liability",
+      "is_group": false,
+      "parent_account": "Current Liabilities"
+    },
+    {
+      "account_name": "Sales",
+      "account_type": "Income",
+      "root_type": "Income",
+      "is_group": false,
+      "parent_account": "Income"
+    },
+    {
+      "account_name": "Cost of Goods Sold",
+      "account_type": "Expense",
+      "root_type": "Expense",
+      "is_group": false,
+      "parent_account": "Expenses"
+    },
+    {
+      "account_name": "Operating Expenses",
+      "account_type": "Expense",
+      "root_type": "Expense",
+      "is_group": true,
+      "parent_account": "Expenses"
+    }
+  ],
+  "SG": [
+    {
+      "account_name": "Cash",
+      "account_type": "Asset",
+      "root_type": "Asset",
+      "is_group": false,
+      "parent_account": "Current Assets"
+    },
+    {
+      "account_name": "Bank",
+      "account_type": "Asset",
+      "root_type": "Asset",
+      "is_group": false,
+      "parent_account": "Current Assets"
+    },
+    {
+      "account_name": "Accounts Receivable",
+      "account_type": "Asset",
+      "root_type": "Asset",
+      "is_group": false,
+      "parent_account": "Current Assets"
+    },
+    {
+      "account_name": "GST Input",
+      "account_type": "Asset",
+      "root_type": "Asset",
+      "is_group": false,
+      "parent_account": "Current Assets"
+    },
+    {
+      "account_name": "GST Output",
+      "account_type": "Liability",
+      "root_type": "Liability",
+      "is_group": false,
+      "parent_account": "Current Liabilities"
+    },
+    {
+      "account_name": "Sales",
+      "account_type": "Income",
+      "root_type": "Income",
+      "is_group": false,
+      "parent_account": "Income"
+    },
+    {
+      "account_name": "Cost of Goods Sold",
+      "account_type": "Expense",
+      "root_type": "Expense",
+      "is_group": false,
+      "parent_account": "Expenses"
+    }
+  ],
+  "US": [
+    {
+      "account_name": "Cash",
+      "account_type": "Asset",
+      "root_type": "Asset",
+      "is_group": false,
+      "parent_account": "Current Assets"
+    },
+    {
+      "account_name": "Bank",
+      "account_type": "Asset",
+      "root_type": "Asset",
+      "is_group": false,
+      "parent_account": "Current Assets"
+    },
+    {
+      "account_name": "Accounts Receivable",
+      "account_type": "Asset",
+      "root_type": "Asset",
+      "is_group": false,
+      "parent_account": "Current Assets"
+    },
+    {
+      "account_name": "Sales Tax Payable",
+      "account_type": "Liability",
+      "root_type": "Liability",
+      "is_group": false,
+      "parent_account": "Current Liabilities"
+    },
+    {
+      "account_name": "Sales",
+      "account_type": "Income",
+      "root_type": "Income",
+      "is_group": false,
+      "parent_account": "Income"
+    },
+    {
+      "account_name": "Cost of Goods Sold",
+      "account_type": "Expense",
+      "root_type": "Expense",
+      "is_group": false,
+      "parent_account": "Expenses"
+    }
+  ]
+}

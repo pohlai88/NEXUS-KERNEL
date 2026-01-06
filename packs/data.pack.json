@@ -1,0 +1,568 @@
+{
+  "id": "data",
+  "name": "Data Hygiene & Precision",
+  "version": "1.0.0",
+  "domain": "DATA",
+  "description": "Mathematical precision, schema validation, serialization, and integrity - prevents IEEE 754 errors and data corruption",
+  "priority": 50,
+  "authoritative_for": {
+    "concepts": [
+      "SCHEMA_VALIDATION_POLICY",
+      "MATH_PRECISION_POLICY",
+      "SERIALIZATION_PROFILE",
+      "DATA_SANITIZATION_RULE",
+      "INTEGRITY_CHECK_POLICY"
+    ],
+    "value_sets": [
+      "VALIDATION_ENGINES",
+      "VALIDATION_STRICTNESS",
+      "MATH_LIBRARIES",
+      "ROUNDING_MODES",
+      "SERIALIZATION_FORMATS",
+      "SANITIZATION_ACTIONS",
+      "HASH_ALGORITHMS"
+    ]
+  },
+  "concepts": [
+    {
+      "code": "SCHEMA_VALIDATION_POLICY",
+      "category": "ENTITY",
+      "domain": "DATA",
+      "description": "Authoritative schema validation engine and strictness per entity type (Zod/TypeBox/JSON Schema)",
+      "tags": ["validation", "schema", "zod", "type-safety"],
+      "value_sets": ["VALIDATION_ENGINES", "VALIDATION_STRICTNESS"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "Prevents drift between runtime data and TypeScript types; critical for Zod-based systems",
+        "risk": "CRITICAL - Loose validation causes data corruption"
+      }
+    },
+    {
+      "code": "MATH_PRECISION_POLICY",
+      "category": "ENTITY",
+      "domain": "DATA",
+      "description": "Mathematical precision rules to prevent IEEE 754 floating-point errors in financial calculations",
+      "tags": ["precision", "decimal", "financial", "ieee-754"],
+      "value_sets": ["MATH_LIBRARIES", "ROUNDING_MODES"],
+      "metadata": {
+        "effective_dating": false,
+        "purpose": "BLOCKER: Prevents 0.1 + 0.2 !== 0.3 errors in currency calculations",
+        "risk": "CRITICAL - Financial calculation errors cause audit failures"
+      }
+    },
+    {
+      "code": "SERIALIZATION_PROFILE",
+      "category": "ENTITY",
+      "domain": "DATA",
+      "description": "Data format rules for storage vs transmission (JSON/Protobuf/Avro, ISO8601 vs Epoch)",
+      "tags": ["serialization", "json", "protobuf", "iso8601"],
+      "value_sets": ["SERIALIZATION_FORMATS"],
+      "metadata": {
+        "effective_dating": false,
+        "purpose": "Ensures interoperability across services and external integrations",
+        "risk": "HIGH - Inconsistent date formats break integrations"
+      }
+    },
+    {
+      "code": "DATA_SANITIZATION_RULE",
+      "category": "ENTITY",
+      "domain": "DATA",
+      "description": "Input hygiene rules: XSS stripping, unicode normalization, zero-width character removal",
+      "tags": ["sanitization", "xss", "security", "owasp"],
+      "value_sets": ["SANITIZATION_ACTIONS"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "Prevents invisible characters and malicious input from corrupting data",
+        "risk": "HIGH - XSS and search-breaking invisible chars"
+      }
+    },
+    {
+      "code": "INTEGRITY_CHECK_POLICY",
+      "category": "ENTITY",
+      "domain": "DATA",
+      "description": "Tamper-evidence for critical ledgers using hash chains or Merkle trees",
+      "tags": ["integrity", "hashing", "audit", "blockchain"],
+      "value_sets": ["HASH_ALGORITHMS"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "Cryptographic proof that journal entries have not been altered",
+        "risk": "MEDIUM - Required for blockchain-lite audit features"
+      }
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "VALIDATION_ENGINES",
+      "label": "Schema Validation Engines",
+      "description": "Runtime schema validation libraries",
+      "domain": "DATA",
+      "status": "ACTIVE",
+      "value_count": 5,
+      "tags": ["validation", "schema"]
+    },
+    {
+      "code": "VALIDATION_STRICTNESS",
+      "label": "Validation Strictness Modes",
+      "description": "Strictness levels for schema validation",
+      "domain": "DATA",
+      "status": "ACTIVE",
+      "value_count": 4,
+      "tags": ["validation", "strictness"]
+    },
+    {
+      "code": "MATH_LIBRARIES",
+      "label": "Mathematical Precision Libraries",
+      "description": "Libraries for arbitrary-precision decimal arithmetic",
+      "domain": "DATA",
+      "status": "ACTIVE",
+      "value_count": 5,
+      "tags": ["math", "precision", "decimal"]
+    },
+    {
+      "code": "ROUNDING_MODES",
+      "label": "Decimal Rounding Modes",
+      "description": "Rounding strategies for financial calculations",
+      "domain": "DATA",
+      "status": "ACTIVE",
+      "value_count": 7,
+      "tags": ["rounding", "decimal", "gaap"]
+    },
+    {
+      "code": "SERIALIZATION_FORMATS",
+      "label": "Data Serialization Formats",
+      "description": "Formats for data at rest and in transit",
+      "domain": "DATA",
+      "status": "ACTIVE",
+      "value_count": 6,
+      "tags": ["serialization", "format"]
+    },
+    {
+      "code": "SANITIZATION_ACTIONS",
+      "label": "Data Sanitization Actions",
+      "description": "Actions for input hygiene",
+      "domain": "DATA",
+      "status": "ACTIVE",
+      "value_count": 5,
+      "tags": ["sanitization", "security"]
+    },
+    {
+      "code": "HASH_ALGORITHMS",
+      "label": "Cryptographic Hash Algorithms",
+      "description": "Algorithms for data integrity verification",
+      "domain": "DATA",
+      "status": "ACTIVE",
+      "value_count": 4,
+      "tags": ["hash", "crypto", "integrity"]
+    }
+  ],
+  "values": [
+    {
+      "code": "ZOD",
+      "value_set_code": "VALIDATION_ENGINES",
+      "label": "Zod",
+      "description": "TypeScript-first schema validation with type inference",
+      "sort_order": 1,
+      "metadata": {
+        "library": "@zod/core",
+        "performance": "moderate",
+        "type_inference": true,
+        "use_case": "Control plane, configuration"
+      }
+    },
+    {
+      "code": "TYPEBOX",
+      "value_set_code": "VALIDATION_ENGINES",
+      "label": "TypeBox",
+      "description": "JSON Schema Type Builder with JIT compilation",
+      "sort_order": 2,
+      "metadata": {
+        "library": "@sinclair/typebox",
+        "performance": "high",
+        "type_inference": true,
+        "use_case": "Data plane, high-volume ingestion"
+      }
+    },
+    {
+      "code": "AJV",
+      "value_set_code": "VALIDATION_ENGINES",
+      "label": "AJV",
+      "description": "Another JSON Schema Validator (fastest)",
+      "sort_order": 3,
+      "metadata": {
+        "library": "ajv",
+        "performance": "very_high",
+        "type_inference": false,
+        "use_case": "High-throughput APIs"
+      }
+    },
+    {
+      "code": "YUP",
+      "value_set_code": "VALIDATION_ENGINES",
+      "label": "Yup",
+      "description": "Object schema validation (legacy)",
+      "sort_order": 4,
+      "metadata": {
+        "library": "yup",
+        "performance": "moderate",
+        "type_inference": false,
+        "use_case": "Legacy React forms"
+      }
+    },
+    {
+      "code": "JSON_SCHEMA",
+      "value_set_code": "VALIDATION_ENGINES",
+      "label": "JSON Schema",
+      "description": "Standard JSON Schema Draft 2020-12",
+      "sort_order": 5,
+      "metadata": {
+        "standard": "JSON Schema 2020-12",
+        "performance": "varies",
+        "type_inference": false,
+        "use_case": "External API contracts"
+      }
+    },
+    {
+      "code": "STRICT",
+      "value_set_code": "VALIDATION_STRICTNESS",
+      "label": "Strict",
+      "description": "Fail on unknown keys, no coercion - for financial data",
+      "sort_order": 1,
+      "metadata": {
+        "unknown_keys": "error",
+        "type_coercion": false,
+        "use_case": "Journal entries, invoices, payments"
+      }
+    },
+    {
+      "code": "STRIP",
+      "value_set_code": "VALIDATION_STRICTNESS",
+      "label": "Strip Unknown",
+      "description": "Remove unknown keys silently - for external integrations",
+      "sort_order": 2,
+      "metadata": {
+        "unknown_keys": "strip",
+        "type_coercion": false,
+        "use_case": "Partner API responses"
+      }
+    },
+    {
+      "code": "COERCE",
+      "value_set_code": "VALIDATION_STRICTNESS",
+      "label": "Coerce Types",
+      "description": "Attempt type coercion (string to number) - for user input",
+      "sort_order": 3,
+      "metadata": {
+        "unknown_keys": "strip",
+        "type_coercion": true,
+        "use_case": "Web forms, CSV imports"
+      }
+    },
+    {
+      "code": "LENIENT",
+      "value_set_code": "VALIDATION_STRICTNESS",
+      "label": "Lenient",
+      "description": "Allow unknown keys, coerce types - for CRM notes",
+      "sort_order": 4,
+      "metadata": {
+        "unknown_keys": "allow",
+        "type_coercion": true,
+        "use_case": "Non-critical text fields"
+      }
+    },
+    {
+      "code": "DECIMAL_JS",
+      "value_set_code": "MATH_LIBRARIES",
+      "label": "Decimal.js",
+      "description": "Arbitrary-precision decimal arithmetic for JavaScript",
+      "sort_order": 1,
+      "metadata": {
+        "library": "decimal.js",
+        "max_precision": "unlimited",
+        "standard": "IEEE 754-2008",
+        "recommended": true
+      }
+    },
+    {
+      "code": "DINERO_JS",
+      "value_set_code": "MATH_LIBRARIES",
+      "label": "Dinero.js",
+      "description": "Currency-specific immutable calculations",
+      "sort_order": 2,
+      "metadata": {
+        "library": "dinero.js",
+        "max_precision": "currency-defined",
+        "currency_aware": true,
+        "recommended": true
+      }
+    },
+    {
+      "code": "BIG_JS",
+      "value_set_code": "MATH_LIBRARIES",
+      "label": "Big.js",
+      "description": "Small arbitrary-precision library",
+      "sort_order": 3,
+      "metadata": {
+        "library": "big.js",
+        "max_precision": "unlimited",
+        "size": "small"
+      }
+    },
+    {
+      "code": "BIGNUMBER_JS",
+      "value_set_code": "MATH_LIBRARIES",
+      "label": "BigNumber.js",
+      "description": "Feature-rich arbitrary-precision library",
+      "sort_order": 4,
+      "metadata": {
+        "library": "bignumber.js",
+        "max_precision": "unlimited",
+        "features": "comprehensive"
+      }
+    },
+    {
+      "code": "NATIVE_BIGINT",
+      "value_set_code": "MATH_LIBRARIES",
+      "label": "Native BigInt",
+      "description": "JavaScript native BigInt (integers only)",
+      "sort_order": 5,
+      "metadata": {
+        "library": "native",
+        "max_precision": "unlimited",
+        "limitation": "integers only - DO NOT use for currency"
+      }
+    },
+    {
+      "code": "HALF_UP",
+      "value_set_code": "ROUNDING_MODES",
+      "label": "Round Half Up",
+      "description": "Round 0.5 up (GAAP standard)",
+      "sort_order": 1,
+      "metadata": {
+        "standard": "GAAP",
+        "example": "2.5 → 3, -2.5 → -3"
+      }
+    },
+    {
+      "code": "HALF_EVEN",
+      "value_set_code": "ROUNDING_MODES",
+      "label": "Round Half Even (Banker's)",
+      "description": "Round to nearest even number (reduces bias)",
+      "sort_order": 2,
+      "metadata": {
+        "standard": "IEEE 754",
+        "example": "2.5 → 2, 3.5 → 4"
+      }
+    },
+    {
+      "code": "HALF_DOWN",
+      "value_set_code": "ROUNDING_MODES",
+      "label": "Round Half Down",
+      "description": "Round 0.5 down",
+      "sort_order": 3,
+      "metadata": {
+        "example": "2.5 → 2, -2.5 → -2"
+      }
+    },
+    {
+      "code": "CEILING",
+      "value_set_code": "ROUNDING_MODES",
+      "label": "Ceiling",
+      "description": "Always round up",
+      "sort_order": 4,
+      "metadata": {
+        "example": "2.1 → 3, -2.9 → -2"
+      }
+    },
+    {
+      "code": "FLOOR",
+      "value_set_code": "ROUNDING_MODES",
+      "label": "Floor",
+      "description": "Always round down",
+      "sort_order": 5,
+      "metadata": {
+        "example": "2.9 → 2, -2.1 → -3"
+      }
+    },
+    {
+      "code": "TRUNCATE",
+      "value_set_code": "ROUNDING_MODES",
+      "label": "Truncate",
+      "description": "Remove decimal places (toward zero)",
+      "sort_order": 6,
+      "metadata": {
+        "example": "2.9 → 2, -2.9 → -2"
+      }
+    },
+    {
+      "code": "NONE",
+      "value_set_code": "ROUNDING_MODES",
+      "label": "No Rounding",
+      "description": "Preserve full precision",
+      "sort_order": 7,
+      "metadata": {
+        "use_case": "Intermediate calculations only"
+      }
+    },
+    {
+      "code": "JSON",
+      "value_set_code": "SERIALIZATION_FORMATS",
+      "label": "JSON",
+      "description": "JSON with ISO 8601 dates",
+      "sort_order": 1,
+      "metadata": {
+        "date_format": "ISO 8601",
+        "use_case": "Public APIs, configuration"
+      }
+    },
+    {
+      "code": "PROTOBUF",
+      "value_set_code": "SERIALIZATION_FORMATS",
+      "label": "Protocol Buffers",
+      "description": "Binary format for high-throughput",
+      "sort_order": 2,
+      "metadata": {
+        "date_format": "unix_timestamp",
+        "use_case": "Internal message bus, gRPC"
+      }
+    },
+    {
+      "code": "AVRO",
+      "value_set_code": "SERIALIZATION_FORMATS",
+      "label": "Apache Avro",
+      "description": "Schema evolution friendly",
+      "sort_order": 3,
+      "metadata": {
+        "date_format": "logical_type",
+        "use_case": "Data lake, streaming"
+      }
+    },
+    {
+      "code": "MSGPACK",
+      "value_set_code": "SERIALIZATION_FORMATS",
+      "label": "MessagePack",
+      "description": "Efficient binary JSON-like",
+      "sort_order": 4,
+      "metadata": {
+        "date_format": "extension",
+        "use_case": "Real-time sync"
+      }
+    },
+    {
+      "code": "XML",
+      "value_set_code": "SERIALIZATION_FORMATS",
+      "label": "XML",
+      "description": "Legacy format (SOAP, EDI)",
+      "sort_order": 5,
+      "metadata": {
+        "date_format": "ISO 8601",
+        "use_case": "Government EDI, legacy B2B"
+      }
+    },
+    {
+      "code": "CSV",
+      "value_set_code": "SERIALIZATION_FORMATS",
+      "label": "CSV",
+      "description": "Flat file (RFC 4180)",
+      "sort_order": 6,
+      "metadata": {
+        "date_format": "configurable",
+        "use_case": "Data import/export, reports"
+      }
+    },
+    {
+      "code": "STRIP",
+      "value_set_code": "SANITIZATION_ACTIONS",
+      "label": "Strip",
+      "description": "Remove matching patterns",
+      "sort_order": 1,
+      "metadata": {
+        "use_case": "HTML tags, script tags"
+      }
+    },
+    {
+      "code": "REJECT",
+      "value_set_code": "SANITIZATION_ACTIONS",
+      "label": "Reject",
+      "description": "Fail validation if pattern found",
+      "sort_order": 2,
+      "metadata": {
+        "use_case": "SQL injection attempts"
+      }
+    },
+    {
+      "code": "ESCAPE",
+      "value_set_code": "SANITIZATION_ACTIONS",
+      "label": "Escape",
+      "description": "HTML/XML entity encoding",
+      "sort_order": 3,
+      "metadata": {
+        "use_case": "Display user input in HTML"
+      }
+    },
+    {
+      "code": "NORMALIZE",
+      "value_set_code": "SANITIZATION_ACTIONS",
+      "label": "Normalize Unicode",
+      "description": "Apply NFC/NFKC normalization",
+      "sort_order": 4,
+      "metadata": {
+        "use_case": "Remove zero-width chars, diacritics"
+      }
+    },
+    {
+      "code": "TRIM",
+      "value_set_code": "SANITIZATION_ACTIONS",
+      "label": "Trim",
+      "description": "Remove leading/trailing whitespace",
+      "sort_order": 5,
+      "metadata": {
+        "use_case": "All text inputs"
+      }
+    },
+    {
+      "code": "SHA256",
+      "value_set_code": "HASH_ALGORITHMS",
+      "label": "SHA-256",
+      "description": "NIST standard 256-bit hash",
+      "sort_order": 1,
+      "metadata": {
+        "standard": "NIST FIPS 180-4",
+        "security": "high",
+        "recommended": true
+      }
+    },
+    {
+      "code": "SHA512",
+      "value_set_code": "HASH_ALGORITHMS",
+      "label": "SHA-512",
+      "description": "NIST standard 512-bit hash",
+      "sort_order": 2,
+      "metadata": {
+        "standard": "NIST FIPS 180-4",
+        "security": "very_high"
+      }
+    },
+    {
+      "code": "BLAKE3",
+      "value_set_code": "HASH_ALGORITHMS",
+      "label": "BLAKE3",
+      "description": "Modern fast cryptographic hash",
+      "sort_order": 3,
+      "metadata": {
+        "security": "high",
+        "performance": "very_high"
+      }
+    },
+    {
+      "code": "SHA3_256",
+      "value_set_code": "HASH_ALGORITHMS",
+      "label": "SHA3-256",
+      "description": "Keccak-based hash function",
+      "sort_order": 4,
+      "metadata": {
+        "standard": "NIST FIPS 202",
+        "security": "high"
+      }
+    }
+  ]
+}

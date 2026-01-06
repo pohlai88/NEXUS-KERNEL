@@ -1,0 +1,542 @@
+{
+  "id": "gtm",
+  "name": "Global Trade Management",
+  "version": "1.0.0",
+  "domain": "GTM",
+  "description": "Trade compliance, sanctions screening, and customs classification - OFAC/WCO compliant",
+  "priority": 20,
+  "authoritative_for": {
+    "concepts": [
+      "SANCTION_LIST",
+      "HS_CODE",
+      "TRADE_RESTRICTION",
+      "CUSTOMS_DECLARATION"
+    ],
+    "value_sets": [
+      "SANCTION_LIST_SOURCES",
+      "INCOTERMS",
+      "EXPORT_CONTROL_REGIMES",
+      "CUSTOMS_PROCEDURE_CODES"
+    ]
+  },
+  "concepts": [
+    {
+      "code": "SANCTION_LIST",
+      "category": "ENTITY",
+      "domain": "GTM",
+      "description": "Denied party screening list (OFAC, EU, UN) for trade compliance",
+      "tags": [
+        "compliance",
+        "sanctions",
+        "screening"
+      ]
+    },
+    {
+      "code": "HS_CODE",
+      "category": "ATTRIBUTE",
+      "domain": "GTM",
+      "description": "Harmonized System code for product classification",
+      "tags": [
+        "customs",
+        "classification",
+        "wco"
+      ]
+    },
+    {
+      "code": "TRADE_RESTRICTION",
+      "category": "ENTITY",
+      "domain": "GTM",
+      "description": "Export control or import restriction rule",
+      "tags": [
+        "compliance",
+        "restriction"
+      ]
+    },
+    {
+      "code": "CUSTOMS_DECLARATION",
+      "category": "ENTITY",
+      "domain": "GTM",
+      "description": "Customs declaration document",
+      "tags": [
+        "customs",
+        "declaration"
+      ]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "SANCTION_LIST_SOURCES",
+      "label": "Sanction List Sources",
+      "description": "Authoritative denied party lists for screening",
+      "domain": "GTM",
+      "status": "ACTIVE",
+      "value_count": 10,
+      "tags": [
+        "sanctions",
+        "screening",
+        "compliance"
+      ]
+    },
+    {
+      "code": "INCOTERMS",
+      "label": "Incoterms 2020",
+      "description": "ICC International Commercial Terms",
+      "domain": "GTM",
+      "status": "ACTIVE",
+      "value_count": 11,
+      "tags": [
+        "trade",
+        "incoterms",
+        "icc"
+      ]
+    },
+    {
+      "code": "EXPORT_CONTROL_REGIMES",
+      "label": "Export Control Regimes",
+      "description": "International export control arrangements",
+      "domain": "GTM",
+      "status": "ACTIVE",
+      "value_count": 5,
+      "tags": [
+        "export",
+        "control"
+      ]
+    },
+    {
+      "code": "CUSTOMS_PROCEDURE_CODES",
+      "label": "Customs Procedure Codes",
+      "description": "Common customs procedure classifications",
+      "domain": "GTM",
+      "status": "ACTIVE",
+      "value_count": 20,
+      "tags": [
+        "customs",
+        "procedure"
+      ]
+    }
+  ],
+  "values": [
+    {
+      "value_set_code": "SANCTION_LIST_SOURCES",
+      "code": "OFAC_SDN",
+      "label": "OFAC SDN List",
+      "description": "US Treasury Specially Designated Nationals and Blocked Persons",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "US Treasury OFAC",
+        "url": "https://sanctionssearch.ofac.treas.gov/",
+        "update_frequency": "Daily",
+        "match_threshold": 95,
+        "jurisdiction": "USA",
+        "format": "XML/CSV"
+      }
+    },
+    {
+      "value_set_code": "SANCTION_LIST_SOURCES",
+      "code": "BIS_DPL",
+      "label": "BIS Denied Persons List",
+      "description": "US Commerce Bureau of Industry and Security Denied Persons",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "US BIS",
+        "url": "https://www.bis.doc.gov/",
+        "update_frequency": "As needed",
+        "match_threshold": 95,
+        "jurisdiction": "USA"
+      }
+    },
+    {
+      "value_set_code": "SANCTION_LIST_SOURCES",
+      "code": "UN_SANCTIONS",
+      "label": "UN Security Council Sanctions List",
+      "description": "United Nations consolidated sanctions list",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "UN Security Council",
+        "url": "https://www.un.org/securitycouncil/sanctions/",
+        "update_frequency": "Weekly",
+        "match_threshold": 95,
+        "jurisdiction": "Global",
+        "format": "XML"
+      }
+    },
+    {
+      "value_set_code": "SANCTION_LIST_SOURCES",
+      "code": "EU_SANCTIONS",
+      "label": "EU Consolidated Sanctions List",
+      "description": "European Union consolidated list of persons and entities",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "EU",
+        "url": "https://data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-entities-subject-to-eu-financial-sanctions/",
+        "update_frequency": "Daily",
+        "match_threshold": 95,
+        "jurisdiction": "EU",
+        "format": "XML"
+      }
+    },
+    {
+      "value_set_code": "SANCTION_LIST_SOURCES",
+      "code": "UK_SANCTIONS",
+      "label": "UK Sanctions List",
+      "description": "UK Office of Financial Sanctions Implementation",
+      "sort_order": 5,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "UK OFSI",
+        "url": "https://www.gov.uk/government/organisations/office-of-financial-sanctions-implementation",
+        "update_frequency": "Daily",
+        "match_threshold": 95,
+        "jurisdiction": "UK"
+      }
+    },
+    {
+      "value_set_code": "SANCTION_LIST_SOURCES",
+      "code": "INTERPOL_RED",
+      "label": "INTERPOL Red Notices",
+      "description": "International arrest warrants",
+      "sort_order": 6,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "INTERPOL",
+        "url": "https://www.interpol.int/",
+        "update_frequency": "Real-time",
+        "match_threshold": 98,
+        "jurisdiction": "Global"
+      }
+    },
+    {
+      "value_set_code": "SANCTION_LIST_SOURCES",
+      "code": "ASEAN_SANCTIONS",
+      "label": "ASEAN Sanctions (Bilateral)",
+      "description": "ASEAN member state bilateral sanctions",
+      "sort_order": 7,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "ASEAN Member States",
+        "update_frequency": "As needed",
+        "match_threshold": 95,
+        "jurisdiction": "ASEAN",
+        "note": "Aggregated from MY, SG, TH, VN, ID, PH"
+      }
+    },
+    {
+      "value_set_code": "SANCTION_LIST_SOURCES",
+      "code": "CANADA_SANCTIONS",
+      "label": "Canada Sanctions",
+      "description": "Canadian Autonomous Sanctions List",
+      "sort_order": 8,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "Global Affairs Canada",
+        "update_frequency": "As needed",
+        "match_threshold": 95,
+        "jurisdiction": "CA"
+      }
+    },
+    {
+      "value_set_code": "SANCTION_LIST_SOURCES",
+      "code": "AUSTRALIA_SANCTIONS",
+      "label": "Australia Sanctions",
+      "description": "Australian Sanctions Regime",
+      "sort_order": 9,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "DFAT Australia",
+        "update_frequency": "As needed",
+        "match_threshold": 95,
+        "jurisdiction": "AU"
+      }
+    },
+    {
+      "value_set_code": "SANCTION_LIST_SOURCES",
+      "code": "WORLDCHECK",
+      "label": "World-Check",
+      "description": "Commercial screening database (Refinitiv)",
+      "sort_order": 10,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "Refinitiv (LSEG)",
+        "type": "Commercial",
+        "update_frequency": "Daily",
+        "match_threshold": 90,
+        "jurisdiction": "Global",
+        "pep_coverage": true
+      }
+    },
+    {
+      "value_set_code": "INCOTERMS",
+      "code": "EXW",
+      "label": "Ex Works",
+      "description": "Seller makes goods available at their premises",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "version": "Incoterms 2020",
+        "risk_transfer": "Seller's premises",
+        "transport_mode": "Any",
+        "seller_responsibility": "Minimal"
+      }
+    },
+    {
+      "value_set_code": "INCOTERMS",
+      "code": "FCA",
+      "label": "Free Carrier",
+      "description": "Seller delivers goods to carrier at named place",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "version": "Incoterms 2020",
+        "risk_transfer": "Named place",
+        "transport_mode": "Any"
+      }
+    },
+    {
+      "value_set_code": "INCOTERMS",
+      "code": "CPT",
+      "label": "Carriage Paid To",
+      "description": "Seller pays carriage to named destination",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "version": "Incoterms 2020",
+        "risk_transfer": "First carrier",
+        "transport_mode": "Any"
+      }
+    },
+    {
+      "value_set_code": "INCOTERMS",
+      "code": "CIP",
+      "label": "Carriage and Insurance Paid To",
+      "description": "Seller pays carriage and insurance to destination",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "version": "Incoterms 2020",
+        "risk_transfer": "First carrier",
+        "transport_mode": "Any",
+        "insurance": "Seller provides"
+      }
+    },
+    {
+      "value_set_code": "INCOTERMS",
+      "code": "DAP",
+      "label": "Delivered at Place",
+      "description": "Seller delivers to named destination, ready for unloading",
+      "sort_order": 5,
+      "status": "ACTIVE",
+      "metadata": {
+        "version": "Incoterms 2020",
+        "risk_transfer": "Destination (before unloading)",
+        "transport_mode": "Any"
+      }
+    },
+    {
+      "value_set_code": "INCOTERMS",
+      "code": "DPU",
+      "label": "Delivered at Place Unloaded",
+      "description": "Seller delivers and unloads at named destination",
+      "sort_order": 6,
+      "status": "ACTIVE",
+      "metadata": {
+        "version": "Incoterms 2020",
+        "risk_transfer": "Destination (after unloading)",
+        "transport_mode": "Any",
+        "replaces": "DAT (Incoterms 2010)"
+      }
+    },
+    {
+      "value_set_code": "INCOTERMS",
+      "code": "DDP",
+      "label": "Delivered Duty Paid",
+      "description": "Seller delivers with all duties and taxes paid",
+      "sort_order": 7,
+      "status": "ACTIVE",
+      "metadata": {
+        "version": "Incoterms 2020",
+        "risk_transfer": "Destination",
+        "transport_mode": "Any",
+        "seller_responsibility": "Maximum"
+      }
+    },
+    {
+      "value_set_code": "INCOTERMS",
+      "code": "FAS",
+      "label": "Free Alongside Ship",
+      "description": "Seller delivers goods alongside vessel at port",
+      "sort_order": 8,
+      "status": "ACTIVE",
+      "metadata": {
+        "version": "Incoterms 2020",
+        "risk_transfer": "Port of shipment",
+        "transport_mode": "Sea/Inland waterway only"
+      }
+    },
+    {
+      "value_set_code": "INCOTERMS",
+      "code": "FOB",
+      "label": "Free on Board",
+      "description": "Seller delivers goods on board vessel",
+      "sort_order": 9,
+      "status": "ACTIVE",
+      "metadata": {
+        "version": "Incoterms 2020",
+        "risk_transfer": "On board vessel",
+        "transport_mode": "Sea/Inland waterway only"
+      }
+    },
+    {
+      "value_set_code": "INCOTERMS",
+      "code": "CFR",
+      "label": "Cost and Freight",
+      "description": "Seller pays freight to destination port",
+      "sort_order": 10,
+      "status": "ACTIVE",
+      "metadata": {
+        "version": "Incoterms 2020",
+        "risk_transfer": "On board vessel",
+        "transport_mode": "Sea/Inland waterway only"
+      }
+    },
+    {
+      "value_set_code": "INCOTERMS",
+      "code": "CIF",
+      "label": "Cost, Insurance and Freight",
+      "description": "Seller pays freight and insurance to destination",
+      "sort_order": 11,
+      "status": "ACTIVE",
+      "metadata": {
+        "version": "Incoterms 2020",
+        "risk_transfer": "On board vessel",
+        "transport_mode": "Sea/Inland waterway only",
+        "insurance": "Seller provides"
+      }
+    },
+    {
+      "value_set_code": "EXPORT_CONTROL_REGIMES",
+      "code": "WASSENAAR",
+      "label": "Wassenaar Arrangement",
+      "description": "Export controls for conventional arms and dual-use goods",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "established": 1996,
+        "members": 42,
+        "url": "https://www.wassenaar.org/"
+      }
+    },
+    {
+      "value_set_code": "EXPORT_CONTROL_REGIMES",
+      "code": "MTCR",
+      "label": "Missile Technology Control Regime",
+      "description": "Export controls for missile technology",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "established": 1987,
+        "members": 35
+      }
+    },
+    {
+      "value_set_code": "EXPORT_CONTROL_REGIMES",
+      "code": "NSG",
+      "label": "Nuclear Suppliers Group",
+      "description": "Nuclear export controls",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "established": 1975,
+        "members": 48
+      }
+    },
+    {
+      "value_set_code": "EXPORT_CONTROL_REGIMES",
+      "code": "AG",
+      "label": "Australia Group",
+      "description": "Chemical and biological export controls",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "established": 1985,
+        "members": 43
+      }
+    },
+    {
+      "value_set_code": "EXPORT_CONTROL_REGIMES",
+      "code": "EAR",
+      "label": "Export Administration Regulations (US)",
+      "description": "US export control regulations",
+      "sort_order": 5,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "US BIS",
+        "jurisdiction": "USA",
+        "scope": "Dual-use items"
+      }
+    },
+    {
+      "value_set_code": "CUSTOMS_PROCEDURE_CODES",
+      "code": "IMPORT_PERMANENT",
+      "label": "Permanent Import",
+      "description": "Goods imported for free circulation",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "duty_applicable": true,
+        "vat_applicable": true
+      }
+    },
+    {
+      "value_set_code": "CUSTOMS_PROCEDURE_CODES",
+      "code": "EXPORT_PERMANENT",
+      "label": "Permanent Export",
+      "description": "Goods exported permanently",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "export_declaration_required": true
+      }
+    },
+    {
+      "value_set_code": "CUSTOMS_PROCEDURE_CODES",
+      "code": "TRANSIT",
+      "label": "Transit",
+      "description": "Goods in transit through territory",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "duty_suspended": true,
+        "bond_required": true
+      }
+    },
+    {
+      "value_set_code": "CUSTOMS_PROCEDURE_CODES",
+      "code": "TEMPORARY_IMPORT",
+      "label": "Temporary Import",
+      "description": "Goods imported temporarily (ATA Carnet, etc.)",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "duty_suspended": true,
+        "return_required": true,
+        "max_duration_months": 12
+      }
+    },
+    {
+      "value_set_code": "CUSTOMS_PROCEDURE_CODES",
+      "code": "BONDED_WAREHOUSE",
+      "label": "Bonded Warehouse",
+      "description": "Goods stored in customs bonded warehouse",
+      "sort_order": 5,
+      "status": "ACTIVE",
+      "metadata": {
+        "duty_deferred": true,
+        "storage_period_limit": true
+      }
+    }
+  ]
+}

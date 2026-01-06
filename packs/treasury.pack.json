@@ -1,0 +1,602 @@
+{
+  "id": "treasury",
+  "name": "Treasury Management",
+  "version": "1.0.0",
+  "domain": "TRE",
+  "description": "Payment factory, bank reconciliation, and cash management - ISO 20022 compliant",
+  "priority": 25,
+  "authoritative_for": {
+    "concepts": [
+      "BANK_ACCOUNT",
+      "PAYMENT_FACTORY_RULE",
+      "BANK_STATEMENT",
+      "CASH_POOL"
+    ],
+    "value_sets": [
+      "BANK_STATEMENT_FORMATS",
+      "PAYMENT_METHODS_TREASURY",
+      "BANK_TRANSACTION_CODES",
+      "CLEARING_SYSTEMS",
+      "CASH_MANAGEMENT_STRUCTURES"
+    ]
+  },
+  "concepts": [
+    {
+      "code": "BANK_ACCOUNT",
+      "category": "ENTITY",
+      "domain": "TRE",
+      "description": "Bank account master data with IBAN/BIC",
+      "tags": [
+        "treasury",
+        "bank",
+        "cash"
+      ]
+    },
+    {
+      "code": "PAYMENT_FACTORY_RULE",
+      "category": "ENTITY",
+      "domain": "TRE",
+      "description": "Centralized payment routing rules (In-House Bank)",
+      "tags": [
+        "treasury",
+        "payment-factory",
+        "routing"
+      ]
+    },
+    {
+      "code": "BANK_STATEMENT",
+      "category": "ENTITY",
+      "domain": "TRE",
+      "description": "Electronic bank statement (MT940/CAMT.053)",
+      "tags": [
+        "treasury",
+        "reconciliation"
+      ]
+    },
+    {
+      "code": "CASH_POOL",
+      "category": "ENTITY",
+      "domain": "TRE",
+      "description": "Cash pooling structure for liquidity management",
+      "tags": [
+        "treasury",
+        "liquidity"
+      ]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "BANK_STATEMENT_FORMATS",
+      "label": "Bank Statement Formats",
+      "description": "Electronic bank statement format standards",
+      "domain": "TRE",
+      "status": "ACTIVE",
+      "value_count": 5,
+      "tags": [
+        "format",
+        "iso20022",
+        "swift"
+      ]
+    },
+    {
+      "code": "BANK_TRANSACTION_CODES",
+      "label": "Bank Transaction Codes",
+      "description": "ISO 20022 Bank Transaction Codes for reconciliation",
+      "domain": "TRE",
+      "status": "ACTIVE",
+      "value_count": 30,
+      "tags": [
+        "btc",
+        "iso20022",
+        "reconciliation"
+      ]
+    },
+    {
+      "code": "CLEARING_SYSTEMS",
+      "label": "Clearing Systems",
+      "description": "Payment clearing and settlement systems",
+      "domain": "TRE",
+      "status": "ACTIVE",
+      "value_count": 15,
+      "tags": [
+        "clearing",
+        "settlement"
+      ]
+    },
+    {
+      "code": "PAYMENT_METHODS_TREASURY",
+      "label": "Treasury Payment Methods",
+      "description": "Payment instruments used in treasury operations",
+      "domain": "TRE",
+      "status": "ACTIVE",
+      "value_count": 12,
+      "tags": [
+        "payment",
+        "instrument"
+      ]
+    },
+    {
+      "code": "CASH_MANAGEMENT_STRUCTURES",
+      "label": "Cash Management Structures",
+      "description": "Cash pooling and netting structures",
+      "domain": "TRE",
+      "status": "ACTIVE",
+      "value_count": 4,
+      "tags": [
+        "cash-pooling",
+        "liquidity"
+      ]
+    }
+  ],
+  "values": [
+    {
+      "value_set_code": "BANK_STATEMENT_FORMATS",
+      "code": "MT940",
+      "label": "MT940 (SWIFT)",
+      "description": "SWIFT MT940 customer statement message",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "standard": "SWIFT FIN",
+        "iso_equivalent": "CAMT.053",
+        "usage": "Legacy, widely supported",
+        "structure": "Fixed-field"
+      }
+    },
+    {
+      "value_set_code": "BANK_STATEMENT_FORMATS",
+      "code": "CAMT053",
+      "label": "CAMT.053 (ISO 20022)",
+      "description": "ISO 20022 Bank-to-Customer Statement",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "standard": "ISO 20022",
+        "replaces": "MT940",
+        "usage": "Modern standard",
+        "structure": "XML"
+      }
+    },
+    {
+      "value_set_code": "BANK_STATEMENT_FORMATS",
+      "code": "BAI2",
+      "label": "BAI2",
+      "description": "BAI2 Cash Management Balance Reporting",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "standard": "Banking Administration Institute",
+        "region": "USA",
+        "usage": "North American banks",
+        "structure": "Fixed-field"
+      }
+    },
+    {
+      "value_set_code": "BANK_STATEMENT_FORMATS",
+      "code": "CAMT052",
+      "label": "CAMT.052 (ISO 20022 Intraday)",
+      "description": "ISO 20022 Bank-to-Customer Account Report (Intraday)",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "standard": "ISO 20022",
+        "frequency": "Intraday",
+        "structure": "XML"
+      }
+    },
+    {
+      "value_set_code": "BANK_STATEMENT_FORMATS",
+      "code": "CAMT054",
+      "label": "CAMT.054 (ISO 20022 Debit/Credit)",
+      "description": "ISO 20022 Bank-to-Customer Debit/Credit Notification",
+      "sort_order": 5,
+      "status": "ACTIVE",
+      "metadata": {
+        "standard": "ISO 20022",
+        "usage": "Real-time notifications",
+        "structure": "XML"
+      }
+    },
+    {
+      "value_set_code": "BANK_TRANSACTION_CODES",
+      "code": "PMNT",
+      "label": "Payments",
+      "description": "General payment transactions",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "iso20022_domain": "Payments",
+        "family": "PMNT",
+        "posting_side": "Debit/Credit"
+      }
+    },
+    {
+      "value_set_code": "BANK_TRANSACTION_CODES",
+      "code": "RCDT",
+      "label": "Received Credit Transfer",
+      "description": "Incoming credit transfer",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "iso20022_domain": "Payments",
+        "family": "RCDT",
+        "posting_side": "Credit",
+        "auto_reconcile": "Match by reference"
+      }
+    },
+    {
+      "value_set_code": "BANK_TRANSACTION_CODES",
+      "code": "ICDT",
+      "label": "Issued Credit Transfer",
+      "description": "Outgoing credit transfer",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "iso20022_domain": "Payments",
+        "family": "ICDT",
+        "posting_side": "Debit",
+        "auto_reconcile": "Match by payment ID"
+      }
+    },
+    {
+      "value_set_code": "BANK_TRANSACTION_CODES",
+      "code": "RDDT",
+      "label": "Received Direct Debit",
+      "description": "Incoming direct debit",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "iso20022_domain": "Payments",
+        "family": "RDDT",
+        "posting_side": "Debit",
+        "auto_reconcile": "Match by mandate"
+      }
+    },
+    {
+      "value_set_code": "BANK_TRANSACTION_CODES",
+      "code": "IDDT",
+      "label": "Issued Direct Debit",
+      "description": "Outgoing direct debit collection",
+      "sort_order": 5,
+      "status": "ACTIVE",
+      "metadata": {
+        "iso20022_domain": "Payments",
+        "family": "IDDT",
+        "posting_side": "Credit",
+        "auto_reconcile": "Match by mandate"
+      }
+    },
+    {
+      "value_set_code": "BANK_TRANSACTION_CODES",
+      "code": "CCRD",
+      "label": "Customer Card Transaction",
+      "description": "Card payment transaction",
+      "sort_order": 6,
+      "status": "ACTIVE",
+      "metadata": {
+        "iso20022_domain": "Card Payments",
+        "family": "CCRD",
+        "posting_side": "Debit",
+        "auto_reconcile": "Match by merchant ID"
+      }
+    },
+    {
+      "value_set_code": "BANK_TRANSACTION_CODES",
+      "code": "CAJT",
+      "label": "Cash Management",
+      "description": "Cash management transfers",
+      "sort_order": 7,
+      "status": "ACTIVE",
+      "metadata": {
+        "iso20022_domain": "Cash Management",
+        "family": "CAJT",
+        "posting_side": "Debit/Credit",
+        "examples": "Sweep, Concentration"
+      }
+    },
+    {
+      "value_set_code": "BANK_TRANSACTION_CODES",
+      "code": "CHRG",
+      "label": "Charges and Fees",
+      "description": "Bank charges and fees",
+      "sort_order": 8,
+      "status": "ACTIVE",
+      "metadata": {
+        "iso20022_domain": "Charges",
+        "family": "CHRG",
+        "posting_side": "Debit",
+        "auto_reconcile": "Post to fee account"
+      }
+    },
+    {
+      "value_set_code": "BANK_TRANSACTION_CODES",
+      "code": "INTC",
+      "label": "Interest Credited",
+      "description": "Interest income",
+      "sort_order": 9,
+      "status": "ACTIVE",
+      "metadata": {
+        "iso20022_domain": "Interest",
+        "family": "INTC",
+        "posting_side": "Credit",
+        "auto_reconcile": "Post to interest income"
+      }
+    },
+    {
+      "value_set_code": "BANK_TRANSACTION_CODES",
+      "code": "INTD",
+      "label": "Interest Debited",
+      "description": "Interest expense",
+      "sort_order": 10,
+      "status": "ACTIVE",
+      "metadata": {
+        "iso20022_domain": "Interest",
+        "family": "INTD",
+        "posting_side": "Debit",
+        "auto_reconcile": "Post to interest expense"
+      }
+    },
+    {
+      "value_set_code": "CLEARING_SYSTEMS",
+      "code": "SWIFT",
+      "label": "SWIFT Network",
+      "description": "Society for Worldwide Interbank Financial Telecommunication",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "Messaging",
+        "scope": "Global",
+        "currencies": "Multi-currency",
+        "settlement": "Correspondent banking"
+      }
+    },
+    {
+      "value_set_code": "CLEARING_SYSTEMS",
+      "code": "SEPA_CT",
+      "label": "SEPA Credit Transfer",
+      "description": "Single Euro Payments Area credit transfers",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "Clearing",
+        "scope": "EU/EEA",
+        "currency": "EUR",
+        "settlement": "T+1",
+        "standard": "ISO 20022 (PAIN.001)"
+      }
+    },
+    {
+      "value_set_code": "CLEARING_SYSTEMS",
+      "code": "SEPA_DD",
+      "label": "SEPA Direct Debit",
+      "description": "SEPA direct debit scheme",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "Clearing",
+        "scope": "EU/EEA",
+        "currency": "EUR",
+        "standard": "ISO 20022 (PAIN.008)"
+      }
+    },
+    {
+      "value_set_code": "CLEARING_SYSTEMS",
+      "code": "CHAPS",
+      "label": "CHAPS (UK)",
+      "description": "Clearing House Automated Payment System (UK)",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "RTGS",
+        "scope": "UK",
+        "currency": "GBP",
+        "settlement": "Same day"
+      }
+    },
+    {
+      "value_set_code": "CLEARING_SYSTEMS",
+      "code": "FEDWIRE",
+      "label": "Fedwire (USA)",
+      "description": "Federal Reserve Wire Network",
+      "sort_order": 5,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "RTGS",
+        "scope": "USA",
+        "currency": "USD",
+        "settlement": "Real-time"
+      }
+    },
+    {
+      "value_set_code": "CLEARING_SYSTEMS",
+      "code": "ACH_USA",
+      "label": "ACH (USA)",
+      "description": "Automated Clearing House (USA)",
+      "sort_order": 6,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "Clearing",
+        "scope": "USA",
+        "currency": "USD",
+        "settlement": "T+1 to T+2"
+      }
+    },
+    {
+      "value_set_code": "CLEARING_SYSTEMS",
+      "code": "RENTAS_MY",
+      "label": "RENTAS (Malaysia)",
+      "description": "Real-time Electronic Transfer of Funds and Securities",
+      "sort_order": 7,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "RTGS",
+        "scope": "MY",
+        "currency": "MYR",
+        "settlement": "Real-time",
+        "operator": "Bank Negara Malaysia"
+      }
+    },
+    {
+      "value_set_code": "CLEARING_SYSTEMS",
+      "code": "FAST_SG",
+      "label": "FAST (Singapore)",
+      "description": "Fast and Secure Transfers",
+      "sort_order": 8,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "Real-time",
+        "scope": "SG",
+        "currency": "SGD",
+        "settlement": "Real-time",
+        "operator": "ABS"
+      }
+    },
+    {
+      "value_set_code": "CLEARING_SYSTEMS",
+      "code": "INSTAPAY_PH",
+      "label": "InstaPay (Philippines)",
+      "description": "Real-time low-value payments",
+      "sort_order": 9,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "Real-time",
+        "scope": "PH",
+        "currency": "PHP",
+        "settlement": "Real-time",
+        "operator": "PPMI"
+      }
+    },
+    {
+      "value_set_code": "CLEARING_SYSTEMS",
+      "code": "PROMPTPAY_TH",
+      "label": "PromptPay (Thailand)",
+      "description": "National e-payment system",
+      "sort_order": 10,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "Real-time",
+        "scope": "TH",
+        "currency": "THB",
+        "settlement": "Real-time",
+        "operator": "BOT"
+      }
+    },
+    {
+      "value_set_code": "PAYMENT_METHODS_TREASURY",
+      "code": "WIRE_TRANSFER",
+      "label": "Wire Transfer",
+      "description": "Electronic funds transfer via RTGS",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "speed": "Same day / Real-time",
+        "cost": "High",
+        "typical_amount": ">$10,000"
+      }
+    },
+    {
+      "value_set_code": "PAYMENT_METHODS_TREASURY",
+      "code": "ACH_CREDIT",
+      "label": "ACH Credit",
+      "description": "Automated clearing house credit transfer",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "speed": "T+1 to T+2",
+        "cost": "Low",
+        "typical_amount": "<$10,000"
+      }
+    },
+    {
+      "value_set_code": "PAYMENT_METHODS_TREASURY",
+      "code": "DIRECT_DEBIT",
+      "label": "Direct Debit",
+      "description": "Pull-based payment collection",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "direction": "Pull",
+        "mandate_required": true,
+        "typical_use": "Recurring payments"
+      }
+    },
+    {
+      "value_set_code": "PAYMENT_METHODS_TREASURY",
+      "code": "CHECK",
+      "label": "Check",
+      "description": "Paper check",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "speed": "Slow (5-7 days)",
+        "cost": "Medium",
+        "declining_usage": true
+      }
+    },
+    {
+      "value_set_code": "PAYMENT_METHODS_TREASURY",
+      "code": "VIRTUAL_ACCOUNT",
+      "label": "Virtual Account",
+      "description": "Bank-generated virtual account for reconciliation",
+      "sort_order": 5,
+      "status": "ACTIVE",
+      "metadata": {
+        "reconciliation": "Automatic by account number",
+        "typical_use": "Receivables"
+      }
+    },
+    {
+      "value_set_code": "CASH_MANAGEMENT_STRUCTURES",
+      "code": "PHYSICAL_POOLING",
+      "label": "Physical Cash Pooling",
+      "description": "Actual transfer of funds to master account",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "Zero-balancing or target-balancing",
+        "interest": "Centralized on master account",
+        "intercompany_loans": "Created on sweep"
+      }
+    },
+    {
+      "value_set_code": "CASH_MANAGEMENT_STRUCTURES",
+      "code": "NOTIONAL_POOLING",
+      "label": "Notional Cash Pooling",
+      "description": "Virtual offset of balances for interest calculation",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "Virtual pooling",
+        "interest": "Calculated on net position",
+        "intercompany_loans": "Not created",
+        "regulatory": "May be restricted in some jurisdictions"
+      }
+    },
+    {
+      "value_set_code": "CASH_MANAGEMENT_STRUCTURES",
+      "code": "PAYMENT_FACTORY",
+      "label": "Payment Factory",
+      "description": "Centralized payment execution via In-House Bank",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "Centralized payments",
+        "benefit": "Banking fee consolidation, standardization",
+        "intercompany_loans": "Created when paying on behalf"
+      }
+    },
+    {
+      "value_set_code": "CASH_MANAGEMENT_STRUCTURES",
+      "code": "IN_HOUSE_BANK",
+      "label": "In-House Bank",
+      "description": "Internal treasury entity managing intercompany finance",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "type": "Intercompany financing",
+        "benefit": "Optimize external borrowing, centralize FX",
+        "regulatory": "Transfer pricing, thin capitalization rules apply"
+      }
+    }
+  ]
+}

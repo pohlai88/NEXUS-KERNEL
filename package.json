@@ -1,21 +1,265 @@
 {
-  "name": "nexus-canon-monorepo",
-  "private": true,
-  "packageManager": "pnpm@10.23.0",
+  "name": "@aibos/kernel",
+  "version": "1.1.0",
+  "description": "AIBOS Kernel - The Business Constitution (L0 SSOT)",
+  "private": false,
+  "type": "module",
+  "sideEffects": false,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "ui/dashboard"
   ],
-  "scripts": {
-    "dev": "turbo dev",
-    "build": "turbo build",
-    "lint": "turbo lint",
-    "typecheck": "turbo typecheck"
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.cts",
+  "module": "./dist/index.js",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*"
+      ],
+      "index": [
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "browser": {
+    "./dist/index.js": "./dist/index.js"
+  },
+  "react-native": {
+    "./dist/index.js": "./dist/index.js"
+  },
+  "exports": {
+    ".": {
+      "@aibos/kernel/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "default": "./dist/index.js"
+    },
+    "./values/lazy": {
+      "@aibos/kernel/source": "./src/values.lazy.ts",
+      "types": "./dist/values.lazy.d.ts",
+      "import": {
+        "types": "./dist/values.lazy.d.ts",
+        "default": "./dist/values.lazy.js"
+      },
+      "require": {
+        "types": "./dist/values.lazy.d.cts",
+        "default": "./dist/values.lazy.cjs"
+      },
+      "default": "./dist/values.lazy.js"
+    },
+    "./validation": {
+      "@aibos/kernel/source": "./src/kernel.validation.ts",
+      "types": "./dist/kernel.validation.d.ts",
+      "import": {
+        "types": "./dist/kernel.validation.d.ts",
+        "default": "./dist/kernel.validation.js"
+      },
+      "require": {
+        "types": "./dist/kernel.validation.d.cts",
+        "default": "./dist/kernel.validation.cjs"
+      },
+      "default": "./dist/kernel.validation.js"
+    },
+    "./cache": {
+      "@aibos/kernel/source": "./src/kernel.validation.cache.ts",
+      "types": "./dist/kernel.validation.cache.d.ts",
+      "import": {
+        "types": "./dist/kernel.validation.cache.d.ts",
+        "default": "./dist/kernel.validation.cache.js"
+      },
+      "require": {
+        "types": "./dist/kernel.validation.cache.d.cts",
+        "default": "./dist/kernel.validation.cache.cjs"
+      },
+      "default": "./dist/kernel.validation.cache.js"
+    },
+    "./cache/supabase": {
+      "@aibos/kernel/source": "./src/kernel.validation.cache.supabase.ts",
+      "types": "./dist/kernel.validation.cache.supabase.d.ts",
+      "import": {
+        "types": "./dist/kernel.validation.cache.supabase.d.ts",
+        "default": "./dist/kernel.validation.cache.supabase.js"
+      },
+      "require": {
+        "types": "./dist/kernel.validation.cache.supabase.d.cts",
+        "default": "./dist/kernel.validation.cache.supabase.cjs"
+      },
+      "default": "./dist/kernel.validation.cache.supabase.js"
+    },
+    "./supabase": {
+      "@aibos/kernel/source": "./src/supabase/index.ts",
+      "types": "./dist/supabase/index.d.ts",
+      "import": {
+        "types": "./dist/supabase/index.d.ts",
+        "default": "./dist/supabase/index.js"
+      },
+      "require": {
+        "types": "./dist/supabase/index.d.cts",
+        "default": "./dist/supabase/index.cjs"
+      },
+      "default": "./dist/supabase/index.js"
+    },
+    "./monitoring": {
+      "@aibos/kernel/source": "./src/monitoring/performance.ts",
+      "types": "./dist/monitoring/performance.d.ts",
+      "import": {
+        "types": "./dist/monitoring/performance.d.ts",
+        "default": "./dist/monitoring/performance.js"
+      },
+      "require": {
+        "types": "./dist/monitoring/performance.d.cts",
+        "default": "./dist/monitoring/performance.cjs"
+      },
+      "default": "./dist/monitoring/performance.js"
+    },
+    "./nextjs": {
+      "@aibos/kernel/source": "./src/nextjs/index.ts",
+      "types": {
+        "import": "./dist/nextjs/index.d.ts",
+        "require": "./dist/nextjs/index.d.cts",
+        "default": "./dist/nextjs/index.d.ts"
+      },
+      "import": {
+        "types": "./dist/nextjs/index.d.ts",
+        "default": "./dist/nextjs/index.js"
+      },
+      "require": {
+        "types": "./dist/nextjs/index.d.cts",
+        "default": "./dist/nextjs/index.cjs"
+      },
+      "default": "./dist/nextjs/index.js"
+    },
+    "./package.json": "./package.json",
+    "./v1": {
+      "types": "./dist/index.d.ts",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "registry.snapshot.json",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "kernel",
+    "aibos",
+    "nexus",
+    "ssot",
+    "governance",
+    "l0"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pohlai88/NEXUS-KERNEL.git"
+  },
+  "dependencies": {
+    "zod": "^3.25.76"
   },
   "devDependencies": {
-    "turbo": "^2.0.0",
-    "typescript": "^5.6.3"
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^13.1.3",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^20.19.27",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitest/coverage-v8": "^4.0.16",
+    "autoprefixer": "^10.4.23",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.39.2",
+    "eslint-plugin-better-tailwindcss": "^3.8.0",
+    "next": "^16.1.1",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "semantic-release": "^25.0.2",
+    "tailwindcss": "^4.1.18",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typedoc": "^0.28.15",
+    "typedoc-plugin-markdown": "^4.9.0",
+    "typescript": "^5.9.3",
+    "vitepress": "^1.6.4",
+    "vitest": "^4.0.16"
+  },
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "build:legacy": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ci": "vitest run --coverage --reporter=verbose",
+    "dev": "concurrently \"pnpm dev:server\" \"pnpm dashboard\" --names \"Kernel:9000,Frontend:3000\" --prefix-colors \"green,cyan\" --kill-others-on-fail",
+    "dev:watch": "pnpm run build:watch",
+    "dev:server": "pnpm run build && node scripts/dev-server.js",
+    "dev:daemon": "tsx scripts/dev-daemon.ts",
+    "dev:full": "concurrently \"pnpm dev:server\" \"pnpm dashboard:watch\" \"pnpm dashboard:strategic\" \"pnpm dashboard:watch-css\" --names \"Dev:9000,ERP:9001,Web:8080,CSS\" --prefix-colors \"green,cyan,magenta,yellow\" --kill-others-on-fail --restart-tries 3",
+    "dev:all": "concurrently \"pnpm dev:server\" \"pnpm dashboard:serve\" \"pnpm dashboard:strategic\" --names \"Dev,ERP,Strategic\" --prefix-colors \"green,cyan,magenta\"",
+    "generate": "tsx scripts/generate-kernel.ts",
+    "generate:watch": "tsx watch scripts/generate-kernel.ts",
+    "release:kernel": "tsx scripts/release-kernel.ts",
+    "changelog:generate": "tsx scripts/generate-changelog.ts",
+    "validate:kernel": "pnpm generate && pnpm typecheck && pnpm test",
+    "validate:templates": "tsx scripts/validate-templates.ts",
+    "validate:ui": "tsx scripts/enforce-ui-law.ts && pnpm diagnose:tailwind && pnpm dashboard:report",
+    "dashboard:v2": "tsx scripts/serve-dashboard-v2.ts",
+    "dashboard:v2:watch": "tsx watch scripts/serve-dashboard-v2.ts",
+    "dashboard": "cd ui/dashboard && pnpm dev",
+    "dashboard:build": "cd ui/dashboard && pnpm build",
+    "dashboard:start": "cd ui/dashboard && pnpm start",
+    "docs:generate": "typedoc",
+    "docs:schema": "tsx scripts/generate-schema-docs.ts",
+    "docs:status": "tsx scripts/generate-status-report.ts",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "release": "semantic-release",
+    "perf:profile": "tsx scripts/performance-profile.ts",
+    "perf:test": "vitest run -- performance.test.ts",
+    "analyze:bundle": "tsx scripts/analyze-bundle.ts",
+    "build:prod": "NODE_ENV=production pnpm build",
+    "build:analyze": "pnpm build && pnpm analyze:bundle",
+    "generate:migration": "tsx scripts/generate-supabase-migration.ts",
+    "perf:dashboard": "tsx scripts/performance-dashboard.ts",
+    "update:repo": "tsx scripts/update-repo.ts",
+    "update": "pnpm update:repo",
+    "audit:docs": "tsx scripts/audit-docs-quality.ts",
+    "clone-template": "tsx scripts/clone-template.ts",
+    "clone-erpnext": "tsx scripts/clone-erpnext-to-template.ts",
+    "clone-iso": "tsx scripts/clone-iso-to-template.ts",
+    "extract-erpnext": "tsx scripts/extract-erpnext-patterns.ts",
+    "generate-iso": "tsx scripts/generate-iso-data.ts",
+    "report:iso": "tsx scripts/generate-iso-population-report.ts",
+    "dashboard:serve": "tsx scripts/serve-dashboard.ts",
+    "dashboard:watch": "tsx watch scripts/serve-dashboard.ts",
+    "dashboard:strategic": "cd ui/packages && python -m http.server 8080",
+    "dashboard:all": "concurrently \"pnpm dashboard:watch\" \"pnpm dashboard:strategic\" --names \"ERP,Strategic\" --prefix-colors \"cyan,magenta\" --kill-others-on-fail",
+    "dashboard:daemon": "concurrently \"pnpm dashboard:watch\" \"pnpm dashboard:strategic\" \"pnpm dashboard:watch-css\" --names \"ERP,Web,CSS\" --prefix-colors \"cyan,magenta,yellow\" --kill-others-on-fail --restart-tries 3",
+    "dashboard:build-css": "postcss ui/input.css -o ui/style.css --minify",
+    "dashboard:watch-css": "postcss ui/input.css -o ui/style.css --watch",
+    "dashboard:report": "tsx scripts/generate-diagnostic-report.ts",
+    "diagnose:tailwind": "tsx scripts/diagnose-tailwind.ts",
+    "diagnose:dashboard": "tsx scripts/diagnose-tailwind-dashboard.ts",
+    "lint:tailwind": "eslint . --ext .ts,.tsx"
   }
 }
-
-

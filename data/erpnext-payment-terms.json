@@ -1,0 +1,32 @@
+[
+  {
+    "payment_term_name": "Net 15",
+    "credit_days": 15,
+    "due_date_based_on": "Invoice Date"
+  },
+  {
+    "payment_term_name": "Net 30",
+    "credit_days": 30,
+    "due_date_based_on": "Invoice Date"
+  },
+  {
+    "payment_term_name": "Net 45",
+    "credit_days": 45,
+    "due_date_based_on": "Invoice Date"
+  },
+  {
+    "payment_term_name": "Net 60",
+    "credit_days": 60,
+    "due_date_based_on": "Invoice Date"
+  },
+  {
+    "payment_term_name": "Due on Receipt",
+    "credit_days": 0,
+    "due_date_based_on": "Invoice Date"
+  },
+  {
+    "payment_term_name": "End of Month",
+    "credit_days": 0,
+    "due_date_based_on": "End of Month"
+  }
+]

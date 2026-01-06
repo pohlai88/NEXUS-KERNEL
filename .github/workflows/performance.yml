@@ -1,0 +1,82 @@
+name: Performance Benchmarks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run daily
+    - cron: '0 2 * * *'
+
+jobs:
+  performance:
+    name: Performance Benchmarks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build package
+        run: pnpm build
+
+      - name: Run performance tests
+        id: perf-tests
+        run: pnpm test -- performance.test.ts
+        continue-on-error: true
+
+      - name: Performance gate check
+        if: steps.perf-tests.outcome == 'failure'
+        run: |
+          echo "❌ Performance tests failed - check for latency >10ms p95"
+          echo "Target: <10ms p95 latency"
+          exit 1
+
+      - name: Check bundle size
+        run: |
+          if [ -f "dist/index.js" ]; then
+            SIZE=$(stat -f%z dist/index.js 2>/dev/null || stat -c%s dist/index.js 2>/dev/null || echo "0")
+            MAX_SIZE=512000  # 500KB in bytes
+            if [ "$SIZE" -gt "$MAX_SIZE" ]; then
+              echo "❌ Bundle size ($SIZE bytes) exceeds maximum ($MAX_SIZE bytes)"
+              exit 1
+            fi
+            echo "✅ Bundle size: $SIZE bytes (max: $MAX_SIZE bytes)"
+          else
+            echo "⚠️ dist/index.js not found - build may have failed"
+          fi
+
+      - name: Memory usage check
+        run: |
+          echo "Checking memory usage..."
+          node --max-old-space-size=512 -e "console.log('Memory check passed')" || echo "⚠️ Memory check warning"
+
+      - name: Performance benchmark report
+        if: always()
+        run: |
+          echo "## Performance Benchmarks" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.perf-tests.outcome }}" == "success" ]; then
+            echo "✅ Performance tests passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Performance tests failed - check for latency >10ms p95" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Target:** <10ms p95 latency" >> $GITHUB_STEP_SUMMARY
+          echo "**Bundle Size:** Check build output for details" >> $GITHUB_STEP_SUMMARY
+

@@ -1,0 +1,1576 @@
+{
+  "id": "finance",
+  "name": "Finance & Accounting",
+  "version": "1.0.1",
+  "domain": "FINANCE",
+  "description": "Core financial concepts, value sets, and values for accounting operations - Production-ready P0 set",
+  "priority": 10,
+  "authoritative_for": {
+    "concepts": [
+      "CURRENCY"
+    ],
+    "value_sets": [
+      "CURRENCIES"
+    ]
+  },
+  "concepts": [
+    {
+      "code": "ACCOUNT",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Chart of Accounts entry",
+      "tags": [
+        "accounting",
+        "gl"
+      ]
+    },
+    {
+      "code": "ACCOUNT_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "FINANCE",
+      "description": "Account classification type",
+      "tags": [
+        "accounting"
+      ]
+    },
+    {
+      "code": "JOURNAL_ENTRY",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Accounting journal entry",
+      "tags": [
+        "accounting",
+        "gl"
+      ]
+    },
+    {
+      "code": "JOURNAL_ENTRY_LINE",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Journal entry line item (debit/credit)",
+      "tags": [
+        "accounting",
+        "gl"
+      ]
+    },
+    {
+      "code": "JOURNAL_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "FINANCE",
+      "description": "Type of journal entry",
+      "tags": [
+        "accounting"
+      ]
+    },
+    {
+      "code": "FISCAL_YEAR",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Financial year period",
+      "tags": [
+        "accounting",
+        "period"
+      ]
+    },
+    {
+      "code": "FISCAL_PERIOD",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Financial period (month, quarter, year)",
+      "tags": [
+        "accounting",
+        "period"
+      ]
+    },
+    {
+      "code": "CURRENCY",
+      "category": "ATTRIBUTE",
+      "domain": "FINANCE",
+      "description": "Currency attribute for monetary values",
+      "tags": [
+        "accounting",
+        "multi-currency"
+      ]
+    },
+    {
+      "code": "EXCHANGE_RATE",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Currency exchange rate",
+      "tags": [
+        "accounting",
+        "multi-currency"
+      ]
+    },
+    {
+      "code": "TAX_CODE",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Tax code for tax calculations",
+      "tags": [
+        "accounting",
+        "tax"
+      ]
+    },
+    {
+      "code": "PAYMENT_TERM",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Payment terms (Net 30, etc.)",
+      "tags": [
+        "accounting",
+        "payment"
+      ]
+    },
+    {
+      "code": "COST_CENTER",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Cost center for cost allocation",
+      "tags": [
+        "accounting",
+        "costing"
+      ]
+    },
+    {
+      "code": "PROFIT_CENTER",
+      "category": "ENTITY",
+      "domain": "FINANCE",
+      "description": "Profit center for profit allocation",
+      "tags": [
+        "accounting",
+        "costing"
+      ]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "CURRENCIES",
+      "domain": "FINANCE",
+      "description": "ISO 4217 currency codes",
+      "jurisdiction": "GLOBAL",
+      "tags": [
+        "accounting",
+        "multi-currency",
+        "iso4217"
+      ],
+      "metadata": {
+        "prefix": "CUR"
+      }
+    },
+    {
+      "code": "ACCOUNT_TYPE",
+      "domain": "FINANCE",
+      "description": "Account type classification",
+      "jurisdiction": "GLOBAL",
+      "tags": [
+        "accounting"
+      ],
+      "metadata": {
+        "prefix": "ACC"
+      }
+    },
+    {
+      "code": "JOURNAL_TYPE",
+      "domain": "FINANCE",
+      "description": "Journal entry types",
+      "jurisdiction": "GLOBAL",
+      "tags": [
+        "accounting"
+      ],
+      "metadata": {
+        "prefix": "JRN"
+      }
+    },
+    {
+      "code": "FISCAL_PERIOD",
+      "domain": "FINANCE",
+      "description": "Fiscal period types",
+      "jurisdiction": "GLOBAL",
+      "tags": [
+        "accounting",
+        "period"
+      ],
+      "metadata": {
+        "prefix": "PER"
+      }
+    }
+  ],
+  "values": [
+    {
+      "code": "ASSET",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Asset",
+      "description": "Assets owned by the company",
+      "sort_order": 1
+    },
+    {
+      "code": "LIABILITY",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Liability",
+      "description": "Obligations owed by the company",
+      "sort_order": 2
+    },
+    {
+      "code": "EQUITY",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Equity",
+      "description": "Owner's equity",
+      "sort_order": 3
+    },
+    {
+      "code": "INCOME",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Income",
+      "description": "Revenue and income accounts",
+      "sort_order": 4
+    },
+    {
+      "code": "EXPENSE",
+      "value_set_code": "ACCOUNT_TYPE",
+      "label": "Expense",
+      "description": "Expense accounts",
+      "sort_order": 5
+    },
+    {
+      "code": "SALES",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Sales Journal",
+      "description": "Sales transactions",
+      "sort_order": 1
+    },
+    {
+      "code": "PURCHASE",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Purchase Journal",
+      "description": "Purchase transactions",
+      "sort_order": 2
+    },
+    {
+      "code": "PAYMENT",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Payment Journal",
+      "description": "Payment transactions",
+      "sort_order": 3
+    },
+    {
+      "code": "RECEIPT",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Receipt Journal",
+      "description": "Receipt transactions",
+      "sort_order": 4
+    },
+    {
+      "code": "GENERAL",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "General Journal",
+      "description": "General ledger entries",
+      "sort_order": 5
+    },
+    {
+      "code": "ADJUSTMENT",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Adjustment Journal",
+      "description": "Adjusting entries",
+      "sort_order": 6
+    },
+    {
+      "code": "OPENING",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Opening Journal",
+      "description": "Opening balance entries",
+      "sort_order": 7
+    },
+    {
+      "code": "CLOSING",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Closing Journal",
+      "description": "Closing entries",
+      "sort_order": 8
+    },
+    {
+      "code": "ACCRUAL",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Accrual Journal",
+      "description": "Accrual entries",
+      "sort_order": 9
+    },
+    {
+      "code": "REVERSAL",
+      "value_set_code": "JOURNAL_TYPE",
+      "label": "Reversal Journal",
+      "description": "Reversing entries",
+      "sort_order": 10
+    },
+    {
+      "code": "MONTH",
+      "value_set_code": "FISCAL_PERIOD",
+      "label": "Month",
+      "description": "Monthly period",
+      "sort_order": 1
+    },
+    {
+      "code": "QUARTER",
+      "value_set_code": "FISCAL_PERIOD",
+      "label": "Quarter",
+      "description": "Quarterly period",
+      "sort_order": 2
+    },
+    {
+      "code": "YEAR",
+      "value_set_code": "FISCAL_PERIOD",
+      "label": "Year",
+      "description": "Annual period",
+      "sort_order": 3
+    },
+    {
+      "code": "MALAYSIAN_RINGGIT",
+      "value_set_code": "CURRENCIES",
+      "label": "Malaysian Ringgit",
+      "description": "Malaysian Ringgit (ISO 4217: MYR)",
+      "sort_order": 1
+    },
+    {
+      "code": "SINGAPORE_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Singapore Dollar",
+      "description": "Singapore Dollar (ISO 4217: SGD)",
+      "sort_order": 2
+    },
+    {
+      "code": "US_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "US Dollar",
+      "description": "US Dollar (ISO 4217: USD)",
+      "sort_order": 3
+    },
+    {
+      "code": "BRITISH_POUND",
+      "value_set_code": "CURRENCIES",
+      "label": "British Pound",
+      "description": "British Pound (ISO 4217: GBP)",
+      "sort_order": 4
+    },
+    {
+      "code": "EURO",
+      "value_set_code": "CURRENCIES",
+      "label": "Euro",
+      "description": "Euro (ISO 4217: EUR)",
+      "sort_order": 5
+    },
+    {
+      "code": "AUSTRALIAN_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Australian Dollar",
+      "description": "Australian Dollar (ISO 4217: AUD)",
+      "sort_order": 6
+    },
+    {
+      "code": "CANADIAN_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Canadian Dollar",
+      "description": "Canadian Dollar (ISO 4217: CAD)",
+      "sort_order": 7
+    },
+    {
+      "code": "JAPANESE_YEN",
+      "value_set_code": "CURRENCIES",
+      "label": "Japanese Yen",
+      "description": "Japanese Yen (ISO 4217: JPY)",
+      "sort_order": 8
+    },
+    {
+      "code": "CHINESE_YUAN",
+      "value_set_code": "CURRENCIES",
+      "label": "Chinese Yuan",
+      "description": "Chinese Yuan (ISO 4217: CNY)",
+      "sort_order": 9
+    },
+    {
+      "code": "INDIAN_RUPEE",
+      "value_set_code": "CURRENCIES",
+      "label": "Indian Rupee",
+      "description": "Indian Rupee (ISO 4217: INR)",
+      "sort_order": 10
+    },
+    {
+      "code": "SOUTH_KOREAN_WON",
+      "value_set_code": "CURRENCIES",
+      "label": "South Korean Won",
+      "description": "South Korean Won (ISO 4217: KRW)",
+      "sort_order": 11
+    },
+    {
+      "code": "THAI_BAHT",
+      "value_set_code": "CURRENCIES",
+      "label": "Thai Baht",
+      "description": "Thai Baht (ISO 4217: THB)",
+      "sort_order": 12
+    },
+    {
+      "code": "INDONESIAN_RUPIAH",
+      "value_set_code": "CURRENCIES",
+      "label": "Indonesian Rupiah",
+      "description": "Indonesian Rupiah (ISO 4217: IDR)",
+      "sort_order": 13
+    },
+    {
+      "code": "PHILIPPINE_PESO",
+      "value_set_code": "CURRENCIES",
+      "label": "Philippine Peso",
+      "description": "Philippine Peso (ISO 4217: PHP)",
+      "sort_order": 14
+    },
+    {
+      "code": "VIETNAMESE_DONG",
+      "value_set_code": "CURRENCIES",
+      "label": "Vietnamese Dong",
+      "description": "Vietnamese Dong (ISO 4217: VND)",
+      "sort_order": 15
+    },
+    {
+      "code": "BRAZILIAN_REAL",
+      "value_set_code": "CURRENCIES",
+      "label": "Brazilian Real",
+      "description": "Brazilian Real (ISO 4217: BRL)",
+      "sort_order": 16
+    },
+    {
+      "code": "MEXICAN_PESO",
+      "value_set_code": "CURRENCIES",
+      "label": "Mexican Peso",
+      "description": "Mexican Peso (ISO 4217: MXN)",
+      "sort_order": 17
+    },
+    {
+      "code": "ARGENTINE_PESO",
+      "value_set_code": "CURRENCIES",
+      "label": "Argentine Peso",
+      "description": "Argentine Peso (ISO 4217: ARS)",
+      "sort_order": 18
+    },
+    {
+      "code": "CHILEAN_PESO",
+      "value_set_code": "CURRENCIES",
+      "label": "Chilean Peso",
+      "description": "Chilean Peso (ISO 4217: CLP)",
+      "sort_order": 19
+    },
+    {
+      "code": "COLOMBIAN_PESO",
+      "value_set_code": "CURRENCIES",
+      "label": "Colombian Peso",
+      "description": "Colombian Peso (ISO 4217: COP)",
+      "sort_order": 20
+    },
+    {
+      "code": "PERUVIAN_SOL",
+      "value_set_code": "CURRENCIES",
+      "label": "Peruvian Sol",
+      "description": "Peruvian Sol (ISO 4217: PEN)",
+      "sort_order": 21
+    },
+    {
+      "code": "SOUTH_AFRICAN_RAND",
+      "value_set_code": "CURRENCIES",
+      "label": "South African Rand",
+      "description": "South African Rand (ISO 4217: ZAR)",
+      "sort_order": 22
+    },
+    {
+      "code": "EGYPTIAN_POUND",
+      "value_set_code": "CURRENCIES",
+      "label": "Egyptian Pound",
+      "description": "Egyptian Pound (ISO 4217: EGP)",
+      "sort_order": 23
+    },
+    {
+      "code": "NIGERIAN_NAIRA",
+      "value_set_code": "CURRENCIES",
+      "label": "Nigerian Naira",
+      "description": "Nigerian Naira (ISO 4217: NGN)",
+      "sort_order": 24
+    },
+    {
+      "code": "KENYAN_SHILLING",
+      "value_set_code": "CURRENCIES",
+      "label": "Kenyan Shilling",
+      "description": "Kenyan Shilling (ISO 4217: KES)",
+      "sort_order": 25
+    },
+    {
+      "code": "UAE_DIRHAM",
+      "value_set_code": "CURRENCIES",
+      "label": "UAE Dirham",
+      "description": "UAE Dirham (ISO 4217: AED)",
+      "sort_order": 26
+    },
+    {
+      "code": "SAUDI_RIYAL",
+      "value_set_code": "CURRENCIES",
+      "label": "Saudi Riyal",
+      "description": "Saudi Riyal (ISO 4217: SAR)",
+      "sort_order": 27
+    },
+    {
+      "code": "ISRAELI_SHEKEL",
+      "value_set_code": "CURRENCIES",
+      "label": "Israeli Shekel",
+      "description": "Israeli Shekel (ISO 4217: ILS)",
+      "sort_order": 28
+    },
+    {
+      "code": "TURKISH_LIRA",
+      "value_set_code": "CURRENCIES",
+      "label": "Turkish Lira",
+      "description": "Turkish Lira (ISO 4217: TRY)",
+      "sort_order": 29
+    },
+    {
+      "code": "RUSSIAN_ROUBLE",
+      "value_set_code": "CURRENCIES",
+      "label": "Russian Rouble",
+      "description": "Russian Rouble (ISO 4217: RUB)",
+      "sort_order": 30
+    },
+    {
+      "code": "NEW_ZEALAND_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "New Zealand Dollar",
+      "description": "New Zealand Dollar (ISO 4217: NZD)",
+      "sort_order": 31
+    },
+    {
+      "code": "HONG_KONG_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Hong Kong Dollar",
+      "description": "Hong Kong Dollar (ISO 4217: HKD)",
+      "sort_order": 32
+    },
+    {
+      "code": "TAIWAN_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Taiwan Dollar",
+      "description": "Taiwan Dollar (ISO 4217: TWD)",
+      "sort_order": 33
+    },
+    {
+      "code": "SWISS_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Swiss Franc",
+      "description": "Swiss Franc (ISO 4217: CHF)",
+      "sort_order": 34
+    },
+    {
+      "code": "SWEDISH_KRONA",
+      "value_set_code": "CURRENCIES",
+      "label": "Swedish Krona",
+      "description": "Swedish Krona (ISO 4217: SEK)",
+      "sort_order": 35
+    },
+    {
+      "code": "NORWEGIAN_KRONE",
+      "value_set_code": "CURRENCIES",
+      "label": "Norwegian Krone",
+      "description": "Norwegian Krone (ISO 4217: NOK)",
+      "sort_order": 36
+    },
+    {
+      "code": "DANISH_KRONE",
+      "value_set_code": "CURRENCIES",
+      "label": "Danish Krone",
+      "description": "Danish Krone (ISO 4217: DKK)",
+      "sort_order": 37
+    },
+    {
+      "code": "POLISH_ZLOTY",
+      "value_set_code": "CURRENCIES",
+      "label": "Polish Zloty",
+      "description": "Polish Zloty (ISO 4217: PLN)",
+      "sort_order": 38
+    },
+    {
+      "code": "CZECH_KORUNA",
+      "value_set_code": "CURRENCIES",
+      "label": "Czech Koruna",
+      "description": "Czech Koruna (ISO 4217: CZK)",
+      "sort_order": 39
+    },
+    {
+      "code": "HUNGARIAN_FORINT",
+      "value_set_code": "CURRENCIES",
+      "label": "Hungarian Forint",
+      "description": "Hungarian Forint (ISO 4217: HUF)",
+      "sort_order": 40
+    },
+    {
+      "code": "ROMANIAN_LEU",
+      "value_set_code": "CURRENCIES",
+      "label": "Romanian Leu",
+      "description": "Romanian Leu (ISO 4217: RON)",
+      "sort_order": 41
+    },
+    {
+      "code": "BULGARIAN_LEV",
+      "value_set_code": "CURRENCIES",
+      "label": "Bulgarian Lev",
+      "description": "Bulgarian Lev (ISO 4217: BGN)",
+      "sort_order": 42
+    },
+    {
+      "code": "CROATIAN_KUNA",
+      "value_set_code": "CURRENCIES",
+      "label": "Croatian Kuna",
+      "description": "Croatian Kuna (ISO 4217: HRK)",
+      "sort_order": 43
+    },
+    {
+      "code": "BANGLADESHI_TAKA",
+      "value_set_code": "CURRENCIES",
+      "label": "Bangladeshi Taka",
+      "description": "Bangladeshi Taka (ISO 4217: BDT)",
+      "sort_order": 44
+    },
+    {
+      "code": "PAKISTANI_RUPEE",
+      "value_set_code": "CURRENCIES",
+      "label": "Pakistani Rupee",
+      "description": "Pakistani Rupee (ISO 4217: PKR)",
+      "sort_order": 45
+    },
+    {
+      "code": "SRI_LANKAN_RUPEE",
+      "value_set_code": "CURRENCIES",
+      "label": "Sri Lankan Rupee",
+      "description": "Sri Lankan Rupee (ISO 4217: LKR)",
+      "sort_order": 46
+    },
+    {
+      "code": "MYANMAR_KYAT",
+      "value_set_code": "CURRENCIES",
+      "label": "Myanmar Kyat",
+      "description": "Myanmar Kyat (ISO 4217: MMK)",
+      "sort_order": 47
+    },
+    {
+      "code": "CAMBODIAN_RIEL",
+      "value_set_code": "CURRENCIES",
+      "label": "Cambodian Riel",
+      "description": "Cambodian Riel (ISO 4217: KHR)",
+      "sort_order": 48
+    },
+    {
+      "code": "LAO_KIP",
+      "value_set_code": "CURRENCIES",
+      "label": "Lao Kip",
+      "description": "Lao Kip (ISO 4217: LAK)",
+      "sort_order": 49
+    },
+    {
+      "code": "BRUNEI_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Brunei Dollar",
+      "description": "Brunei Dollar (ISO 4217: BND)",
+      "sort_order": 50
+    },
+    {
+      "code": "MONGOLIAN_TUGRIK",
+      "value_set_code": "CURRENCIES",
+      "label": "Mongolian Tugrik",
+      "description": "Mongolian Tugrik (ISO 4217: MNT)",
+      "sort_order": 51
+    },
+    {
+      "code": "KAZAKHSTANI_TENGE",
+      "value_set_code": "CURRENCIES",
+      "label": "Kazakhstani Tenge",
+      "description": "Kazakhstani Tenge (ISO 4217: KZT)",
+      "sort_order": 52
+    },
+    {
+      "code": "UZBEKISTANI_SOM",
+      "value_set_code": "CURRENCIES",
+      "label": "Uzbekistani Som",
+      "description": "Uzbekistani Som (ISO 4217: UZS)",
+      "sort_order": 53
+    },
+    {
+      "code": "KYRGYSTANI_SOM",
+      "value_set_code": "CURRENCIES",
+      "label": "Kyrgystani Som",
+      "description": "Kyrgystani Som (ISO 4217: KGS)",
+      "sort_order": 54
+    },
+    {
+      "code": "TAJIKISTANI_SOMONI",
+      "value_set_code": "CURRENCIES",
+      "label": "Tajikistani Somoni",
+      "description": "Tajikistani Somoni (ISO 4217: TJS)",
+      "sort_order": 55
+    },
+    {
+      "code": "AFGHAN_AFGHANI",
+      "value_set_code": "CURRENCIES",
+      "label": "Afghan Afghani",
+      "description": "Afghan Afghani (ISO 4217: AFN)",
+      "sort_order": 56
+    },
+    {
+      "code": "IRANIAN_RIAL",
+      "value_set_code": "CURRENCIES",
+      "label": "Iranian Rial",
+      "description": "Iranian Rial (ISO 4217: IRR)",
+      "sort_order": 57
+    },
+    {
+      "code": "IRAQI_DINAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Iraqi Dinar",
+      "description": "Iraqi Dinar (ISO 4217: IQD)",
+      "sort_order": 58
+    },
+    {
+      "code": "JORDANIAN_DINAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Jordanian Dinar",
+      "description": "Jordanian Dinar (ISO 4217: JOD)",
+      "sort_order": 59
+    },
+    {
+      "code": "LEBANESE_POUND",
+      "value_set_code": "CURRENCIES",
+      "label": "Lebanese Pound",
+      "description": "Lebanese Pound (ISO 4217: LBP)",
+      "sort_order": 60
+    },
+    {
+      "code": "SYRIAN_POUND",
+      "value_set_code": "CURRENCIES",
+      "label": "Syrian Pound",
+      "description": "Syrian Pound (ISO 4217: SYP)",
+      "sort_order": 61
+    },
+    {
+      "code": "YEMENI_RIAL",
+      "value_set_code": "CURRENCIES",
+      "label": "Yemeni Rial",
+      "description": "Yemeni Rial (ISO 4217: YER)",
+      "sort_order": 62
+    },
+    {
+      "code": "OMANI_RIAL",
+      "value_set_code": "CURRENCIES",
+      "label": "Omani Rial",
+      "description": "Omani Rial (ISO 4217: OMR)",
+      "sort_order": 63
+    },
+    {
+      "code": "KUWAITI_DINAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Kuwaiti Dinar",
+      "description": "Kuwaiti Dinar (ISO 4217: KWD)",
+      "sort_order": 64
+    },
+    {
+      "code": "QATARI_RIYAL",
+      "value_set_code": "CURRENCIES",
+      "label": "Qatari Riyal",
+      "description": "Qatari Riyal (ISO 4217: QAR)",
+      "sort_order": 65
+    },
+    {
+      "code": "BAHRAINI_DINAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Bahraini Dinar",
+      "description": "Bahraini Dinar (ISO 4217: BHD)",
+      "sort_order": 66
+    },
+    {
+      "code": "MOROCCAN_DIRHAM",
+      "value_set_code": "CURRENCIES",
+      "label": "Moroccan Dirham",
+      "description": "Moroccan Dirham (ISO 4217: MAD)",
+      "sort_order": 67
+    },
+    {
+      "code": "ALGERIAN_DINAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Algerian Dinar",
+      "description": "Algerian Dinar (ISO 4217: DZD)",
+      "sort_order": 68
+    },
+    {
+      "code": "TUNISIAN_DINAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Tunisian Dinar",
+      "description": "Tunisian Dinar (ISO 4217: TND)",
+      "sort_order": 69
+    },
+    {
+      "code": "LIBYAN_DINAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Libyan Dinar",
+      "description": "Libyan Dinar (ISO 4217: LYD)",
+      "sort_order": 70
+    },
+    {
+      "code": "SUDANESE_POUND",
+      "value_set_code": "CURRENCIES",
+      "label": "Sudanese Pound",
+      "description": "Sudanese Pound (ISO 4217: SDG)",
+      "sort_order": 71
+    },
+    {
+      "code": "ETHIOPIAN_BIRR",
+      "value_set_code": "CURRENCIES",
+      "label": "Ethiopian Birr",
+      "description": "Ethiopian Birr (ISO 4217: ETB)",
+      "sort_order": 72
+    },
+    {
+      "code": "TANZANIAN_SHILLING",
+      "value_set_code": "CURRENCIES",
+      "label": "Tanzanian Shilling",
+      "description": "Tanzanian Shilling (ISO 4217: TZS)",
+      "sort_order": 73
+    },
+    {
+      "code": "UGANDAN_SHILLING",
+      "value_set_code": "CURRENCIES",
+      "label": "Ugandan Shilling",
+      "description": "Ugandan Shilling (ISO 4217: UGX)",
+      "sort_order": 74
+    },
+    {
+      "code": "GHANAIAN_CEDI",
+      "value_set_code": "CURRENCIES",
+      "label": "Ghanaian Cedi",
+      "description": "Ghanaian Cedi (ISO 4217: GHS)",
+      "sort_order": 75
+    },
+    {
+      "code": "SENEGALESE_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Senegalese Franc",
+      "description": "Senegalese Franc (ISO 4217: XOF)",
+      "sort_order": 76
+    },
+    {
+      "code": "IVORY_COAST_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Ivory Coast Franc",
+      "description": "Ivory Coast Franc (ISO 4217: XOF)",
+      "sort_order": 77
+    },
+    {
+      "code": "CAMEROONIAN_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Cameroonian Franc",
+      "description": "Cameroonian Franc (ISO 4217: XAF)",
+      "sort_order": 78
+    },
+    {
+      "code": "ANGOLAN_KWANZA",
+      "value_set_code": "CURRENCIES",
+      "label": "Angolan Kwanza",
+      "description": "Angolan Kwanza (ISO 4217: AOA)",
+      "sort_order": 79
+    },
+    {
+      "code": "MOZAMBICAN_METICAL",
+      "value_set_code": "CURRENCIES",
+      "label": "Mozambican Metical",
+      "description": "Mozambican Metical (ISO 4217: MZN)",
+      "sort_order": 80
+    },
+    {
+      "code": "MADAGASCAR_ARIARY",
+      "value_set_code": "CURRENCIES",
+      "label": "Madagascar Ariary",
+      "description": "Madagascar Ariary (ISO 4217: MGA)",
+      "sort_order": 81
+    },
+    {
+      "code": "ZIMBABWEAN_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Zimbabwean Dollar",
+      "description": "Zimbabwean Dollar (ISO 4217: ZWL)",
+      "sort_order": 82
+    },
+    {
+      "code": "BOTSWANAN_PULA",
+      "value_set_code": "CURRENCIES",
+      "label": "Botswanan Pula",
+      "description": "Botswanan Pula (ISO 4217: BWP)",
+      "sort_order": 83
+    },
+    {
+      "code": "NAMIBIAN_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Namibian Dollar",
+      "description": "Namibian Dollar (ISO 4217: NAD)",
+      "sort_order": 84
+    },
+    {
+      "code": "ZAMBIAN_KWACHA",
+      "value_set_code": "CURRENCIES",
+      "label": "Zambian Kwacha",
+      "description": "Zambian Kwacha (ISO 4217: ZMW)",
+      "sort_order": 85
+    },
+    {
+      "code": "MALAWIAN_KWACHA",
+      "value_set_code": "CURRENCIES",
+      "label": "Malawian Kwacha",
+      "description": "Malawian Kwacha (ISO 4217: MWK)",
+      "sort_order": 86
+    },
+    {
+      "code": "RWANDAN_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Rwandan Franc",
+      "description": "Rwandan Franc (ISO 4217: RWF)",
+      "sort_order": 87
+    },
+    {
+      "code": "BURUNDIAN_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Burundian Franc",
+      "description": "Burundian Franc (ISO 4217: BIF)",
+      "sort_order": 88
+    },
+    {
+      "code": "SOMALI_SHILLING",
+      "value_set_code": "CURRENCIES",
+      "label": "Somali Shilling",
+      "description": "Somali Shilling (ISO 4217: SOS)",
+      "sort_order": 89
+    },
+    {
+      "code": "ERITREAN_NAKFA",
+      "value_set_code": "CURRENCIES",
+      "label": "Eritrean Nakfa",
+      "description": "Eritrean Nakfa (ISO 4217: ERN)",
+      "sort_order": 90
+    },
+    {
+      "code": "DJIBOUTIAN_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Djiboutian Franc",
+      "description": "Djiboutian Franc (ISO 4217: DJF)",
+      "sort_order": 91
+    },
+    {
+      "code": "MAURITIAN_RUPEE",
+      "value_set_code": "CURRENCIES",
+      "label": "Mauritian Rupee",
+      "description": "Mauritian Rupee (ISO 4217: MUR)",
+      "sort_order": 92
+    },
+    {
+      "code": "SEYCHELLOIS_RUPEE",
+      "value_set_code": "CURRENCIES",
+      "label": "Seychellois Rupee",
+      "description": "Seychellois Rupee (ISO 4217: SCR)",
+      "sort_order": 93
+    },
+    {
+      "code": "COMORIAN_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Comorian Franc",
+      "description": "Comorian Franc (ISO 4217: KMF)",
+      "sort_order": 94
+    },
+    {
+      "code": "CAPE_VERDEAN_ESCUDO",
+      "value_set_code": "CURRENCIES",
+      "label": "Cape Verdean Escudo",
+      "description": "Cape Verdean Escudo (ISO 4217: CVE)",
+      "sort_order": 95
+    },
+    {
+      "code": "GUINEAN_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Guinean Franc",
+      "description": "Guinean Franc (ISO 4217: GNF)",
+      "sort_order": 96
+    },
+    {
+      "code": "SIERRA_LEONEAN_LEONE",
+      "value_set_code": "CURRENCIES",
+      "label": "Sierra Leonean Leone",
+      "description": "Sierra Leonean Leone (ISO 4217: SLL)",
+      "sort_order": 97
+    },
+    {
+      "code": "LIBERIAN_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Liberian Dollar",
+      "description": "Liberian Dollar (ISO 4217: LRD)",
+      "sort_order": 98
+    },
+    {
+      "code": "GAMBIAN_DALASI",
+      "value_set_code": "CURRENCIES",
+      "label": "Gambian Dalasi",
+      "description": "Gambian Dalasi (ISO 4217: GMD)",
+      "sort_order": 99
+    },
+    {
+      "code": "GUINEA_BISSAU_PESO",
+      "value_set_code": "CURRENCIES",
+      "label": "Guinea-Bissau Peso",
+      "description": "Guinea-Bissau Peso (ISO 4217: XOF)",
+      "sort_order": 100
+    },
+    {
+      "code": "MALIAN_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Malian Franc",
+      "description": "Malian Franc (ISO 4217: XOF)",
+      "sort_order": 101
+    },
+    {
+      "code": "BURKINA_FASO_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Burkina Faso Franc",
+      "description": "Burkina Faso Franc (ISO 4217: XOF)",
+      "sort_order": 102
+    },
+    {
+      "code": "NIGERIAN_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Nigerian Franc",
+      "description": "Nigerian Franc (ISO 4217: XOF)",
+      "sort_order": 103
+    },
+    {
+      "code": "CHADIAN_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Chadian Franc",
+      "description": "Chadian Franc (ISO 4217: XAF)",
+      "sort_order": 104
+    },
+    {
+      "code": "CENTRAL_AFRICAN_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Central African Franc",
+      "description": "Central African Franc (ISO 4217: XAF)",
+      "sort_order": 105
+    },
+    {
+      "code": "CONGOLESE_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Congolese Franc",
+      "description": "Congolese Franc (ISO 4217: CDF)",
+      "sort_order": 106
+    },
+    {
+      "code": "WEST_AFRICAN_CFA_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "West African CFA Franc",
+      "description": "West African CFA Franc (ISO 4217: XOF)",
+      "sort_order": 107,
+      "metadata": {
+        "iso_code": "XOF",
+        "numeric": "952",
+        "minor_units": 0,
+        "symbol": "CFA"
+      }
+    },
+    {
+      "code": "CENTRAL_AFRICAN_CFA_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "Central African CFA Franc",
+      "description": "Central African CFA Franc (ISO 4217: XAF)",
+      "sort_order": 108,
+      "metadata": {
+        "iso_code": "XAF",
+        "numeric": "950",
+        "minor_units": 0,
+        "symbol": "FCFA"
+      }
+    },
+    {
+      "code": "ALBANIAN_LEK",
+      "value_set_code": "CURRENCIES",
+      "label": "Albanian Lek",
+      "description": "Albanian Lek (ISO 4217: ALL)",
+      "sort_order": 109,
+      "metadata": {
+        "iso_code": "ALL",
+        "numeric": "008",
+        "minor_units": 2,
+        "symbol": "L"
+      }
+    },
+    {
+      "code": "ARMENIAN_DRAM",
+      "value_set_code": "CURRENCIES",
+      "label": "Armenian Dram",
+      "description": "Armenian Dram (ISO 4217: AMD)",
+      "sort_order": 110,
+      "metadata": {
+        "iso_code": "AMD",
+        "numeric": "051",
+        "minor_units": 2,
+        "symbol": "֏"
+      }
+    },
+    {
+      "code": "ARUBAN_FLORIN",
+      "value_set_code": "CURRENCIES",
+      "label": "Aruban Florin",
+      "description": "Aruban Florin (ISO 4217: AWG)",
+      "sort_order": 111,
+      "metadata": {
+        "iso_code": "AWG",
+        "numeric": "533",
+        "minor_units": 2,
+        "symbol": "ƒ"
+      }
+    },
+    {
+      "code": "AZERBAIJANI_MANAT",
+      "value_set_code": "CURRENCIES",
+      "label": "Azerbaijani Manat",
+      "description": "Azerbaijani Manat (ISO 4217: AZN)",
+      "sort_order": 112,
+      "metadata": {
+        "iso_code": "AZN",
+        "numeric": "944",
+        "minor_units": 2,
+        "symbol": "₼"
+      }
+    },
+    {
+      "code": "BOSNIA_HERZEGOVINA_CONVERTIBLE_MARK",
+      "value_set_code": "CURRENCIES",
+      "label": "Bosnia-Herzegovina Convertible Mark",
+      "description": "Bosnia-Herzegovina Convertible Mark (ISO 4217: BAM)",
+      "sort_order": 113,
+      "metadata": {
+        "iso_code": "BAM",
+        "numeric": "977",
+        "minor_units": 2,
+        "symbol": "КМ"
+      }
+    },
+    {
+      "code": "BARBADIAN_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Barbadian Dollar",
+      "description": "Barbadian Dollar (ISO 4217: BBD)",
+      "sort_order": 114,
+      "metadata": {
+        "iso_code": "BBD",
+        "numeric": "052",
+        "minor_units": 2,
+        "symbol": "Bds$"
+      }
+    },
+    {
+      "code": "BERMUDAN_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Bermudan Dollar",
+      "description": "Bermudan Dollar (ISO 4217: BMD)",
+      "sort_order": 115,
+      "metadata": {
+        "iso_code": "BMD",
+        "numeric": "060",
+        "minor_units": 2,
+        "symbol": "BD$"
+      }
+    },
+    {
+      "code": "BHUTANESE_NGULTRUM",
+      "value_set_code": "CURRENCIES",
+      "label": "Bhutanese Ngultrum",
+      "description": "Bhutanese Ngultrum (ISO 4217: BTN)",
+      "sort_order": 116,
+      "metadata": {
+        "iso_code": "BTN",
+        "numeric": "064",
+        "minor_units": 2,
+        "symbol": "Nu."
+      }
+    },
+    {
+      "code": "BELARUSIAN_RUBLE",
+      "value_set_code": "CURRENCIES",
+      "label": "Belarusian Ruble",
+      "description": "Belarusian Ruble (ISO 4217: BYN)",
+      "sort_order": 117,
+      "metadata": {
+        "iso_code": "BYN",
+        "numeric": "933",
+        "minor_units": 2,
+        "symbol": "Br"
+      }
+    },
+    {
+      "code": "FIJIAN_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Fijian Dollar",
+      "description": "Fijian Dollar (ISO 4217: FJD)",
+      "sort_order": 118,
+      "metadata": {
+        "iso_code": "FJD",
+        "numeric": "242",
+        "minor_units": 2,
+        "symbol": "FJ$"
+      }
+    },
+    {
+      "code": "GUYANESE_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Guyanese Dollar",
+      "description": "Guyanese Dollar (ISO 4217: GYD)",
+      "sort_order": 119,
+      "metadata": {
+        "iso_code": "GYD",
+        "numeric": "328",
+        "minor_units": 2,
+        "symbol": "G$"
+      }
+    },
+    {
+      "code": "ICELANDIC_KRONA",
+      "value_set_code": "CURRENCIES",
+      "label": "Icelandic Krona",
+      "description": "Icelandic Krona (ISO 4217: ISK)",
+      "sort_order": 120,
+      "metadata": {
+        "iso_code": "ISK",
+        "numeric": "352",
+        "minor_units": 0,
+        "symbol": "kr"
+      }
+    },
+    {
+      "code": "JAMAICAN_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Jamaican Dollar",
+      "description": "Jamaican Dollar (ISO 4217: JMD)",
+      "sort_order": 121,
+      "metadata": {
+        "iso_code": "JMD",
+        "numeric": "388",
+        "minor_units": 2,
+        "symbol": "J$"
+      }
+    },
+    {
+      "code": "LESOTHO_LOTI",
+      "value_set_code": "CURRENCIES",
+      "label": "Lesotho Loti",
+      "description": "Lesotho Loti (ISO 4217: LSL)",
+      "sort_order": 122,
+      "metadata": {
+        "iso_code": "LSL",
+        "numeric": "426",
+        "minor_units": 2,
+        "symbol": "L"
+      }
+    },
+    {
+      "code": "MOLDOVAN_LEU",
+      "value_set_code": "CURRENCIES",
+      "label": "Moldovan Leu",
+      "description": "Moldovan Leu (ISO 4217: MDL)",
+      "sort_order": 123,
+      "metadata": {
+        "iso_code": "MDL",
+        "numeric": "498",
+        "minor_units": 2,
+        "symbol": "lei"
+      }
+    },
+    {
+      "code": "MACEDONIAN_DENAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Macedonian Denar",
+      "description": "Macedonian Denar (ISO 4217: MKD)",
+      "sort_order": 124,
+      "metadata": {
+        "iso_code": "MKD",
+        "numeric": "807",
+        "minor_units": 2,
+        "symbol": "ден"
+      }
+    },
+    {
+      "code": "MACANESE_PATACA",
+      "value_set_code": "CURRENCIES",
+      "label": "Macanese Pataca",
+      "description": "Macanese Pataca (ISO 4217: MOP)",
+      "sort_order": 125,
+      "metadata": {
+        "iso_code": "MOP",
+        "numeric": "446",
+        "minor_units": 2,
+        "symbol": "MOP$"
+      }
+    },
+    {
+      "code": "MAURITANIAN_OUGUIYA",
+      "value_set_code": "CURRENCIES",
+      "label": "Mauritanian Ouguiya",
+      "description": "Mauritanian Ouguiya (ISO 4217: MRO)",
+      "sort_order": 126,
+      "metadata": {
+        "iso_code": "MRO",
+        "numeric": "478",
+        "minor_units": 2,
+        "symbol": "UM"
+      }
+    },
+    {
+      "code": "MALDIVIAN_RUFIYAA",
+      "value_set_code": "CURRENCIES",
+      "label": "Maldivian Rufiyaa",
+      "description": "Maldivian Rufiyaa (ISO 4217: MVR)",
+      "sort_order": 127,
+      "metadata": {
+        "iso_code": "MVR",
+        "numeric": "462",
+        "minor_units": 2,
+        "symbol": "Rf"
+      }
+    },
+    {
+      "code": "NEPALESE_RUPEE",
+      "value_set_code": "CURRENCIES",
+      "label": "Nepalese Rupee",
+      "description": "Nepalese Rupee (ISO 4217: NPR)",
+      "sort_order": 128,
+      "metadata": {
+        "iso_code": "NPR",
+        "numeric": "524",
+        "minor_units": 2,
+        "symbol": "₨"
+      }
+    },
+    {
+      "code": "PAPUA_NEW_GUINEAN_KINA",
+      "value_set_code": "CURRENCIES",
+      "label": "Papua New Guinean Kina",
+      "description": "Papua New Guinean Kina (ISO 4217: PGK)",
+      "sort_order": 129,
+      "metadata": {
+        "iso_code": "PGK",
+        "numeric": "598",
+        "minor_units": 2,
+        "symbol": "K"
+      }
+    },
+    {
+      "code": "PARAGUAYAN_GUARANI",
+      "value_set_code": "CURRENCIES",
+      "label": "Paraguayan Guarani",
+      "description": "Paraguayan Guarani (ISO 4217: PYG)",
+      "sort_order": 130,
+      "metadata": {
+        "iso_code": "PYG",
+        "numeric": "600",
+        "minor_units": 0,
+        "symbol": "₲"
+      }
+    },
+    {
+      "code": "SERBIAN_DINAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Serbian Dinar",
+      "description": "Serbian Dinar (ISO 4217: RSD)",
+      "sort_order": 131,
+      "metadata": {
+        "iso_code": "RSD",
+        "numeric": "975",
+        "minor_units": 2,
+        "symbol": "дин."
+      }
+    },
+    {
+      "code": "SOLOMON_ISLANDS_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Solomon Islands Dollar",
+      "description": "Solomon Islands Dollar (ISO 4217: SBD)",
+      "sort_order": 132,
+      "metadata": {
+        "iso_code": "SBD",
+        "numeric": "090",
+        "minor_units": 2,
+        "symbol": "SI$"
+      }
+    },
+    {
+      "code": "SURINAMESE_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Surinamese Dollar",
+      "description": "Surinamese Dollar (ISO 4217: SRD)",
+      "sort_order": 133,
+      "metadata": {
+        "iso_code": "SRD",
+        "numeric": "968",
+        "minor_units": 2,
+        "symbol": "Sr$"
+      }
+    },
+    {
+      "code": "SOUTH_SUDANESE_POUND",
+      "value_set_code": "CURRENCIES",
+      "label": "South Sudanese Pound",
+      "description": "South Sudanese Pound (ISO 4217: SSP)",
+      "sort_order": 134,
+      "metadata": {
+        "iso_code": "SSP",
+        "numeric": "728",
+        "minor_units": 2,
+        "symbol": "£"
+      }
+    },
+    {
+      "code": "S_O_TOM_AND_PR_NCIPE_DOBRA",
+      "value_set_code": "CURRENCIES",
+      "label": "São Tomé and Príncipe Dobra",
+      "description": "São Tomé and Príncipe Dobra (ISO 4217: STN)",
+      "sort_order": 135,
+      "metadata": {
+        "iso_code": "STN",
+        "numeric": "930",
+        "minor_units": 2,
+        "symbol": "Db"
+      }
+    },
+    {
+      "code": "SWAZI_LILANGENI",
+      "value_set_code": "CURRENCIES",
+      "label": "Swazi Lilangeni",
+      "description": "Swazi Lilangeni (ISO 4217: SZL)",
+      "sort_order": 136,
+      "metadata": {
+        "iso_code": "SZL",
+        "numeric": "748",
+        "minor_units": 2,
+        "symbol": "L"
+      }
+    },
+    {
+      "code": "TONGAN_PA_ANGA",
+      "value_set_code": "CURRENCIES",
+      "label": "Tongan Pa'anga",
+      "description": "Tongan Pa'anga (ISO 4217: TOP)",
+      "sort_order": 137,
+      "metadata": {
+        "iso_code": "TOP",
+        "numeric": "776",
+        "minor_units": 2,
+        "symbol": "T$"
+      }
+    },
+    {
+      "code": "TRINIDAD_AND_TOBAGO_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "Trinidad and Tobago Dollar",
+      "description": "Trinidad and Tobago Dollar (ISO 4217: TTD)",
+      "sort_order": 138,
+      "metadata": {
+        "iso_code": "TTD",
+        "numeric": "780",
+        "minor_units": 2,
+        "symbol": "TT$"
+      }
+    },
+    {
+      "code": "UKRAINIAN_HRYVNIA",
+      "value_set_code": "CURRENCIES",
+      "label": "Ukrainian Hryvnia",
+      "description": "Ukrainian Hryvnia (ISO 4217: UAH)",
+      "sort_order": 139,
+      "metadata": {
+        "iso_code": "UAH",
+        "numeric": "980",
+        "minor_units": 2,
+        "symbol": "₴"
+      }
+    },
+    {
+      "code": "URUGUAYAN_PESO",
+      "value_set_code": "CURRENCIES",
+      "label": "Uruguayan Peso",
+      "description": "Uruguayan Peso (ISO 4217: UYU)",
+      "sort_order": 140,
+      "metadata": {
+        "iso_code": "UYU",
+        "numeric": "858",
+        "minor_units": 2,
+        "symbol": "$U"
+      }
+    },
+    {
+      "code": "VANUATU_VATU",
+      "value_set_code": "CURRENCIES",
+      "label": "Vanuatu Vatu",
+      "description": "Vanuatu Vatu (ISO 4217: VUV)",
+      "sort_order": 141,
+      "metadata": {
+        "iso_code": "VUV",
+        "numeric": "548",
+        "minor_units": 0,
+        "symbol": "Vt"
+      }
+    },
+    {
+      "code": "SAMOAN_TALA",
+      "value_set_code": "CURRENCIES",
+      "label": "Samoan Tala",
+      "description": "Samoan Tala (ISO 4217: WST)",
+      "sort_order": 142,
+      "metadata": {
+        "iso_code": "WST",
+        "numeric": "882",
+        "minor_units": 2,
+        "symbol": "WS$"
+      }
+    },
+    {
+      "code": "EAST_CARIBBEAN_DOLLAR",
+      "value_set_code": "CURRENCIES",
+      "label": "East Caribbean Dollar",
+      "description": "East Caribbean Dollar (ISO 4217: XCD)",
+      "sort_order": 143,
+      "metadata": {
+        "iso_code": "XCD",
+        "numeric": "951",
+        "minor_units": 2,
+        "symbol": "$"
+      }
+    },
+    {
+      "code": "CFP_FRANC",
+      "value_set_code": "CURRENCIES",
+      "label": "CFP Franc",
+      "description": "CFP Franc (ISO 4217: XPF)",
+      "sort_order": 144,
+      "metadata": {
+        "iso_code": "XPF",
+        "numeric": "953",
+        "minor_units": 0,
+        "symbol": "₣"
+      }
+    },
+    {
+      "code": "ZAMBIAN_KWACHA_OLD",
+      "value_set_code": "CURRENCIES",
+      "label": "Zambian Kwacha (Old)",
+      "description": "Zambian Kwacha (Old) (ISO 4217: ZMK)",
+      "sort_order": 145,
+      "metadata": {
+        "iso_code": "ZMK",
+        "numeric": "894",
+        "minor_units": 2,
+        "symbol": "ZK"
+      }
+    }
+  ]
+}

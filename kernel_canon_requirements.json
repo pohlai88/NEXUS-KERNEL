@@ -1,0 +1,83 @@
+{
+  "tier1": {
+    "Finance": {
+      "required": [
+        "ACCOUNT_TYPE",
+        "JOURNAL_TYPE",
+        "FISCAL_PERIOD",
+        "ROUNDING_METHOD",
+        "CURRENCIES"
+      ],
+      "description": "Core accounting and financial management"
+    },
+    "Sales": {
+      "required": [
+        "PAYMENT_TERM",
+        "PAYMENT_METHOD",
+        "DOCUMENT_STATUS",
+        "COUNTRIES"
+      ],
+      "description": "Sales order management and invoicing"
+    },
+    "Tax": {
+      "required": [
+        "TAX_TYPE",
+        "TAX_TREATMENT",
+        "TAX_REPORTING_CATEGORY"
+      ],
+      "description": "Tax calculation and reporting"
+    },
+    "Inventory": {
+      "required": [
+        "UNIT_OF_MEASURE",
+        "WAREHOUSE_TYPE",
+        "INVENTORY_STATUS"
+      ],
+      "description": "Stock management and warehouse operations"
+    }
+  },
+  "tier2": {
+    "Purchasing": {
+      "required": [
+        "PAYMENT_TERM",
+        "PAYMENT_METHOD",
+        "DOCUMENT_STATUS",
+        "COUNTRIES"
+      ],
+      "description": "Purchase order management"
+    },
+    "Manufacturing": {
+      "required": [
+        "UNIT_OF_MEASURE",
+        "BOM_TYPE",
+        "WORK_ORDER_STATUS"
+      ],
+      "description": "Production and work orders"
+    },
+    "HR": {
+      "required": [
+        "EMPLOYEE_TYPE",
+        "ATTENDANCE_STATUS",
+        "LEAVE_STATUS"
+      ],
+      "description": "Human resources and payroll"
+    },
+    "Project": {
+      "required": [
+        "PROJECT_STATUS",
+        "TASK_STATUS",
+        "MILESTONE_STATUS"
+      ],
+      "description": "Project management and tracking"
+    },
+    "FixedAssets": {
+      "required": [
+        "ASSET_TYPE",
+        "ASSET_CATEGORY",
+        "DEPRECIATION_METHOD"
+      ],
+      "description": "Asset management and depreciation"
+    }
+  }
+}
+

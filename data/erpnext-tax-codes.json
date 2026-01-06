@@ -1,0 +1,96 @@
+{
+  "MY": [
+    {
+      "name": "SST 6%",
+      "rate": 6,
+      "type": "Sales",
+      "account_head": "Sales Tax Account"
+    },
+    {
+      "name": "SST 10%",
+      "rate": 10,
+      "type": "Sales",
+      "account_head": "Sales Tax Account"
+    },
+    {
+      "name": "SST Exempt",
+      "rate": 0,
+      "type": "Sales",
+      "account_head": "Sales Tax Account"
+    }
+  ],
+  "SG": [
+    {
+      "name": "GST 7%",
+      "rate": 7,
+      "type": "Sales",
+      "account_head": "GST Output Account"
+    },
+    {
+      "name": "GST 9%",
+      "rate": 9,
+      "type": "Sales",
+      "account_head": "GST Output Account"
+    },
+    {
+      "name": "GST Exempt",
+      "rate": 0,
+      "type": "Sales",
+      "account_head": "GST Output Account"
+    }
+  ],
+  "US": [
+    {
+      "name": "Sales Tax 8%",
+      "rate": 8,
+      "type": "Sales",
+      "account_head": "Sales Tax Payable"
+    },
+    {
+      "name": "Sales Tax 10%",
+      "rate": 10,
+      "type": "Sales",
+      "account_head": "Sales Tax Payable"
+    },
+    {
+      "name": "Tax Exempt",
+      "rate": 0,
+      "type": "Sales",
+      "account_head": "Sales Tax Payable"
+    }
+  ],
+  "GB": [
+    {
+      "name": "VAT 20%",
+      "rate": 20,
+      "type": "Sales",
+      "account_head": "VAT Output Account"
+    },
+    {
+      "name": "VAT 5%",
+      "rate": 5,
+      "type": "Sales",
+      "account_head": "VAT Output Account"
+    },
+    {
+      "name": "VAT Zero Rate",
+      "rate": 0,
+      "type": "Sales",
+      "account_head": "VAT Output Account"
+    }
+  ],
+  "AU": [
+    {
+      "name": "GST 10%",
+      "rate": 10,
+      "type": "Sales",
+      "account_head": "GST Output Account"
+    },
+    {
+      "name": "GST Free",
+      "rate": 0,
+      "type": "Sales",
+      "account_head": "GST Output Account"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "id": "compliance",
+  "name": "Compliance & Audit",
+  "version": "1.0.0",
+  "domain": "COMPLIANCE",
+  "description": "Governance concepts for policy, control, risk, evidence, incidents, and audit logs - enterprise compliance spine",
+  "priority": 10,
+  "authoritative_for": { "concepts": [], "value_sets": [] },
+  "concepts": [
+    {
+      "code": "POLICY",
+      "category": "ENTITY",
+      "domain": "COMPLIANCE",
+      "description": "Policy record (security, finance, operations)",
+      "tags": ["compliance", "policy"]
+    },
+    {
+      "code": "POLICY_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "COMPLIANCE",
+      "description": "Policy lifecycle status",
+      "tags": ["compliance", "policy", "status"]
+    },
+    {
+      "code": "CONTROL",
+      "category": "ENTITY",
+      "domain": "COMPLIANCE",
+      "description": "Control record (preventive/detective/corrective control)",
+      "tags": ["compliance", "control"]
+    },
+    {
+      "code": "CONTROL_TYPE",
+      "category": "ATTRIBUTE",
+      "domain": "COMPLIANCE",
+      "description": "Control type classification",
+      "tags": ["compliance", "control", "classification"]
+    },
+    {
+      "code": "RISK",
+      "category": "ENTITY",
+      "domain": "COMPLIANCE",
+      "description": "Risk record (risk register)",
+      "tags": ["compliance", "risk"]
+    },
+    {
+      "code": "RISK_SEVERITY",
+      "category": "ATTRIBUTE",
+      "domain": "COMPLIANCE",
+      "description": "Risk severity classification",
+      "tags": ["compliance", "risk", "classification"]
+    },
+    {
+      "code": "EVIDENCE",
+      "category": "ENTITY",
+      "domain": "COMPLIANCE",
+      "description": "Evidence record used to prove control execution (files, logs, screenshots, attestations)",
+      "tags": ["compliance", "evidence"]
+    },
+    {
+      "code": "EVIDENCE_LINE",
+      "category": "ENTITY",
+      "domain": "COMPLIANCE",
+      "description": "Evidence line item (multiple attachments/entries per evidence record)",
+      "tags": ["compliance", "evidence"]
+    },
+    {
+      "code": "INCIDENT",
+      "category": "ENTITY",
+      "domain": "COMPLIANCE",
+      "description": "Incident record (security/compliance incident or breach)",
+      "tags": ["compliance", "incident"]
+    },
+    {
+      "code": "INCIDENT_STATUS",
+      "category": "ATTRIBUTE",
+      "domain": "COMPLIANCE",
+      "description": "Incident lifecycle status",
+      "tags": ["compliance", "incident", "status"]
+    },
+    {
+      "code": "AUDIT_LOG",
+      "category": "ENTITY",
+      "domain": "COMPLIANCE",
+      "description": "Audit log record (who did what, when, where, outcome)",
+      "tags": ["compliance", "audit", "log"]
+    },
+    {
+      "code": "AUDIT_LOG_LINE",
+      "category": "ENTITY",
+      "domain": "COMPLIANCE",
+      "description": "Audit log line (detailed diff/field-level or multi-event expansion)",
+      "tags": ["compliance", "audit", "log"]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "POLICY_STATUS",
+      "domain": "COMPLIANCE",
+      "description": "Policy statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["compliance", "policy", "status"],
+      "metadata": { "prefix": "PLS" }
+    },
+    {
+      "code": "CONTROL_TYPE",
+      "domain": "COMPLIANCE",
+      "description": "Control types",
+      "jurisdiction": "GLOBAL",
+      "tags": ["compliance", "control"],
+      "metadata": { "prefix": "CTL" }
+    },
+    {
+      "code": "RISK_SEVERITY",
+      "domain": "COMPLIANCE",
+      "description": "Risk severity levels",
+      "jurisdiction": "GLOBAL",
+      "tags": ["compliance", "risk"],
+      "metadata": { "prefix": "RSK" }
+    },
+    {
+      "code": "INCIDENT_STATUS",
+      "domain": "COMPLIANCE",
+      "description": "Incident statuses",
+      "jurisdiction": "GLOBAL",
+      "tags": ["compliance", "incident", "status"],
+      "metadata": { "prefix": "INS" }
+    }
+  ],
+  "values": [
+    { "code": "DRAFT", "value_set_code": "POLICY_STATUS", "label": "Draft", "description": "Policy drafted", "sort_order": 1 },
+    { "code": "ACTIVE", "value_set_code": "POLICY_STATUS", "label": "Active", "description": "Policy active", "sort_order": 2 },
+    { "code": "RETIRED", "value_set_code": "POLICY_STATUS", "label": "Retired", "description": "Policy retired", "sort_order": 3 },
+    { "code": "PREVENTIVE", "value_set_code": "CONTROL_TYPE", "label": "Preventive", "description": "Prevents issues from occurring", "sort_order": 1 },
+    { "code": "DETECTIVE", "value_set_code": "CONTROL_TYPE", "label": "Detective", "description": "Detects issues after occurrence", "sort_order": 2 },
+    { "code": "CORRECTIVE", "value_set_code": "CONTROL_TYPE", "label": "Corrective", "description": "Corrects/remediates issues", "sort_order": 3 },
+    { "code": "LOW", "value_set_code": "RISK_SEVERITY", "label": "Low", "description": "Low severity risk", "sort_order": 1 },
+    { "code": "MEDIUM", "value_set_code": "RISK_SEVERITY", "label": "Medium", "description": "Medium severity risk", "sort_order": 2 },
+    { "code": "HIGH", "value_set_code": "RISK_SEVERITY", "label": "High", "description": "High severity risk", "sort_order": 3 },
+    { "code": "CRITICAL", "value_set_code": "RISK_SEVERITY", "label": "Critical", "description": "Critical severity risk", "sort_order": 4 },
+    { "code": "OPEN", "value_set_code": "INCIDENT_STATUS", "label": "Open", "description": "Incident opened", "sort_order": 1 },
+    { "code": "INVESTIGATING", "value_set_code": "INCIDENT_STATUS", "label": "Investigating", "description": "Investigation in progress", "sort_order": 2 },
+    { "code": "RESOLVED", "value_set_code": "INCIDENT_STATUS", "label": "Resolved", "description": "Incident resolved", "sort_order": 3 },
+    { "code": "CLOSED", "value_set_code": "INCIDENT_STATUS", "label": "Closed", "description": "Incident closed", "sort_order": 4 }
+  ]
+}
+

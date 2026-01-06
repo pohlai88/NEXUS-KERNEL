@@ -1,0 +1,631 @@
+{
+  "id": "esg",
+  "name": "ESG & Sustainability",
+  "version": "1.0.0",
+  "domain": "ESG",
+  "description": "Environmental, Social, and Governance metrics and emission factor registry - GHG Protocol compliant",
+  "priority": 30,
+  "authoritative_for": {
+    "concepts": [
+      "ESG_METRIC",
+      "EMISSION_FACTOR",
+      "SCOPE_CATEGORY",
+      "CALCULATION_STANDARD"
+    ],
+    "value_sets": [
+      "ESG_METRIC_DEFINITIONS",
+      "EMISSION_FACTOR_REGISTRY",
+      "SCOPE_CATEGORIES",
+      "CALCULATION_STANDARDS",
+      "ESG_REPORTING_FRAMEWORKS"
+    ]
+  },
+  "concepts": [
+    {
+      "code": "ESG_METRIC",
+      "category": "ENTITY",
+      "domain": "ESG",
+      "description": "Sustainability metric definition (Carbon, Water, Social) with calculation standards",
+      "tags": [
+        "esg",
+        "sustainability",
+        "ghg-protocol"
+      ]
+    },
+    {
+      "code": "EMISSION_FACTOR",
+      "category": "ENTITY",
+      "domain": "ESG",
+      "description": "Conversion factor for activity data (e.g., kWh to CO2e) with regional variations",
+      "tags": [
+        "esg",
+        "carbon",
+        "emission"
+      ]
+    },
+    {
+      "code": "SCOPE_CATEGORY",
+      "category": "ATTRIBUTE",
+      "domain": "ESG",
+      "description": "GHG Protocol scope classification (Scope 1/2/3)",
+      "tags": [
+        "esg",
+        "ghg-protocol"
+      ]
+    },
+    {
+      "code": "CALCULATION_STANDARD",
+      "category": "ATTRIBUTE",
+      "domain": "ESG",
+      "description": "Standard used for ESG metric calculation (GHG Protocol, GRI, SASB)",
+      "tags": [
+        "esg",
+        "standard"
+      ]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "SCOPE_CATEGORIES",
+      "label": "GHG Protocol Scope Categories",
+      "description": "Greenhouse Gas Protocol emission scope classifications",
+      "domain": "ESG",
+      "status": "ACTIVE",
+      "value_count": 3,
+      "tags": [
+        "ghg-protocol",
+        "scope"
+      ]
+    },
+    {
+      "code": "CALCULATION_STANDARDS",
+      "label": "ESG Calculation Standards",
+      "description": "Authoritative standards for sustainability metrics",
+      "domain": "ESG",
+      "status": "ACTIVE",
+      "value_count": 5,
+      "tags": [
+        "standard",
+        "framework"
+      ]
+    },
+    {
+      "code": "ESG_REPORTING_FRAMEWORKS",
+      "label": "ESG Reporting Frameworks",
+      "description": "Global sustainability reporting frameworks",
+      "domain": "ESG",
+      "status": "ACTIVE",
+      "value_count": 4,
+      "tags": [
+        "reporting",
+        "framework"
+      ]
+    },
+    {
+      "code": "ESG_METRIC_DEFINITIONS",
+      "label": "ESG Metric Definitions",
+      "description": "Core sustainability metrics tracked by organizations",
+      "domain": "ESG",
+      "status": "ACTIVE",
+      "value_count": 15,
+      "tags": [
+        "metric",
+        "carbon",
+        "water",
+        "social"
+      ]
+    },
+    {
+      "code": "EMISSION_FACTOR_REGISTRY",
+      "label": "Emission Factor Registry",
+      "description": "Region-specific conversion factors for GHG calculations",
+      "domain": "ESG",
+      "status": "ACTIVE",
+      "value_count": 50,
+      "tags": [
+        "emission",
+        "factor",
+        "regional"
+      ]
+    }
+  ],
+  "values": [
+    {
+      "value_set_code": "SCOPE_CATEGORIES",
+      "code": "SCOPE_1",
+      "label": "Scope 1 - Direct Emissions",
+      "description": "Direct GHG emissions from owned or controlled sources",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "standard": "GHG_PROTOCOL",
+        "examples": "Company vehicles, on-site fuel combustion"
+      }
+    },
+    {
+      "value_set_code": "SCOPE_CATEGORIES",
+      "code": "SCOPE_2",
+      "label": "Scope 2 - Indirect Emissions (Energy)",
+      "description": "Indirect GHG emissions from purchased electricity, steam, heating, cooling",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "standard": "GHG_PROTOCOL",
+        "examples": "Purchased electricity, district heating"
+      }
+    },
+    {
+      "value_set_code": "SCOPE_CATEGORIES",
+      "code": "SCOPE_3",
+      "label": "Scope 3 - Indirect Emissions (Value Chain)",
+      "description": "Indirect GHG emissions in value chain (upstream and downstream)",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "standard": "GHG_PROTOCOL",
+        "categories": 15,
+        "examples": "Business travel, purchased goods, sold products use"
+      }
+    },
+    {
+      "value_set_code": "CALCULATION_STANDARDS",
+      "code": "GHG_PROTOCOL",
+      "label": "GHG Protocol",
+      "description": "Greenhouse Gas Protocol Corporate Standard",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "WRI/WBCSD",
+        "url": "https://ghgprotocol.org/",
+        "version": "Revised 2015"
+      }
+    },
+    {
+      "value_set_code": "CALCULATION_STANDARDS",
+      "code": "GRI",
+      "label": "GRI Standards",
+      "description": "Global Reporting Initiative Sustainability Standards",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "GRI",
+        "url": "https://www.globalreporting.org/",
+        "version": "GRI 2021"
+      }
+    },
+    {
+      "value_set_code": "CALCULATION_STANDARDS",
+      "code": "SASB",
+      "label": "SASB Standards",
+      "description": "Sustainability Accounting Standards Board",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "IFRS Foundation",
+        "url": "https://www.sasb.org/",
+        "sector_specific": true
+      }
+    },
+    {
+      "value_set_code": "CALCULATION_STANDARDS",
+      "code": "TCFD",
+      "label": "TCFD Recommendations",
+      "description": "Task Force on Climate-related Financial Disclosures",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "FSB",
+        "focus": "Climate-related risks and opportunities"
+      }
+    },
+    {
+      "value_set_code": "CALCULATION_STANDARDS",
+      "code": "ISO_14064",
+      "label": "ISO 14064",
+      "description": "Greenhouse gases quantification and reporting",
+      "sort_order": 5,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "ISO",
+        "parts": 3,
+        "verification": "Part 3"
+      }
+    },
+    {
+      "value_set_code": "ESG_REPORTING_FRAMEWORKS",
+      "code": "CDP",
+      "label": "CDP",
+      "description": "Carbon Disclosure Project",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "url": "https://www.cdp.net/",
+        "focus": "Climate, Water, Forests"
+      }
+    },
+    {
+      "value_set_code": "ESG_REPORTING_FRAMEWORKS",
+      "code": "CSRD",
+      "label": "CSRD",
+      "description": "Corporate Sustainability Reporting Directive (EU)",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "jurisdiction": "EU",
+        "mandatory": true,
+        "effective": "2024+"
+      }
+    },
+    {
+      "value_set_code": "ESG_REPORTING_FRAMEWORKS",
+      "code": "ISSB",
+      "label": "ISSB Standards",
+      "description": "International Sustainability Standards Board",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "authority": "IFRS Foundation",
+        "standards": ["IFRS S1", "IFRS S2"]
+      }
+    },
+    {
+      "value_set_code": "ESG_REPORTING_FRAMEWORKS",
+      "code": "SEC_CLIMATE",
+      "label": "SEC Climate Disclosure",
+      "description": "US SEC Climate-Related Disclosures",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "jurisdiction": "USA",
+        "authority": "SEC",
+        "status": "Proposed 2024"
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "CARBON_FOOTPRINT",
+      "label": "Carbon Footprint",
+      "description": "Total GHG emissions in metric tons CO2 equivalent",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "tCO2e",
+        "scope": "ALL",
+        "standard": "GHG_PROTOCOL",
+        "calculation": "Activity Data × Emission Factor"
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "SCOPE1_EMISSIONS",
+      "label": "Scope 1 Emissions",
+      "description": "Direct GHG emissions",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "tCO2e",
+        "scope": "SCOPE_1",
+        "standard": "GHG_PROTOCOL"
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "SCOPE2_EMISSIONS",
+      "label": "Scope 2 Emissions",
+      "description": "Indirect emissions from purchased energy",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "tCO2e",
+        "scope": "SCOPE_2",
+        "standard": "GHG_PROTOCOL",
+        "methods": ["Location-based", "Market-based"]
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "SCOPE3_EMISSIONS",
+      "label": "Scope 3 Emissions",
+      "description": "Value chain indirect emissions",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "tCO2e",
+        "scope": "SCOPE_3",
+        "standard": "GHG_PROTOCOL",
+        "categories": 15
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "ENERGY_CONSUMPTION",
+      "label": "Energy Consumption",
+      "description": "Total energy consumed",
+      "sort_order": 5,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "MWh",
+        "types": ["Renewable", "Non-renewable"]
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "RENEWABLE_ENERGY_PCT",
+      "label": "Renewable Energy Percentage",
+      "description": "Percentage of energy from renewable sources",
+      "sort_order": 6,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "%",
+        "target_example": "100% by 2030"
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "WATER_CONSUMPTION",
+      "label": "Water Consumption",
+      "description": "Total water withdrawal and consumption",
+      "sort_order": 7,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "m³",
+        "standard": "GRI_303"
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "WASTE_GENERATED",
+      "label": "Waste Generated",
+      "description": "Total waste by type",
+      "sort_order": 8,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "tonnes",
+        "types": ["Hazardous", "Non-hazardous"],
+        "standard": "GRI_306"
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "WASTE_DIVERTED",
+      "label": "Waste Diverted",
+      "description": "Waste diverted from disposal",
+      "sort_order": 9,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "tonnes",
+        "methods": ["Recycling", "Composting", "Reuse"]
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "EMPLOYEE_SAFETY_RATE",
+      "label": "Employee Safety Rate",
+      "description": "Total Recordable Incident Rate (TRIR)",
+      "sort_order": 10,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "incidents per 200,000 hours",
+        "standard": "OSHA"
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "GENDER_DIVERSITY_PCT",
+      "label": "Gender Diversity",
+      "description": "Percentage of women in workforce and leadership",
+      "sort_order": 11,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "%",
+        "levels": ["Overall", "Leadership", "Board"],
+        "standard": "GRI_405"
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "TRAINING_HOURS",
+      "label": "Employee Training Hours",
+      "description": "Average training hours per employee",
+      "sort_order": 12,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "hours/employee",
+        "standard": "GRI_404"
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "COMMUNITY_INVESTMENT",
+      "label": "Community Investment",
+      "description": "Total community and social investments",
+      "sort_order": 13,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "USD",
+        "standard": "GRI_413"
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "SUPPLIER_ESG_SCORE",
+      "label": "Supplier ESG Score",
+      "description": "Average ESG performance score of suppliers",
+      "sort_order": 14,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "score (0-100)",
+        "scope": "SCOPE_3"
+      }
+    },
+    {
+      "value_set_code": "ESG_METRIC_DEFINITIONS",
+      "code": "CARBON_INTENSITY",
+      "label": "Carbon Intensity",
+      "description": "Emissions per unit of revenue or production",
+      "sort_order": 15,
+      "status": "ACTIVE",
+      "metadata": {
+        "unit": "tCO2e/million USD or tCO2e/unit",
+        "use": "Performance benchmarking"
+      }
+    },
+    {
+      "value_set_code": "EMISSION_FACTOR_REGISTRY",
+      "code": "EF_ELECTRICITY_MY",
+      "label": "Malaysia Grid Electricity",
+      "description": "Malaysia national grid emission factor",
+      "sort_order": 1,
+      "status": "ACTIVE",
+      "metadata": {
+        "region": "MY",
+        "value": 0.694,
+        "unit": "kgCO2e/kWh",
+        "source": "Malaysia Energy Commission",
+        "year": 2023,
+        "scope": "SCOPE_2"
+      }
+    },
+    {
+      "value_set_code": "EMISSION_FACTOR_REGISTRY",
+      "code": "EF_ELECTRICITY_SG",
+      "label": "Singapore Grid Electricity",
+      "description": "Singapore national grid emission factor",
+      "sort_order": 2,
+      "status": "ACTIVE",
+      "metadata": {
+        "region": "SG",
+        "value": 0.4085,
+        "unit": "kgCO2e/kWh",
+        "source": "EMA Singapore",
+        "year": 2023,
+        "scope": "SCOPE_2"
+      }
+    },
+    {
+      "value_set_code": "EMISSION_FACTOR_REGISTRY",
+      "code": "EF_ELECTRICITY_TH",
+      "label": "Thailand Grid Electricity",
+      "description": "Thailand national grid emission factor",
+      "sort_order": 3,
+      "status": "ACTIVE",
+      "metadata": {
+        "region": "TH",
+        "value": 0.5213,
+        "unit": "kgCO2e/kWh",
+        "source": "TGO Thailand",
+        "year": 2023,
+        "scope": "SCOPE_2"
+      }
+    },
+    {
+      "value_set_code": "EMISSION_FACTOR_REGISTRY",
+      "code": "EF_ELECTRICITY_VN",
+      "label": "Vietnam Grid Electricity",
+      "description": "Vietnam national grid emission factor",
+      "sort_order": 4,
+      "status": "ACTIVE",
+      "metadata": {
+        "region": "VN",
+        "value": 0.7445,
+        "unit": "kgCO2e/kWh",
+        "source": "Vietnam MONRE",
+        "year": 2023,
+        "scope": "SCOPE_2"
+      }
+    },
+    {
+      "value_set_code": "EMISSION_FACTOR_REGISTRY",
+      "code": "EF_ELECTRICITY_ID",
+      "label": "Indonesia Grid Electricity",
+      "description": "Indonesia national grid emission factor",
+      "sort_order": 5,
+      "status": "ACTIVE",
+      "metadata": {
+        "region": "ID",
+        "value": 0.795,
+        "unit": "kgCO2e/kWh",
+        "source": "Indonesia Ministry of Energy",
+        "year": 2023,
+        "scope": "SCOPE_2"
+      }
+    },
+    {
+      "value_set_code": "EMISSION_FACTOR_REGISTRY",
+      "code": "EF_ELECTRICITY_PH",
+      "label": "Philippines Grid Electricity",
+      "description": "Philippines national grid emission factor",
+      "sort_order": 6,
+      "status": "ACTIVE",
+      "metadata": {
+        "region": "PH",
+        "value": 0.7122,
+        "unit": "kgCO2e/kWh",
+        "source": "Philippines DOE",
+        "year": 2023,
+        "scope": "SCOPE_2"
+      }
+    },
+    {
+      "value_set_code": "EMISSION_FACTOR_REGISTRY",
+      "code": "EF_DIESEL",
+      "label": "Diesel Fuel Combustion",
+      "description": "Stationary combustion of diesel fuel",
+      "sort_order": 7,
+      "status": "ACTIVE",
+      "metadata": {
+        "value": 2.68,
+        "unit": "kgCO2e/liter",
+        "source": "IPCC 2006",
+        "scope": "SCOPE_1",
+        "global": true
+      }
+    },
+    {
+      "value_set_code": "EMISSION_FACTOR_REGISTRY",
+      "code": "EF_GASOLINE",
+      "label": "Gasoline Fuel Combustion",
+      "description": "Mobile combustion of gasoline",
+      "sort_order": 8,
+      "status": "ACTIVE",
+      "metadata": {
+        "value": 2.31,
+        "unit": "kgCO2e/liter",
+        "source": "IPCC 2006",
+        "scope": "SCOPE_1",
+        "global": true
+      }
+    },
+    {
+      "value_set_code": "EMISSION_FACTOR_REGISTRY",
+      "code": "EF_NATURAL_GAS",
+      "label": "Natural Gas Combustion",
+      "description": "Stationary combustion of natural gas",
+      "sort_order": 9,
+      "status": "ACTIVE",
+      "metadata": {
+        "value": 1.96,
+        "unit": "kgCO2e/m³",
+        "source": "IPCC 2006",
+        "scope": "SCOPE_1",
+        "global": true
+      }
+    },
+    {
+      "value_set_code": "EMISSION_FACTOR_REGISTRY",
+      "code": "EF_AIR_TRAVEL_SHORT",
+      "label": "Air Travel Short Haul",
+      "description": "Commercial air travel <1,500km",
+      "sort_order": 10,
+      "status": "ACTIVE",
+      "metadata": {
+        "value": 0.158,
+        "unit": "kgCO2e/passenger-km",
+        "source": "DEFRA 2023",
+        "scope": "SCOPE_3",
+        "global": true,
+        "category": "Business Travel"
+      }
+    }
+  ]
+}

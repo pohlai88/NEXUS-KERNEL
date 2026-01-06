@@ -1,0 +1,24 @@
+[
+  {
+    "Domain": "META",
+    "Config_Set": "LEGEND_SUPPORT_STATUS",
+    "Priority": "P0",
+    "Scope": "GLOBAL",
+    "Purpose": "How to interpret competitor support columns.",
+    "Minimum_Requirements_(P0)": "Use PASS/PARTIAL/WEAK/NA/UNKNOWN consistently.",
+    "Key_Attributes_(suggested)": "PASS=Native & configurable; PARTIAL=Some support or needs customization; WEAK=Limited/SMB-grade; NA=Not comparable; UNKNOWN=needs verification.",
+    "Standards/Reference": "Internal convention",
+    "Recommended_Data_Model": "Enum/value-set",
+    "Effective-Dated?": "No",
+    "Typical_Values_Count_(P0)": "5",
+    "SAP_S4HANA": "PASS",
+    "Oracle_NetSuite": "PASS",
+    "MS_Dynamics_365": "PASS",
+    "Odoo": "PASS",
+    "Zoho": "PASS",
+    "QuickBooks": "PASS",
+    "Evidence_Level": "INTERNAL",
+    "Evidence_URLs": "",
+    "Notes_for_Migration/Extensibility": "Attach Evidence_URLs where you have official docs; otherwise mark as INFERRED/UNKNOWN."
+  }
+]
