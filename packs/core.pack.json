@@ -6,8 +6,30 @@
   "description": "Shared primitives used across all ERP domains (party, address, contact, document, status, payment, compliance) - P0 enabler",
   "priority": 100,
   "authoritative_for": {
-    "concepts": ["PARTY", "ADDRESS", "CONTACT", "DOCUMENT", "ATTACHMENT", "TRANSACTION_STATUS", "APPROVAL_STATUS", "PAYMENT_METHOD", "PRIORITY_LEVEL", "COUNTRY"],
-    "value_sets": ["PARTY_TYPE", "ADDRESS_TYPE", "CONTACT_TYPE", "TRANSACTION_STATUS", "APPROVAL_STATUS", "PAYMENT_METHOD", "PRIORITY_LEVEL", "COUNTRIES", "DOCUMENT_STATUS", "SHIPPING_METHOD"]
+    "concepts": [
+      "PARTY",
+      "ADDRESS",
+      "CONTACT",
+      "DOCUMENT",
+      "ATTACHMENT",
+      "TRANSACTION_STATUS",
+      "APPROVAL_STATUS",
+      "PAYMENT_METHOD",
+      "PRIORITY_LEVEL",
+      "COUNTRY"
+    ],
+    "value_sets": [
+      "PARTY_TYPE",
+      "ADDRESS_TYPE",
+      "CONTACT_TYPE",
+      "TRANSACTION_STATUS",
+      "APPROVAL_STATUS",
+      "PAYMENT_METHOD",
+      "PRIORITY_LEVEL",
+      "COUNTRIES",
+      "DOCUMENT_STATUS",
+      "SHIPPING_METHOD"
+    ]
   },
   "concepts": [
     {
@@ -15,98 +37,144 @@
       "category": "ENTITY",
       "domain": "CORE",
       "description": "Generic party master (person or organization). Can unify customer/supplier/employee later",
-      "tags": ["core", "party", "master"]
+      "tags": [
+        "core",
+        "party",
+        "master"
+      ]
     },
     {
       "code": "PARTY_TYPE",
       "category": "ATTRIBUTE",
       "domain": "CORE",
       "description": "Party classification type",
-      "tags": ["core", "party"]
+      "tags": [
+        "core",
+        "party"
+      ]
     },
     {
       "code": "ADDRESS",
       "category": "ENTITY",
       "domain": "CORE",
       "description": "Address record used for billing, shipping, legal, and operational locations",
-      "tags": ["core", "address"]
+      "tags": [
+        "core",
+        "address"
+      ]
     },
     {
       "code": "ADDRESS_TYPE",
       "category": "ATTRIBUTE",
       "domain": "CORE",
       "description": "Address usage type",
-      "tags": ["core", "address"]
+      "tags": [
+        "core",
+        "address"
+      ]
     },
     {
       "code": "CONTACT",
       "category": "ENTITY",
       "domain": "CORE",
       "description": "Contact person record linked to a party (customer/supplier/employee)",
-      "tags": ["core", "contact"]
+      "tags": [
+        "core",
+        "contact"
+      ]
     },
     {
       "code": "CONTACT_TYPE",
       "category": "ATTRIBUTE",
       "domain": "CORE",
       "description": "Contact usage type",
-      "tags": ["core", "contact"]
+      "tags": [
+        "core",
+        "contact"
+      ]
     },
     {
       "code": "DOCUMENT",
       "category": "ENTITY",
       "domain": "CORE",
       "description": "Generic document container for ERP transactions and references",
-      "tags": ["core", "document"]
+      "tags": [
+        "core",
+        "document"
+      ]
     },
     {
       "code": "DOCUMENT_TYPE",
       "category": "ATTRIBUTE",
       "domain": "CORE",
       "description": "Document classification type",
-      "tags": ["core", "document"]
+      "tags": [
+        "core",
+        "document"
+      ]
     },
     {
       "code": "ATTACHMENT",
       "category": "ENTITY",
       "domain": "CORE",
       "description": "File attachment linked to any document or record (evidence, invoice PDF, image, etc.)",
-      "tags": ["core", "document", "attachment"]
+      "tags": [
+        "core",
+        "document",
+        "attachment"
+      ]
     },
     {
       "code": "TRANSACTION_STATUS",
       "category": "ATTRIBUTE",
       "domain": "CORE",
       "description": "Generic lifecycle status for transactions and workflows",
-      "tags": ["core", "status"]
+      "tags": [
+        "core",
+        "status"
+      ]
     },
     {
       "code": "APPROVAL_STATUS",
       "category": "ATTRIBUTE",
       "domain": "CORE",
       "description": "Generic approval workflow status",
-      "tags": ["core", "approval", "status"]
+      "tags": [
+        "core",
+        "approval",
+        "status"
+      ]
     },
     {
       "code": "PAYMENT_METHOD",
       "category": "ATTRIBUTE",
       "domain": "CORE",
       "description": "Payment method classification",
-      "tags": ["core", "payment"]
+      "tags": [
+        "core",
+        "payment"
+      ]
     },
     {
       "code": "PRIORITY_LEVEL",
       "category": "ATTRIBUTE",
       "domain": "CORE",
       "description": "Priority / severity level used across tasks, tickets, and workflows",
-      "tags": ["core", "priority"]
+      "tags": [
+        "core",
+        "priority"
+      ]
     },
     {
       "code": "COUNTRY",
       "category": "ENTITY",
       "domain": "CORE",
       "description": "Sovereign nation per ISO 3166-1",
-      "tags": ["core", "geographic", "iso3166"]
+      "tags": [
+        "core",
+        "geographic",
+        "iso3166"
+      ]
     }
   ],
   "value_sets": [
@@ -115,80 +183,134 @@
       "domain": "CORE",
       "description": "Party types (person / company / government)",
       "jurisdiction": "GLOBAL",
-      "tags": ["core", "party"],
-      "metadata": { "prefix": "PTY" }
+      "tags": [
+        "core",
+        "party"
+      ],
+      "metadata": {
+        "prefix": "PTY"
+      }
     },
     {
       "code": "ADDRESS_TYPE",
       "domain": "CORE",
       "description": "Address usage types",
       "jurisdiction": "GLOBAL",
-      "tags": ["core", "address"],
-      "metadata": { "prefix": "ADR" }
+      "tags": [
+        "core",
+        "address"
+      ],
+      "metadata": {
+        "prefix": "ADR"
+      }
     },
     {
       "code": "CONTACT_TYPE",
       "domain": "CORE",
       "description": "Contact usage types",
       "jurisdiction": "GLOBAL",
-      "tags": ["core", "contact"],
-      "metadata": { "prefix": "CON" }
+      "tags": [
+        "core",
+        "contact"
+      ],
+      "metadata": {
+        "prefix": "CON"
+      }
     },
     {
       "code": "TRANSACTION_STATUS",
       "domain": "CORE",
       "description": "Generic transaction lifecycle statuses",
       "jurisdiction": "GLOBAL",
-      "tags": ["core", "status"],
-      "metadata": { "prefix": "TXN" }
+      "tags": [
+        "core",
+        "status"
+      ],
+      "metadata": {
+        "prefix": "TXN"
+      }
     },
     {
       "code": "APPROVAL_STATUS",
       "domain": "CORE",
       "description": "Approval workflow statuses",
       "jurisdiction": "GLOBAL",
-      "tags": ["core", "approval", "status"],
-      "metadata": { "prefix": "APR" }
+      "tags": [
+        "core",
+        "approval",
+        "status"
+      ],
+      "metadata": {
+        "prefix": "APR"
+      }
     },
     {
       "code": "PAYMENT_METHOD",
       "domain": "CORE",
       "description": "Payment methods",
       "jurisdiction": "GLOBAL",
-      "tags": ["core", "payment"],
-      "metadata": { "prefix": "PAY" }
+      "tags": [
+        "core",
+        "payment"
+      ],
+      "metadata": {
+        "prefix": "PAY"
+      }
     },
     {
       "code": "PRIORITY_LEVEL",
       "domain": "CORE",
       "description": "Priority levels",
       "jurisdiction": "GLOBAL",
-      "tags": ["core", "priority"],
-      "metadata": { "prefix": "PRI" }
+      "tags": [
+        "core",
+        "priority"
+      ],
+      "metadata": {
+        "prefix": "PRI"
+      }
     },
     {
       "code": "COUNTRIES",
       "domain": "CORE",
       "description": "ISO 3166-1 Alpha-2 country codes",
       "jurisdiction": "GLOBAL",
-      "tags": ["core", "geographic", "iso3166"],
-      "metadata": { "prefix": "CNT" }
+      "tags": [
+        "core",
+        "geographic",
+        "iso3166"
+      ],
+      "metadata": {
+        "prefix": "CNT"
+      }
     },
     {
       "code": "DOCUMENT_STATUS",
       "domain": "CORE",
       "description": "Document lifecycle status",
       "jurisdiction": "GLOBAL",
-      "tags": ["core", "document", "status"],
-      "metadata": { "prefix": "DOC" }
+      "tags": [
+        "core",
+        "document",
+        "status"
+      ],
+      "metadata": {
+        "prefix": "DOC"
+      }
     },
     {
       "code": "SHIPPING_METHOD",
       "domain": "CORE",
       "description": "Shipping/delivery methods",
       "jurisdiction": "GLOBAL",
-      "tags": ["core", "shipping", "logistics"],
-      "metadata": { "prefix": "SHP" }
+      "tags": [
+        "core",
+        "shipping",
+        "logistics"
+      ],
+      "metadata": {
+        "prefix": "SHP"
+      }
     }
   ],
   "values": [
@@ -1899,6 +2021,342 @@
       "label": "Local Delivery",
       "description": "Local area delivery service",
       "sort_order": 10
+    },
+    {
+      "code": "ANTIGUA_AND_BARBUDA",
+      "value_set_code": "COUNTRIES",
+      "label": "Antigua and Barbuda",
+      "description": "Antigua and Barbuda (ISO 3166-1: AG)",
+      "sort_order": 184,
+      "metadata": {
+        "alpha2": "AG",
+        "alpha3": "ATG",
+        "numeric": "028",
+        "region": "Americas",
+        "subregion": "Caribbean"
+      }
+    },
+    {
+      "code": "TUVALU",
+      "value_set_code": "COUNTRIES",
+      "label": "Tuvalu",
+      "description": "Tuvalu (ISO 3166-1: TV)",
+      "sort_order": 185,
+      "metadata": {
+        "alpha2": "TV",
+        "alpha3": "TUV",
+        "numeric": "798",
+        "region": "Oceania",
+        "subregion": "Polynesia"
+      }
+    },
+    {
+      "code": "ANGUILLA",
+      "value_set_code": "COUNTRIES",
+      "label": "Anguilla",
+      "description": "Anguilla (ISO 3166-1: AI)",
+      "sort_order": 186,
+      "metadata": {
+        "alpha2": "AI",
+        "alpha3": "AIA",
+        "numeric": "660",
+        "region": "Americas",
+        "subregion": "Caribbean"
+      }
+    },
+    {
+      "code": "NORFOLK_ISLAND",
+      "value_set_code": "COUNTRIES",
+      "label": "Norfolk Island",
+      "description": "Norfolk Island (ISO 3166-1: NF)",
+      "sort_order": 187,
+      "metadata": {
+        "alpha2": "NF",
+        "alpha3": "NFK",
+        "numeric": "574",
+        "region": "Oceania",
+        "subregion": "Australia and New Zealand"
+      }
+    },
+    {
+      "code": "CARIBBEAN_NETHERLANDS",
+      "value_set_code": "COUNTRIES",
+      "label": "Caribbean Netherlands",
+      "description": "Caribbean Netherlands (ISO 3166-1: BQ)",
+      "sort_order": 188,
+      "metadata": {
+        "alpha2": "BQ",
+        "alpha3": "BES",
+        "numeric": "535",
+        "region": "Americas",
+        "subregion": "Caribbean"
+      }
+    },
+    {
+      "code": "GUERNSEY",
+      "value_set_code": "COUNTRIES",
+      "label": "Guernsey",
+      "description": "Guernsey (ISO 3166-1: GG)",
+      "sort_order": 189,
+      "metadata": {
+        "alpha2": "GG",
+        "alpha3": "GGY",
+        "numeric": "831",
+        "region": "Europe",
+        "subregion": "Northern Europe"
+      }
+    },
+    {
+      "code": "MAYOTTE",
+      "value_set_code": "COUNTRIES",
+      "label": "Mayotte",
+      "description": "Mayotte (ISO 3166-1: YT)",
+      "sort_order": 190,
+      "metadata": {
+        "alpha2": "YT",
+        "alpha3": "MYT",
+        "numeric": "175",
+        "region": "Africa",
+        "subregion": "Eastern Africa"
+      }
+    },
+    {
+      "code": "SAINT_BARTH_LEMY",
+      "value_set_code": "COUNTRIES",
+      "label": "Saint Barthélemy",
+      "description": "Saint Barthélemy (ISO 3166-1: BL)",
+      "sort_order": 191,
+      "metadata": {
+        "alpha2": "BL",
+        "alpha3": "BLM",
+        "numeric": "652",
+        "region": "Americas",
+        "subregion": "Caribbean"
+      }
+    },
+    {
+      "code": "VATICAN_CITY",
+      "value_set_code": "COUNTRIES",
+      "label": "Vatican City",
+      "description": "Vatican City (ISO 3166-1: VA)",
+      "sort_order": 192,
+      "metadata": {
+        "alpha2": "VA",
+        "alpha3": "VAT",
+        "numeric": "336",
+        "region": "Europe",
+        "subregion": "Southern Europe"
+      }
+    },
+    {
+      "code": "TURKS_AND_CAICOS_ISLANDS",
+      "value_set_code": "COUNTRIES",
+      "label": "Turks and Caicos Islands",
+      "description": "Turks and Caicos Islands (ISO 3166-1: TC)",
+      "sort_order": 193,
+      "metadata": {
+        "alpha2": "TC",
+        "alpha3": "TCA",
+        "numeric": "796",
+        "region": "Americas",
+        "subregion": "Caribbean"
+      }
+    },
+    {
+      "code": "CURA_AO",
+      "value_set_code": "COUNTRIES",
+      "label": "Curaçao",
+      "description": "Curaçao (ISO 3166-1: CW)",
+      "sort_order": 194,
+      "metadata": {
+        "alpha2": "CW",
+        "alpha3": "CUW",
+        "numeric": "531",
+        "region": "Americas",
+        "subregion": "Caribbean"
+      }
+    },
+    {
+      "code": "MONTSERRAT",
+      "value_set_code": "COUNTRIES",
+      "label": "Montserrat",
+      "description": "Montserrat (ISO 3166-1: MS)",
+      "sort_order": 195,
+      "metadata": {
+        "alpha2": "MS",
+        "alpha3": "MSR",
+        "numeric": "500",
+        "region": "Americas",
+        "subregion": "Caribbean"
+      }
+    },
+    {
+      "code": "BRITISH_VIRGIN_ISLANDS",
+      "value_set_code": "COUNTRIES",
+      "label": "British Virgin Islands",
+      "description": "British Virgin Islands (ISO 3166-1: VG)",
+      "sort_order": 196,
+      "metadata": {
+        "alpha2": "VG",
+        "alpha3": "VGB",
+        "numeric": "092",
+        "region": "Americas",
+        "subregion": "Caribbean"
+      }
+    },
+    {
+      "code": "UNITED_STATES_MINOR_OUTLYING_ISLANDS",
+      "value_set_code": "COUNTRIES",
+      "label": "United States Minor Outlying Islands",
+      "description": "United States Minor Outlying Islands (ISO 3166-1: UM)",
+      "sort_order": 197,
+      "metadata": {
+        "alpha2": "UM",
+        "alpha3": "UMI",
+        "numeric": "581",
+        "region": "Americas",
+        "subregion": "North America"
+      }
+    },
+    {
+      "code": "BERMUDA",
+      "value_set_code": "COUNTRIES",
+      "label": "Bermuda",
+      "description": "Bermuda (ISO 3166-1: BM)",
+      "sort_order": 198,
+      "metadata": {
+        "alpha2": "BM",
+        "alpha3": "BMU",
+        "numeric": "060",
+        "region": "Americas",
+        "subregion": "North America"
+      }
+    },
+    {
+      "code": "SAINT_VINCENT_AND_THE_GRENADINES",
+      "value_set_code": "COUNTRIES",
+      "label": "Saint Vincent and the Grenadines",
+      "description": "Saint Vincent and the Grenadines (ISO 3166-1: VC)",
+      "sort_order": 199,
+      "metadata": {
+        "alpha2": "VC",
+        "alpha3": "VCT",
+        "numeric": "670",
+        "region": "Americas",
+        "subregion": "Caribbean"
+      }
+    },
+    {
+      "code": "SVALBARD_AND_JAN_MAYEN",
+      "value_set_code": "COUNTRIES",
+      "label": "Svalbard and Jan Mayen",
+      "description": "Svalbard and Jan Mayen (ISO 3166-1: SJ)",
+      "sort_order": 200,
+      "metadata": {
+        "alpha2": "SJ",
+        "alpha3": "SJM",
+        "numeric": "744",
+        "region": "Europe",
+        "subregion": "Northern Europe"
+      }
+    },
+    {
+      "code": "SINT_MAARTEN",
+      "value_set_code": "COUNTRIES",
+      "label": "Sint Maarten",
+      "description": "Sint Maarten (ISO 3166-1: SX)",
+      "sort_order": 201,
+      "metadata": {
+        "alpha2": "SX",
+        "alpha3": "SXM",
+        "numeric": "534",
+        "region": "Americas",
+        "subregion": "Caribbean"
+      }
+    },
+    {
+      "code": "SAINT_PIERRE_AND_MIQUELON",
+      "value_set_code": "COUNTRIES",
+      "label": "Saint Pierre and Miquelon",
+      "description": "Saint Pierre and Miquelon (ISO 3166-1: PM)",
+      "sort_order": 202,
+      "metadata": {
+        "alpha2": "PM",
+        "alpha3": "SPM",
+        "numeric": "666",
+        "region": "Americas",
+        "subregion": "North America"
+      }
+    },
+    {
+      "code": "TOKELAU",
+      "value_set_code": "COUNTRIES",
+      "label": "Tokelau",
+      "description": "Tokelau (ISO 3166-1: TK)",
+      "sort_order": 203,
+      "metadata": {
+        "alpha2": "TK",
+        "alpha3": "TKL",
+        "numeric": "772",
+        "region": "Oceania",
+        "subregion": "Polynesia"
+      }
+    },
+    {
+      "code": "SAINT_HELENA_ASCENSION_AND_TRISTAN_DA_CUNHA",
+      "value_set_code": "COUNTRIES",
+      "label": "Saint Helena, Ascension and Tristan da Cunha",
+      "description": "Saint Helena, Ascension and Tristan da Cunha (ISO 3166-1: SH)",
+      "sort_order": 204,
+      "metadata": {
+        "alpha2": "SH",
+        "alpha3": "SHN",
+        "numeric": "654",
+        "region": "Africa",
+        "subregion": "Western Africa"
+      }
+    },
+    {
+      "code": "COCOS_KEELING_ISLANDS",
+      "value_set_code": "COUNTRIES",
+      "label": "Cocos (Keeling) Islands",
+      "description": "Cocos (Keeling) Islands (ISO 3166-1: CC)",
+      "sort_order": 205,
+      "metadata": {
+        "alpha2": "CC",
+        "alpha3": "CCK",
+        "numeric": "166",
+        "region": "Oceania",
+        "subregion": "Australia and New Zealand"
+      }
+    },
+    {
+      "code": "NIUE",
+      "value_set_code": "COUNTRIES",
+      "label": "Niue",
+      "description": "Niue (ISO 3166-1: NU)",
+      "sort_order": 206,
+      "metadata": {
+        "alpha2": "NU",
+        "alpha3": "NIU",
+        "numeric": "570",
+        "region": "Oceania",
+        "subregion": "Polynesia"
+      }
+    },
+    {
+      "code": "KOSOVO",
+      "value_set_code": "COUNTRIES",
+      "label": "Kosovo",
+      "description": "Kosovo (ISO 3166-1: XK)",
+      "sort_order": 207,
+      "metadata": {
+        "alpha2": "XK",
+        "alpha3": "UNK",
+        "numeric": "",
+        "region": "Europe",
+        "subregion": "Southeast Europe"
+      }
     }
   ]
 }

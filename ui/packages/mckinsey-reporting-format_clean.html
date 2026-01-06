@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quantum Obsidian — Executive Report</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--color-canvas);
+      color: var(--ink-titanium-950);
+      line-height: 1.55;
+    }
+    .report-container { max-width: 72rem; margin: 0 auto; }
+
+    .page { padding: 64px 48px; border-bottom: 1px solid var(--ink-titanium-100); }
+    .page-header {
+      display:flex; justify-content:space-between; align-items:flex-end;
+      margin-bottom: 32px; border-bottom: 2px solid var(--ink-indigo-600); padding-bottom: 12px;
+    }
+    .page-title { font-size: 28px; font-weight: 700; color: var(--ink-titanium-950); }
+    .page-number { font-size: 12px; color: var(--ink-titanium-500); }
+
+    .section { margin-bottom: 40px; }
+    .section-title {
+      font-size: 20px; font-weight:700; margin-bottom:16px;
+      border-bottom:1px solid var(--ink-titanium-200); padding-bottom:6px;
+      color: var(--ink-titanium-900);
+    }
+
+    .exec-recommendation {
+      border-bottom: 2px solid var(--ink-indigo-600);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+    .exec-recommendation-label {
+      font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+      color: var(--ink-titanium-500); margin-bottom:8px;
+      font-weight: 700;
+    }
+    .exec-recommendation-text {
+      font-size:18px; font-weight:600;
+      color: var(--ink-titanium-950);
+    }
+
+    /* Obsidian Insight Stream (Diamond Markers) */
+    .insight-rail {
+      padding-left:24px;
+      display:grid;
+      gap:20px;
+    }
+    .insight-row {
+      display:grid;
+      grid-template-columns:20px 1fr;
+      gap:18px;
+      align-items: start;
+    }
+    .insight-marker {
+      width: 12px;
+      height: 12px;
+      background: linear-gradient(135deg, var(--ink-indigo-500) 0%, var(--ink-cyan-500) 100%);
+      transform: rotate(45deg);
+      margin-top: 6px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 4px oklch(0% 0 0 / 0.08);
+    }
+
+    ul { padding-left:18px; }
+    li { margin:8px 0; color: var(--ink-titanium-800); }
+
+    .footer {
+      margin-top:48px; font-size:12px; color: var(--ink-titanium-500);
+      display:flex; justify-content:space-between;
+    }
+
+    em {
+      color: var(--ink-indigo-600);
+      font-style: italic;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<div class="report-container">
+
+  <div class="page">
+    <div class="page-header">
+      <div class="page-title">Executive Summary</div>
+      <div class="page-number">Page 1</div>
+    </div>
+
+    <div class="exec-recommendation">
+      <div class="exec-recommendation-label">Recommendation</div>
+      <div class="exec-recommendation-text">
+        We recommend adopting <em>Quantum Obsidian</em> as the standard design system
+        to establish executive-grade authority, eliminate design drift, and scale
+        development with consistency.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Key insights</div>
+      <div class="insight-rail">
+        <div class="insight-row">
+          <div class="insight-marker"></div>
+          <div>Current design practices create inconsistency and hidden decision overhead,
+               slowing delivery and producing uneven professional quality.</div>
+        </div>
+        <div class="insight-row">
+          <div class="insight-marker"></div>
+          <div>Quantum Obsidian enforces a single, disciplined visual and interaction
+               standard through tokens and patterns.</div>
+        </div>
+        <div class="insight-row">
+          <div class="insight-marker"></div>
+          <div>The system balances modern wide-gamut capability with conservative,
+               enterprise-safe fallbacks.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Implications</div>
+      <ul>
+        <li>Teams shift from designing components to selecting proven patterns.</li>
+        <li>Executives experience a consistent, authoritative interface.</li>
+        <li>The organization scales without increasing design governance cost.</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <span>NEXUS-KERNEL</span>
+      <span>© 2025 Proprietary</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

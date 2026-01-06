@@ -13,7 +13,7 @@
  *   --port <port>     HTTP server port for live dashboard (optional)
  */
 
-import { writeFileSync } from "fs";
+import { writeFileSync, readFileSync } from "fs";
 import { join } from "path";
 import {
   enablePerformanceMonitoring,
@@ -134,6 +134,15 @@ function collectErrorData(): {
 
 function generateDashboardHTML(data: DashboardData): string {
   const { performance, errors, cache, kernel } = data;
+  
+  // Load design system CSS (The Constitution)
+  const cssPath = join(process.cwd(), "ui", "style.css");
+  let css = "";
+  try {
+    css = readFileSync(cssPath, "utf-8");
+  } catch (error) {
+    css = `/* CRITICAL: No CSS found at ${cssPath} */`;
+  }
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -141,111 +150,83 @@ function generateDashboardHTML(data: DashboardData): string {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kernel Performance Dashboard</title>
+  
+  <!-- Design System CSS (The Constitution) -->
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: #f5f5f5;
-      padding: 20px;
-      color: #333;
-    }
-    .container { max-width: 1400px; margin: 0 auto; }
-    h1 { color: #1a1a1a; margin-bottom: 30px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px; }
-    .card {
-      background: white;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .card h2 { font-size: 18px; margin-bottom: 15px; color: #555; }
-    .stat { display: flex; justify-content: space-between; margin-bottom: 10px; }
-    .stat-label { color: #666; }
-    .stat-value { font-weight: 600; color: #1a1a1a; }
-    .metric { padding: 8px; background: #f9f9f9; border-radius: 4px; margin-bottom: 8px; }
-    .metric-header { display: flex; justify-content: space-between; font-weight: 600; }
-    .metric-details { font-size: 12px; color: #666; margin-top: 4px; }
-    .badge {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .badge-success { background: #d4edda; color: #155724; }
-    .badge-warning { background: #fff3cd; color: #856404; }
-    .badge-danger { background: #f8d7da; color: #721c24; }
-    .footer { text-align: center; color: #666; margin-top: 40px; font-size: 14px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { padding: 8px; text-align: left; border-bottom: 1px solid #eee; }
-    th { background: #f9f9f9; font-weight: 600; }
+${css}
   </style>
 </head>
-<body>
-  <div class="container">
-    <h1>🚀 Kernel Performance Dashboard</h1>
-    <p style="color: #666; margin-bottom: 30px;">Generated: ${data.generatedAt}</p>
+<body class="shell">
+  <div class="container-page">
+    <h1 class="title">🚀 Kernel Performance Dashboard</h1>
+    <p class="caption text-text-sub mb-6">Generated: ${data.generatedAt}</p>
 
-    <div class="grid">
+    <div class="grid-cards">
       <!-- Performance Summary -->
-      <div class="card">
-        <h2>Performance Summary</h2>
-        <div class="stat">
-          <span class="stat-label">Total Operations</span>
-          <span class="stat-value">${performance.summary.totalOperations}</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Average Duration</span>
-          <span class="stat-value">${formatDuration(performance.summary.averageDuration)}</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Min Duration</span>
-          <span class="stat-value">${formatDuration(performance.summary.minDuration)}</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Max Duration</span>
-          <span class="stat-value">${formatDuration(performance.summary.maxDuration)}</span>
+      <div class="stat-card">
+        <h2 class="section mb-4">Performance Summary</h2>
+        <div class="flex-col">
+          <div class="flex-row justify-between mb-2">
+            <span class="stat-label">Total Operations</span>
+            <span class="stat-value">${performance.summary.totalOperations}</span>
+          </div>
+          <div class="flex-row justify-between mb-2">
+            <span class="stat-label">Average Duration</span>
+            <span class="stat-value">${formatDuration(performance.summary.averageDuration)}</span>
+          </div>
+          <div class="flex-row justify-between mb-2">
+            <span class="stat-label">Min Duration</span>
+            <span class="stat-value">${formatDuration(performance.summary.minDuration)}</span>
+          </div>
+          <div class="flex-row justify-between">
+            <span class="stat-label">Max Duration</span>
+            <span class="stat-value">${formatDuration(performance.summary.maxDuration)}</span>
+          </div>
         </div>
       </div>
 
       <!-- Cache Statistics -->
-      <div class="card">
-        <h2>Cache Statistics</h2>
-        <div class="stat">
-          <span class="stat-label">Total Size</span>
-          <span class="stat-value">${cache.stats.total.size}</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Hit Rate</span>
-          <span class="stat-value">${(cache.stats.total.hitRate * 100).toFixed(2)}%</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Total Hits</span>
-          <span class="stat-value">${cache.stats.total.hits}</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Total Misses</span>
-          <span class="stat-value">${cache.stats.total.misses}</span>
+      <div class="stat-card">
+        <h2 class="section mb-4">Cache Statistics</h2>
+        <div class="flex-col">
+          <div class="flex-row justify-between mb-2">
+            <span class="stat-label">Total Size</span>
+            <span class="stat-value">${cache.stats.total.size}</span>
+          </div>
+          <div class="flex-row justify-between mb-2">
+            <span class="stat-label">Hit Rate</span>
+            <span class="stat-value">${(cache.stats.total.hitRate * 100).toFixed(2)}%</span>
+          </div>
+          <div class="flex-row justify-between mb-2">
+            <span class="stat-label">Total Hits</span>
+            <span class="stat-value">${cache.stats.total.hits}</span>
+          </div>
+          <div class="flex-row justify-between">
+            <span class="stat-label">Total Misses</span>
+            <span class="stat-value">${cache.stats.total.misses}</span>
+          </div>
         </div>
       </div>
 
       <!-- Kernel Stats -->
-      <div class="card">
-        <h2>Kernel Statistics</h2>
-        <div class="stat">
-          <span class="stat-label">Concepts</span>
-          <span class="stat-value">${kernel.concepts}</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">Values</span>
-          <span class="stat-value">${kernel.values}</span>
+      <div class="stat-card">
+        <h2 class="section mb-4">Kernel Statistics</h2>
+        <div class="flex-col">
+          <div class="flex-row justify-between mb-2">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">${kernel.concepts}</span>
+          </div>
+          <div class="flex-row justify-between">
+            <span class="stat-label">Values</span>
+            <span class="stat-value">${kernel.values}</span>
+          </div>
         </div>
       </div>
 
       <!-- Error Summary -->
-      <div class="card">
-        <h2>Error Summary</h2>
-        <div class="stat">
+      <div class="stat-card">
+        <h2 class="section mb-4">Error Summary</h2>
+        <div class="flex-row justify-between">
           <span class="stat-label">Total Errors</span>
           <span class="stat-value">${errors.total}</span>
         </div>
@@ -253,50 +234,56 @@ function generateDashboardHTML(data: DashboardData): string {
     </div>
 
     <!-- Performance Metrics -->
-    <div class="card" style="margin-bottom: 20px;">
-      <h2>Recent Performance Metrics</h2>
-      ${performance.metrics.slice(-20).map((m) => `
-        <div class="metric">
-          <div class="metric-header">
-            <span>${m.operation}</span>
-            <span>${formatDuration(m.duration)}</span>
+    <div class="card mb-6">
+      <h2 class="section mb-4">Recent Performance Metrics</h2>
+      <div class="flex-col">
+        ${performance.metrics.slice(-20).map((m) => `
+          <div class="card-well mb-2">
+            <div class="flex-row justify-between mb-1">
+              <span class="text-text-main font-semibold">${m.operation}</span>
+              <span class="text-text-main font-semibold">${formatDuration(m.duration)}</span>
+            </div>
+            <div class="caption text-text-sub">
+              ${new Date(m.timestamp).toLocaleString()}
+              ${m.metadata ? ` • ${JSON.stringify(m.metadata)}` : ""}
+            </div>
           </div>
-          <div class="metric-details">
-            ${new Date(m.timestamp).toLocaleString()}
-            ${m.metadata ? ` • ${JSON.stringify(m.metadata)}` : ""}
-          </div>
-        </div>
-      `).join("")}
+        `).join("")}
+      </div>
     </div>
 
     <!-- Operations by Type -->
-    <div class="card">
-      <h2>Operations by Type</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Operation</th>
-            <th>Count</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${Object.entries(performance.summary.operationsByType)
-            .sort(([, a], [, b]) => b - a)
-            .map(([op, count]) => `
+    <div class="table-container">
+      <div class="table-header">
+        <h2 class="section">Operations by Type</h2>
+      </div>
+      <div class="table-body">
+        <table class="w-full">
+          <thead>
             <tr>
-              <td>${op}</td>
-              <td>${count}</td>
+              <th class="cell">Operation</th>
+              <th class="cell">Count</th>
             </tr>
-          `).join("")}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            ${Object.entries(performance.summary.operationsByType)
+              .sort(([, a], [, b]) => b - a)
+              .map(([op, count]) => `
+              <tr>
+                <td class="cell">${op}</td>
+                <td class="cell">${count}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
-  <div class="footer">
-    <p>@aibos/kernel Performance Dashboard</p>
-    <p>Generated by performance-dashboard.ts</p>
-  </div>
+  <footer class="border-t border-border mt-8 py-6 text-center">
+    <p class="caption text-text-sub">@aibos/kernel Performance Dashboard</p>
+    <p class="caption text-text-sub mt-1">Generated by performance-dashboard.ts</p>
+  </footer>
 </body>
 </html>`;
 }

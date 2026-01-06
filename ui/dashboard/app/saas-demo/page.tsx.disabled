@@ -1,0 +1,387 @@
+'use client';
+
+import React, { useState } from 'react';
+import Button from '../components/ui-primitives/Button';
+import Modal from '../components/ui-primitives/Modal';
+import Tabs, { type Tab } from '../components/ui-primitives/Tabs';
+import Table, { type TableColumn } from '../components/ui-primitives/Table';
+import Badge, { BadgeGroup } from '../components/ui-primitives/Badge';
+import Select, { type SelectOption } from '../components/ui-primitives/Select';
+
+/**
+ * SaaS Dashboard Demo Page
+ * 
+ * Demonstrates all new UI primitives with Quantum Obsidian design system:
+ * - Modal (dialog with backdrop, animations, focus trap)
+ * - Tabs (underline, pills, enclosed variants)
+ * - Table (sorting, selection, hover states)
+ * - Badge (7 semantic variants, P3 OKLCH colors)
+ * - Select (single/multi-select, searchable, keyboard nav)
+ * 
+ * All components use 100% Quantum Obsidian tokens (no arbitrary values)
+ */
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  status: 'active' | 'inactive' | 'pending';
+  lastActive: string;
+}
+
+const sampleUsers: User[] = [
+  { id: 1, name: 'Alice Chen', email: 'alice@nexus.ai', role: 'Admin', status: 'active', lastActive: '2 mins ago' },
+  { id: 2, name: 'Bob Kumar', email: 'bob@nexus.ai', role: 'Developer', status: 'active', lastActive: '1 hour ago' },
+  { id: 3, name: 'Carol Zhang', email: 'carol@nexus.ai', role: 'Designer', status: 'inactive', lastActive: '2 days ago' },
+  { id: 4, name: 'David Park', email: 'david@nexus.ai', role: 'Manager', status: 'active', lastActive: '5 mins ago' },
+  { id: 5, name: 'Emma Wilson', email: 'emma@nexus.ai', role: 'Developer', status: 'pending', lastActive: 'Never' },
+];
+
+const roleOptions: SelectOption[] = [
+  { value: 'admin', label: 'Admin', description: 'Full system access' },
+  { value: 'developer', label: 'Developer', description: 'Code & deploy access' },
+  { value: 'designer', label: 'Designer', description: 'Design tools access' },
+  { value: 'manager', label: 'Manager', description: 'Team management access' },
+];
+
+export default function SaaSDashboardDemo() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRole, setSelectedRole] = useState<string | number>('developer');
+  const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
+
+  // Table columns configuration
+  const columns: TableColumn<User>[] = [
+    {
+      key: 'name',
+      label: 'Name',
+      sortable: true,
+      render: (value, row) => (
+        <div className="flex items-center gap-3">
+          <div
+            style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              backgroundColor: 'var(--color-primary-light)',
+              color: 'var(--color-primary)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 'var(--weight-semibold)',
+              fontSize: 'var(--type-caption-size)',
+            }}
+          >
+            {value.charAt(0)}
+          </div>
+          <div>
+            <div style={{ fontWeight: 'var(--weight-medium)', color: 'var(--color-text-main)' }}>{value}</div>
+            <div style={{ fontSize: 'var(--type-caption-size)', color: 'var(--color-text-sub)' }}>{row.email}</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: 'role',
+      label: 'Role',
+      sortable: true,
+      render: (value) => <Badge variant="secondary">{value}</Badge>,
+    },
+    {
+      key: 'status',
+      label: 'Status',
+      sortable: true,
+      render: (value: 'active' | 'inactive' | 'pending') => (
+        <Badge variant={value === 'active' ? 'success' : value === 'inactive' ? 'neutral' : 'warning'}>
+          {value.charAt(0).toUpperCase() + value.slice(1)}
+        </Badge>
+      ),
+    },
+    {
+      key: 'lastActive',
+      label: 'Last Active',
+      sortable: true,
+      align: 'right',
+    },
+  ];
+
+  // Tabs configuration
+  const tabs: Tab[] = [
+    {
+      id: 'overview',
+      label: 'Overview',
+      badge: 12,
+      content: (
+        <div>
+          <h3 className="text-section" style={{ marginBottom: 'var(--space-4)' }}>
+            User Management Overview
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <StatCard title="Total Users" value="247" trend="+12%" variant="primary" />
+            <StatCard title="Active Now" value="89" trend="+5%" variant="success" />
+            <StatCard title="Pending" value="5" trend="-2%" variant="warning" />
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'users',
+      label: 'Users',
+      content: (
+        <div>
+          <div className="flex items-center justify-between" style={{ marginBottom: 'var(--space-4)' }}>
+            <h3 className="text-section">User Directory</h3>
+            <Button variant="primary" onClick={() => setIsModalOpen(true)}>
+              Add User
+            </Button>
+          </div>
+          <Table
+            columns={columns}
+            data={sampleUsers}
+            hoverable
+            selectable
+            selectedRows={selectedRows}
+            onSelectionChange={setSelectedRows}
+            onRowClick={(row) => console.log('Clicked:', row.name)}
+          />
+          {selectedRows.size > 0 && (
+            <div
+              style={{
+                marginTop: 'var(--space-4)',
+                padding: 'var(--space-3) var(--space-4)',
+                backgroundColor: 'var(--color-primary-light)',
+                borderRadius: 'var(--radius-sm)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'var(--space-3)',
+              }}
+            >
+              <span style={{ color: 'var(--color-text-main)', fontSize: 'var(--type-body-size)' }}>
+                {selectedRows.size} user(s) selected
+              </span>
+              <Button variant="secondary" size="sm">
+                Export
+              </Button>
+              <Button variant="destructive" size="sm">
+                Delete
+              </Button>
+            </div>
+          )}
+        </div>
+      ),
+    },
+    {
+      id: 'settings',
+      label: 'Settings',
+      content: (
+        <div>
+          <h3 className="text-section" style={{ marginBottom: 'var(--space-4)' }}>
+            User Settings
+          </h3>
+          <div className="flex flex-col gap-4">
+            <div>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: 'var(--type-body-size)',
+                  fontWeight: 'var(--weight-medium)',
+                  color: 'var(--color-text-main)',
+                  marginBottom: 'var(--space-2)',
+                }}
+              >
+                Default Role
+              </label>
+              <Select options={roleOptions} value={selectedRole} onChange={setSelectedRole} searchable fullWidth />
+            </div>
+            <div>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: 'var(--type-body-size)',
+                  fontWeight: 'var(--weight-medium)',
+                  color: 'var(--color-text-main)',
+                  marginBottom: 'var(--space-2)',
+                }}
+              >
+                Status Badges
+              </label>
+              <BadgeGroup>
+                <Badge variant="primary">Primary</Badge>
+                <Badge variant="success">Success</Badge>
+                <Badge variant="warning">Warning</Badge>
+                <Badge variant="danger">Danger</Badge>
+                <Badge variant="info">Info</Badge>
+                <Badge variant="neutral">Neutral</Badge>
+              </BadgeGroup>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: 'var(--color-canvas)',
+        padding: 'var(--space-page)',
+      }}
+    >
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        {/* Header */}
+        <div style={{ marginBottom: 'var(--space-section)' }}>
+          <h1 className="text-display" style={{ marginBottom: 'var(--space-2)' }}>
+            SaaS Dashboard
+          </h1>
+          <p className="text-body" style={{ color: 'var(--color-text-sub)' }}>
+            Component showcase using Quantum Obsidian design system (P3 OKLCH colors)
+          </p>
+        </div>
+
+        {/* Tabs Section */}
+        <div
+          style={{
+            backgroundColor: 'var(--color-surface)',
+            borderRadius: 'var(--radius-lg)',
+            padding: 'var(--space-6)',
+            boxShadow: 'var(--shadow-1)',
+          }}
+        >
+          <Tabs tabs={tabs} defaultTab="overview" variant="underline" />
+        </div>
+
+        {/* Modal */}
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          title="Add New User"
+          size="md"
+          footer={
+            <>
+              <Button variant="secondary" onClick={() => setIsModalOpen(false)}>
+                Cancel
+              </Button>
+              <Button variant="primary" onClick={() => setIsModalOpen(false)}>
+                Save User
+              </Button>
+            </>
+          }
+        >
+          <div className="flex flex-col gap-4">
+            <div>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: 'var(--type-body-size)',
+                  fontWeight: 'var(--weight-medium)',
+                  color: 'var(--color-text-main)',
+                  marginBottom: 'var(--space-2)',
+                }}
+              >
+                Full Name
+              </label>
+              <input
+                type="text"
+                placeholder="Enter full name"
+                style={{
+                  width: '100%',
+                  padding: 'var(--space-2) var(--space-3)',
+                  fontSize: 'var(--type-body-size)',
+                  color: 'var(--color-text-main)',
+                  backgroundColor: 'var(--color-surface)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 'var(--radius-sm)',
+                  outline: 'none',
+                }}
+              />
+            </div>
+            <div>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: 'var(--type-body-size)',
+                  fontWeight: 'var(--weight-medium)',
+                  color: 'var(--color-text-main)',
+                  marginBottom: 'var(--space-2)',
+                }}
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                placeholder="user@nexus.ai"
+                style={{
+                  width: '100%',
+                  padding: 'var(--space-2) var(--space-3)',
+                  fontSize: 'var(--type-body-size)',
+                  color: 'var(--color-text-main)',
+                  backgroundColor: 'var(--color-surface)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 'var(--radius-sm)',
+                  outline: 'none',
+                }}
+              />
+            </div>
+            <div>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: 'var(--type-body-size)',
+                  fontWeight: 'var(--weight-medium)',
+                  color: 'var(--color-text-main)',
+                  marginBottom: 'var(--space-2)',
+                }}
+              >
+                Role
+              </label>
+              <Select options={roleOptions} value="developer" searchable fullWidth />
+            </div>
+          </div>
+        </Modal>
+      </div>
+    </div>
+  );
+}
+
+/** Stat Card Component */
+function StatCard({
+  title,
+  value,
+  trend,
+  variant = 'primary',
+}: {
+  title: string;
+  value: string;
+  trend: string;
+  variant?: 'primary' | 'success' | 'warning';
+}) {
+  const variantColors = {
+    primary: 'var(--color-primary)',
+    success: 'var(--color-success)',
+    warning: 'var(--color-warning)',
+  };
+
+  return (
+    <div
+      style={{
+        backgroundColor: 'var(--color-surface)',
+        border: '1px solid var(--color-border)',
+        borderRadius: 'var(--radius-md)',
+        padding: 'var(--space-4)',
+      }}
+    >
+      <div style={{ fontSize: 'var(--type-body-size)', color: 'var(--color-text-sub)', marginBottom: 'var(--space-2)' }}>
+        {title}
+      </div>
+      <div className="flex items-baseline gap-2">
+        <div className="text-title" style={{ color: 'var(--color-text-main)' }}>
+          {value}
+        </div>
+        <div style={{ fontSize: 'var(--type-caption-size)', color: variantColors[variant], fontWeight: 'var(--weight-medium)' }}>
+          {trend}
+        </div>
+      </div>
+    </div>
+  );
+}

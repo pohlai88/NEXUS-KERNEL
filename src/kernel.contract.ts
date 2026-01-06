@@ -39,6 +39,12 @@ export const DomainSchema = z.enum([
   "COMPLIANCE",
   "SYSTEM",
   "GLOBAL",
+  "ESG",
+  "GTM",
+  "AI",
+  "TRE",
+  "DATA",
+  "SECURITY",
 ]);
 export type Domain = z.infer<typeof DomainSchema>;
 

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ERP Kernel Global Config Canon Entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "Domain",
+    "Config_Set",
+    "Priority",
+    "Scope",
+    "Purpose",
+    "Minimum_Requirements_(P0)"
+  ],
+  "properties": {
+    "Domain": {
+      "type": "string"
+    },
+    "Config_Set": {
+      "type": "string"
+    },
+    "Priority": {
+      "type": "string"
+    },
+    "Scope": {
+      "type": "string"
+    },
+    "Purpose": {
+      "type": "string"
+    },
+    "Minimum_Requirements_(P0)": {
+      "type": "string"
+    },
+    "Key_Attributes_(suggested)": {
+      "type": "string"
+    },
+    "Standards/Reference": {
+      "type": "string"
+    },
+    "Recommended_Data_Model": {
+      "type": "string"
+    },
+    "Effective-Dated?": {
+      "type": "string"
+    },
+    "Typical_Values_Count_(P0)": {
+      "type": "string"
+    },
+    "SAP_S4HANA": {
+      "type": "string"
+    },
+    "Oracle_NetSuite": {
+      "type": "string"
+    },
+    "MS_Dynamics_365": {
+      "type": "string"
+    },
+    "Odoo": {
+      "type": "string"
+    },
+    "Zoho": {
+      "type": "string"
+    },
+    "QuickBooks": {
+      "type": "string"
+    },
+    "Evidence_Level": {
+      "type": "string"
+    },
+    "Evidence_URLs": {
+      "type": "string"
+    },
+    "Notes_for_Migration/Extensibility": {
+      "type": "string"
+    }
+  }
+}

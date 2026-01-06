@@ -1,0 +1,1334 @@
+{
+  "id": "security",
+  "name": "Security & Protection",
+  "version": "1.0.0",
+  "domain": "SECURITY",
+  "description": "Comprehensive security hardening: CSP, CORS, TLS, WAF, rate limiting, RLS, authentication, and session management - based on OWASP best practices",
+  "priority": 100,
+  "authoritative_for": {
+    "concepts": [
+      "CSP_POLICY",
+      "HTTP_HEADER_PROFILE",
+      "COOKIE_POLICY",
+      "CORS_POLICY",
+      "TLS_PROFILE",
+      "WAF_RULE_PROFILE",
+      "RATE_LIMIT_POLICY",
+      "BRUTE_FORCE_PROTECTION",
+      "RLS_POLICY_PROFILE",
+      "QUERY_VALIDATION_POLICY",
+      "SESSION_BINDING_POLICY",
+      "SESSION_POLICY",
+      "MFA_POLICY"
+    ],
+    "value_sets": [
+      "CSP_DIRECTIVES",
+      "CSP_SOURCES",
+      "HTTP_SECURITY_HEADERS",
+      "COOKIE_SAME_SITE_MODES",
+      "CORS_METHODS",
+      "TLS_VERSIONS",
+      "CIPHER_SUITES",
+      "WAF_RULE_SETS",
+      "RATE_LIMIT_STRATEGIES",
+      "ATTACK_PATTERNS",
+      "RLS_POLICY_TYPES",
+      "SQL_INJECTION_PATTERNS",
+      "SESSION_BINDING_FACTORS",
+      "MFA_METHODS",
+      "TOKEN_TYPES"
+    ]
+  },
+  "concepts": [
+    {
+      "code": "CSP_POLICY",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "Content Security Policy directives to prevent XSS, clickjacking, and code injection attacks",
+      "tags": ["csp", "xss", "owasp", "headers"],
+      "value_sets": ["CSP_DIRECTIVES", "CSP_SOURCES"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "OWASP A03:2021 Injection - Prevents inline scripts and unauthorized resource loading",
+        "risk": "CRITICAL - Missing CSP allows XSS attacks"
+      }
+    },
+    {
+      "code": "HTTP_HEADER_PROFILE",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "Security headers configuration (HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy)",
+      "tags": ["headers", "hsts", "clickjacking", "owasp"],
+      "value_sets": ["HTTP_SECURITY_HEADERS"],
+      "metadata": {
+        "effective_dating": false,
+        "purpose": "OWASP A05:2021 Security Misconfiguration - Hardens HTTP responses",
+        "risk": "HIGH - Missing headers expose to MITM and clickjacking"
+      }
+    },
+    {
+      "code": "COOKIE_POLICY",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "Cookie security attributes (HttpOnly, Secure, SameSite) to prevent CSRF and session hijacking",
+      "tags": ["cookies", "csrf", "session", "owasp"],
+      "value_sets": ["COOKIE_SAME_SITE_MODES"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "OWASP A07:2021 Identification Failures - Prevents session theft",
+        "risk": "CRITICAL - Insecure cookies allow CSRF and XSS theft"
+      }
+    },
+    {
+      "code": "CORS_POLICY",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "Cross-Origin Resource Sharing rules with allowlist (never wildcard with credentials)",
+      "tags": ["cors", "cross-origin", "api", "owasp"],
+      "value_sets": ["CORS_METHODS", "CSP_SOURCES"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "Prevents unauthorized cross-origin access while enabling legitimate integrations",
+        "risk": "HIGH - Wildcard CORS exposes API to theft"
+      }
+    },
+    {
+      "code": "TLS_PROFILE",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "TLS/SSL configuration (minimum version, cipher suites, certificate validation)",
+      "tags": ["tls", "ssl", "encryption", "pci-dss"],
+      "value_sets": ["TLS_VERSIONS", "CIPHER_SUITES"],
+      "metadata": {
+        "effective_dating": false,
+        "purpose": "OWASP A02:2021 Cryptographic Failures - Ensures transport encryption",
+        "risk": "CRITICAL - Weak TLS allows MITM attacks"
+      }
+    },
+    {
+      "code": "WAF_RULE_PROFILE",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "Web Application Firewall rules based on OWASP ModSecurity Core Rule Set",
+      "tags": ["waf", "modsecurity", "owasp", "injection"],
+      "value_sets": ["WAF_RULE_SETS", "ATTACK_PATTERNS"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "OWASP Top 10 protection - SQL injection, XSS, LFI, RCE detection",
+        "risk": "HIGH - No WAF means unfiltered malicious traffic"
+      }
+    },
+    {
+      "code": "RATE_LIMIT_POLICY",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "Request throttling per IP/user/tenant to prevent DDoS and resource exhaustion",
+      "tags": ["rate-limiting", "ddos", "throttling", "redis"],
+      "value_sets": ["RATE_LIMIT_STRATEGIES"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "Prevents denial-of-service attacks and resource abuse",
+        "risk": "HIGH - Unthrottled endpoints vulnerable to DDoS"
+      }
+    },
+    {
+      "code": "BRUTE_FORCE_PROTECTION",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "Login attempt limiting with exponential backoff and account lockout",
+      "tags": ["brute-force", "authentication", "lockout", "owasp"],
+      "value_sets": ["RATE_LIMIT_STRATEGIES"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "OWASP A07:2021 Identification Failures - Prevents credential stuffing",
+        "risk": "CRITICAL - Weak protection allows password cracking"
+      }
+    },
+    {
+      "code": "RLS_POLICY_PROFILE",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "PostgreSQL Row Level Security policies for multi-tenant data isolation",
+      "tags": ["rls", "postgres", "isolation", "multi-tenant"],
+      "value_sets": ["RLS_POLICY_TYPES"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "OWASP A01:2021 Broken Access Control - Database-level authorization",
+        "risk": "CRITICAL - Missing RLS allows cross-tenant data access"
+      }
+    },
+    {
+      "code": "QUERY_VALIDATION_POLICY",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "SQL injection prevention via parameterized queries and input validation",
+      "tags": ["sql-injection", "owasp", "parameterized", "drizzle"],
+      "value_sets": ["SQL_INJECTION_PATTERNS"],
+      "metadata": {
+        "effective_dating": false,
+        "purpose": "OWASP A03:2021 Injection - Prevents SQL injection attacks",
+        "risk": "CRITICAL - Dynamic SQL allows database compromise"
+      }
+    },
+    {
+      "code": "SESSION_BINDING_POLICY",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "Session fixation prevention by binding to IP, User-Agent, or device fingerprint",
+      "tags": ["session", "binding", "fixation", "hijacking"],
+      "value_sets": ["SESSION_BINDING_FACTORS"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "Prevents session hijacking and replay attacks",
+        "risk": "HIGH - Unbound sessions vulnerable to theft"
+      }
+    },
+    {
+      "code": "SESSION_POLICY",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "Session lifecycle management (timeout, rotation, concurrent session limits)",
+      "tags": ["session", "timeout", "rotation", "jwt"],
+      "value_sets": ["TOKEN_TYPES"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "Reduces attack window and enforces session hygiene",
+        "risk": "MEDIUM - Long-lived sessions increase breach risk"
+      }
+    },
+    {
+      "code": "MFA_POLICY",
+      "category": "ENTITY",
+      "domain": "SECURITY",
+      "description": "Multi-factor authentication configuration (TOTP, SMS, WebAuthn, recovery codes)",
+      "tags": ["mfa", "2fa", "totp", "webauthn"],
+      "value_sets": ["MFA_METHODS"],
+      "metadata": {
+        "effective_dating": true,
+        "purpose": "OWASP A07:2021 Identification Failures - Prevents account takeover",
+        "risk": "HIGH - Single-factor auth vulnerable to phishing"
+      }
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "CSP_DIRECTIVES",
+      "label": "Content Security Policy Directives",
+      "description": "CSP directives for resource control",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 12,
+      "tags": ["csp", "directives"]
+    },
+    {
+      "code": "CSP_SOURCES",
+      "label": "CSP Source Expressions",
+      "description": "Valid sources for CSP directives",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 8,
+      "tags": ["csp", "sources"]
+    },
+    {
+      "code": "HTTP_SECURITY_HEADERS",
+      "label": "HTTP Security Headers",
+      "description": "Standard security headers",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 7,
+      "tags": ["headers", "http"]
+    },
+    {
+      "code": "COOKIE_SAME_SITE_MODES",
+      "label": "Cookie SameSite Modes",
+      "description": "SameSite attribute values",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 3,
+      "tags": ["cookies", "csrf"]
+    },
+    {
+      "code": "CORS_METHODS",
+      "label": "CORS HTTP Methods",
+      "description": "Allowed HTTP methods for CORS",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 5,
+      "tags": ["cors", "http"]
+    },
+    {
+      "code": "TLS_VERSIONS",
+      "label": "TLS Protocol Versions",
+      "description": "Supported TLS versions",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 4,
+      "tags": ["tls", "encryption"]
+    },
+    {
+      "code": "CIPHER_SUITES",
+      "label": "TLS Cipher Suites",
+      "description": "Cryptographic cipher suites",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 6,
+      "tags": ["tls", "ciphers"]
+    },
+    {
+      "code": "WAF_RULE_SETS",
+      "label": "WAF Rule Sets",
+      "description": "Web Application Firewall rule sets",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 5,
+      "tags": ["waf", "owasp"]
+    },
+    {
+      "code": "RATE_LIMIT_STRATEGIES",
+      "label": "Rate Limiting Strategies",
+      "description": "Throttling algorithms",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 5,
+      "tags": ["rate-limiting", "throttling"]
+    },
+    {
+      "code": "ATTACK_PATTERNS",
+      "label": "Attack Pattern Signatures",
+      "description": "Common attack patterns",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 8,
+      "tags": ["waf", "detection"]
+    },
+    {
+      "code": "RLS_POLICY_TYPES",
+      "label": "Row Level Security Policy Types",
+      "description": "PostgreSQL RLS policy types",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 4,
+      "tags": ["rls", "postgres"]
+    },
+    {
+      "code": "SQL_INJECTION_PATTERNS",
+      "label": "SQL Injection Detection Patterns",
+      "description": "Common SQL injection signatures",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 6,
+      "tags": ["sql-injection", "detection"]
+    },
+    {
+      "code": "SESSION_BINDING_FACTORS",
+      "label": "Session Binding Factors",
+      "description": "Factors for session binding",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 5,
+      "tags": ["session", "binding"]
+    },
+    {
+      "code": "MFA_METHODS",
+      "label": "Multi-Factor Authentication Methods",
+      "description": "MFA authentication methods",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 5,
+      "tags": ["mfa", "authentication"]
+    },
+    {
+      "code": "TOKEN_TYPES",
+      "label": "Authentication Token Types",
+      "description": "Token formats for authentication",
+      "domain": "SECURITY",
+      "status": "ACTIVE",
+      "value_count": 4,
+      "tags": ["tokens", "jwt"]
+    }
+  ],
+  "values": [
+    {
+      "code": "DEFAULT_SRC",
+      "value_set_code": "CSP_DIRECTIVES",
+      "label": "default-src",
+      "description": "Fallback for all resource types",
+      "sort_order": 1,
+      "metadata": {
+        "recommended": "'self'",
+        "purpose": "Sets default policy for all directives"
+      }
+    },
+    {
+      "code": "SCRIPT_SRC",
+      "value_set_code": "CSP_DIRECTIVES",
+      "label": "script-src",
+      "description": "JavaScript source control",
+      "sort_order": 2,
+      "metadata": {
+        "recommended": "'self' 'nonce-{RANDOM}'",
+        "critical": "NEVER use 'unsafe-inline' in production"
+      }
+    },
+    {
+      "code": "STYLE_SRC",
+      "value_set_code": "CSP_DIRECTIVES",
+      "label": "style-src",
+      "description": "CSS source control",
+      "sort_order": 3,
+      "metadata": {
+        "recommended": "'self' https://fonts.googleapis.com",
+        "note": "Inline styles require nonce or hash"
+      }
+    },
+    {
+      "code": "CONNECT_SRC",
+      "value_set_code": "CSP_DIRECTIVES",
+      "label": "connect-src",
+      "description": "XHR, WebSocket, EventSource origins",
+      "sort_order": 4,
+      "metadata": {
+        "recommended": "'self' https://api.yourdomain.com",
+        "purpose": "Restricts AJAX and WebSocket connections"
+      }
+    },
+    {
+      "code": "IMG_SRC",
+      "value_set_code": "CSP_DIRECTIVES",
+      "label": "img-src",
+      "description": "Image source control",
+      "sort_order": 5,
+      "metadata": {
+        "recommended": "'self' data: https://cdn.yourdomain.com",
+        "note": "Allow data: for inline images if needed"
+      }
+    },
+    {
+      "code": "FONT_SRC",
+      "value_set_code": "CSP_DIRECTIVES",
+      "label": "font-src",
+      "description": "Font source control",
+      "sort_order": 6,
+      "metadata": {
+        "recommended": "'self' https://fonts.gstatic.com"
+      }
+    },
+    {
+      "code": "FRAME_SRC",
+      "value_set_code": "CSP_DIRECTIVES",
+      "label": "frame-src",
+      "description": "Allowed iframe sources",
+      "sort_order": 7,
+      "metadata": {
+        "recommended": "'none'",
+        "purpose": "Prevents embedding malicious content"
+      }
+    },
+    {
+      "code": "FRAME_ANCESTORS",
+      "value_set_code": "CSP_DIRECTIVES",
+      "label": "frame-ancestors",
+      "description": "Who can embed this page",
+      "sort_order": 8,
+      "metadata": {
+        "recommended": "'none'",
+        "purpose": "Clickjacking protection (replaces X-Frame-Options)"
+      }
+    },
+    {
+      "code": "OBJECT_SRC",
+      "value_set_code": "CSP_DIRECTIVES",
+      "label": "object-src",
+      "description": "Flash, Java applet sources",
+      "sort_order": 9,
+      "metadata": {
+        "recommended": "'none'",
+        "purpose": "Blocks legacy plugin exploits"
+      }
+    },
+    {
+      "code": "BASE_URI",
+      "value_set_code": "CSP_DIRECTIVES",
+      "label": "base-uri",
+      "description": "Allowed <base> tag URIs",
+      "sort_order": 10,
+      "metadata": {
+        "recommended": "'self'",
+        "purpose": "Prevents base tag hijacking"
+      }
+    },
+    {
+      "code": "FORM_ACTION",
+      "value_set_code": "CSP_DIRECTIVES",
+      "label": "form-action",
+      "description": "Allowed form submission targets",
+      "sort_order": 11,
+      "metadata": {
+        "recommended": "'self'",
+        "purpose": "Prevents form hijacking"
+      }
+    },
+    {
+      "code": "UPGRADE_INSECURE_REQUESTS",
+      "value_set_code": "CSP_DIRECTIVES",
+      "label": "upgrade-insecure-requests",
+      "description": "Auto-upgrade HTTP to HTTPS",
+      "sort_order": 12,
+      "metadata": {
+        "recommended": true,
+        "purpose": "Forces HTTPS for all resources"
+      }
+    },
+    {
+      "code": "SELF",
+      "value_set_code": "CSP_SOURCES",
+      "label": "'self'",
+      "description": "Same origin only",
+      "sort_order": 1,
+      "metadata": {
+        "use_case": "Default safe source"
+      }
+    },
+    {
+      "code": "NONE",
+      "value_set_code": "CSP_SOURCES",
+      "label": "'none'",
+      "description": "Block all sources",
+      "sort_order": 2,
+      "metadata": {
+        "use_case": "Disable resource type entirely"
+      }
+    },
+    {
+      "code": "UNSAFE_INLINE",
+      "value_set_code": "CSP_SOURCES",
+      "label": "'unsafe-inline'",
+      "description": "Allow inline scripts/styles (DANGEROUS)",
+      "sort_order": 3,
+      "metadata": {
+        "security": "CRITICAL - Opens XSS vulnerability",
+        "use_case": "Legacy apps only - migrate to nonces"
+      }
+    },
+    {
+      "code": "UNSAFE_EVAL",
+      "value_set_code": "CSP_SOURCES",
+      "label": "'unsafe-eval'",
+      "description": "Allow eval() and new Function() (DANGEROUS)",
+      "sort_order": 4,
+      "metadata": {
+        "security": "HIGH - Enables code injection",
+        "use_case": "Avoid unless absolutely required"
+      }
+    },
+    {
+      "code": "NONCE",
+      "value_set_code": "CSP_SOURCES",
+      "label": "'nonce-{RANDOM}'",
+      "description": "Cryptographic nonce for inline scripts",
+      "sort_order": 5,
+      "metadata": {
+        "security": "Recommended for inline scripts",
+        "implementation": "Generate per-request random value"
+      }
+    },
+    {
+      "code": "HASH",
+      "value_set_code": "CSP_SOURCES",
+      "label": "'sha256-{BASE64}'",
+      "description": "Hash of inline script content",
+      "sort_order": 6,
+      "metadata": {
+        "security": "Good for static inline scripts",
+        "use_case": "Analytics snippets, third-party widgets"
+      }
+    },
+    {
+      "code": "HTTPS_SCHEME",
+      "value_set_code": "CSP_SOURCES",
+      "label": "https:",
+      "description": "Any HTTPS origin",
+      "sort_order": 7,
+      "metadata": {
+        "security": "Better than wildcard, still broad",
+        "use_case": "CDNs with dynamic subdomains"
+      }
+    },
+    {
+      "code": "DATA_SCHEME",
+      "value_set_code": "CSP_SOURCES",
+      "label": "data:",
+      "description": "Data URIs (base64 encoded)",
+      "sort_order": 8,
+      "metadata": {
+        "security": "LOW - Can hide malicious payloads",
+        "use_case": "Inline images only (img-src)"
+      }
+    },
+    {
+      "code": "HSTS",
+      "value_set_code": "HTTP_SECURITY_HEADERS",
+      "label": "Strict-Transport-Security",
+      "description": "Force HTTPS for all future connections",
+      "sort_order": 1,
+      "metadata": {
+        "value": "max-age=31536000; includeSubDomains; preload",
+        "purpose": "Prevents SSL stripping attacks",
+        "required": "PCI-DSS, SOC 2"
+      }
+    },
+    {
+      "code": "X_FRAME_OPTIONS",
+      "value_set_code": "HTTP_SECURITY_HEADERS",
+      "label": "X-Frame-Options",
+      "description": "Clickjacking protection (legacy)",
+      "sort_order": 2,
+      "metadata": {
+        "value": "DENY or SAMEORIGIN",
+        "note": "Superseded by CSP frame-ancestors",
+        "compatibility": "Needed for older browsers"
+      }
+    },
+    {
+      "code": "X_CONTENT_TYPE_OPTIONS",
+      "value_set_code": "HTTP_SECURITY_HEADERS",
+      "label": "X-Content-Type-Options",
+      "description": "Disable MIME sniffing",
+      "sort_order": 3,
+      "metadata": {
+        "value": "nosniff",
+        "purpose": "Prevents MIME confusion attacks"
+      }
+    },
+    {
+      "code": "REFERRER_POLICY",
+      "value_set_code": "HTTP_SECURITY_HEADERS",
+      "label": "Referrer-Policy",
+      "description": "Control Referer header leakage",
+      "sort_order": 4,
+      "metadata": {
+        "value": "strict-origin-when-cross-origin",
+        "purpose": "Prevents sensitive URL leakage"
+      }
+    },
+    {
+      "code": "PERMISSIONS_POLICY",
+      "value_set_code": "HTTP_SECURITY_HEADERS",
+      "label": "Permissions-Policy",
+      "description": "Control browser features (camera, mic, etc.)",
+      "sort_order": 5,
+      "metadata": {
+        "value": "geolocation=(), microphone=(), camera=()",
+        "purpose": "Disables unnecessary browser APIs"
+      }
+    },
+    {
+      "code": "X_XSS_PROTECTION",
+      "value_set_code": "HTTP_SECURITY_HEADERS",
+      "label": "X-XSS-Protection",
+      "description": "Legacy XSS filter (deprecated)",
+      "sort_order": 6,
+      "metadata": {
+        "value": "0",
+        "note": "DISABLE - causes vulnerabilities in modern browsers",
+        "status": "Deprecated - CSP replaces this"
+      }
+    },
+    {
+      "code": "CROSS_ORIGIN_OPENER_POLICY",
+      "value_set_code": "HTTP_SECURITY_HEADERS",
+      "label": "Cross-Origin-Opener-Policy",
+      "description": "Isolate browsing context",
+      "sort_order": 7,
+      "metadata": {
+        "value": "same-origin",
+        "purpose": "Prevents Spectre attacks via window.opener"
+      }
+    },
+    {
+      "code": "STRICT",
+      "value_set_code": "COOKIE_SAME_SITE_MODES",
+      "label": "Strict",
+      "description": "Never send cookie in cross-site requests",
+      "sort_order": 1,
+      "metadata": {
+        "csrf_protection": "maximum",
+        "use_case": "Authentication cookies for highly sensitive apps",
+        "usability": "Breaks legitimate cross-site navigation"
+      }
+    },
+    {
+      "code": "LAX",
+      "value_set_code": "COOKIE_SAME_SITE_MODES",
+      "label": "Lax",
+      "description": "Send cookie on top-level GET navigation",
+      "sort_order": 2,
+      "metadata": {
+        "csrf_protection": "good",
+        "use_case": "Default for most applications",
+        "recommended": true
+      }
+    },
+    {
+      "code": "NONE",
+      "value_set_code": "COOKIE_SAME_SITE_MODES",
+      "label": "None",
+      "description": "Send cookie in all contexts (requires Secure)",
+      "sort_order": 3,
+      "metadata": {
+        "csrf_protection": "none",
+        "use_case": "Third-party embeds (iframes)",
+        "requirement": "MUST be used with Secure attribute"
+      }
+    },
+    {
+      "code": "GET",
+      "value_set_code": "CORS_METHODS",
+      "label": "GET",
+      "description": "Safe read-only method",
+      "sort_order": 1,
+      "metadata": {
+        "safe": true
+      }
+    },
+    {
+      "code": "POST",
+      "value_set_code": "CORS_METHODS",
+      "label": "POST",
+      "description": "Create new resources",
+      "sort_order": 2,
+      "metadata": {
+        "safe": false
+      }
+    },
+    {
+      "code": "PUT",
+      "value_set_code": "CORS_METHODS",
+      "label": "PUT",
+      "description": "Update existing resources",
+      "sort_order": 3,
+      "metadata": {
+        "safe": false
+      }
+    },
+    {
+      "code": "PATCH",
+      "value_set_code": "CORS_METHODS",
+      "label": "PATCH",
+      "description": "Partial update",
+      "sort_order": 4,
+      "metadata": {
+        "safe": false
+      }
+    },
+    {
+      "code": "DELETE",
+      "value_set_code": "CORS_METHODS",
+      "label": "DELETE",
+      "description": "Remove resources",
+      "sort_order": 5,
+      "metadata": {
+        "safe": false
+      }
+    },
+    {
+      "code": "TLS_1_3",
+      "value_set_code": "TLS_VERSIONS",
+      "label": "TLS 1.3",
+      "description": "Latest TLS protocol (2018)",
+      "sort_order": 1,
+      "metadata": {
+        "security": "highest",
+        "performance": "best (0-RTT)",
+        "recommended": true
+      }
+    },
+    {
+      "code": "TLS_1_2",
+      "value_set_code": "TLS_VERSIONS",
+      "label": "TLS 1.2",
+      "description": "Current standard (2008)",
+      "sort_order": 2,
+      "metadata": {
+        "security": "high",
+        "minimum_required": "PCI-DSS 3.2.1",
+        "status": "Widely supported"
+      }
+    },
+    {
+      "code": "TLS_1_1",
+      "value_set_code": "TLS_VERSIONS",
+      "label": "TLS 1.1",
+      "description": "Deprecated (2006)",
+      "sort_order": 3,
+      "metadata": {
+        "security": "weak",
+        "status": "DEPRECATED - disabled by major browsers",
+        "pci_dss": "Non-compliant after June 2018"
+      }
+    },
+    {
+      "code": "TLS_1_0",
+      "value_set_code": "TLS_VERSIONS",
+      "label": "TLS 1.0",
+      "description": "Legacy (1999)",
+      "sort_order": 4,
+      "metadata": {
+        "security": "vulnerable",
+        "status": "DEPRECATED - BEAST, POODLE attacks",
+        "action": "DISABLE IMMEDIATELY"
+      }
+    },
+    {
+      "code": "AES_256_GCM",
+      "value_set_code": "CIPHER_SUITES",
+      "label": "TLS_AES_256_GCM_SHA384",
+      "description": "AES-256 Galois/Counter Mode (TLS 1.3)",
+      "sort_order": 1,
+      "metadata": {
+        "security": "highest",
+        "tls_version": "1.3",
+        "forward_secrecy": true,
+        "recommended": true
+      }
+    },
+    {
+      "code": "AES_128_GCM",
+      "value_set_code": "CIPHER_SUITES",
+      "label": "TLS_AES_128_GCM_SHA256",
+      "description": "AES-128 GCM (TLS 1.3)",
+      "sort_order": 2,
+      "metadata": {
+        "security": "high",
+        "tls_version": "1.3",
+        "performance": "best"
+      }
+    },
+    {
+      "code": "CHACHA20_POLY1305",
+      "value_set_code": "CIPHER_SUITES",
+      "label": "TLS_CHACHA20_POLY1305_SHA256",
+      "description": "ChaCha20-Poly1305 (mobile optimized)",
+      "sort_order": 3,
+      "metadata": {
+        "security": "high",
+        "tls_version": "1.3",
+        "use_case": "Mobile devices without AES hardware"
+      }
+    },
+    {
+      "code": "ECDHE_RSA_AES_256_GCM",
+      "value_set_code": "CIPHER_SUITES",
+      "label": "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+      "description": "ECDHE with RSA and AES-256 (TLS 1.2)",
+      "sort_order": 4,
+      "metadata": {
+        "security": "high",
+        "tls_version": "1.2",
+        "forward_secrecy": true
+      }
+    },
+    {
+      "code": "ECDHE_RSA_AES_128_GCM",
+      "value_set_code": "CIPHER_SUITES",
+      "label": "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+      "description": "ECDHE with RSA and AES-128 (TLS 1.2)",
+      "sort_order": 5,
+      "metadata": {
+        "security": "good",
+        "tls_version": "1.2",
+        "compatibility": "Wide browser support"
+      }
+    },
+    {
+      "code": "RSA_AES_256_CBC",
+      "value_set_code": "CIPHER_SUITES",
+      "label": "TLS_RSA_WITH_AES_256_CBC_SHA256",
+      "description": "RSA with AES-256 CBC (legacy)",
+      "sort_order": 6,
+      "metadata": {
+        "security": "weak",
+        "forward_secrecy": false,
+        "status": "AVOID - vulnerable to BEAST, Lucky13",
+        "use_case": "Legacy client compatibility only"
+      }
+    },
+    {
+      "code": "OWASP_CRS",
+      "value_set_code": "WAF_RULE_SETS",
+      "label": "OWASP ModSecurity CRS",
+      "description": "Core Rule Set for common attacks",
+      "sort_order": 1,
+      "metadata": {
+        "version": "4.x",
+        "coverage": "SQL injection, XSS, LFI, RCE",
+        "recommended": true
+      }
+    },
+    {
+      "code": "SQL_INJECTION",
+      "value_set_code": "WAF_RULE_SETS",
+      "label": "SQL Injection Protection",
+      "description": "Detects SQLi patterns",
+      "sort_order": 2,
+      "metadata": {
+        "owasp": "A03:2021",
+        "detection": "UNION, OR 1=1, admin'--"
+      }
+    },
+    {
+      "code": "XSS_PROTECTION",
+      "value_set_code": "WAF_RULE_SETS",
+      "label": "Cross-Site Scripting Protection",
+      "description": "Detects XSS payloads",
+      "sort_order": 3,
+      "metadata": {
+        "owasp": "A03:2021",
+        "detection": "<script>, onerror=, javascript:"
+      }
+    },
+    {
+      "code": "LFI_RFI",
+      "value_set_code": "WAF_RULE_SETS",
+      "label": "Local/Remote File Inclusion",
+      "description": "Detects path traversal",
+      "sort_order": 4,
+      "metadata": {
+        "detection": "../../../etc/passwd, %00, file://"
+      }
+    },
+    {
+      "code": "RCE_PROTECTION",
+      "value_set_code": "WAF_RULE_SETS",
+      "label": "Remote Code Execution",
+      "description": "Detects command injection",
+      "sort_order": 5,
+      "metadata": {
+        "detection": "eval(, system(, exec(, shell_exec"
+      }
+    },
+    {
+      "code": "TOKEN_BUCKET",
+      "value_set_code": "RATE_LIMIT_STRATEGIES",
+      "label": "Token Bucket",
+      "description": "Allow burst traffic up to bucket size",
+      "sort_order": 1,
+      "metadata": {
+        "use_case": "API endpoints with bursty traffic",
+        "implementation": "rate-limiter-flexible"
+      }
+    },
+    {
+      "code": "LEAKY_BUCKET",
+      "value_set_code": "RATE_LIMIT_STRATEGIES",
+      "label": "Leaky Bucket",
+      "description": "Smooth out traffic at constant rate",
+      "sort_order": 2,
+      "metadata": {
+        "use_case": "Backend processing queues"
+      }
+    },
+    {
+      "code": "FIXED_WINDOW",
+      "value_set_code": "RATE_LIMIT_STRATEGIES",
+      "label": "Fixed Window",
+      "description": "Count requests per time window",
+      "sort_order": 3,
+      "metadata": {
+        "use_case": "Simple hourly/daily quotas",
+        "weakness": "Burst at window boundaries"
+      }
+    },
+    {
+      "code": "SLIDING_WINDOW",
+      "value_set_code": "RATE_LIMIT_STRATEGIES",
+      "label": "Sliding Window",
+      "description": "Rolling time window counter",
+      "sort_order": 4,
+      "metadata": {
+        "use_case": "Prevents boundary burst attacks",
+        "recommended": true
+      }
+    },
+    {
+      "code": "CONCURRENT_LIMIT",
+      "value_set_code": "RATE_LIMIT_STRATEGIES",
+      "label": "Concurrent Request Limit",
+      "description": "Max simultaneous connections per user",
+      "sort_order": 5,
+      "metadata": {
+        "use_case": "Prevent resource exhaustion",
+        "example": "Max 3 concurrent API requests"
+      }
+    },
+    {
+      "code": "SQL_INJECTION",
+      "value_set_code": "ATTACK_PATTERNS",
+      "label": "SQL Injection",
+      "description": "UNION, OR 1=1, admin'--",
+      "sort_order": 1,
+      "metadata": {
+        "severity": "CRITICAL",
+        "regex": "/(union|select|insert|update|delete|drop|create|alter|exec|execute|script|javascript|eval)/i"
+      }
+    },
+    {
+      "code": "XSS",
+      "value_set_code": "ATTACK_PATTERNS",
+      "label": "Cross-Site Scripting",
+      "description": "<script>, onerror=, javascript:",
+      "sort_order": 2,
+      "metadata": {
+        "severity": "HIGH",
+        "regex": "/(<script|onerror=|onload=|javascript:|data:text\\/html)/i"
+      }
+    },
+    {
+      "code": "PATH_TRAVERSAL",
+      "value_set_code": "ATTACK_PATTERNS",
+      "label": "Path Traversal",
+      "description": "../../../etc/passwd",
+      "sort_order": 3,
+      "metadata": {
+        "severity": "HIGH",
+        "regex": "/(\\.\\.\\/|\\.\\.\\\\/|%2e%2e%2f|%2e%2e\\\\)/i"
+      }
+    },
+    {
+      "code": "COMMAND_INJECTION",
+      "value_set_code": "ATTACK_PATTERNS",
+      "label": "Command Injection",
+      "description": "; ls -la, | whoami",
+      "sort_order": 4,
+      "metadata": {
+        "severity": "CRITICAL",
+        "regex": "/(;|\\||`|\\$\\(|\\$\\{)/i"
+      }
+    },
+    {
+      "code": "LDAP_INJECTION",
+      "value_set_code": "ATTACK_PATTERNS",
+      "label": "LDAP Injection",
+      "description": "*)(&(objectClass=*",
+      "sort_order": 5,
+      "metadata": {
+        "severity": "HIGH",
+        "regex": "/(\\*\\)|\\(&|\\|\\()/i"
+      }
+    },
+    {
+      "code": "XML_INJECTION",
+      "value_set_code": "ATTACK_PATTERNS",
+      "label": "XML Injection",
+      "description": "XXE, SOAP injection",
+      "sort_order": 6,
+      "metadata": {
+        "severity": "HIGH",
+        "regex": "/<!DOCTYPE|<!ENTITY|SYSTEM|PUBLIC/i"
+      }
+    },
+    {
+      "code": "SSRF",
+      "value_set_code": "ATTACK_PATTERNS",
+      "label": "Server-Side Request Forgery",
+      "description": "Internal IP ranges, metadata endpoints",
+      "sort_order": 7,
+      "metadata": {
+        "severity": "HIGH",
+        "regex": "/(localhost|127\\.0\\.0\\.1|169\\.254\\.169\\.254|10\\.|172\\.16\\.|192\\.168\\.)/i"
+      }
+    },
+    {
+      "code": "NOSQL_INJECTION",
+      "value_set_code": "ATTACK_PATTERNS",
+      "label": "NoSQL Injection",
+      "description": "$ne, $gt, $where operators",
+      "sort_order": 8,
+      "metadata": {
+        "severity": "HIGH",
+        "regex": "/(\\$ne|\\$gt|\\$where|\\$regex)/i"
+      }
+    },
+    {
+      "code": "SELECT_POLICY",
+      "value_set_code": "RLS_POLICY_TYPES",
+      "label": "SELECT Policy",
+      "description": "Controls which rows users can read",
+      "sort_order": 1,
+      "metadata": {
+        "sql_operation": "SELECT",
+        "example": "tenant_id = current_setting('app.tenant_id')::uuid"
+      }
+    },
+    {
+      "code": "INSERT_POLICY",
+      "value_set_code": "RLS_POLICY_TYPES",
+      "label": "INSERT Policy",
+      "description": "Controls which rows can be created",
+      "sort_order": 2,
+      "metadata": {
+        "sql_operation": "INSERT",
+        "example": "user_id = (SELECT auth.uid())"
+      }
+    },
+    {
+      "code": "UPDATE_POLICY",
+      "value_set_code": "RLS_POLICY_TYPES",
+      "label": "UPDATE Policy",
+      "description": "Controls which rows can be modified",
+      "sort_order": 3,
+      "metadata": {
+        "sql_operation": "UPDATE",
+        "example": "owner_id = (SELECT auth.uid())"
+      }
+    },
+    {
+      "code": "DELETE_POLICY",
+      "value_set_code": "RLS_POLICY_TYPES",
+      "label": "DELETE Policy",
+      "description": "Controls which rows can be removed",
+      "sort_order": 4,
+      "metadata": {
+        "sql_operation": "DELETE",
+        "example": "owner_id = (SELECT auth.uid())"
+      }
+    },
+    {
+      "code": "UNION_SELECT",
+      "value_set_code": "SQL_INJECTION_PATTERNS",
+      "label": "UNION-based Injection",
+      "description": "UNION SELECT attacks",
+      "sort_order": 1,
+      "metadata": {
+        "severity": "CRITICAL",
+        "example": "' UNION SELECT username, password FROM users--"
+      }
+    },
+    {
+      "code": "BOOLEAN_BLIND",
+      "value_set_code": "SQL_INJECTION_PATTERNS",
+      "label": "Boolean-based Blind",
+      "description": "OR 1=1, AND 1=2",
+      "sort_order": 2,
+      "metadata": {
+        "severity": "HIGH",
+        "example": "admin' OR '1'='1"
+      }
+    },
+    {
+      "code": "TIME_BLIND",
+      "value_set_code": "SQL_INJECTION_PATTERNS",
+      "label": "Time-based Blind",
+      "description": "SLEEP(), WAITFOR DELAY",
+      "sort_order": 3,
+      "metadata": {
+        "severity": "HIGH",
+        "example": "'; WAITFOR DELAY '00:00:05'--"
+      }
+    },
+    {
+      "code": "ERROR_BASED",
+      "value_set_code": "SQL_INJECTION_PATTERNS",
+      "label": "Error-based Injection",
+      "description": "Triggers verbose errors",
+      "sort_order": 4,
+      "metadata": {
+        "severity": "MEDIUM",
+        "example": "' AND 1=CONVERT(int, (SELECT @@version))--"
+      }
+    },
+    {
+      "code": "STACKED_QUERIES",
+      "value_set_code": "SQL_INJECTION_PATTERNS",
+      "label": "Stacked Queries",
+      "description": "Multiple statements with ;",
+      "sort_order": 5,
+      "metadata": {
+        "severity": "CRITICAL",
+        "example": "'; DROP TABLE users;--"
+      }
+    },
+    {
+      "code": "COMMENT_INJECTION",
+      "value_set_code": "SQL_INJECTION_PATTERNS",
+      "label": "Comment-based Bypass",
+      "description": "-- or /* */ to bypass logic",
+      "sort_order": 6,
+      "metadata": {
+        "severity": "HIGH",
+        "example": "admin'-- (bypasses password check)"
+      }
+    },
+    {
+      "code": "IP_ADDRESS",
+      "value_set_code": "SESSION_BINDING_FACTORS",
+      "label": "IP Address",
+      "description": "Bind session to originating IP",
+      "sort_order": 1,
+      "metadata": {
+        "security": "low",
+        "issue": "Breaks with carrier-grade NAT, mobile networks",
+        "use_case": "High-security intranet apps"
+      }
+    },
+    {
+      "code": "USER_AGENT",
+      "value_set_code": "SESSION_BINDING_FACTORS",
+      "label": "User-Agent",
+      "description": "Bind to browser fingerprint",
+      "sort_order": 2,
+      "metadata": {
+        "security": "low",
+        "issue": "Easily spoofed",
+        "use_case": "Combined with other factors"
+      }
+    },
+    {
+      "code": "DEVICE_FINGERPRINT",
+      "value_set_code": "SESSION_BINDING_FACTORS",
+      "label": "Device Fingerprint",
+      "description": "Canvas, WebGL, audio fingerprinting",
+      "sort_order": 3,
+      "metadata": {
+        "security": "medium",
+        "library": "fingerprintjs",
+        "recommended": true
+      }
+    },
+    {
+      "code": "TLS_SESSION_ID",
+      "value_set_code": "SESSION_BINDING_FACTORS",
+      "label": "TLS Session ID",
+      "description": "Bind to TLS connection",
+      "sort_order": 4,
+      "metadata": {
+        "security": "high",
+        "issue": "Breaks with TLS resumption, CDN",
+        "use_case": "Direct connections only"
+      }
+    },
+    {
+      "code": "GEO_LOCATION",
+      "value_set_code": "SESSION_BINDING_FACTORS",
+      "label": "Geo-location",
+      "description": "Detect country/region changes",
+      "sort_order": 5,
+      "metadata": {
+        "security": "medium",
+        "use_case": "Trigger re-authentication on location change"
+      }
+    },
+    {
+      "code": "TOTP",
+      "value_set_code": "MFA_METHODS",
+      "label": "TOTP (Time-based OTP)",
+      "description": "Google Authenticator, Authy",
+      "sort_order": 1,
+      "metadata": {
+        "security": "high",
+        "standard": "RFC 6238",
+        "recommended": true,
+        "library": "otplib"
+      }
+    },
+    {
+      "code": "SMS",
+      "value_set_code": "MFA_METHODS",
+      "label": "SMS One-Time Password",
+      "description": "6-digit code via SMS",
+      "sort_order": 2,
+      "metadata": {
+        "security": "low",
+        "vulnerability": "SIM swapping, SS7 attacks",
+        "use_case": "Fallback only - not recommended"
+      }
+    },
+    {
+      "code": "WEBAUTHN",
+      "value_set_code": "MFA_METHODS",
+      "label": "WebAuthn (FIDO2)",
+      "description": "Yubikey, Touch ID, Face ID",
+      "sort_order": 3,
+      "metadata": {
+        "security": "highest",
+        "standard": "W3C WebAuthn",
+        "phishing_resistant": true,
+        "recommended": true
+      }
+    },
+    {
+      "code": "EMAIL_OTP",
+      "value_set_code": "MFA_METHODS",
+      "label": "Email One-Time Password",
+      "description": "6-digit code via email",
+      "sort_order": 4,
+      "metadata": {
+        "security": "low",
+        "vulnerability": "Email compromise",
+        "use_case": "Account recovery only"
+      }
+    },
+    {
+      "code": "RECOVERY_CODES",
+      "value_set_code": "MFA_METHODS",
+      "label": "Recovery Codes",
+      "description": "One-time backup codes",
+      "sort_order": 5,
+      "metadata": {
+        "security": "medium",
+        "use_case": "MFA device loss recovery",
+        "implementation": "10x 8-character codes, single use"
+      }
+    },
+    {
+      "code": "JWT",
+      "value_set_code": "TOKEN_TYPES",
+      "label": "JSON Web Token",
+      "description": "Stateless signed tokens",
+      "sort_order": 1,
+      "metadata": {
+        "standard": "RFC 7519",
+        "recommended": true,
+        "library": "jsonwebtoken",
+        "use_case": "API authentication"
+      }
+    },
+    {
+      "code": "OPAQUE",
+      "value_set_code": "TOKEN_TYPES",
+      "label": "Opaque Token",
+      "description": "Random string in Redis/DB",
+      "sort_order": 2,
+      "metadata": {
+        "security": "high",
+        "revocable": true,
+        "use_case": "Session tokens, OAuth access tokens"
+      }
+    },
+    {
+      "code": "REFRESH_TOKEN",
+      "value_set_code": "TOKEN_TYPES",
+      "label": "Refresh Token",
+      "description": "Long-lived token for JWT renewal",
+      "sort_order": 3,
+      "metadata": {
+        "security": "high",
+        "rotation": "Rotate on each use",
+        "storage": "HttpOnly cookie"
+      }
+    },
+    {
+      "code": "CSRF_TOKEN",
+      "value_set_code": "TOKEN_TYPES",
+      "label": "CSRF Token",
+      "description": "Double-submit cookie or synchronizer token",
+      "sort_order": 4,
+      "metadata": {
+        "purpose": "Prevent cross-site request forgery",
+        "pattern": "Double Submit Cookie pattern",
+        "library": "csurf"
+      }
+    }
+  ]
+}
+

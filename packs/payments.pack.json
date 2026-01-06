@@ -15,13 +15,6 @@
       "tags": ["payments", "bank"]
     },
     {
-      "code": "BANK_ACCOUNT",
-      "category": "ENTITY",
-      "domain": "PAYMENTS",
-      "description": "Bank account master record used for receipts and payments",
-      "tags": ["payments", "bank"]
-    },
-    {
       "code": "PAYMENT",
       "category": "ENTITY",
       "domain": "PAYMENTS",
@@ -64,20 +57,6 @@
       "tags": ["payments", "batch"]
     },
     {
-      "code": "BANK_STATEMENT",
-      "category": "ENTITY",
-      "domain": "PAYMENTS",
-      "description": "Imported bank statement (header)",
-      "tags": ["payments", "bank", "reconciliation"]
-    },
-    {
-      "code": "BANK_STATEMENT_LINE",
-      "category": "ENTITY",
-      "domain": "PAYMENTS",
-      "description": "Imported bank statement line (transaction line)",
-      "tags": ["payments", "bank", "reconciliation"]
-    },
-    {
       "code": "BANK_RECONCILIATION",
       "category": "ENTITY",
       "domain": "PAYMENTS",
@@ -118,14 +97,6 @@
       "metadata": { "prefix": "PBS" }
     },
     {
-      "code": "BANK_STATEMENT_STATUS",
-      "domain": "PAYMENTS",
-      "description": "Bank statement import statuses",
-      "jurisdiction": "GLOBAL",
-      "tags": ["payments", "bank", "status"],
-      "metadata": { "prefix": "BSS" }
-    },
-    {
       "code": "RECONCILIATION_STATUS",
       "domain": "PAYMENTS",
       "description": "Reconciliation statuses",
@@ -161,10 +132,6 @@
     { "code": "SUBMITTED", "value_set_code": "PAYMENT_BATCH_STATUS", "label": "Submitted", "description": "Submitted to bank", "sort_order": 4 },
     { "code": "COMPLETED", "value_set_code": "PAYMENT_BATCH_STATUS", "label": "Completed", "description": "Batch completed", "sort_order": 5 },
     { "code": "CANCELLED", "value_set_code": "PAYMENT_BATCH_STATUS", "label": "Cancelled", "description": "Batch cancelled", "sort_order": 6 },
-    { "code": "IMPORTED", "value_set_code": "BANK_STATEMENT_STATUS", "label": "Imported", "description": "Statement imported", "sort_order": 1 },
-    { "code": "VALIDATED", "value_set_code": "BANK_STATEMENT_STATUS", "label": "Validated", "description": "Statement validated", "sort_order": 2 },
-    { "code": "POSTED", "value_set_code": "BANK_STATEMENT_STATUS", "label": "Posted", "description": "Statement posted/locked", "sort_order": 3 },
-    { "code": "CLOSED", "value_set_code": "BANK_STATEMENT_STATUS", "label": "Closed", "description": "Statement closed (final state)", "sort_order": 4 },
     { "code": "OPEN", "value_set_code": "RECONCILIATION_STATUS", "label": "Open", "description": "Reconciliation open", "sort_order": 1 },
     { "code": "IN_PROGRESS", "value_set_code": "RECONCILIATION_STATUS", "label": "In Progress", "description": "Matching in progress", "sort_order": 2 },
     { "code": "COMPLETED", "value_set_code": "RECONCILIATION_STATUS", "label": "Completed", "description": "Reconciliation completed", "sort_order": 3 },

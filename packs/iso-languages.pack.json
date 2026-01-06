@@ -1,0 +1,2071 @@
+{
+  "id": "iso-languages",
+  "name": "ISO 639-1 Languages",
+  "version": "1.0.0",
+  "domain": "CORE",
+  "description": "ISO 639-1 language codes and metadata - complete language support for internationalization",
+  "priority": 50,
+  "authoritative_for": {
+    "concepts": [
+      "LANGUAGE"
+    ],
+    "value_sets": [
+      "LANGUAGES"
+    ]
+  },
+  "concepts": [
+    {
+      "code": "LANGUAGE",
+      "category": "ENTITY",
+      "domain": "CORE",
+      "description": "Language per ISO 639-1",
+      "tags": [
+        "core",
+        "language",
+        "iso6391"
+      ]
+    }
+  ],
+  "value_sets": [
+    {
+      "code": "LANGUAGES",
+      "domain": "CORE",
+      "description": "ISO 639-1 language codes",
+      "jurisdiction": "GLOBAL",
+      "tags": [
+        "core",
+        "language",
+        "iso6391"
+      ],
+      "metadata": {
+        "prefix": "LNG"
+      }
+    }
+  ],
+  "values": [
+    {
+      "code": "AFAR",
+      "value_set_code": "LANGUAGES",
+      "label": "Afar",
+      "description": "Afar (ISO 639-1: aa)",
+      "sort_order": 1,
+      "metadata": {
+        "iso_code": "aa",
+        "native_name": "Afaraf"
+      }
+    },
+    {
+      "code": "ABKHAZIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Abkhazian",
+      "description": "Abkhazian (ISO 639-1: ab)",
+      "sort_order": 2,
+      "metadata": {
+        "iso_code": "ab",
+        "native_name": "аҧсуа"
+      }
+    },
+    {
+      "code": "AVESTAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Avestan",
+      "description": "Avestan (ISO 639-1: ae)",
+      "sort_order": 3,
+      "metadata": {
+        "iso_code": "ae",
+        "native_name": "avesta"
+      }
+    },
+    {
+      "code": "AFRIKAANS",
+      "value_set_code": "LANGUAGES",
+      "label": "Afrikaans",
+      "description": "Afrikaans (ISO 639-1: af)",
+      "sort_order": 4,
+      "metadata": {
+        "iso_code": "af",
+        "native_name": "Afrikaans"
+      }
+    },
+    {
+      "code": "AKAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Akan",
+      "description": "Akan (ISO 639-1: ak)",
+      "sort_order": 5,
+      "metadata": {
+        "iso_code": "ak",
+        "native_name": "Akan"
+      }
+    },
+    {
+      "code": "AMHARIC",
+      "value_set_code": "LANGUAGES",
+      "label": "Amharic",
+      "description": "Amharic (ISO 639-1: am)",
+      "sort_order": 6,
+      "metadata": {
+        "iso_code": "am",
+        "native_name": "አማርኛ"
+      }
+    },
+    {
+      "code": "ARAGONESE",
+      "value_set_code": "LANGUAGES",
+      "label": "Aragonese",
+      "description": "Aragonese (ISO 639-1: an)",
+      "sort_order": 7,
+      "metadata": {
+        "iso_code": "an",
+        "native_name": "aragonés"
+      }
+    },
+    {
+      "code": "ARABIC",
+      "value_set_code": "LANGUAGES",
+      "label": "Arabic",
+      "description": "Arabic (ISO 639-1: ar)",
+      "sort_order": 8,
+      "metadata": {
+        "iso_code": "ar",
+        "native_name": "العربية"
+      }
+    },
+    {
+      "code": "ASSAMESE",
+      "value_set_code": "LANGUAGES",
+      "label": "Assamese",
+      "description": "Assamese (ISO 639-1: as)",
+      "sort_order": 9,
+      "metadata": {
+        "iso_code": "as",
+        "native_name": "অসমীয়া"
+      }
+    },
+    {
+      "code": "AVARIC",
+      "value_set_code": "LANGUAGES",
+      "label": "Avaric",
+      "description": "Avaric (ISO 639-1: av)",
+      "sort_order": 10,
+      "metadata": {
+        "iso_code": "av",
+        "native_name": "авар мацӀ"
+      }
+    },
+    {
+      "code": "AYMARA",
+      "value_set_code": "LANGUAGES",
+      "label": "Aymara",
+      "description": "Aymara (ISO 639-1: ay)",
+      "sort_order": 11,
+      "metadata": {
+        "iso_code": "ay",
+        "native_name": "aymar aru"
+      }
+    },
+    {
+      "code": "AZERBAIJANI",
+      "value_set_code": "LANGUAGES",
+      "label": "Azerbaijani",
+      "description": "Azerbaijani (ISO 639-1: az)",
+      "sort_order": 12,
+      "metadata": {
+        "iso_code": "az",
+        "native_name": "azərbaycan dili"
+      }
+    },
+    {
+      "code": "BASHKIR",
+      "value_set_code": "LANGUAGES",
+      "label": "Bashkir",
+      "description": "Bashkir (ISO 639-1: ba)",
+      "sort_order": 13,
+      "metadata": {
+        "iso_code": "ba",
+        "native_name": "башҡорт теле"
+      }
+    },
+    {
+      "code": "BELARUSIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Belarusian",
+      "description": "Belarusian (ISO 639-1: be)",
+      "sort_order": 14,
+      "metadata": {
+        "iso_code": "be",
+        "native_name": "беларуская мова"
+      }
+    },
+    {
+      "code": "BULGARIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Bulgarian",
+      "description": "Bulgarian (ISO 639-1: bg)",
+      "sort_order": 15,
+      "metadata": {
+        "iso_code": "bg",
+        "native_name": "български език"
+      }
+    },
+    {
+      "code": "BIHARI",
+      "value_set_code": "LANGUAGES",
+      "label": "Bihari",
+      "description": "Bihari (ISO 639-1: bh)",
+      "sort_order": 16,
+      "metadata": {
+        "iso_code": "bh",
+        "native_name": "भोजपुरी"
+      }
+    },
+    {
+      "code": "BISLAMA",
+      "value_set_code": "LANGUAGES",
+      "label": "Bislama",
+      "description": "Bislama (ISO 639-1: bi)",
+      "sort_order": 17,
+      "metadata": {
+        "iso_code": "bi",
+        "native_name": "Bislama"
+      }
+    },
+    {
+      "code": "BAMBARA",
+      "value_set_code": "LANGUAGES",
+      "label": "Bambara",
+      "description": "Bambara (ISO 639-1: bm)",
+      "sort_order": 18,
+      "metadata": {
+        "iso_code": "bm",
+        "native_name": "bamanankan"
+      }
+    },
+    {
+      "code": "BENGALI",
+      "value_set_code": "LANGUAGES",
+      "label": "Bengali",
+      "description": "Bengali (ISO 639-1: bn)",
+      "sort_order": 19,
+      "metadata": {
+        "iso_code": "bn",
+        "native_name": "বাংলা"
+      }
+    },
+    {
+      "code": "TIBETAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Tibetan",
+      "description": "Tibetan (ISO 639-1: bo)",
+      "sort_order": 20,
+      "metadata": {
+        "iso_code": "bo",
+        "native_name": "བོད་ཡིག"
+      }
+    },
+    {
+      "code": "BRETON",
+      "value_set_code": "LANGUAGES",
+      "label": "Breton",
+      "description": "Breton (ISO 639-1: br)",
+      "sort_order": 21,
+      "metadata": {
+        "iso_code": "br",
+        "native_name": "brezhoneg"
+      }
+    },
+    {
+      "code": "BOSNIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Bosnian",
+      "description": "Bosnian (ISO 639-1: bs)",
+      "sort_order": 22,
+      "metadata": {
+        "iso_code": "bs",
+        "native_name": "bosanski jezik"
+      }
+    },
+    {
+      "code": "CATALAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Catalan",
+      "description": "Catalan (ISO 639-1: ca)",
+      "sort_order": 23,
+      "metadata": {
+        "iso_code": "ca",
+        "native_name": "català"
+      }
+    },
+    {
+      "code": "CHECHEN",
+      "value_set_code": "LANGUAGES",
+      "label": "Chechen",
+      "description": "Chechen (ISO 639-1: ce)",
+      "sort_order": 24,
+      "metadata": {
+        "iso_code": "ce",
+        "native_name": "нохчийн мотт"
+      }
+    },
+    {
+      "code": "CHAMORRO",
+      "value_set_code": "LANGUAGES",
+      "label": "Chamorro",
+      "description": "Chamorro (ISO 639-1: ch)",
+      "sort_order": 25,
+      "metadata": {
+        "iso_code": "ch",
+        "native_name": "Chamoru"
+      }
+    },
+    {
+      "code": "CORSICAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Corsican",
+      "description": "Corsican (ISO 639-1: co)",
+      "sort_order": 26,
+      "metadata": {
+        "iso_code": "co",
+        "native_name": "corsu"
+      }
+    },
+    {
+      "code": "CREE",
+      "value_set_code": "LANGUAGES",
+      "label": "Cree",
+      "description": "Cree (ISO 639-1: cr)",
+      "sort_order": 27,
+      "metadata": {
+        "iso_code": "cr",
+        "native_name": "ᓀᐦᐃᔭᐍᐏᐣ"
+      }
+    },
+    {
+      "code": "CZECH",
+      "value_set_code": "LANGUAGES",
+      "label": "Czech",
+      "description": "Czech (ISO 639-1: cs)",
+      "sort_order": 28,
+      "metadata": {
+        "iso_code": "cs",
+        "native_name": "čeština"
+      }
+    },
+    {
+      "code": "CHURCH_SLAVIC",
+      "value_set_code": "LANGUAGES",
+      "label": "Church Slavic",
+      "description": "Church Slavic (ISO 639-1: cu)",
+      "sort_order": 29,
+      "metadata": {
+        "iso_code": "cu",
+        "native_name": "ѩзыкъ словѣньскъ"
+      }
+    },
+    {
+      "code": "CHUVASH",
+      "value_set_code": "LANGUAGES",
+      "label": "Chuvash",
+      "description": "Chuvash (ISO 639-1: cv)",
+      "sort_order": 30,
+      "metadata": {
+        "iso_code": "cv",
+        "native_name": "чӑваш чӗлхи"
+      }
+    },
+    {
+      "code": "WELSH",
+      "value_set_code": "LANGUAGES",
+      "label": "Welsh",
+      "description": "Welsh (ISO 639-1: cy)",
+      "sort_order": 31,
+      "metadata": {
+        "iso_code": "cy",
+        "native_name": "Cymraeg"
+      }
+    },
+    {
+      "code": "DANISH",
+      "value_set_code": "LANGUAGES",
+      "label": "Danish",
+      "description": "Danish (ISO 639-1: da)",
+      "sort_order": 32,
+      "metadata": {
+        "iso_code": "da",
+        "native_name": "dansk"
+      }
+    },
+    {
+      "code": "GERMAN",
+      "value_set_code": "LANGUAGES",
+      "label": "German",
+      "description": "German (ISO 639-1: de)",
+      "sort_order": 33,
+      "metadata": {
+        "iso_code": "de",
+        "native_name": "Deutsch"
+      }
+    },
+    {
+      "code": "DIVEHI",
+      "value_set_code": "LANGUAGES",
+      "label": "Divehi",
+      "description": "Divehi (ISO 639-1: dv)",
+      "sort_order": 34,
+      "metadata": {
+        "iso_code": "dv",
+        "native_name": "ދިވެހި"
+      }
+    },
+    {
+      "code": "DZONGKHA",
+      "value_set_code": "LANGUAGES",
+      "label": "Dzongkha",
+      "description": "Dzongkha (ISO 639-1: dz)",
+      "sort_order": 35,
+      "metadata": {
+        "iso_code": "dz",
+        "native_name": "རྫོང་ཁ"
+      }
+    },
+    {
+      "code": "EWE",
+      "value_set_code": "LANGUAGES",
+      "label": "Ewe",
+      "description": "Ewe (ISO 639-1: ee)",
+      "sort_order": 36,
+      "metadata": {
+        "iso_code": "ee",
+        "native_name": "Eʋegbe"
+      }
+    },
+    {
+      "code": "GREEK",
+      "value_set_code": "LANGUAGES",
+      "label": "Greek",
+      "description": "Greek (ISO 639-1: el)",
+      "sort_order": 37,
+      "metadata": {
+        "iso_code": "el",
+        "native_name": "Ελληνικά"
+      }
+    },
+    {
+      "code": "ENGLISH",
+      "value_set_code": "LANGUAGES",
+      "label": "English",
+      "description": "English (ISO 639-1: en)",
+      "sort_order": 38,
+      "metadata": {
+        "iso_code": "en",
+        "native_name": "English"
+      }
+    },
+    {
+      "code": "ESPERANTO",
+      "value_set_code": "LANGUAGES",
+      "label": "Esperanto",
+      "description": "Esperanto (ISO 639-1: eo)",
+      "sort_order": 39,
+      "metadata": {
+        "iso_code": "eo",
+        "native_name": "Esperanto"
+      }
+    },
+    {
+      "code": "SPANISH",
+      "value_set_code": "LANGUAGES",
+      "label": "Spanish",
+      "description": "Spanish (ISO 639-1: es)",
+      "sort_order": 40,
+      "metadata": {
+        "iso_code": "es",
+        "native_name": "español"
+      }
+    },
+    {
+      "code": "ESTONIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Estonian",
+      "description": "Estonian (ISO 639-1: et)",
+      "sort_order": 41,
+      "metadata": {
+        "iso_code": "et",
+        "native_name": "eesti"
+      }
+    },
+    {
+      "code": "BASQUE",
+      "value_set_code": "LANGUAGES",
+      "label": "Basque",
+      "description": "Basque (ISO 639-1: eu)",
+      "sort_order": 42,
+      "metadata": {
+        "iso_code": "eu",
+        "native_name": "euskara"
+      }
+    },
+    {
+      "code": "PERSIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Persian",
+      "description": "Persian (ISO 639-1: fa)",
+      "sort_order": 43,
+      "metadata": {
+        "iso_code": "fa",
+        "native_name": "فارسی"
+      }
+    },
+    {
+      "code": "FULAH",
+      "value_set_code": "LANGUAGES",
+      "label": "Fulah",
+      "description": "Fulah (ISO 639-1: ff)",
+      "sort_order": 44,
+      "metadata": {
+        "iso_code": "ff",
+        "native_name": "Fulfulde"
+      }
+    },
+    {
+      "code": "FINNISH",
+      "value_set_code": "LANGUAGES",
+      "label": "Finnish",
+      "description": "Finnish (ISO 639-1: fi)",
+      "sort_order": 45,
+      "metadata": {
+        "iso_code": "fi",
+        "native_name": "suomi"
+      }
+    },
+    {
+      "code": "FIJIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Fijian",
+      "description": "Fijian (ISO 639-1: fj)",
+      "sort_order": 46,
+      "metadata": {
+        "iso_code": "fj",
+        "native_name": "vosa Vakaviti"
+      }
+    },
+    {
+      "code": "FAROESE",
+      "value_set_code": "LANGUAGES",
+      "label": "Faroese",
+      "description": "Faroese (ISO 639-1: fo)",
+      "sort_order": 47,
+      "metadata": {
+        "iso_code": "fo",
+        "native_name": "føroyskt"
+      }
+    },
+    {
+      "code": "FRENCH",
+      "value_set_code": "LANGUAGES",
+      "label": "French",
+      "description": "French (ISO 639-1: fr)",
+      "sort_order": 48,
+      "metadata": {
+        "iso_code": "fr",
+        "native_name": "français"
+      }
+    },
+    {
+      "code": "WESTERN_FRISIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Western Frisian",
+      "description": "Western Frisian (ISO 639-1: fy)",
+      "sort_order": 49,
+      "metadata": {
+        "iso_code": "fy",
+        "native_name": "Frysk"
+      }
+    },
+    {
+      "code": "IRISH",
+      "value_set_code": "LANGUAGES",
+      "label": "Irish",
+      "description": "Irish (ISO 639-1: ga)",
+      "sort_order": 50,
+      "metadata": {
+        "iso_code": "ga",
+        "native_name": "Gaeilge"
+      }
+    },
+    {
+      "code": "SCOTTISH_GAELIC",
+      "value_set_code": "LANGUAGES",
+      "label": "Scottish Gaelic",
+      "description": "Scottish Gaelic (ISO 639-1: gd)",
+      "sort_order": 51,
+      "metadata": {
+        "iso_code": "gd",
+        "native_name": "Gàidhlig"
+      }
+    },
+    {
+      "code": "GALICIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Galician",
+      "description": "Galician (ISO 639-1: gl)",
+      "sort_order": 52,
+      "metadata": {
+        "iso_code": "gl",
+        "native_name": "galego"
+      }
+    },
+    {
+      "code": "GUARANI",
+      "value_set_code": "LANGUAGES",
+      "label": "Guarani",
+      "description": "Guarani (ISO 639-1: gn)",
+      "sort_order": 53,
+      "metadata": {
+        "iso_code": "gn",
+        "native_name": "Avañe'ẽ"
+      }
+    },
+    {
+      "code": "GUJARATI",
+      "value_set_code": "LANGUAGES",
+      "label": "Gujarati",
+      "description": "Gujarati (ISO 639-1: gu)",
+      "sort_order": 54,
+      "metadata": {
+        "iso_code": "gu",
+        "native_name": "ગુજરાતી"
+      }
+    },
+    {
+      "code": "MANX",
+      "value_set_code": "LANGUAGES",
+      "label": "Manx",
+      "description": "Manx (ISO 639-1: gv)",
+      "sort_order": 55,
+      "metadata": {
+        "iso_code": "gv",
+        "native_name": "Gaelg"
+      }
+    },
+    {
+      "code": "HAUSA",
+      "value_set_code": "LANGUAGES",
+      "label": "Hausa",
+      "description": "Hausa (ISO 639-1: ha)",
+      "sort_order": 56,
+      "metadata": {
+        "iso_code": "ha",
+        "native_name": "Hausa"
+      }
+    },
+    {
+      "code": "HEBREW",
+      "value_set_code": "LANGUAGES",
+      "label": "Hebrew",
+      "description": "Hebrew (ISO 639-1: he)",
+      "sort_order": 57,
+      "metadata": {
+        "iso_code": "he",
+        "native_name": "עברית"
+      }
+    },
+    {
+      "code": "HINDI",
+      "value_set_code": "LANGUAGES",
+      "label": "Hindi",
+      "description": "Hindi (ISO 639-1: hi)",
+      "sort_order": 58,
+      "metadata": {
+        "iso_code": "hi",
+        "native_name": "हिन्दी"
+      }
+    },
+    {
+      "code": "HIRI_MOTU",
+      "value_set_code": "LANGUAGES",
+      "label": "Hiri Motu",
+      "description": "Hiri Motu (ISO 639-1: ho)",
+      "sort_order": 59,
+      "metadata": {
+        "iso_code": "ho",
+        "native_name": "Hiri Motu"
+      }
+    },
+    {
+      "code": "CROATIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Croatian",
+      "description": "Croatian (ISO 639-1: hr)",
+      "sort_order": 60,
+      "metadata": {
+        "iso_code": "hr",
+        "native_name": "hrvatski"
+      }
+    },
+    {
+      "code": "HAITIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Haitian",
+      "description": "Haitian (ISO 639-1: ht)",
+      "sort_order": 61,
+      "metadata": {
+        "iso_code": "ht",
+        "native_name": "Kreyòl ayisyen"
+      }
+    },
+    {
+      "code": "HUNGARIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Hungarian",
+      "description": "Hungarian (ISO 639-1: hu)",
+      "sort_order": 62,
+      "metadata": {
+        "iso_code": "hu",
+        "native_name": "magyar"
+      }
+    },
+    {
+      "code": "ARMENIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Armenian",
+      "description": "Armenian (ISO 639-1: hy)",
+      "sort_order": 63,
+      "metadata": {
+        "iso_code": "hy",
+        "native_name": "Հայերեն"
+      }
+    },
+    {
+      "code": "HERERO",
+      "value_set_code": "LANGUAGES",
+      "label": "Herero",
+      "description": "Herero (ISO 639-1: hz)",
+      "sort_order": 64,
+      "metadata": {
+        "iso_code": "hz",
+        "native_name": "Otjiherero"
+      }
+    },
+    {
+      "code": "INTERLINGUA",
+      "value_set_code": "LANGUAGES",
+      "label": "Interlingua",
+      "description": "Interlingua (ISO 639-1: ia)",
+      "sort_order": 65,
+      "metadata": {
+        "iso_code": "ia",
+        "native_name": "Interlingua"
+      }
+    },
+    {
+      "code": "INDONESIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Indonesian",
+      "description": "Indonesian (ISO 639-1: id)",
+      "sort_order": 66,
+      "metadata": {
+        "iso_code": "id",
+        "native_name": "Bahasa Indonesia"
+      }
+    },
+    {
+      "code": "INTERLINGUE",
+      "value_set_code": "LANGUAGES",
+      "label": "Interlingue",
+      "description": "Interlingue (ISO 639-1: ie)",
+      "sort_order": 67,
+      "metadata": {
+        "iso_code": "ie",
+        "native_name": "Interlingue"
+      }
+    },
+    {
+      "code": "IGBO",
+      "value_set_code": "LANGUAGES",
+      "label": "Igbo",
+      "description": "Igbo (ISO 639-1: ig)",
+      "sort_order": 68,
+      "metadata": {
+        "iso_code": "ig",
+        "native_name": "Asụsụ Igbo"
+      }
+    },
+    {
+      "code": "SICHUAN_YI",
+      "value_set_code": "LANGUAGES",
+      "label": "Sichuan Yi",
+      "description": "Sichuan Yi (ISO 639-1: ii)",
+      "sort_order": 69,
+      "metadata": {
+        "iso_code": "ii",
+        "native_name": "ꆈꌠ꒿ Nuosuhxop"
+      }
+    },
+    {
+      "code": "INUPIAQ",
+      "value_set_code": "LANGUAGES",
+      "label": "Inupiaq",
+      "description": "Inupiaq (ISO 639-1: ik)",
+      "sort_order": 70,
+      "metadata": {
+        "iso_code": "ik",
+        "native_name": "Iñupiaq"
+      }
+    },
+    {
+      "code": "IDO",
+      "value_set_code": "LANGUAGES",
+      "label": "Ido",
+      "description": "Ido (ISO 639-1: io)",
+      "sort_order": 71,
+      "metadata": {
+        "iso_code": "io",
+        "native_name": "Ido"
+      }
+    },
+    {
+      "code": "ICELANDIC",
+      "value_set_code": "LANGUAGES",
+      "label": "Icelandic",
+      "description": "Icelandic (ISO 639-1: is)",
+      "sort_order": 72,
+      "metadata": {
+        "iso_code": "is",
+        "native_name": "Íslenska"
+      }
+    },
+    {
+      "code": "ITALIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Italian",
+      "description": "Italian (ISO 639-1: it)",
+      "sort_order": 73,
+      "metadata": {
+        "iso_code": "it",
+        "native_name": "italiano"
+      }
+    },
+    {
+      "code": "INUKTITUT",
+      "value_set_code": "LANGUAGES",
+      "label": "Inuktitut",
+      "description": "Inuktitut (ISO 639-1: iu)",
+      "sort_order": 74,
+      "metadata": {
+        "iso_code": "iu",
+        "native_name": "ᐃᓄᒃᑎᑐᑦ"
+      }
+    },
+    {
+      "code": "JAPANESE",
+      "value_set_code": "LANGUAGES",
+      "label": "Japanese",
+      "description": "Japanese (ISO 639-1: ja)",
+      "sort_order": 75,
+      "metadata": {
+        "iso_code": "ja",
+        "native_name": "日本語"
+      }
+    },
+    {
+      "code": "JAVANESE",
+      "value_set_code": "LANGUAGES",
+      "label": "Javanese",
+      "description": "Javanese (ISO 639-1: jv)",
+      "sort_order": 76,
+      "metadata": {
+        "iso_code": "jv",
+        "native_name": "basa Jawa"
+      }
+    },
+    {
+      "code": "GEORGIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Georgian",
+      "description": "Georgian (ISO 639-1: ka)",
+      "sort_order": 77,
+      "metadata": {
+        "iso_code": "ka",
+        "native_name": "ქართული"
+      }
+    },
+    {
+      "code": "KONGO",
+      "value_set_code": "LANGUAGES",
+      "label": "Kongo",
+      "description": "Kongo (ISO 639-1: kg)",
+      "sort_order": 78,
+      "metadata": {
+        "iso_code": "kg",
+        "native_name": "KiKongo"
+      }
+    },
+    {
+      "code": "KIKUYU",
+      "value_set_code": "LANGUAGES",
+      "label": "Kikuyu",
+      "description": "Kikuyu (ISO 639-1: ki)",
+      "sort_order": 79,
+      "metadata": {
+        "iso_code": "ki",
+        "native_name": "Gĩkũyũ"
+      }
+    },
+    {
+      "code": "KWANYAMA",
+      "value_set_code": "LANGUAGES",
+      "label": "Kwanyama",
+      "description": "Kwanyama (ISO 639-1: kj)",
+      "sort_order": 80,
+      "metadata": {
+        "iso_code": "kj",
+        "native_name": "Kuanyama"
+      }
+    },
+    {
+      "code": "KAZAKH",
+      "value_set_code": "LANGUAGES",
+      "label": "Kazakh",
+      "description": "Kazakh (ISO 639-1: kk)",
+      "sort_order": 81,
+      "metadata": {
+        "iso_code": "kk",
+        "native_name": "Қазақ тілі"
+      }
+    },
+    {
+      "code": "KALAALLISUT",
+      "value_set_code": "LANGUAGES",
+      "label": "Kalaallisut",
+      "description": "Kalaallisut (ISO 639-1: kl)",
+      "sort_order": 82,
+      "metadata": {
+        "iso_code": "kl",
+        "native_name": "kalaallisut"
+      }
+    },
+    {
+      "code": "KHMER",
+      "value_set_code": "LANGUAGES",
+      "label": "Khmer",
+      "description": "Khmer (ISO 639-1: km)",
+      "sort_order": 83,
+      "metadata": {
+        "iso_code": "km",
+        "native_name": "ភាសាខ្មែរ"
+      }
+    },
+    {
+      "code": "KANNADA",
+      "value_set_code": "LANGUAGES",
+      "label": "Kannada",
+      "description": "Kannada (ISO 639-1: kn)",
+      "sort_order": 84,
+      "metadata": {
+        "iso_code": "kn",
+        "native_name": "ಕನ್ನಡ"
+      }
+    },
+    {
+      "code": "KOREAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Korean",
+      "description": "Korean (ISO 639-1: ko)",
+      "sort_order": 85,
+      "metadata": {
+        "iso_code": "ko",
+        "native_name": "한국어"
+      }
+    },
+    {
+      "code": "KANURI",
+      "value_set_code": "LANGUAGES",
+      "label": "Kanuri",
+      "description": "Kanuri (ISO 639-1: kr)",
+      "sort_order": 86,
+      "metadata": {
+        "iso_code": "kr",
+        "native_name": "Kanuri"
+      }
+    },
+    {
+      "code": "KASHMIRI",
+      "value_set_code": "LANGUAGES",
+      "label": "Kashmiri",
+      "description": "Kashmiri (ISO 639-1: ks)",
+      "sort_order": 87,
+      "metadata": {
+        "iso_code": "ks",
+        "native_name": "कश्मीरी"
+      }
+    },
+    {
+      "code": "KURDISH",
+      "value_set_code": "LANGUAGES",
+      "label": "Kurdish",
+      "description": "Kurdish (ISO 639-1: ku)",
+      "sort_order": 88,
+      "metadata": {
+        "iso_code": "ku",
+        "native_name": "Kurdî"
+      }
+    },
+    {
+      "code": "KOMI",
+      "value_set_code": "LANGUAGES",
+      "label": "Komi",
+      "description": "Komi (ISO 639-1: kv)",
+      "sort_order": 89,
+      "metadata": {
+        "iso_code": "kv",
+        "native_name": "коми кыв"
+      }
+    },
+    {
+      "code": "CORNISH",
+      "value_set_code": "LANGUAGES",
+      "label": "Cornish",
+      "description": "Cornish (ISO 639-1: kw)",
+      "sort_order": 90,
+      "metadata": {
+        "iso_code": "kw",
+        "native_name": "Kernewek"
+      }
+    },
+    {
+      "code": "KIRGHIZ",
+      "value_set_code": "LANGUAGES",
+      "label": "Kirghiz",
+      "description": "Kirghiz (ISO 639-1: ky)",
+      "sort_order": 91,
+      "metadata": {
+        "iso_code": "ky",
+        "native_name": "кыргыз тили"
+      }
+    },
+    {
+      "code": "LATIN",
+      "value_set_code": "LANGUAGES",
+      "label": "Latin",
+      "description": "Latin (ISO 639-1: la)",
+      "sort_order": 92,
+      "metadata": {
+        "iso_code": "la",
+        "native_name": "latine"
+      }
+    },
+    {
+      "code": "LUXEMBOURGISH",
+      "value_set_code": "LANGUAGES",
+      "label": "Luxembourgish",
+      "description": "Luxembourgish (ISO 639-1: lb)",
+      "sort_order": 93,
+      "metadata": {
+        "iso_code": "lb",
+        "native_name": "Lëtzebuergesch"
+      }
+    },
+    {
+      "code": "GANDA",
+      "value_set_code": "LANGUAGES",
+      "label": "Ganda",
+      "description": "Ganda (ISO 639-1: lg)",
+      "sort_order": 94,
+      "metadata": {
+        "iso_code": "lg",
+        "native_name": "Luganda"
+      }
+    },
+    {
+      "code": "LIMBURGISH",
+      "value_set_code": "LANGUAGES",
+      "label": "Limburgish",
+      "description": "Limburgish (ISO 639-1: li)",
+      "sort_order": 95,
+      "metadata": {
+        "iso_code": "li",
+        "native_name": "Limburgs"
+      }
+    },
+    {
+      "code": "LINGALA",
+      "value_set_code": "LANGUAGES",
+      "label": "Lingala",
+      "description": "Lingala (ISO 639-1: ln)",
+      "sort_order": 96,
+      "metadata": {
+        "iso_code": "ln",
+        "native_name": "Lingála"
+      }
+    },
+    {
+      "code": "LAO",
+      "value_set_code": "LANGUAGES",
+      "label": "Lao",
+      "description": "Lao (ISO 639-1: lo)",
+      "sort_order": 97,
+      "metadata": {
+        "iso_code": "lo",
+        "native_name": "ພາສາລາວ"
+      }
+    },
+    {
+      "code": "LITHUANIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Lithuanian",
+      "description": "Lithuanian (ISO 639-1: lt)",
+      "sort_order": 98,
+      "metadata": {
+        "iso_code": "lt",
+        "native_name": "lietuvių kalba"
+      }
+    },
+    {
+      "code": "LUBA_KATANGA",
+      "value_set_code": "LANGUAGES",
+      "label": "Luba-Katanga",
+      "description": "Luba-Katanga (ISO 639-1: lu)",
+      "sort_order": 99,
+      "metadata": {
+        "iso_code": "lu",
+        "native_name": "Kiluba"
+      }
+    },
+    {
+      "code": "LATVIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Latvian",
+      "description": "Latvian (ISO 639-1: lv)",
+      "sort_order": 100,
+      "metadata": {
+        "iso_code": "lv",
+        "native_name": "latviešu valoda"
+      }
+    },
+    {
+      "code": "MALAGASY",
+      "value_set_code": "LANGUAGES",
+      "label": "Malagasy",
+      "description": "Malagasy (ISO 639-1: mg)",
+      "sort_order": 101,
+      "metadata": {
+        "iso_code": "mg",
+        "native_name": "fiteny malagasy"
+      }
+    },
+    {
+      "code": "MARSHALLESE",
+      "value_set_code": "LANGUAGES",
+      "label": "Marshallese",
+      "description": "Marshallese (ISO 639-1: mh)",
+      "sort_order": 102,
+      "metadata": {
+        "iso_code": "mh",
+        "native_name": "Kajin M̧ajeļ"
+      }
+    },
+    {
+      "code": "M_ORI",
+      "value_set_code": "LANGUAGES",
+      "label": "Māori",
+      "description": "Māori (ISO 639-1: mi)",
+      "sort_order": 103,
+      "metadata": {
+        "iso_code": "mi",
+        "native_name": "te reo Māori"
+      }
+    },
+    {
+      "code": "MACEDONIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Macedonian",
+      "description": "Macedonian (ISO 639-1: mk)",
+      "sort_order": 104,
+      "metadata": {
+        "iso_code": "mk",
+        "native_name": "македонски јазик"
+      }
+    },
+    {
+      "code": "MALAYALAM",
+      "value_set_code": "LANGUAGES",
+      "label": "Malayalam",
+      "description": "Malayalam (ISO 639-1: ml)",
+      "sort_order": 105,
+      "metadata": {
+        "iso_code": "ml",
+        "native_name": "മലയാളം"
+      }
+    },
+    {
+      "code": "MONGOLIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Mongolian",
+      "description": "Mongolian (ISO 639-1: mn)",
+      "sort_order": 106,
+      "metadata": {
+        "iso_code": "mn",
+        "native_name": "Монгол хэл"
+      }
+    },
+    {
+      "code": "MARATHI",
+      "value_set_code": "LANGUAGES",
+      "label": "Marathi",
+      "description": "Marathi (ISO 639-1: mr)",
+      "sort_order": 107,
+      "metadata": {
+        "iso_code": "mr",
+        "native_name": "मराठी"
+      }
+    },
+    {
+      "code": "MALAY",
+      "value_set_code": "LANGUAGES",
+      "label": "Malay",
+      "description": "Malay (ISO 639-1: ms)",
+      "sort_order": 108,
+      "metadata": {
+        "iso_code": "ms",
+        "native_name": "bahasa Melayu"
+      }
+    },
+    {
+      "code": "MALTESE",
+      "value_set_code": "LANGUAGES",
+      "label": "Maltese",
+      "description": "Maltese (ISO 639-1: mt)",
+      "sort_order": 109,
+      "metadata": {
+        "iso_code": "mt",
+        "native_name": "Malti"
+      }
+    },
+    {
+      "code": "BURMESE",
+      "value_set_code": "LANGUAGES",
+      "label": "Burmese",
+      "description": "Burmese (ISO 639-1: my)",
+      "sort_order": 110,
+      "metadata": {
+        "iso_code": "my",
+        "native_name": "ဗမာစာ"
+      }
+    },
+    {
+      "code": "NAURU",
+      "value_set_code": "LANGUAGES",
+      "label": "Nauru",
+      "description": "Nauru (ISO 639-1: na)",
+      "sort_order": 111,
+      "metadata": {
+        "iso_code": "na",
+        "native_name": "Ekakairũ Naoero"
+      }
+    },
+    {
+      "code": "NORWEGIAN_BOKM_L",
+      "value_set_code": "LANGUAGES",
+      "label": "Norwegian Bokmål",
+      "description": "Norwegian Bokmål (ISO 639-1: nb)",
+      "sort_order": 112,
+      "metadata": {
+        "iso_code": "nb",
+        "native_name": "Norsk bokmål"
+      }
+    },
+    {
+      "code": "NORTH_NDEBELE",
+      "value_set_code": "LANGUAGES",
+      "label": "North Ndebele",
+      "description": "North Ndebele (ISO 639-1: nd)",
+      "sort_order": 113,
+      "metadata": {
+        "iso_code": "nd",
+        "native_name": "isiNdebele"
+      }
+    },
+    {
+      "code": "NEPALI",
+      "value_set_code": "LANGUAGES",
+      "label": "Nepali",
+      "description": "Nepali (ISO 639-1: ne)",
+      "sort_order": 114,
+      "metadata": {
+        "iso_code": "ne",
+        "native_name": "नेपाली"
+      }
+    },
+    {
+      "code": "NDONGA",
+      "value_set_code": "LANGUAGES",
+      "label": "Ndonga",
+      "description": "Ndonga (ISO 639-1: ng)",
+      "sort_order": 115,
+      "metadata": {
+        "iso_code": "ng",
+        "native_name": "Owambo"
+      }
+    },
+    {
+      "code": "DUTCH",
+      "value_set_code": "LANGUAGES",
+      "label": "Dutch",
+      "description": "Dutch (ISO 639-1: nl)",
+      "sort_order": 116,
+      "metadata": {
+        "iso_code": "nl",
+        "native_name": "Nederlands"
+      }
+    },
+    {
+      "code": "NORWEGIAN_NYNORSK",
+      "value_set_code": "LANGUAGES",
+      "label": "Norwegian Nynorsk",
+      "description": "Norwegian Nynorsk (ISO 639-1: nn)",
+      "sort_order": 117,
+      "metadata": {
+        "iso_code": "nn",
+        "native_name": "Norsk nynorsk"
+      }
+    },
+    {
+      "code": "NORWEGIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Norwegian",
+      "description": "Norwegian (ISO 639-1: no)",
+      "sort_order": 118,
+      "metadata": {
+        "iso_code": "no",
+        "native_name": "Norsk"
+      }
+    },
+    {
+      "code": "SOUTH_NDEBELE",
+      "value_set_code": "LANGUAGES",
+      "label": "South Ndebele",
+      "description": "South Ndebele (ISO 639-1: nr)",
+      "sort_order": 119,
+      "metadata": {
+        "iso_code": "nr",
+        "native_name": "isiNdebele"
+      }
+    },
+    {
+      "code": "NAVAJO",
+      "value_set_code": "LANGUAGES",
+      "label": "Navajo",
+      "description": "Navajo (ISO 639-1: nv)",
+      "sort_order": 120,
+      "metadata": {
+        "iso_code": "nv",
+        "native_name": "Diné bizaad"
+      }
+    },
+    {
+      "code": "CHICHEWA",
+      "value_set_code": "LANGUAGES",
+      "label": "Chichewa",
+      "description": "Chichewa (ISO 639-1: ny)",
+      "sort_order": 121,
+      "metadata": {
+        "iso_code": "ny",
+        "native_name": "chiCheŵa"
+      }
+    },
+    {
+      "code": "OCCITAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Occitan",
+      "description": "Occitan (ISO 639-1: oc)",
+      "sort_order": 122,
+      "metadata": {
+        "iso_code": "oc",
+        "native_name": "occitan"
+      }
+    },
+    {
+      "code": "OJIBWA",
+      "value_set_code": "LANGUAGES",
+      "label": "Ojibwa",
+      "description": "Ojibwa (ISO 639-1: oj)",
+      "sort_order": 123,
+      "metadata": {
+        "iso_code": "oj",
+        "native_name": "ᐊᓂᔑᓈᐯᒧᐎᓐ"
+      }
+    },
+    {
+      "code": "OROMO",
+      "value_set_code": "LANGUAGES",
+      "label": "Oromo",
+      "description": "Oromo (ISO 639-1: om)",
+      "sort_order": 124,
+      "metadata": {
+        "iso_code": "om",
+        "native_name": "Afaan Oromoo"
+      }
+    },
+    {
+      "code": "ORIYA",
+      "value_set_code": "LANGUAGES",
+      "label": "Oriya",
+      "description": "Oriya (ISO 639-1: or)",
+      "sort_order": 125,
+      "metadata": {
+        "iso_code": "or",
+        "native_name": "ଓଡ଼ିଆ"
+      }
+    },
+    {
+      "code": "OSSETIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Ossetian",
+      "description": "Ossetian (ISO 639-1: os)",
+      "sort_order": 126,
+      "metadata": {
+        "iso_code": "os",
+        "native_name": "Ирон æвзаг"
+      }
+    },
+    {
+      "code": "PANJABI",
+      "value_set_code": "LANGUAGES",
+      "label": "Panjabi",
+      "description": "Panjabi (ISO 639-1: pa)",
+      "sort_order": 127,
+      "metadata": {
+        "iso_code": "pa",
+        "native_name": "ਪੰਜਾਬੀ"
+      }
+    },
+    {
+      "code": "PALI",
+      "value_set_code": "LANGUAGES",
+      "label": "Pali",
+      "description": "Pali (ISO 639-1: pi)",
+      "sort_order": 128,
+      "metadata": {
+        "iso_code": "pi",
+        "native_name": "पाऴि"
+      }
+    },
+    {
+      "code": "POLISH",
+      "value_set_code": "LANGUAGES",
+      "label": "Polish",
+      "description": "Polish (ISO 639-1: pl)",
+      "sort_order": 129,
+      "metadata": {
+        "iso_code": "pl",
+        "native_name": "polski"
+      }
+    },
+    {
+      "code": "PASHTO",
+      "value_set_code": "LANGUAGES",
+      "label": "Pashto",
+      "description": "Pashto (ISO 639-1: ps)",
+      "sort_order": 130,
+      "metadata": {
+        "iso_code": "ps",
+        "native_name": "پښتو"
+      }
+    },
+    {
+      "code": "PORTUGUESE",
+      "value_set_code": "LANGUAGES",
+      "label": "Portuguese",
+      "description": "Portuguese (ISO 639-1: pt)",
+      "sort_order": 131,
+      "metadata": {
+        "iso_code": "pt",
+        "native_name": "português"
+      }
+    },
+    {
+      "code": "QUECHUA",
+      "value_set_code": "LANGUAGES",
+      "label": "Quechua",
+      "description": "Quechua (ISO 639-1: qu)",
+      "sort_order": 132,
+      "metadata": {
+        "iso_code": "qu",
+        "native_name": "Runa Simi"
+      }
+    },
+    {
+      "code": "ROMANSH",
+      "value_set_code": "LANGUAGES",
+      "label": "Romansh",
+      "description": "Romansh (ISO 639-1: rm)",
+      "sort_order": 133,
+      "metadata": {
+        "iso_code": "rm",
+        "native_name": "rumantsch grischun"
+      }
+    },
+    {
+      "code": "KIRUNDI",
+      "value_set_code": "LANGUAGES",
+      "label": "Kirundi",
+      "description": "Kirundi (ISO 639-1: rn)",
+      "sort_order": 134,
+      "metadata": {
+        "iso_code": "rn",
+        "native_name": "Ikirundi"
+      }
+    },
+    {
+      "code": "ROMANIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Romanian",
+      "description": "Romanian (ISO 639-1: ro)",
+      "sort_order": 135,
+      "metadata": {
+        "iso_code": "ro",
+        "native_name": "română"
+      }
+    },
+    {
+      "code": "RUSSIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Russian",
+      "description": "Russian (ISO 639-1: ru)",
+      "sort_order": 136,
+      "metadata": {
+        "iso_code": "ru",
+        "native_name": "русский"
+      }
+    },
+    {
+      "code": "KINYARWANDA",
+      "value_set_code": "LANGUAGES",
+      "label": "Kinyarwanda",
+      "description": "Kinyarwanda (ISO 639-1: rw)",
+      "sort_order": 137,
+      "metadata": {
+        "iso_code": "rw",
+        "native_name": "Ikinyarwanda"
+      }
+    },
+    {
+      "code": "SANSKRIT",
+      "value_set_code": "LANGUAGES",
+      "label": "Sanskrit",
+      "description": "Sanskrit (ISO 639-1: sa)",
+      "sort_order": 138,
+      "metadata": {
+        "iso_code": "sa",
+        "native_name": "संस्कृतम्"
+      }
+    },
+    {
+      "code": "SARDINIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Sardinian",
+      "description": "Sardinian (ISO 639-1: sc)",
+      "sort_order": 139,
+      "metadata": {
+        "iso_code": "sc",
+        "native_name": "sardu"
+      }
+    },
+    {
+      "code": "SINDHI",
+      "value_set_code": "LANGUAGES",
+      "label": "Sindhi",
+      "description": "Sindhi (ISO 639-1: sd)",
+      "sort_order": 140,
+      "metadata": {
+        "iso_code": "sd",
+        "native_name": "सिन्धी"
+      }
+    },
+    {
+      "code": "NORTHERN_SAMI",
+      "value_set_code": "LANGUAGES",
+      "label": "Northern Sami",
+      "description": "Northern Sami (ISO 639-1: se)",
+      "sort_order": 141,
+      "metadata": {
+        "iso_code": "se",
+        "native_name": "Davvisámegiella"
+      }
+    },
+    {
+      "code": "SANGO",
+      "value_set_code": "LANGUAGES",
+      "label": "Sango",
+      "description": "Sango (ISO 639-1: sg)",
+      "sort_order": 142,
+      "metadata": {
+        "iso_code": "sg",
+        "native_name": "yângâ tî sängö"
+      }
+    },
+    {
+      "code": "SINHALA",
+      "value_set_code": "LANGUAGES",
+      "label": "Sinhala",
+      "description": "Sinhala (ISO 639-1: si)",
+      "sort_order": 143,
+      "metadata": {
+        "iso_code": "si",
+        "native_name": "සිංහල"
+      }
+    },
+    {
+      "code": "SLOVAK",
+      "value_set_code": "LANGUAGES",
+      "label": "Slovak",
+      "description": "Slovak (ISO 639-1: sk)",
+      "sort_order": 144,
+      "metadata": {
+        "iso_code": "sk",
+        "native_name": "slovenčina"
+      }
+    },
+    {
+      "code": "SLOVENIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Slovenian",
+      "description": "Slovenian (ISO 639-1: sl)",
+      "sort_order": 145,
+      "metadata": {
+        "iso_code": "sl",
+        "native_name": "slovenščina"
+      }
+    },
+    {
+      "code": "SAMOAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Samoan",
+      "description": "Samoan (ISO 639-1: sm)",
+      "sort_order": 146,
+      "metadata": {
+        "iso_code": "sm",
+        "native_name": "gagana fa'a Samoa"
+      }
+    },
+    {
+      "code": "SHONA",
+      "value_set_code": "LANGUAGES",
+      "label": "Shona",
+      "description": "Shona (ISO 639-1: sn)",
+      "sort_order": 147,
+      "metadata": {
+        "iso_code": "sn",
+        "native_name": "chiShona"
+      }
+    },
+    {
+      "code": "SOMALI",
+      "value_set_code": "LANGUAGES",
+      "label": "Somali",
+      "description": "Somali (ISO 639-1: so)",
+      "sort_order": 148,
+      "metadata": {
+        "iso_code": "so",
+        "native_name": "Soomaaliga"
+      }
+    },
+    {
+      "code": "ALBANIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Albanian",
+      "description": "Albanian (ISO 639-1: sq)",
+      "sort_order": 149,
+      "metadata": {
+        "iso_code": "sq",
+        "native_name": "Shqip"
+      }
+    },
+    {
+      "code": "SERBIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Serbian",
+      "description": "Serbian (ISO 639-1: sr)",
+      "sort_order": 150,
+      "metadata": {
+        "iso_code": "sr",
+        "native_name": "српски језик"
+      }
+    },
+    {
+      "code": "SWATI",
+      "value_set_code": "LANGUAGES",
+      "label": "Swati",
+      "description": "Swati (ISO 639-1: ss)",
+      "sort_order": 151,
+      "metadata": {
+        "iso_code": "ss",
+        "native_name": "SiSwati"
+      }
+    },
+    {
+      "code": "SOUTHERN_SOTHO",
+      "value_set_code": "LANGUAGES",
+      "label": "Southern Sotho",
+      "description": "Southern Sotho (ISO 639-1: st)",
+      "sort_order": 152,
+      "metadata": {
+        "iso_code": "st",
+        "native_name": "Sesotho"
+      }
+    },
+    {
+      "code": "SUNDANESE",
+      "value_set_code": "LANGUAGES",
+      "label": "Sundanese",
+      "description": "Sundanese (ISO 639-1: su)",
+      "sort_order": 153,
+      "metadata": {
+        "iso_code": "su",
+        "native_name": "Basa Sunda"
+      }
+    },
+    {
+      "code": "SWEDISH",
+      "value_set_code": "LANGUAGES",
+      "label": "Swedish",
+      "description": "Swedish (ISO 639-1: sv)",
+      "sort_order": 154,
+      "metadata": {
+        "iso_code": "sv",
+        "native_name": "svenska"
+      }
+    },
+    {
+      "code": "SWAHILI",
+      "value_set_code": "LANGUAGES",
+      "label": "Swahili",
+      "description": "Swahili (ISO 639-1: sw)",
+      "sort_order": 155,
+      "metadata": {
+        "iso_code": "sw",
+        "native_name": "Kiswahili"
+      }
+    },
+    {
+      "code": "TAMIL",
+      "value_set_code": "LANGUAGES",
+      "label": "Tamil",
+      "description": "Tamil (ISO 639-1: ta)",
+      "sort_order": 156,
+      "metadata": {
+        "iso_code": "ta",
+        "native_name": "தமிழ்"
+      }
+    },
+    {
+      "code": "TELUGU",
+      "value_set_code": "LANGUAGES",
+      "label": "Telugu",
+      "description": "Telugu (ISO 639-1: te)",
+      "sort_order": 157,
+      "metadata": {
+        "iso_code": "te",
+        "native_name": "తెలుగు"
+      }
+    },
+    {
+      "code": "TAJIK",
+      "value_set_code": "LANGUAGES",
+      "label": "Tajik",
+      "description": "Tajik (ISO 639-1: tg)",
+      "sort_order": 158,
+      "metadata": {
+        "iso_code": "tg",
+        "native_name": "тоҷикӣ"
+      }
+    },
+    {
+      "code": "THAI",
+      "value_set_code": "LANGUAGES",
+      "label": "Thai",
+      "description": "Thai (ISO 639-1: th)",
+      "sort_order": 159,
+      "metadata": {
+        "iso_code": "th",
+        "native_name": "ไทย"
+      }
+    },
+    {
+      "code": "TIGRINYA",
+      "value_set_code": "LANGUAGES",
+      "label": "Tigrinya",
+      "description": "Tigrinya (ISO 639-1: ti)",
+      "sort_order": 160,
+      "metadata": {
+        "iso_code": "ti",
+        "native_name": "ትግርኛ"
+      }
+    },
+    {
+      "code": "TURKMEN",
+      "value_set_code": "LANGUAGES",
+      "label": "Turkmen",
+      "description": "Turkmen (ISO 639-1: tk)",
+      "sort_order": 161,
+      "metadata": {
+        "iso_code": "tk",
+        "native_name": "Türkmen"
+      }
+    },
+    {
+      "code": "TAGALOG",
+      "value_set_code": "LANGUAGES",
+      "label": "Tagalog",
+      "description": "Tagalog (ISO 639-1: tl)",
+      "sort_order": 162,
+      "metadata": {
+        "iso_code": "tl",
+        "native_name": "Wikang Tagalog"
+      }
+    },
+    {
+      "code": "TSWANA",
+      "value_set_code": "LANGUAGES",
+      "label": "Tswana",
+      "description": "Tswana (ISO 639-1: tn)",
+      "sort_order": 163,
+      "metadata": {
+        "iso_code": "tn",
+        "native_name": "Setswana"
+      }
+    },
+    {
+      "code": "TONGA",
+      "value_set_code": "LANGUAGES",
+      "label": "Tonga",
+      "description": "Tonga (ISO 639-1: to)",
+      "sort_order": 164,
+      "metadata": {
+        "iso_code": "to",
+        "native_name": "faka Tonga"
+      }
+    },
+    {
+      "code": "TURKISH",
+      "value_set_code": "LANGUAGES",
+      "label": "Turkish",
+      "description": "Turkish (ISO 639-1: tr)",
+      "sort_order": 165,
+      "metadata": {
+        "iso_code": "tr",
+        "native_name": "Türkçe"
+      }
+    },
+    {
+      "code": "TSONGA",
+      "value_set_code": "LANGUAGES",
+      "label": "Tsonga",
+      "description": "Tsonga (ISO 639-1: ts)",
+      "sort_order": 166,
+      "metadata": {
+        "iso_code": "ts",
+        "native_name": "Xitsonga"
+      }
+    },
+    {
+      "code": "TATAR",
+      "value_set_code": "LANGUAGES",
+      "label": "Tatar",
+      "description": "Tatar (ISO 639-1: tt)",
+      "sort_order": 167,
+      "metadata": {
+        "iso_code": "tt",
+        "native_name": "татар теле"
+      }
+    },
+    {
+      "code": "TWI",
+      "value_set_code": "LANGUAGES",
+      "label": "Twi",
+      "description": "Twi (ISO 639-1: tw)",
+      "sort_order": 168,
+      "metadata": {
+        "iso_code": "tw",
+        "native_name": "Twi"
+      }
+    },
+    {
+      "code": "TAHITIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Tahitian",
+      "description": "Tahitian (ISO 639-1: ty)",
+      "sort_order": 169,
+      "metadata": {
+        "iso_code": "ty",
+        "native_name": "Reo Tahiti"
+      }
+    },
+    {
+      "code": "UIGHUR",
+      "value_set_code": "LANGUAGES",
+      "label": "Uighur",
+      "description": "Uighur (ISO 639-1: ug)",
+      "sort_order": 170,
+      "metadata": {
+        "iso_code": "ug",
+        "native_name": "ئۇيغۇرچە"
+      }
+    },
+    {
+      "code": "UKRAINIAN",
+      "value_set_code": "LANGUAGES",
+      "label": "Ukrainian",
+      "description": "Ukrainian (ISO 639-1: uk)",
+      "sort_order": 171,
+      "metadata": {
+        "iso_code": "uk",
+        "native_name": "українська"
+      }
+    },
+    {
+      "code": "URDU",
+      "value_set_code": "LANGUAGES",
+      "label": "Urdu",
+      "description": "Urdu (ISO 639-1: ur)",
+      "sort_order": 172,
+      "metadata": {
+        "iso_code": "ur",
+        "native_name": "اردو"
+      }
+    },
+    {
+      "code": "UZBEK",
+      "value_set_code": "LANGUAGES",
+      "label": "Uzbek",
+      "description": "Uzbek (ISO 639-1: uz)",
+      "sort_order": 173,
+      "metadata": {
+        "iso_code": "uz",
+        "native_name": "O'zbek"
+      }
+    },
+    {
+      "code": "VENDA",
+      "value_set_code": "LANGUAGES",
+      "label": "Venda",
+      "description": "Venda (ISO 639-1: ve)",
+      "sort_order": 174,
+      "metadata": {
+        "iso_code": "ve",
+        "native_name": "Tshivenḓa"
+      }
+    },
+    {
+      "code": "VIETNAMESE",
+      "value_set_code": "LANGUAGES",
+      "label": "Vietnamese",
+      "description": "Vietnamese (ISO 639-1: vi)",
+      "sort_order": 175,
+      "metadata": {
+        "iso_code": "vi",
+        "native_name": "Tiếng Việt"
+      }
+    },
+    {
+      "code": "VOLAP_K",
+      "value_set_code": "LANGUAGES",
+      "label": "Volapük",
+      "description": "Volapük (ISO 639-1: vo)",
+      "sort_order": 176,
+      "metadata": {
+        "iso_code": "vo",
+        "native_name": "Volapük"
+      }
+    },
+    {
+      "code": "WALLOON",
+      "value_set_code": "LANGUAGES",
+      "label": "Walloon",
+      "description": "Walloon (ISO 639-1: wa)",
+      "sort_order": 177,
+      "metadata": {
+        "iso_code": "wa",
+        "native_name": "walon"
+      }
+    },
+    {
+      "code": "WOLOF",
+      "value_set_code": "LANGUAGES",
+      "label": "Wolof",
+      "description": "Wolof (ISO 639-1: wo)",
+      "sort_order": 178,
+      "metadata": {
+        "iso_code": "wo",
+        "native_name": "Wollof"
+      }
+    },
+    {
+      "code": "XHOSA",
+      "value_set_code": "LANGUAGES",
+      "label": "Xhosa",
+      "description": "Xhosa (ISO 639-1: xh)",
+      "sort_order": 179,
+      "metadata": {
+        "iso_code": "xh",
+        "native_name": "isiXhosa"
+      }
+    },
+    {
+      "code": "YIDDISH",
+      "value_set_code": "LANGUAGES",
+      "label": "Yiddish",
+      "description": "Yiddish (ISO 639-1: yi)",
+      "sort_order": 180,
+      "metadata": {
+        "iso_code": "yi",
+        "native_name": "ייִדיש"
+      }
+    },
+    {
+      "code": "YORUBA",
+      "value_set_code": "LANGUAGES",
+      "label": "Yoruba",
+      "description": "Yoruba (ISO 639-1: yo)",
+      "sort_order": 181,
+      "metadata": {
+        "iso_code": "yo",
+        "native_name": "Yorùbá"
+      }
+    },
+    {
+      "code": "ZHUANG",
+      "value_set_code": "LANGUAGES",
+      "label": "Zhuang",
+      "description": "Zhuang (ISO 639-1: za)",
+      "sort_order": 182,
+      "metadata": {
+        "iso_code": "za",
+        "native_name": "Saɯ cueŋƅ"
+      }
+    },
+    {
+      "code": "CHINESE",
+      "value_set_code": "LANGUAGES",
+      "label": "Chinese",
+      "description": "Chinese (ISO 639-1: zh)",
+      "sort_order": 183,
+      "metadata": {
+        "iso_code": "zh",
+        "native_name": "中文"
+      }
+    },
+    {
+      "code": "ZULU",
+      "value_set_code": "LANGUAGES",
+      "label": "Zulu",
+      "description": "Zulu (ISO 639-1: zu)",
+      "sort_order": 184,
+      "metadata": {
+        "iso_code": "zu",
+        "native_name": "isiZulu"
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 // @aibos/kernel - L0 Concept Constants
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // ⚠️ AUTO-GENERATED: Do not edit manually. Edit data sources instead.
-// Generated: 2026-01-03T06:45:17.507Z
+// Generated: 2026-01-04T20:30:58.699Z
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
@@ -15,7 +15,7 @@ export type ConceptCategory =
 /**
  * CONCEPT - The Business Ontology
  *
- * 182 canonical concepts organized by category.
+ * 214 canonical concepts organized by category.
  * These define WHAT EXISTS in AI-BOS.
  *
  * @example
@@ -28,12 +28,16 @@ export type ConceptCategory =
  */
 export const CONCEPT = {
   // ─────────────────────────────────────────────────────────────────────────
-  // ENTITY (129) - Core business objects
+  // ENTITY (156) - Core business objects
   // ─────────────────────────────────────────────────────────────────────────
   /** Chart of Accounts entry */
   ACCOUNT: "CONCEPT_ACCOUNT",
   /** Address record used for billing, shipping, legal, and operational locations */
   ADDRESS: "CONCEPT_ADDRESS",
+  /** Approved AI model or endpoint for specific enterprise contexts */
+  AI_MODEL: "CONCEPT_AI_MODEL",
+  /** AI service provider (OpenAI, Anthropic, Azure, etc.) */
+  AI_PROVIDER: "CONCEPT_AI_PROVIDER",
   /** API key for integrations */
   API_KEY: "CONCEPT_API_KEY",
   /** Asset assignment record (assigned to employee/department/project) */
@@ -58,32 +62,44 @@ export const CONCEPT = {
   AUDIT_LOG_LINE: "CONCEPT_AUDIT_LOG_LINE",
   /** Bank master record */
   BANK: "CONCEPT_BANK",
-  /** Bank account master record used for receipts and payments */
+  /** Bank account master data with IBAN/BIC */
   BANK_ACCOUNT: "CONCEPT_BANK_ACCOUNT",
   /** Bank reconciliation session/document */
   BANK_RECONCILIATION: "CONCEPT_BANK_RECONCILIATION",
   /** Bank reconciliation line (matched/unmatched mapping) */
   BANK_RECONCILIATION_LINE: "CONCEPT_BANK_RECONCILIATION_LINE",
-  /** Imported bank statement (header) */
+  /** Electronic bank statement (MT940/CAMT.053) */
   BANK_STATEMENT: "CONCEPT_BANK_STATEMENT",
-  /** Imported bank statement line (transaction line) */
-  BANK_STATEMENT_LINE: "CONCEPT_BANK_STATEMENT_LINE",
   /** Bill of Materials (structure defining components required to produce an item) */
   BOM: "CONCEPT_BOM",
   /** Bill of Materials line (component item, quantity, and UOM requirements) */
   BOM_LINE: "CONCEPT_BOM_LINE",
+  /** Login attempt limiting with exponential backoff and account lockout */
+  BRUTE_FORCE_PROTECTION: "CONCEPT_BRUTE_FORCE_PROTECTION",
   /** Carrier/shipping provider */
   CARRIER: "CONCEPT_CARRIER",
+  /** Cash pooling structure for liquidity management */
+  CASH_POOL: "CONCEPT_CASH_POOL",
   /** Contact person record linked to a party (customer/supplier/employee) */
   CONTACT: "CONCEPT_CONTACT",
   /** Control record (preventive/detective/corrective control) */
   CONTROL: "CONCEPT_CONTROL",
+  /** Cookie security attributes (HttpOnly, Secure, SameSite) to prevent CSRF and session hijacking */
+  COOKIE_POLICY: "CONCEPT_COOKIE_POLICY",
+  /** Cross-Origin Resource Sharing rules with allowlist (never wildcard with credentials) */
+  CORS_POLICY: "CONCEPT_CORS_POLICY",
   /** Cost center for cost allocation */
   COST_CENTER: "CONCEPT_COST_CENTER",
   /** Sovereign nation per ISO 3166-1 */
   COUNTRY: "CONCEPT_COUNTRY",
+  /** Content Security Policy directives to prevent XSS, clickjacking, and code injection attacks */
+  CSP_POLICY: "CONCEPT_CSP_POLICY",
   /** Customer master data */
   CUSTOMER: "CONCEPT_CUSTOMER",
+  /** Customs declaration document */
+  CUSTOMS_DECLARATION: "CONCEPT_CUSTOMS_DECLARATION",
+  /** Input hygiene rules: XSS stripping, unicode normalization, zero-width character removal */
+  DATA_SANITIZATION_RULE: "CONCEPT_DATA_SANITIZATION_RULE",
   /** Delivery note/shipment */
   DELIVERY_NOTE: "CONCEPT_DELIVERY_NOTE",
   /** Delivery note line item */
@@ -102,8 +118,12 @@ export const CONCEPT = {
   DESIGNATION: "CONCEPT_DESIGNATION",
   /** Generic document container for ERP transactions and references */
   DOCUMENT: "CONCEPT_DOCUMENT",
+  /** Conversion factor for activity data (e.g., kWh to CO2e) with regional variations */
+  EMISSION_FACTOR: "CONCEPT_EMISSION_FACTOR",
   /** Employee master record */
   EMPLOYEE: "CONCEPT_EMPLOYEE",
+  /** Sustainability metric definition (Carbon, Water, Social) with calculation standards */
+  ESG_METRIC: "CONCEPT_ESG_METRIC",
   /** Evidence record used to prove control execution (files, logs, screenshots, attestations) */
   EVIDENCE: "CONCEPT_EVIDENCE",
   /** Evidence line item (multiple attachments/entries per evidence record) */
@@ -126,20 +146,30 @@ export const CONCEPT = {
   GOODS_RECEIPT: "CONCEPT_GOODS_RECEIPT",
   /** Goods receipt line item */
   GOODS_RECEIPT_LINE: "CONCEPT_GOODS_RECEIPT_LINE",
+  /** Security headers configuration (HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy) */
+  HTTP_HEADER_PROFILE: "CONCEPT_HTTP_HEADER_PROFILE",
   /** Incident record (security/compliance incident or breach) */
   INCIDENT: "CONCEPT_INCIDENT",
+  /** Tamper-evidence for critical ledgers using hash chains or Merkle trees */
+  INTEGRITY_CHECK_POLICY: "CONCEPT_INTEGRITY_CHECK_POLICY",
   /** Product or service item */
   ITEM: "CONCEPT_ITEM",
   /** Accounting journal entry */
   JOURNAL_ENTRY: "CONCEPT_JOURNAL_ENTRY",
   /** Journal entry line item (debit/credit) */
   JOURNAL_ENTRY_LINE: "CONCEPT_JOURNAL_ENTRY_LINE",
+  /** Language per ISO 639-1 */
+  LANGUAGE: "CONCEPT_LANGUAGE",
   /** Leave application/request transaction */
   LEAVE_APPLICATION: "CONCEPT_LEAVE_APPLICATION",
   /** Leave type definition (annual, sick, etc.) */
   LEAVE_TYPE: "CONCEPT_LEAVE_TYPE",
   /** Material request (requisition of components for production or maintenance) */
   MATERIAL_REQUEST: "CONCEPT_MATERIAL_REQUEST",
+  /** Mathematical precision rules to prevent IEEE 754 floating-point errors in financial calculations */
+  MATH_PRECISION_POLICY: "CONCEPT_MATH_PRECISION_POLICY",
+  /** Multi-factor authentication configuration (TOTP, SMS, WebAuthn, recovery codes) */
+  MFA_POLICY: "CONCEPT_MFA_POLICY",
   /** Project milestone record */
   MILESTONE: "CONCEPT_MILESTONE",
   /** Notification record (in-app/email) */
@@ -158,6 +188,8 @@ export const CONCEPT = {
   PAYMENT_BATCH: "CONCEPT_PAYMENT_BATCH",
   /** Payment batch line (individual payment within a batch) */
   PAYMENT_BATCH_LINE: "CONCEPT_PAYMENT_BATCH_LINE",
+  /** Centralized payment routing rules (In-House Bank) */
+  PAYMENT_FACTORY_RULE: "CONCEPT_PAYMENT_FACTORY_RULE",
   /** Payment line item (allocation to invoices/transactions) */
   PAYMENT_LINE: "CONCEPT_PAYMENT_LINE",
   /** Payment terms (Net 30, etc.) */
@@ -198,6 +230,10 @@ export const CONCEPT = {
   PURCHASE_ORDER_LINE: "CONCEPT_PURCHASE_ORDER_LINE",
   /** Purchase return */
   PURCHASE_RETURN: "CONCEPT_PURCHASE_RETURN",
+  /** SQL injection prevention via parameterized queries and input validation */
+  QUERY_VALIDATION_POLICY: "CONCEPT_QUERY_VALIDATION_POLICY",
+  /** Request throttling per IP/user/tenant to prevent DDoS and resource exhaustion */
+  RATE_LIMIT_POLICY: "CONCEPT_RATE_LIMIT_POLICY",
   /** Receipt transaction (incoming cash collection) */
   RECEIPT: "CONCEPT_RECEIPT",
   /** Receipt line item (allocation to invoices/transactions) */
@@ -208,6 +244,8 @@ export const CONCEPT = {
   RFQ: "CONCEPT_RFQ",
   /** Risk record (risk register) */
   RISK: "CONCEPT_RISK",
+  /** PostgreSQL Row Level Security policies for multi-tenant data isolation */
+  RLS_POLICY_PROFILE: "CONCEPT_RLS_POLICY_PROFILE",
   /** Role definition for RBAC */
   ROLE: "CONCEPT_ROLE",
   /** Role to permission assignment record */
@@ -230,8 +268,18 @@ export const CONCEPT = {
   SALES_QUOTATION_LINE: "CONCEPT_SALES_QUOTATION_LINE",
   /** Sales return */
   SALES_RETURN: "CONCEPT_SALES_RETURN",
+  /** Denied party screening list (OFAC, EU, UN) for trade compliance */
+  SANCTION_LIST: "CONCEPT_SANCTION_LIST",
+  /** Authoritative schema validation engine and strictness per entity type (Zod/TypeBox/JSON Schema) */
+  SCHEMA_VALIDATION_POLICY: "CONCEPT_SCHEMA_VALIDATION_POLICY",
   /** Scrap record (waste/loss generated during production) */
   SCRAP: "CONCEPT_SCRAP",
+  /** Data format rules for storage vs transmission (JSON/Protobuf/Avro, ISO8601 vs Epoch) */
+  SERIALIZATION_PROFILE: "CONCEPT_SERIALIZATION_PROFILE",
+  /** Session fixation prevention by binding to IP, User-Agent, or device fingerprint */
+  SESSION_BINDING_POLICY: "CONCEPT_SESSION_BINDING_POLICY",
+  /** Session lifecycle management (timeout, rotation, concurrent session limits) */
+  SESSION_POLICY: "CONCEPT_SESSION_POLICY",
   /** Shipment document for outbound delivery */
   SHIPMENT: "CONCEPT_SHIPMENT",
   /** Shipment line (item, quantity, package reference) */
@@ -264,12 +312,18 @@ export const CONCEPT = {
   TIMESHEET: "CONCEPT_TIMESHEET",
   /** Timesheet line item (date, hours, project/task reference) */
   TIMESHEET_LINE: "CONCEPT_TIMESHEET_LINE",
+  /** TLS/SSL configuration (minimum version, cipher suites, certificate validation) */
+  TLS_PROFILE: "CONCEPT_TLS_PROFILE",
+  /** Export control or import restriction rule */
+  TRADE_RESTRICTION: "CONCEPT_TRADE_RESTRICTION",
   /** Unit of Measure */
   UOM: "CONCEPT_UOM",
   /** User identity record */
   USER: "CONCEPT_USER",
   /** User to role assignment record */
   USER_ROLE: "CONCEPT_USER_ROLE",
+  /** Web Application Firewall rules based on OWASP ModSecurity Core Rule Set */
+  WAF_RULE_PROFILE: "CONCEPT_WAF_RULE_PROFILE",
   /** Storage location for inventory */
   WAREHOUSE: "CONCEPT_WAREHOUSE",
   /** Warehouse bin/location (put-away and picking location) */
@@ -290,12 +344,14 @@ export const CONCEPT = {
   WORKFLOW_STEP: "CONCEPT_WORKFLOW_STEP",
 
   // ─────────────────────────────────────────────────────────────────────────
-  // ATTRIBUTE (53) - Properties of entities
+  // ATTRIBUTE (58) - Properties of entities
   // ─────────────────────────────────────────────────────────────────────────
   /** Account classification type */
   ACCOUNT_TYPE: "CONCEPT_ACCOUNT_TYPE",
   /** Address usage type */
   ADDRESS_TYPE: "CONCEPT_ADDRESS_TYPE",
+  /** Business context for AI usage (email drafting, forecasting, etc.) */
+  AI_CONTEXT: "CONCEPT_AI_CONTEXT",
   /** API key lifecycle status */
   API_KEY_STATUS: "CONCEPT_API_KEY_STATUS",
   /** Generic approval workflow status */
@@ -306,6 +362,8 @@ export const CONCEPT = {
   ASSET_TYPE: "CONCEPT_ASSET_TYPE",
   /** Attendance status classification */
   ATTENDANCE_STATUS: "CONCEPT_ATTENDANCE_STATUS",
+  /** Standard used for ESG metric calculation (GHG Protocol, GRI, SASB) */
+  CALCULATION_STANDARD: "CONCEPT_CALCULATION_STANDARD",
   /** Contact usage type */
   CONTACT_TYPE: "CONCEPT_CONTACT_TYPE",
   /** Control type classification */
@@ -314,6 +372,8 @@ export const CONCEPT = {
   CURRENCY: "CONCEPT_CURRENCY",
   /** Customer classification type */
   CUSTOMER_TYPE: "CONCEPT_CUSTOMER_TYPE",
+  /** Data sensitivity classification for AI processing */
+  DATA_CLASSIFICATION: "CONCEPT_DATA_CLASSIFICATION",
   /** Delivery note document status */
   DELIVERY_NOTE_STATUS: "CONCEPT_DELIVERY_NOTE_STATUS",
   /** Delivery status classification */
@@ -328,6 +388,8 @@ export const CONCEPT = {
   FEATURE_FLAG_STATUS: "CONCEPT_FEATURE_FLAG_STATUS",
   /** Goods receipt status */
   GOODS_RECEIPT_STATUS: "CONCEPT_GOODS_RECEIPT_STATUS",
+  /** Harmonized System code for product classification */
+  HS_CODE: "CONCEPT_HS_CODE",
   /** Incident lifecycle status */
   INCIDENT_STATUS: "CONCEPT_INCIDENT_STATUS",
   /** Sales invoice status */
@@ -380,6 +442,8 @@ export const CONCEPT = {
   SALARY_COMPONENT_TYPE: "CONCEPT_SALARY_COMPONENT_TYPE",
   /** Sales order status */
   SALES_ORDER_STATUS: "CONCEPT_SALES_ORDER_STATUS",
+  /** GHG Protocol scope classification (Scope 1/2/3) */
+  SCOPE_CATEGORY: "CONCEPT_SCOPE_CATEGORY",
   /** Setting scope classification */
   SETTING_SCOPE: "CONCEPT_SETTING_SCOPE",
   /** Shipment lifecycle status classification */
@@ -414,6 +478,9 @@ export const CONCEPT_CATEGORY: Record<ConceptId, ConceptCategory> = {
   [CONCEPT.ACCOUNT_TYPE]: "ATTRIBUTE",
   [CONCEPT.ADDRESS]: "ENTITY",
   [CONCEPT.ADDRESS_TYPE]: "ATTRIBUTE",
+  [CONCEPT.AI_CONTEXT]: "ATTRIBUTE",
+  [CONCEPT.AI_MODEL]: "ENTITY",
+  [CONCEPT.AI_PROVIDER]: "ENTITY",
   [CONCEPT.API_KEY]: "ENTITY",
   [CONCEPT.API_KEY_STATUS]: "ATTRIBUTE",
   [CONCEPT.APPROVAL_STATUS]: "ATTRIBUTE",
@@ -435,19 +502,27 @@ export const CONCEPT_CATEGORY: Record<ConceptId, ConceptCategory> = {
   [CONCEPT.BANK_RECONCILIATION]: "ENTITY",
   [CONCEPT.BANK_RECONCILIATION_LINE]: "ENTITY",
   [CONCEPT.BANK_STATEMENT]: "ENTITY",
-  [CONCEPT.BANK_STATEMENT_LINE]: "ENTITY",
   [CONCEPT.BOM]: "ENTITY",
   [CONCEPT.BOM_LINE]: "ENTITY",
+  [CONCEPT.BRUTE_FORCE_PROTECTION]: "ENTITY",
+  [CONCEPT.CALCULATION_STANDARD]: "ATTRIBUTE",
   [CONCEPT.CARRIER]: "ENTITY",
+  [CONCEPT.CASH_POOL]: "ENTITY",
   [CONCEPT.CONTACT]: "ENTITY",
   [CONCEPT.CONTACT_TYPE]: "ATTRIBUTE",
   [CONCEPT.CONTROL]: "ENTITY",
   [CONCEPT.CONTROL_TYPE]: "ATTRIBUTE",
+  [CONCEPT.COOKIE_POLICY]: "ENTITY",
+  [CONCEPT.CORS_POLICY]: "ENTITY",
   [CONCEPT.COST_CENTER]: "ENTITY",
   [CONCEPT.COUNTRY]: "ENTITY",
+  [CONCEPT.CSP_POLICY]: "ENTITY",
   [CONCEPT.CURRENCY]: "ATTRIBUTE",
   [CONCEPT.CUSTOMER]: "ENTITY",
   [CONCEPT.CUSTOMER_TYPE]: "ATTRIBUTE",
+  [CONCEPT.CUSTOMS_DECLARATION]: "ENTITY",
+  [CONCEPT.DATA_CLASSIFICATION]: "ATTRIBUTE",
+  [CONCEPT.DATA_SANITIZATION_RULE]: "ENTITY",
   [CONCEPT.DELIVERY_NOTE]: "ENTITY",
   [CONCEPT.DELIVERY_NOTE_LINE]: "ENTITY",
   [CONCEPT.DELIVERY_NOTE_STATUS]: "ATTRIBUTE",
@@ -461,8 +536,10 @@ export const CONCEPT_CATEGORY: Record<ConceptId, ConceptCategory> = {
   [CONCEPT.DESIGNATION]: "ENTITY",
   [CONCEPT.DOCUMENT]: "ENTITY",
   [CONCEPT.DOCUMENT_TYPE]: "ATTRIBUTE",
+  [CONCEPT.EMISSION_FACTOR]: "ENTITY",
   [CONCEPT.EMPLOYEE]: "ENTITY",
   [CONCEPT.EMPLOYEE_TYPE]: "ATTRIBUTE",
+  [CONCEPT.ESG_METRIC]: "ENTITY",
   [CONCEPT.EVIDENCE]: "ENTITY",
   [CONCEPT.EVIDENCE_LINE]: "ENTITY",
   [CONCEPT.EXCHANGE_RATE]: "ENTITY",
@@ -476,18 +553,24 @@ export const CONCEPT_CATEGORY: Record<ConceptId, ConceptCategory> = {
   [CONCEPT.GOODS_RECEIPT]: "ENTITY",
   [CONCEPT.GOODS_RECEIPT_LINE]: "ENTITY",
   [CONCEPT.GOODS_RECEIPT_STATUS]: "ATTRIBUTE",
+  [CONCEPT.HS_CODE]: "ATTRIBUTE",
+  [CONCEPT.HTTP_HEADER_PROFILE]: "ENTITY",
   [CONCEPT.INCIDENT]: "ENTITY",
   [CONCEPT.INCIDENT_STATUS]: "ATTRIBUTE",
+  [CONCEPT.INTEGRITY_CHECK_POLICY]: "ENTITY",
   [CONCEPT.INVOICE_STATUS]: "ATTRIBUTE",
   [CONCEPT.ITEM]: "ENTITY",
   [CONCEPT.ITEM_TYPE]: "ATTRIBUTE",
   [CONCEPT.JOURNAL_ENTRY]: "ENTITY",
   [CONCEPT.JOURNAL_ENTRY_LINE]: "ENTITY",
   [CONCEPT.JOURNAL_TYPE]: "ATTRIBUTE",
+  [CONCEPT.LANGUAGE]: "ENTITY",
   [CONCEPT.LEAVE_APPLICATION]: "ENTITY",
   [CONCEPT.LEAVE_STATUS]: "ATTRIBUTE",
   [CONCEPT.LEAVE_TYPE]: "ENTITY",
   [CONCEPT.MATERIAL_REQUEST]: "ENTITY",
+  [CONCEPT.MATH_PRECISION_POLICY]: "ENTITY",
+  [CONCEPT.MFA_POLICY]: "ENTITY",
   [CONCEPT.MILESTONE]: "ENTITY",
   [CONCEPT.MILESTONE_STATUS]: "ATTRIBUTE",
   [CONCEPT.NOTIFICATION]: "ENTITY",
@@ -501,6 +584,7 @@ export const CONCEPT_CATEGORY: Record<ConceptId, ConceptCategory> = {
   [CONCEPT.PAYMENT]: "ENTITY",
   [CONCEPT.PAYMENT_BATCH]: "ENTITY",
   [CONCEPT.PAYMENT_BATCH_LINE]: "ENTITY",
+  [CONCEPT.PAYMENT_FACTORY_RULE]: "ENTITY",
   [CONCEPT.PAYMENT_LINE]: "ENTITY",
   [CONCEPT.PAYMENT_METHOD]: "ATTRIBUTE",
   [CONCEPT.PAYMENT_TERM]: "ENTITY",
@@ -532,7 +616,9 @@ export const CONCEPT_CATEGORY: Record<ConceptId, ConceptCategory> = {
   [CONCEPT.PURCHASE_ORDER_LINE]: "ENTITY",
   [CONCEPT.PURCHASE_ORDER_STATUS]: "ATTRIBUTE",
   [CONCEPT.PURCHASE_RETURN]: "ENTITY",
+  [CONCEPT.QUERY_VALIDATION_POLICY]: "ENTITY",
   [CONCEPT.QUOTATION_STATUS]: "ATTRIBUTE",
+  [CONCEPT.RATE_LIMIT_POLICY]: "ENTITY",
   [CONCEPT.RECEIPT]: "ENTITY",
   [CONCEPT.RECEIPT_LINE]: "ENTITY",
   [CONCEPT.RESOURCE]: "ENTITY",
@@ -541,6 +627,7 @@ export const CONCEPT_CATEGORY: Record<ConceptId, ConceptCategory> = {
   [CONCEPT.RFQ_STATUS]: "ATTRIBUTE",
   [CONCEPT.RISK]: "ENTITY",
   [CONCEPT.RISK_SEVERITY]: "ATTRIBUTE",
+  [CONCEPT.RLS_POLICY_PROFILE]: "ENTITY",
   [CONCEPT.ROLE]: "ENTITY",
   [CONCEPT.ROLE_PERMISSION]: "ENTITY",
   [CONCEPT.ROUTING]: "ENTITY",
@@ -554,7 +641,13 @@ export const CONCEPT_CATEGORY: Record<ConceptId, ConceptCategory> = {
   [CONCEPT.SALES_QUOTATION]: "ENTITY",
   [CONCEPT.SALES_QUOTATION_LINE]: "ENTITY",
   [CONCEPT.SALES_RETURN]: "ENTITY",
+  [CONCEPT.SANCTION_LIST]: "ENTITY",
+  [CONCEPT.SCHEMA_VALIDATION_POLICY]: "ENTITY",
+  [CONCEPT.SCOPE_CATEGORY]: "ATTRIBUTE",
   [CONCEPT.SCRAP]: "ENTITY",
+  [CONCEPT.SERIALIZATION_PROFILE]: "ENTITY",
+  [CONCEPT.SESSION_BINDING_POLICY]: "ENTITY",
+  [CONCEPT.SESSION_POLICY]: "ENTITY",
   [CONCEPT.SETTING_SCOPE]: "ATTRIBUTE",
   [CONCEPT.SHIPMENT]: "ENTITY",
   [CONCEPT.SHIPMENT_LINE]: "ENTITY",
@@ -578,10 +671,13 @@ export const CONCEPT_CATEGORY: Record<ConceptId, ConceptCategory> = {
   [CONCEPT.TENANT]: "ENTITY",
   [CONCEPT.TIMESHEET]: "ENTITY",
   [CONCEPT.TIMESHEET_LINE]: "ENTITY",
+  [CONCEPT.TLS_PROFILE]: "ENTITY",
+  [CONCEPT.TRADE_RESTRICTION]: "ENTITY",
   [CONCEPT.TRANSACTION_STATUS]: "ATTRIBUTE",
   [CONCEPT.UOM]: "ENTITY",
   [CONCEPT.USER]: "ENTITY",
   [CONCEPT.USER_ROLE]: "ENTITY",
+  [CONCEPT.WAF_RULE_PROFILE]: "ENTITY",
   [CONCEPT.WAREHOUSE]: "ENTITY",
   [CONCEPT.WAREHOUSE_BIN]: "ENTITY",
   [CONCEPT.WAREHOUSE_ZONE]: "ENTITY",
@@ -597,4 +693,4 @@ export const CONCEPT_CATEGORY: Record<ConceptId, ConceptCategory> = {
 /**
  * Concept count for validation
  */
-export const CONCEPT_COUNT = 182 as const;
+export const CONCEPT_COUNT = 214 as const;

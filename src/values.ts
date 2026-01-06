@@ -1,13 +1,13 @@
 // @aibos/kernel - L0 Value Set Constants
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // ⚠️ AUTO-GENERATED: Do not edit manually. Edit data sources instead.
-// Generated: 2026-01-03T06:45:17.518Z
+// Generated: 2026-01-04T20:30:58.721Z
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
  * VALUESET - The Value Set Registry
  *
- * 72 canonical value sets.
+ * 113 canonical value sets.
  * These define ALLOWED VALUES for concepts.
  *
  * @example
@@ -21,34 +21,60 @@
 export const VALUESET = {
   ACCOUNT_TYPE: "VALUESET_GLOBAL_ACCOUNT_TYPE",
   ADDRESS_TYPE: "VALUESET_GLOBAL_ADDRESS_TYPE",
+  AI_CONTEXTS: "VALUESET_GLOBAL_AI_CONTEXTS",
+  AI_MODEL_REGISTRY: "VALUESET_GLOBAL_AI_MODEL_REGISTRY",
+  AI_PROVIDERS: "VALUESET_GLOBAL_AI_PROVIDERS",
+  AI_RISK_CATEGORIES: "VALUESET_GLOBAL_AI_RISK_CATEGORIES",
   API_KEY_STATUS: "VALUESET_GLOBAL_API_KEY_STATUS",
   APPROVAL_STATUS: "VALUESET_GLOBAL_APPROVAL_STATUS",
   ASSET_EVENT_TYPE: "VALUESET_GLOBAL_ASSET_EVENT_TYPE",
   ASSET_STATUS: "VALUESET_GLOBAL_ASSET_STATUS",
   ASSET_TYPE: "VALUESET_GLOBAL_ASSET_TYPE",
+  ATTACK_PATTERNS: "VALUESET_GLOBAL_ATTACK_PATTERNS",
   ATTENDANCE_STATUS: "VALUESET_GLOBAL_ATTENDANCE_STATUS",
-  BANK_STATEMENT_STATUS: "VALUESET_GLOBAL_BANK_STATEMENT_STATUS",
+  BANK_STATEMENT_FORMATS: "VALUESET_GLOBAL_BANK_STATEMENT_FORMATS",
+  BANK_TRANSACTION_CODES: "VALUESET_GLOBAL_BANK_TRANSACTION_CODES",
   BOM_TYPE: "VALUESET_GLOBAL_BOM_TYPE",
+  CALCULATION_STANDARDS: "VALUESET_GLOBAL_CALCULATION_STANDARDS",
+  CASH_MANAGEMENT_STRUCTURES: "VALUESET_GLOBAL_CASH_MANAGEMENT_STRUCTURES",
+  CIPHER_SUITES: "VALUESET_GLOBAL_CIPHER_SUITES",
+  CLEARING_SYSTEMS: "VALUESET_GLOBAL_CLEARING_SYSTEMS",
   CONTACT_TYPE: "VALUESET_GLOBAL_CONTACT_TYPE",
   CONTROL_TYPE: "VALUESET_GLOBAL_CONTROL_TYPE",
+  COOKIE_SAME_SITE_MODES: "VALUESET_GLOBAL_COOKIE_SAME_SITE_MODES",
+  CORS_METHODS: "VALUESET_GLOBAL_CORS_METHODS",
   COUNTRIES: "VALUESET_GLOBAL_COUNTRIES",
+  CSP_DIRECTIVES: "VALUESET_GLOBAL_CSP_DIRECTIVES",
+  CSP_SOURCES: "VALUESET_GLOBAL_CSP_SOURCES",
   CURRENCIES: "VALUESET_GLOBAL_CURRENCIES",
   CUSTOMER_TYPE: "VALUESET_GLOBAL_CUSTOMER_TYPE",
+  CUSTOMS_PROCEDURE_CODES: "VALUESET_GLOBAL_CUSTOMS_PROCEDURE_CODES",
+  DATA_PRIVACY_TIERS: "VALUESET_GLOBAL_DATA_PRIVACY_TIERS",
   DELIVERY_NOTE_STATUS: "VALUESET_GLOBAL_DELIVERY_NOTE_STATUS",
   DELIVERY_STATUS: "VALUESET_GLOBAL_DELIVERY_STATUS",
   DEPRECIATION_METHOD: "VALUESET_GLOBAL_DEPRECIATION_METHOD",
   DOCUMENT_STATUS: "VALUESET_GLOBAL_DOCUMENT_STATUS",
+  EMISSION_FACTOR_REGISTRY: "VALUESET_GLOBAL_EMISSION_FACTOR_REGISTRY",
   EMPLOYEE_TYPE: "VALUESET_GLOBAL_EMPLOYEE_TYPE",
+  ESG_METRIC_DEFINITIONS: "VALUESET_GLOBAL_ESG_METRIC_DEFINITIONS",
+  ESG_REPORTING_FRAMEWORKS: "VALUESET_GLOBAL_ESG_REPORTING_FRAMEWORKS",
+  EXPORT_CONTROL_REGIMES: "VALUESET_GLOBAL_EXPORT_CONTROL_REGIMES",
   FEATURE_FLAG_STATUS: "VALUESET_GLOBAL_FEATURE_FLAG_STATUS",
   FISCAL_PERIOD: "VALUESET_GLOBAL_FISCAL_PERIOD",
   GOODS_RECEIPT_STATUS: "VALUESET_GLOBAL_GOODS_RECEIPT_STATUS",
+  HASH_ALGORITHMS: "VALUESET_GLOBAL_HASH_ALGORITHMS",
+  HTTP_SECURITY_HEADERS: "VALUESET_GLOBAL_HTTP_SECURITY_HEADERS",
   INCIDENT_STATUS: "VALUESET_GLOBAL_INCIDENT_STATUS",
+  INCOTERMS: "VALUESET_GLOBAL_INCOTERMS",
   INVOICE_STATUS: "VALUESET_GLOBAL_INVOICE_STATUS",
   ITEM_TYPE: "VALUESET_GLOBAL_ITEM_TYPE",
   JOURNAL_TYPE: "VALUESET_GLOBAL_JOURNAL_TYPE",
+  LANGUAGES: "VALUESET_GLOBAL_LANGUAGES",
   LEAVE_STATUS: "VALUESET_GLOBAL_LEAVE_STATUS",
   MAINTENANCE_STATUS: "VALUESET_GLOBAL_MAINTENANCE_STATUS",
   MATCHING_METHOD: "VALUESET_GLOBAL_MATCHING_METHOD",
+  MATH_LIBRARIES: "VALUESET_GLOBAL_MATH_LIBRARIES",
+  MFA_METHODS: "VALUESET_GLOBAL_MFA_METHODS",
   MILESTONE_STATUS: "VALUESET_GLOBAL_MILESTONE_STATUS",
   NOTIFICATION_CHANNEL: "VALUESET_GLOBAL_NOTIFICATION_CHANNEL",
   NOTIFICATION_STATUS: "VALUESET_GLOBAL_NOTIFICATION_STATUS",
@@ -56,6 +82,7 @@ export const VALUESET = {
   PARTY_TYPE: "VALUESET_GLOBAL_PARTY_TYPE",
   PAYMENT_BATCH_STATUS: "VALUESET_GLOBAL_PAYMENT_BATCH_STATUS",
   PAYMENT_METHOD: "VALUESET_GLOBAL_PAYMENT_METHOD",
+  PAYMENT_METHODS_TREASURY: "VALUESET_GLOBAL_PAYMENT_METHODS_TREASURY",
   PAYMENT_STATUS: "VALUESET_GLOBAL_PAYMENT_STATUS",
   PAYROLL_STATUS: "VALUESET_GLOBAL_PAYROLL_STATUS",
   PERFORMANCE_RATING: "VALUESET_GLOBAL_PERFORMANCE_RATING",
@@ -69,26 +96,40 @@ export const VALUESET = {
   PURCHASE_INVOICE_STATUS: "VALUESET_GLOBAL_PURCHASE_INVOICE_STATUS",
   PURCHASE_ORDER_STATUS: "VALUESET_GLOBAL_PURCHASE_ORDER_STATUS",
   QUOTATION_STATUS: "VALUESET_GLOBAL_QUOTATION_STATUS",
+  RATE_LIMIT_STRATEGIES: "VALUESET_GLOBAL_RATE_LIMIT_STRATEGIES",
   RECEIPT_STATUS: "VALUESET_GLOBAL_RECEIPT_STATUS",
   RECONCILIATION_STATUS: "VALUESET_GLOBAL_RECONCILIATION_STATUS",
   RESOURCE_TYPE: "VALUESET_GLOBAL_RESOURCE_TYPE",
   RFQ_STATUS: "VALUESET_GLOBAL_RFQ_STATUS",
   RISK_SEVERITY: "VALUESET_GLOBAL_RISK_SEVERITY",
+  RLS_POLICY_TYPES: "VALUESET_GLOBAL_RLS_POLICY_TYPES",
   ROUNDING_METHOD: "VALUESET_GLOBAL_ROUNDING_METHOD",
+  ROUNDING_MODES: "VALUESET_GLOBAL_ROUNDING_MODES",
   SALARY_COMPONENT_TYPE: "VALUESET_GLOBAL_SALARY_COMPONENT_TYPE",
   SALES_ORDER_STATUS: "VALUESET_GLOBAL_SALES_ORDER_STATUS",
+  SANCTION_LIST_SOURCES: "VALUESET_GLOBAL_SANCTION_LIST_SOURCES",
+  SANITIZATION_ACTIONS: "VALUESET_GLOBAL_SANITIZATION_ACTIONS",
+  SCOPE_CATEGORIES: "VALUESET_GLOBAL_SCOPE_CATEGORIES",
+  SERIALIZATION_FORMATS: "VALUESET_GLOBAL_SERIALIZATION_FORMATS",
+  SESSION_BINDING_FACTORS: "VALUESET_GLOBAL_SESSION_BINDING_FACTORS",
   SETTING_SCOPE: "VALUESET_GLOBAL_SETTING_SCOPE",
   SHIPMENT_STATUS: "VALUESET_GLOBAL_SHIPMENT_STATUS",
   SHIPPING_METHOD: "VALUESET_GLOBAL_SHIPPING_METHOD",
+  SQL_INJECTION_PATTERNS: "VALUESET_GLOBAL_SQL_INJECTION_PATTERNS",
   STOCK_ENTRY_TYPE: "VALUESET_GLOBAL_STOCK_ENTRY_TYPE",
   SUPPLIER_TYPE: "VALUESET_GLOBAL_SUPPLIER_TYPE",
   TASK_STATUS: "VALUESET_GLOBAL_TASK_STATUS",
   TAX_REPORTING_CATEGORY: "VALUESET_GLOBAL_TAX_REPORTING_CATEGORY",
   TAX_TREATMENT: "VALUESET_GLOBAL_TAX_TREATMENT",
   TAX_TYPE: "VALUESET_GLOBAL_TAX_TYPE",
+  TLS_VERSIONS: "VALUESET_GLOBAL_TLS_VERSIONS",
+  TOKEN_TYPES: "VALUESET_GLOBAL_TOKEN_TYPES",
   TRANSACTION_STATUS: "VALUESET_GLOBAL_TRANSACTION_STATUS",
   TRANSFER_TYPE: "VALUESET_GLOBAL_TRANSFER_TYPE",
   UOM_CATEGORY: "VALUESET_GLOBAL_UOM_CATEGORY",
+  VALIDATION_ENGINES: "VALUESET_GLOBAL_VALIDATION_ENGINES",
+  VALIDATION_STRICTNESS: "VALUESET_GLOBAL_VALIDATION_STRICTNESS",
+  WAF_RULE_SETS: "VALUESET_GLOBAL_WAF_RULE_SETS",
   WORK_ORDER_STATUS: "VALUESET_GLOBAL_WORK_ORDER_STATUS",
   WORKFLOW_STATUS: "VALUESET_GLOBAL_WORKFLOW_STATUS",
 } as const;
@@ -101,7 +142,7 @@ export type ValueSetId = (typeof VALUESET)[keyof typeof VALUESET];
 /**
  * VALUE - The Value Registry
  *
- * 624 canonical values organized by value set.
+ * 1123 canonical values organized by value set.
  * Nested structure: VALUE.<ValueSet>.<Value>
  *
  * @example
@@ -135,6 +176,57 @@ export const VALUE = {
     MAILING: "ADR_MAILING",
     RESIDENTIAL: "ADR_RESIDENTIAL",
     TEMPORARY: "ADR_TEMPORARY",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // AI_CONTEXTS (10 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  AI_CONTEXTS: {
+    EMAIL_DRAFT: "AC_EMAIL_DRAFT",
+    FINANCIAL_FORECAST: "AC_FINANCIAL_FORECAST",
+    CUSTOMER_SENTIMENT: "AC_CUSTOMER_SENTIMENT",
+    DOCUMENT_SUMMARY: "AC_DOCUMENT_SUMMARY",
+    CODE_GENERATION: "AC_CODE_GENERATION",
+    FRAUD_DETECTION: "AC_FRAUD_DETECTION",
+    CHATBOT_SUPPORT: "AC_CHATBOT_SUPPORT",
+    RESUME_SCREENING: "AC_RESUME_SCREENING",
+    PRICING_OPTIMIZATION: "AC_PRICING_OPTIMIZATION",
+    DATA_ENTRY_ASSIST: "AC_DATA_ENTRY_ASSIST",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // AI_MODEL_REGISTRY (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  AI_MODEL_REGISTRY: {
+    GPT4_TURBO_PUBLIC: "AMR_GPT4_TURBO_PUBLIC",
+    CLAUDE_3_SONNET_PUBLIC: "AMR_CLAUDE_3_SONNET_PUBLIC",
+    GPT4_AZURE_PRIVATE: "AMR_GPT4_AZURE_PRIVATE",
+    COPILOT_BUSINESS: "AMR_COPILOT_BUSINESS",
+    LLAMA3_ONPREM: "AMR_LLAMA3_ONPREM",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // AI_PROVIDERS (8 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  AI_PROVIDERS: {
+    OPENAI: "AP_OPENAI",
+    ANTHROPIC: "AP_ANTHROPIC",
+    AZURE_OPENAI: "AP_AZURE_OPENAI",
+    GOOGLE_VERTEXAI: "AP_GOOGLE_VERTEXAI",
+    AWS_BEDROCK: "AP_AWS_BEDROCK",
+    GITHUB_COPILOT: "AP_GITHUB_COPILOT",
+    ONPREM_LLAMA: "AP_ONPREM_LLAMA",
+    ONPREM_MISTRAL: "AP_ONPREM_MISTRAL",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // AI_RISK_CATEGORIES (4 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  AI_RISK_CATEGORIES: {
+    UNACCEPTABLE_RISK: "ARC_UNACCEPTABLE_RISK",
+    HIGH_RISK: "ARC_HIGH_RISK",
+    LIMITED_RISK: "ARC_LIMITED_RISK",
+    MINIMAL_RISK: "ARC_MINIMAL_RISK",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -190,6 +282,20 @@ export const VALUE = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // ATTACK_PATTERNS (8 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  ATTACK_PATTERNS: {
+    SQL_INJECTION: "AP_SQL_INJECTION",
+    XSS: "AP_XSS",
+    PATH_TRAVERSAL: "AP_PATH_TRAVERSAL",
+    COMMAND_INJECTION: "AP_COMMAND_INJECTION",
+    LDAP_INJECTION: "AP_LDAP_INJECTION",
+    XML_INJECTION: "AP_XML_INJECTION",
+    SSRF: "AP_SSRF",
+    NOSQL_INJECTION: "AP_NOSQL_INJECTION",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // ATTENDANCE_STATUS (5 values)
   // ─────────────────────────────────────────────────────────────────────────
   ATTENDANCE_STATUS: {
@@ -201,13 +307,30 @@ export const VALUE = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // BANK_STATEMENT_STATUS (4 values)
+  // BANK_STATEMENT_FORMATS (5 values)
   // ─────────────────────────────────────────────────────────────────────────
-  BANK_STATEMENT_STATUS: {
-    IMPORTED: "BSS_IMPORTED",
-    VALIDATED: "BSS_VALIDATED",
-    POSTED: "BSS_POSTED",
-    CLOSED: "BSS_CLOSED",
+  BANK_STATEMENT_FORMATS: {
+    MT940: "BSF_MT940",
+    CAMT053: "BSF_CAMT053",
+    BAI2: "BSF_BAI2",
+    CAMT052: "BSF_CAMT052",
+    CAMT054: "BSF_CAMT054",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // BANK_TRANSACTION_CODES (10 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  BANK_TRANSACTION_CODES: {
+    PMNT: "BTC_PMNT",
+    RCDT: "BTC_RCDT",
+    ICDT: "BTC_ICDT",
+    RDDT: "BTC_RDDT",
+    IDDT: "BTC_IDDT",
+    CCRD: "BTC_CCRD",
+    CAJT: "BTC_CAJT",
+    CHRG: "BTC_CHRG",
+    INTC: "BTC_INTC",
+    INTD: "BTC_INTD",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -217,6 +340,55 @@ export const VALUE = {
     STANDARD: "BOM_STANDARD",
     VARIANT: "BOM_VARIANT",
     PHANTOM: "BOM_PHANTOM",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CALCULATION_STANDARDS (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  CALCULATION_STANDARDS: {
+    GHG_PROTOCOL: "CS_GHG_PROTOCOL",
+    GRI: "CS_GRI",
+    SASB: "CS_SASB",
+    TCFD: "CS_TCFD",
+    ISO_14064: "CS_ISO_14064",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CASH_MANAGEMENT_STRUCTURES (4 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  CASH_MANAGEMENT_STRUCTURES: {
+    PHYSICAL_POOLING: "CMS_PHYSICAL_POOLING",
+    NOTIONAL_POOLING: "CMS_NOTIONAL_POOLING",
+    PAYMENT_FACTORY: "CMS_PAYMENT_FACTORY",
+    IN_HOUSE_BANK: "CMS_IN_HOUSE_BANK",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CIPHER_SUITES (6 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  CIPHER_SUITES: {
+    AES_256_GCM: "CS_AES_256_GCM",
+    AES_128_GCM: "CS_AES_128_GCM",
+    CHACHA20_POLY1305: "CS_CHACHA20_POLY1305",
+    ECDHE_RSA_AES_256_GCM: "CS_ECDHE_RSA_AES_256_GCM",
+    ECDHE_RSA_AES_128_GCM: "CS_ECDHE_RSA_AES_128_GCM",
+    RSA_AES_256_CBC: "CS_RSA_AES_256_CBC",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CLEARING_SYSTEMS (10 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  CLEARING_SYSTEMS: {
+    SWIFT: "CS_SWIFT",
+    SEPA_CT: "CS_SEPA_CT",
+    SEPA_DD: "CS_SEPA_DD",
+    CHAPS: "CS_CHAPS",
+    FEDWIRE: "CS_FEDWIRE",
+    ACH_USA: "CS_ACH_USA",
+    RENTAS_MY: "CS_RENTAS_MY",
+    FAST_SG: "CS_FAST_SG",
+    INSTAPAY_PH: "CS_INSTAPAY_PH",
+    PROMPTPAY_TH: "CS_PROMPTPAY_TH",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -242,7 +414,27 @@ export const VALUE = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // COUNTRIES (183 values)
+  // COOKIE_SAME_SITE_MODES (3 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  COOKIE_SAME_SITE_MODES: {
+    STRICT: "CSSM_STRICT",
+    LAX: "CSSM_LAX",
+    NONE: "CSSM_NONE",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CORS_METHODS (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  CORS_METHODS: {
+    GET: "CM_GET",
+    POST: "CM_POST",
+    PUT: "CM_PUT",
+    PATCH: "CM_PATCH",
+    DELETE: "CM_DELETE",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // COUNTRIES (207 values)
   // ─────────────────────────────────────────────────────────────────────────
   COUNTRIES: {
     MALAYSIA: "CNT_MALAYSIA",
@@ -428,10 +620,66 @@ export const VALUE = {
     ARMENIA: "CNT_ARMENIA",
     AZERBAIJAN: "CNT_AZERBAIJAN",
     TURKMENISTAN: "CNT_TURKMENISTAN",
+    ANTIGUA_AND_BARBUDA: "CNT_ANTIGUA_AND_BARBUDA",
+    TUVALU: "CNT_TUVALU",
+    ANGUILLA: "CNT_ANGUILLA",
+    NORFOLK_ISLAND: "CNT_NORFOLK_ISLAND",
+    CARIBBEAN_NETHERLANDS: "CNT_CARIBBEAN_NETHERLANDS",
+    GUERNSEY: "CNT_GUERNSEY",
+    MAYOTTE: "CNT_MAYOTTE",
+    SAINT_BARTH_LEMY: "CNT_SAINT_BARTH_LEMY",
+    VATICAN_CITY: "CNT_VATICAN_CITY",
+    TURKS_AND_CAICOS_ISLANDS: "CNT_TURKS_AND_CAICOS_ISLANDS",
+    CURA_AO: "CNT_CURA_AO",
+    MONTSERRAT: "CNT_MONTSERRAT",
+    BRITISH_VIRGIN_ISLANDS: "CNT_BRITISH_VIRGIN_ISLANDS",
+    UNITED_STATES_MINOR_OUTLYING_ISLANDS: "CNT_UNITED_STATES_MINOR_OUTLYING_ISLANDS",
+    BERMUDA: "CNT_BERMUDA",
+    SAINT_VINCENT_AND_THE_GRENADINES: "CNT_SAINT_VINCENT_AND_THE_GRENADINES",
+    SVALBARD_AND_JAN_MAYEN: "CNT_SVALBARD_AND_JAN_MAYEN",
+    SINT_MAARTEN: "CNT_SINT_MAARTEN",
+    SAINT_PIERRE_AND_MIQUELON: "CNT_SAINT_PIERRE_AND_MIQUELON",
+    TOKELAU: "CNT_TOKELAU",
+    SAINT_HELENA_ASCENSION_AND_TRISTAN_DA_CUNHA: "CNT_SAINT_HELENA_ASCENSION_AND_TRISTAN_DA_CUNHA",
+    COCOS_KEELING_ISLANDS: "CNT_COCOS_KEELING_ISLANDS",
+    NIUE: "CNT_NIUE",
+    KOSOVO: "CNT_KOSOVO",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // CURRENCIES (106 values)
+  // CSP_DIRECTIVES (12 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  CSP_DIRECTIVES: {
+    DEFAULT_SRC: "CD_DEFAULT_SRC",
+    SCRIPT_SRC: "CD_SCRIPT_SRC",
+    STYLE_SRC: "CD_STYLE_SRC",
+    CONNECT_SRC: "CD_CONNECT_SRC",
+    IMG_SRC: "CD_IMG_SRC",
+    FONT_SRC: "CD_FONT_SRC",
+    FRAME_SRC: "CD_FRAME_SRC",
+    FRAME_ANCESTORS: "CD_FRAME_ANCESTORS",
+    OBJECT_SRC: "CD_OBJECT_SRC",
+    BASE_URI: "CD_BASE_URI",
+    FORM_ACTION: "CD_FORM_ACTION",
+    UPGRADE_INSECURE_REQUESTS: "CD_UPGRADE_INSECURE_REQUESTS",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CSP_SOURCES (8 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  CSP_SOURCES: {
+    SELF: "CS_SELF",
+    NONE: "CS_NONE",
+    UNSAFE_INLINE: "CS_UNSAFE_INLINE",
+    UNSAFE_EVAL: "CS_UNSAFE_EVAL",
+    NONCE: "CS_NONCE",
+    HASH: "CS_HASH",
+    HTTPS_SCHEME: "CS_HTTPS_SCHEME",
+    DATA_SCHEME: "CS_DATA_SCHEME",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CURRENCIES (145 values)
   // ─────────────────────────────────────────────────────────────────────────
   CURRENCIES: {
     MALAYSIAN_RINGGIT: "CUR_MALAYSIAN_RINGGIT",
@@ -540,6 +788,45 @@ export const VALUE = {
     CHADIAN_FRANC: "CUR_CHADIAN_FRANC",
     CENTRAL_AFRICAN_FRANC: "CUR_CENTRAL_AFRICAN_FRANC",
     CONGOLESE_FRANC: "CUR_CONGOLESE_FRANC",
+    WEST_AFRICAN_CFA_FRANC: "CUR_WEST_AFRICAN_CFA_FRANC",
+    CENTRAL_AFRICAN_CFA_FRANC: "CUR_CENTRAL_AFRICAN_CFA_FRANC",
+    ALBANIAN_LEK: "CUR_ALBANIAN_LEK",
+    ARMENIAN_DRAM: "CUR_ARMENIAN_DRAM",
+    ARUBAN_FLORIN: "CUR_ARUBAN_FLORIN",
+    AZERBAIJANI_MANAT: "CUR_AZERBAIJANI_MANAT",
+    BOSNIA_HERZEGOVINA_CONVERTIBLE_MARK: "CUR_BOSNIA_HERZEGOVINA_CONVERTIBLE_MARK",
+    BARBADIAN_DOLLAR: "CUR_BARBADIAN_DOLLAR",
+    BERMUDAN_DOLLAR: "CUR_BERMUDAN_DOLLAR",
+    BHUTANESE_NGULTRUM: "CUR_BHUTANESE_NGULTRUM",
+    BELARUSIAN_RUBLE: "CUR_BELARUSIAN_RUBLE",
+    FIJIAN_DOLLAR: "CUR_FIJIAN_DOLLAR",
+    GUYANESE_DOLLAR: "CUR_GUYANESE_DOLLAR",
+    ICELANDIC_KRONA: "CUR_ICELANDIC_KRONA",
+    JAMAICAN_DOLLAR: "CUR_JAMAICAN_DOLLAR",
+    LESOTHO_LOTI: "CUR_LESOTHO_LOTI",
+    MOLDOVAN_LEU: "CUR_MOLDOVAN_LEU",
+    MACEDONIAN_DENAR: "CUR_MACEDONIAN_DENAR",
+    MACANESE_PATACA: "CUR_MACANESE_PATACA",
+    MAURITANIAN_OUGUIYA: "CUR_MAURITANIAN_OUGUIYA",
+    MALDIVIAN_RUFIYAA: "CUR_MALDIVIAN_RUFIYAA",
+    NEPALESE_RUPEE: "CUR_NEPALESE_RUPEE",
+    PAPUA_NEW_GUINEAN_KINA: "CUR_PAPUA_NEW_GUINEAN_KINA",
+    PARAGUAYAN_GUARANI: "CUR_PARAGUAYAN_GUARANI",
+    SERBIAN_DINAR: "CUR_SERBIAN_DINAR",
+    SOLOMON_ISLANDS_DOLLAR: "CUR_SOLOMON_ISLANDS_DOLLAR",
+    SURINAMESE_DOLLAR: "CUR_SURINAMESE_DOLLAR",
+    SOUTH_SUDANESE_POUND: "CUR_SOUTH_SUDANESE_POUND",
+    S_O_TOM_AND_PR_NCIPE_DOBRA: "CUR_S_O_TOM_AND_PR_NCIPE_DOBRA",
+    SWAZI_LILANGENI: "CUR_SWAZI_LILANGENI",
+    TONGAN_PA_ANGA: "CUR_TONGAN_PA_ANGA",
+    TRINIDAD_AND_TOBAGO_DOLLAR: "CUR_TRINIDAD_AND_TOBAGO_DOLLAR",
+    UKRAINIAN_HRYVNIA: "CUR_UKRAINIAN_HRYVNIA",
+    URUGUAYAN_PESO: "CUR_URUGUAYAN_PESO",
+    VANUATU_VATU: "CUR_VANUATU_VATU",
+    SAMOAN_TALA: "CUR_SAMOAN_TALA",
+    EAST_CARIBBEAN_DOLLAR: "CUR_EAST_CARIBBEAN_DOLLAR",
+    CFP_FRANC: "CUR_CFP_FRANC",
+    ZAMBIAN_KWACHA_OLD: "CUR_ZAMBIAN_KWACHA_OLD",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -549,6 +836,27 @@ export const VALUE = {
     INDIVIDUAL: "CUS_INDIVIDUAL",
     COMPANY: "CUS_COMPANY",
     GOVERNMENT: "CUS_GOVERNMENT",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CUSTOMS_PROCEDURE_CODES (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  CUSTOMS_PROCEDURE_CODES: {
+    IMPORT_PERMANENT: "CPC_IMPORT_PERMANENT",
+    EXPORT_PERMANENT: "CPC_EXPORT_PERMANENT",
+    TRANSIT: "CPC_TRANSIT",
+    TEMPORARY_IMPORT: "CPC_TEMPORARY_IMPORT",
+    BONDED_WAREHOUSE: "CPC_BONDED_WAREHOUSE",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // DATA_PRIVACY_TIERS (4 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  DATA_PRIVACY_TIERS: {
+    PUBLIC: "DPT_PUBLIC",
+    INTERNAL: "DPT_INTERNAL",
+    CONFIDENTIAL: "DPT_CONFIDENTIAL",
+    RESTRICTED: "DPT_RESTRICTED",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -596,6 +904,22 @@ export const VALUE = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // EMISSION_FACTOR_REGISTRY (10 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  EMISSION_FACTOR_REGISTRY: {
+    EF_ELECTRICITY_MY: "EFR_EF_ELECTRICITY_MY",
+    EF_ELECTRICITY_SG: "EFR_EF_ELECTRICITY_SG",
+    EF_ELECTRICITY_TH: "EFR_EF_ELECTRICITY_TH",
+    EF_ELECTRICITY_VN: "EFR_EF_ELECTRICITY_VN",
+    EF_ELECTRICITY_ID: "EFR_EF_ELECTRICITY_ID",
+    EF_ELECTRICITY_PH: "EFR_EF_ELECTRICITY_PH",
+    EF_DIESEL: "EFR_EF_DIESEL",
+    EF_GASOLINE: "EFR_EF_GASOLINE",
+    EF_NATURAL_GAS: "EFR_EF_NATURAL_GAS",
+    EF_AIR_TRAVEL_SHORT: "EFR_EF_AIR_TRAVEL_SHORT",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // EMPLOYEE_TYPE (4 values)
   // ─────────────────────────────────────────────────────────────────────────
   EMPLOYEE_TYPE: {
@@ -603,6 +927,48 @@ export const VALUE = {
     PART_TIME: "EMP_PART_TIME",
     CONTRACTOR: "EMP_CONTRACTOR",
     INTERN: "EMP_INTERN",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // ESG_METRIC_DEFINITIONS (15 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  ESG_METRIC_DEFINITIONS: {
+    CARBON_FOOTPRINT: "EMD_CARBON_FOOTPRINT",
+    SCOPE1_EMISSIONS: "EMD_SCOPE1_EMISSIONS",
+    SCOPE2_EMISSIONS: "EMD_SCOPE2_EMISSIONS",
+    SCOPE3_EMISSIONS: "EMD_SCOPE3_EMISSIONS",
+    ENERGY_CONSUMPTION: "EMD_ENERGY_CONSUMPTION",
+    RENEWABLE_ENERGY_PCT: "EMD_RENEWABLE_ENERGY_PCT",
+    WATER_CONSUMPTION: "EMD_WATER_CONSUMPTION",
+    WASTE_GENERATED: "EMD_WASTE_GENERATED",
+    WASTE_DIVERTED: "EMD_WASTE_DIVERTED",
+    EMPLOYEE_SAFETY_RATE: "EMD_EMPLOYEE_SAFETY_RATE",
+    GENDER_DIVERSITY_PCT: "EMD_GENDER_DIVERSITY_PCT",
+    TRAINING_HOURS: "EMD_TRAINING_HOURS",
+    COMMUNITY_INVESTMENT: "EMD_COMMUNITY_INVESTMENT",
+    SUPPLIER_ESG_SCORE: "EMD_SUPPLIER_ESG_SCORE",
+    CARBON_INTENSITY: "EMD_CARBON_INTENSITY",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // ESG_REPORTING_FRAMEWORKS (4 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  ESG_REPORTING_FRAMEWORKS: {
+    CDP: "ERF_CDP",
+    CSRD: "ERF_CSRD",
+    ISSB: "ERF_ISSB",
+    SEC_CLIMATE: "ERF_SEC_CLIMATE",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // EXPORT_CONTROL_REGIMES (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  EXPORT_CONTROL_REGIMES: {
+    WASSENAAR: "ECR_WASSENAAR",
+    MTCR: "ECR_MTCR",
+    NSG: "ECR_NSG",
+    AG: "ECR_AG",
+    EAR: "ECR_EAR",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -635,6 +1001,29 @@ export const VALUE = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // HASH_ALGORITHMS (4 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  HASH_ALGORITHMS: {
+    SHA256: "HA_SHA256",
+    SHA512: "HA_SHA512",
+    BLAKE3: "HA_BLAKE3",
+    SHA3_256: "HA_SHA3_256",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // HTTP_SECURITY_HEADERS (7 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  HTTP_SECURITY_HEADERS: {
+    HSTS: "HSH_HSTS",
+    X_FRAME_OPTIONS: "HSH_X_FRAME_OPTIONS",
+    X_CONTENT_TYPE_OPTIONS: "HSH_X_CONTENT_TYPE_OPTIONS",
+    REFERRER_POLICY: "HSH_REFERRER_POLICY",
+    PERMISSIONS_POLICY: "HSH_PERMISSIONS_POLICY",
+    X_XSS_PROTECTION: "HSH_X_XSS_PROTECTION",
+    CROSS_ORIGIN_OPENER_POLICY: "HSH_CROSS_ORIGIN_OPENER_POLICY",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // INCIDENT_STATUS (4 values)
   // ─────────────────────────────────────────────────────────────────────────
   INCIDENT_STATUS: {
@@ -642,6 +1031,23 @@ export const VALUE = {
     INVESTIGATING: "INS_INVESTIGATING",
     RESOLVED: "INS_RESOLVED",
     CLOSED: "INS_CLOSED",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // INCOTERMS (11 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  INCOTERMS: {
+    EXW: "INC_EXW",
+    FCA: "INC_FCA",
+    CPT: "INC_CPT",
+    CIP: "INC_CIP",
+    DAP: "INC_DAP",
+    DPU: "INC_DPU",
+    DDP: "INC_DDP",
+    FAS: "INC_FAS",
+    FOB: "INC_FOB",
+    CFR: "INC_CFR",
+    CIF: "INC_CIF",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -683,6 +1089,196 @@ export const VALUE = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // LANGUAGES (184 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  LANGUAGES: {
+    AFAR: "LNG_AFAR",
+    ABKHAZIAN: "LNG_ABKHAZIAN",
+    AVESTAN: "LNG_AVESTAN",
+    AFRIKAANS: "LNG_AFRIKAANS",
+    AKAN: "LNG_AKAN",
+    AMHARIC: "LNG_AMHARIC",
+    ARAGONESE: "LNG_ARAGONESE",
+    ARABIC: "LNG_ARABIC",
+    ASSAMESE: "LNG_ASSAMESE",
+    AVARIC: "LNG_AVARIC",
+    AYMARA: "LNG_AYMARA",
+    AZERBAIJANI: "LNG_AZERBAIJANI",
+    BASHKIR: "LNG_BASHKIR",
+    BELARUSIAN: "LNG_BELARUSIAN",
+    BULGARIAN: "LNG_BULGARIAN",
+    BIHARI: "LNG_BIHARI",
+    BISLAMA: "LNG_BISLAMA",
+    BAMBARA: "LNG_BAMBARA",
+    BENGALI: "LNG_BENGALI",
+    TIBETAN: "LNG_TIBETAN",
+    BRETON: "LNG_BRETON",
+    BOSNIAN: "LNG_BOSNIAN",
+    CATALAN: "LNG_CATALAN",
+    CHECHEN: "LNG_CHECHEN",
+    CHAMORRO: "LNG_CHAMORRO",
+    CORSICAN: "LNG_CORSICAN",
+    CREE: "LNG_CREE",
+    CZECH: "LNG_CZECH",
+    CHURCH_SLAVIC: "LNG_CHURCH_SLAVIC",
+    CHUVASH: "LNG_CHUVASH",
+    WELSH: "LNG_WELSH",
+    DANISH: "LNG_DANISH",
+    GERMAN: "LNG_GERMAN",
+    DIVEHI: "LNG_DIVEHI",
+    DZONGKHA: "LNG_DZONGKHA",
+    EWE: "LNG_EWE",
+    GREEK: "LNG_GREEK",
+    ENGLISH: "LNG_ENGLISH",
+    ESPERANTO: "LNG_ESPERANTO",
+    SPANISH: "LNG_SPANISH",
+    ESTONIAN: "LNG_ESTONIAN",
+    BASQUE: "LNG_BASQUE",
+    PERSIAN: "LNG_PERSIAN",
+    FULAH: "LNG_FULAH",
+    FINNISH: "LNG_FINNISH",
+    FIJIAN: "LNG_FIJIAN",
+    FAROESE: "LNG_FAROESE",
+    FRENCH: "LNG_FRENCH",
+    WESTERN_FRISIAN: "LNG_WESTERN_FRISIAN",
+    IRISH: "LNG_IRISH",
+    SCOTTISH_GAELIC: "LNG_SCOTTISH_GAELIC",
+    GALICIAN: "LNG_GALICIAN",
+    GUARANI: "LNG_GUARANI",
+    GUJARATI: "LNG_GUJARATI",
+    MANX: "LNG_MANX",
+    HAUSA: "LNG_HAUSA",
+    HEBREW: "LNG_HEBREW",
+    HINDI: "LNG_HINDI",
+    HIRI_MOTU: "LNG_HIRI_MOTU",
+    CROATIAN: "LNG_CROATIAN",
+    HAITIAN: "LNG_HAITIAN",
+    HUNGARIAN: "LNG_HUNGARIAN",
+    ARMENIAN: "LNG_ARMENIAN",
+    HERERO: "LNG_HERERO",
+    INTERLINGUA: "LNG_INTERLINGUA",
+    INDONESIAN: "LNG_INDONESIAN",
+    INTERLINGUE: "LNG_INTERLINGUE",
+    IGBO: "LNG_IGBO",
+    SICHUAN_YI: "LNG_SICHUAN_YI",
+    INUPIAQ: "LNG_INUPIAQ",
+    IDO: "LNG_IDO",
+    ICELANDIC: "LNG_ICELANDIC",
+    ITALIAN: "LNG_ITALIAN",
+    INUKTITUT: "LNG_INUKTITUT",
+    JAPANESE: "LNG_JAPANESE",
+    JAVANESE: "LNG_JAVANESE",
+    GEORGIAN: "LNG_GEORGIAN",
+    KONGO: "LNG_KONGO",
+    KIKUYU: "LNG_KIKUYU",
+    KWANYAMA: "LNG_KWANYAMA",
+    KAZAKH: "LNG_KAZAKH",
+    KALAALLISUT: "LNG_KALAALLISUT",
+    KHMER: "LNG_KHMER",
+    KANNADA: "LNG_KANNADA",
+    KOREAN: "LNG_KOREAN",
+    KANURI: "LNG_KANURI",
+    KASHMIRI: "LNG_KASHMIRI",
+    KURDISH: "LNG_KURDISH",
+    KOMI: "LNG_KOMI",
+    CORNISH: "LNG_CORNISH",
+    KIRGHIZ: "LNG_KIRGHIZ",
+    LATIN: "LNG_LATIN",
+    LUXEMBOURGISH: "LNG_LUXEMBOURGISH",
+    GANDA: "LNG_GANDA",
+    LIMBURGISH: "LNG_LIMBURGISH",
+    LINGALA: "LNG_LINGALA",
+    LAO: "LNG_LAO",
+    LITHUANIAN: "LNG_LITHUANIAN",
+    LUBA_KATANGA: "LNG_LUBA_KATANGA",
+    LATVIAN: "LNG_LATVIAN",
+    MALAGASY: "LNG_MALAGASY",
+    MARSHALLESE: "LNG_MARSHALLESE",
+    M_ORI: "LNG_M_ORI",
+    MACEDONIAN: "LNG_MACEDONIAN",
+    MALAYALAM: "LNG_MALAYALAM",
+    MONGOLIAN: "LNG_MONGOLIAN",
+    MARATHI: "LNG_MARATHI",
+    MALAY: "LNG_MALAY",
+    MALTESE: "LNG_MALTESE",
+    BURMESE: "LNG_BURMESE",
+    NAURU: "LNG_NAURU",
+    NORWEGIAN_BOKM_L: "LNG_NORWEGIAN_BOKM_L",
+    NORTH_NDEBELE: "LNG_NORTH_NDEBELE",
+    NEPALI: "LNG_NEPALI",
+    NDONGA: "LNG_NDONGA",
+    DUTCH: "LNG_DUTCH",
+    NORWEGIAN_NYNORSK: "LNG_NORWEGIAN_NYNORSK",
+    NORWEGIAN: "LNG_NORWEGIAN",
+    SOUTH_NDEBELE: "LNG_SOUTH_NDEBELE",
+    NAVAJO: "LNG_NAVAJO",
+    CHICHEWA: "LNG_CHICHEWA",
+    OCCITAN: "LNG_OCCITAN",
+    OJIBWA: "LNG_OJIBWA",
+    OROMO: "LNG_OROMO",
+    ORIYA: "LNG_ORIYA",
+    OSSETIAN: "LNG_OSSETIAN",
+    PANJABI: "LNG_PANJABI",
+    PALI: "LNG_PALI",
+    POLISH: "LNG_POLISH",
+    PASHTO: "LNG_PASHTO",
+    PORTUGUESE: "LNG_PORTUGUESE",
+    QUECHUA: "LNG_QUECHUA",
+    ROMANSH: "LNG_ROMANSH",
+    KIRUNDI: "LNG_KIRUNDI",
+    ROMANIAN: "LNG_ROMANIAN",
+    RUSSIAN: "LNG_RUSSIAN",
+    KINYARWANDA: "LNG_KINYARWANDA",
+    SANSKRIT: "LNG_SANSKRIT",
+    SARDINIAN: "LNG_SARDINIAN",
+    SINDHI: "LNG_SINDHI",
+    NORTHERN_SAMI: "LNG_NORTHERN_SAMI",
+    SANGO: "LNG_SANGO",
+    SINHALA: "LNG_SINHALA",
+    SLOVAK: "LNG_SLOVAK",
+    SLOVENIAN: "LNG_SLOVENIAN",
+    SAMOAN: "LNG_SAMOAN",
+    SHONA: "LNG_SHONA",
+    SOMALI: "LNG_SOMALI",
+    ALBANIAN: "LNG_ALBANIAN",
+    SERBIAN: "LNG_SERBIAN",
+    SWATI: "LNG_SWATI",
+    SOUTHERN_SOTHO: "LNG_SOUTHERN_SOTHO",
+    SUNDANESE: "LNG_SUNDANESE",
+    SWEDISH: "LNG_SWEDISH",
+    SWAHILI: "LNG_SWAHILI",
+    TAMIL: "LNG_TAMIL",
+    TELUGU: "LNG_TELUGU",
+    TAJIK: "LNG_TAJIK",
+    THAI: "LNG_THAI",
+    TIGRINYA: "LNG_TIGRINYA",
+    TURKMEN: "LNG_TURKMEN",
+    TAGALOG: "LNG_TAGALOG",
+    TSWANA: "LNG_TSWANA",
+    TONGA: "LNG_TONGA",
+    TURKISH: "LNG_TURKISH",
+    TSONGA: "LNG_TSONGA",
+    TATAR: "LNG_TATAR",
+    TWI: "LNG_TWI",
+    TAHITIAN: "LNG_TAHITIAN",
+    UIGHUR: "LNG_UIGHUR",
+    UKRAINIAN: "LNG_UKRAINIAN",
+    URDU: "LNG_URDU",
+    UZBEK: "LNG_UZBEK",
+    VENDA: "LNG_VENDA",
+    VIETNAMESE: "LNG_VIETNAMESE",
+    VOLAP_K: "LNG_VOLAP_K",
+    WALLOON: "LNG_WALLOON",
+    WOLOF: "LNG_WOLOF",
+    XHOSA: "LNG_XHOSA",
+    YIDDISH: "LNG_YIDDISH",
+    YORUBA: "LNG_YORUBA",
+    ZHUANG: "LNG_ZHUANG",
+    CHINESE: "LNG_CHINESE",
+    ZULU: "LNG_ZULU",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // LEAVE_STATUS (4 values)
   // ─────────────────────────────────────────────────────────────────────────
   LEAVE_STATUS: {
@@ -709,6 +1305,28 @@ export const VALUE = {
     AUTO: "MTM_AUTO",
     MANUAL: "MTM_MANUAL",
     RULE_BASED: "MTM_RULE_BASED",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // MATH_LIBRARIES (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  MATH_LIBRARIES: {
+    DECIMAL_JS: "ML_DECIMAL_JS",
+    DINERO_JS: "ML_DINERO_JS",
+    BIG_JS: "ML_BIG_JS",
+    BIGNUMBER_JS: "ML_BIGNUMBER_JS",
+    NATIVE_BIGINT: "ML_NATIVE_BIGINT",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // MFA_METHODS (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  MFA_METHODS: {
+    TOTP: "MM_TOTP",
+    SMS: "MM_SMS",
+    WEBAUTHN: "MM_WEBAUTHN",
+    EMAIL_OTP: "MM_EMAIL_OTP",
+    RECOVERY_CODES: "MM_RECOVERY_CODES",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -789,6 +1407,17 @@ export const VALUE = {
     CRYPTOCURRENCY: "PAY_CRYPTOCURRENCY",
     MOBILE_PAYMENT: "PAY_MOBILE_PAYMENT",
     TRADE_CREDIT: "PAY_TRADE_CREDIT",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // PAYMENT_METHODS_TREASURY (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  PAYMENT_METHODS_TREASURY: {
+    WIRE_TRANSFER: "PMT_WIRE_TRANSFER",
+    ACH_CREDIT: "PMT_ACH_CREDIT",
+    DIRECT_DEBIT: "PMT_DIRECT_DEBIT",
+    CHECK: "PMT_CHECK",
+    VIRTUAL_ACCOUNT: "PMT_VIRTUAL_ACCOUNT",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -930,6 +1559,17 @@ export const VALUE = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // RATE_LIMIT_STRATEGIES (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  RATE_LIMIT_STRATEGIES: {
+    TOKEN_BUCKET: "RLS_TOKEN_BUCKET",
+    LEAKY_BUCKET: "RLS_LEAKY_BUCKET",
+    FIXED_WINDOW: "RLS_FIXED_WINDOW",
+    SLIDING_WINDOW: "RLS_SLIDING_WINDOW",
+    CONCURRENT_LIMIT: "RLS_CONCURRENT_LIMIT",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // RECEIPT_STATUS (6 values)
   // ─────────────────────────────────────────────────────────────────────────
   RECEIPT_STATUS: {
@@ -983,6 +1623,16 @@ export const VALUE = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // RLS_POLICY_TYPES (4 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  RLS_POLICY_TYPES: {
+    SELECT_POLICY: "RPT_SELECT_POLICY",
+    INSERT_POLICY: "RPT_INSERT_POLICY",
+    UPDATE_POLICY: "RPT_UPDATE_POLICY",
+    DELETE_POLICY: "RPT_DELETE_POLICY",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // ROUNDING_METHOD (4 values)
   // ─────────────────────────────────────────────────────────────────────────
   ROUNDING_METHOD: {
@@ -990,6 +1640,19 @@ export const VALUE = {
     ROUND_HALF_EVEN: "RND_ROUND_HALF_EVEN",
     ROUND_UP: "RND_ROUND_UP",
     ROUND_DOWN: "RND_ROUND_DOWN",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // ROUNDING_MODES (7 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  ROUNDING_MODES: {
+    HALF_UP: "RM_HALF_UP",
+    HALF_EVEN: "RM_HALF_EVEN",
+    HALF_DOWN: "RM_HALF_DOWN",
+    CEILING: "RM_CEILING",
+    FLOOR: "RM_FLOOR",
+    TRUNCATE: "RM_TRUNCATE",
+    NONE: "RM_NONE",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -1011,6 +1674,65 @@ export const VALUE = {
     DELIVERED: "SOS_DELIVERED",
     COMPLETED: "SOS_COMPLETED",
     CANCELLED: "SOS_CANCELLED",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SANCTION_LIST_SOURCES (10 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  SANCTION_LIST_SOURCES: {
+    OFAC_SDN: "SLS_OFAC_SDN",
+    BIS_DPL: "SLS_BIS_DPL",
+    UN_SANCTIONS: "SLS_UN_SANCTIONS",
+    EU_SANCTIONS: "SLS_EU_SANCTIONS",
+    UK_SANCTIONS: "SLS_UK_SANCTIONS",
+    INTERPOL_RED: "SLS_INTERPOL_RED",
+    ASEAN_SANCTIONS: "SLS_ASEAN_SANCTIONS",
+    CANADA_SANCTIONS: "SLS_CANADA_SANCTIONS",
+    AUSTRALIA_SANCTIONS: "SLS_AUSTRALIA_SANCTIONS",
+    WORLDCHECK: "SLS_WORLDCHECK",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SANITIZATION_ACTIONS (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  SANITIZATION_ACTIONS: {
+    STRIP: "SA_STRIP",
+    REJECT: "SA_REJECT",
+    ESCAPE: "SA_ESCAPE",
+    NORMALIZE: "SA_NORMALIZE",
+    TRIM: "SA_TRIM",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SCOPE_CATEGORIES (3 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  SCOPE_CATEGORIES: {
+    SCOPE_1: "SC_SCOPE_1",
+    SCOPE_2: "SC_SCOPE_2",
+    SCOPE_3: "SC_SCOPE_3",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SERIALIZATION_FORMATS (6 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  SERIALIZATION_FORMATS: {
+    JSON: "SF_JSON",
+    PROTOBUF: "SF_PROTOBUF",
+    AVRO: "SF_AVRO",
+    MSGPACK: "SF_MSGPACK",
+    XML: "SF_XML",
+    CSV: "SF_CSV",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SESSION_BINDING_FACTORS (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  SESSION_BINDING_FACTORS: {
+    IP_ADDRESS: "SBF_IP_ADDRESS",
+    USER_AGENT: "SBF_USER_AGENT",
+    DEVICE_FINGERPRINT: "SBF_DEVICE_FINGERPRINT",
+    TLS_SESSION_ID: "SBF_TLS_SESSION_ID",
+    GEO_LOCATION: "SBF_GEO_LOCATION",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -1048,6 +1770,18 @@ export const VALUE = {
     SAME_DAY: "SHP_SAME_DAY",
     INTERNATIONAL: "SHP_INTERNATIONAL",
     LOCAL_DELIVERY: "SHP_LOCAL_DELIVERY",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SQL_INJECTION_PATTERNS (6 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  SQL_INJECTION_PATTERNS: {
+    UNION_SELECT: "SIP_UNION_SELECT",
+    BOOLEAN_BLIND: "SIP_BOOLEAN_BLIND",
+    TIME_BLIND: "SIP_TIME_BLIND",
+    ERROR_BASED: "SIP_ERROR_BASED",
+    STACKED_QUERIES: "SIP_STACKED_QUERIES",
+    COMMENT_INJECTION: "SIP_COMMENT_INJECTION",
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -1115,6 +1849,26 @@ export const VALUE = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // TLS_VERSIONS (4 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  TLS_VERSIONS: {
+    TLS_1_3: "TV_TLS_1_3",
+    TLS_1_2: "TV_TLS_1_2",
+    TLS_1_1: "TV_TLS_1_1",
+    TLS_1_0: "TV_TLS_1_0",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // TOKEN_TYPES (4 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  TOKEN_TYPES: {
+    JWT: "TT_JWT",
+    OPAQUE: "TT_OPAQUE",
+    REFRESH_TOKEN: "TT_REFRESH_TOKEN",
+    CSRF_TOKEN: "TT_CSRF_TOKEN",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // TRANSACTION_STATUS (6 values)
   // ─────────────────────────────────────────────────────────────────────────
   TRANSACTION_STATUS: {
@@ -1149,6 +1903,38 @@ export const VALUE = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // VALIDATION_ENGINES (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  VALIDATION_ENGINES: {
+    ZOD: "VE_ZOD",
+    TYPEBOX: "VE_TYPEBOX",
+    AJV: "VE_AJV",
+    YUP: "VE_YUP",
+    JSON_SCHEMA: "VE_JSON_SCHEMA",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // VALIDATION_STRICTNESS (4 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  VALIDATION_STRICTNESS: {
+    STRICT: "VS_STRICT",
+    STRIP: "VS_STRIP",
+    COERCE: "VS_COERCE",
+    LENIENT: "VS_LENIENT",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // WAF_RULE_SETS (5 values)
+  // ─────────────────────────────────────────────────────────────────────────
+  WAF_RULE_SETS: {
+    OWASP_CRS: "WRS_OWASP_CRS",
+    SQL_INJECTION: "WRS_SQL_INJECTION",
+    XSS_PROTECTION: "WRS_XSS_PROTECTION",
+    LFI_RFI: "WRS_LFI_RFI",
+    RCE_PROTECTION: "WRS_RCE_PROTECTION",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // WORK_ORDER_STATUS (5 values)
   // ─────────────────────────────────────────────────────────────────────────
   WORK_ORDER_STATUS: {
@@ -1174,5 +1960,5 @@ export const VALUE = {
 /**
  * Counts for validation
  */
-export const VALUESET_COUNT = 72 as const;
-export const VALUE_COUNT = 624 as const;
+export const VALUESET_COUNT = 113 as const;
+export const VALUE_COUNT = 1123 as const;
