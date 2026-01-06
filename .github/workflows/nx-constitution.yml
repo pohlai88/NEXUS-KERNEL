@@ -1,0 +1,66 @@
+name: Nexus Design Constitution
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'ui/canonical.ts'
+      - 'ui/input.css'
+      - 'scripts/nx-*.ts'
+      - 'apps/portal/**/*.tsx'
+      - 'apps/portal/**/*.ts'
+      - 'packages/**/*.ts'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'ui/canonical.ts'
+      - 'ui/input.css'
+      - 'scripts/nx-*.ts'
+      - 'apps/portal/**/*.tsx'
+      - 'apps/portal/**/*.ts'
+      - 'packages/**/*.ts'
+
+jobs:
+  constitutional-check:
+    name: Constitutional Compliance
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate CSS from canonical.ts
+        run: pnpm nx:generate
+
+      - name: Validate constitutional hashes
+        run: pnpm nx:validate
+
+      - name: Check for forbidden patterns
+        run: pnpm nx:check
+
+      - name: Verify no uncommitted changes
+        run: git diff --exit-code
+        id: diff-check
+        continue-on-error: true
+
+      - name: Fail if generated files differ
+        if: steps.diff-check.outcome == 'failure'
+        run: |
+          echo "❌ Generated files are out of sync with canonical.ts"
+          echo "Run 'pnpm nx:generate' locally and commit the changes"
+          git diff --stat
+          exit 1

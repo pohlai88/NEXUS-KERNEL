@@ -1,7 +1,7 @@
 {
-  "name": "@aibos/kernel",
+  "name": "@nexus/kernel",
   "version": "1.1.0",
-  "description": "AIBOS Kernel - The Business Constitution (L0 SSOT)",
+  "description": "Nexus Kernel - The Business Constitution (L0 SSOT)",
   "private": false,
   "type": "module",
   "sideEffects": false,
@@ -159,7 +159,6 @@
   ],
   "keywords": [
     "kernel",
-    "aibos",
     "nexus",
     "ssot",
     "governance",
@@ -174,6 +173,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@nexus/ui-guard": "github:pohlai88/NEXUS_UI_GUARD",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^13.1.3",
@@ -260,6 +260,16 @@
     "dashboard:report": "tsx scripts/generate-diagnostic-report.ts",
     "diagnose:tailwind": "tsx scripts/diagnose-tailwind.ts",
     "diagnose:dashboard": "tsx scripts/diagnose-tailwind-dashboard.ts",
-    "lint:tailwind": "eslint . --ext .ts,.tsx"
+    "lint:tailwind": "eslint . --ext .ts,.tsx",
+    "nx:generate": "npx tsx node_modules/@nexus/ui-guard/scripts/nx-generate.ts",
+    "nx:validate": "npx tsx node_modules/@nexus/ui-guard/scripts/nx-validate.ts",
+    "nx:check": "npx tsx node_modules/@nexus/ui-guard/scripts/nx-check.ts",
+    "nx:migrate": "npx tsx node_modules/@nexus/ui-guard/scripts/nx-migrate.ts",
+    "nx:migrate:dry": "npx tsx node_modules/@nexus/ui-guard/scripts/nx-migrate.ts --dry-run --verbose",
+    "nx:migrate:strict": "npx tsx node_modules/@nexus/ui-guard/scripts/nx-migrate.ts --strict",
+    "nx:all": "pnpm nx:generate && pnpm nx:validate && pnpm nx:check",
+    "nx:full": "pnpm nx:migrate && pnpm build:css && pnpm nx:check",
+    "build:css": "pnpm nx:generate && pnpm exec postcss ui/input.css -o ui/style.css --minify",
+    "build:css:watch": "pnpm nx:generate && pnpm exec postcss ui/input.css -o ui/style.css --watch"
   }
 }
